@@ -22,18 +22,21 @@ class Loading : UIView {
     }()
     
     
-     func showLoading() {
+    func showLoading() {
         
         DispatchQueue.main.async {
             let window = SceneDelegate().window //UIApplication.shared.windows.first
             
-            self.frame = CGRect(x: 0, y: 0, width: (window?.frame.width)!,
-                           height: (window?.frame.height)!)
+            self.frame = CGRect(x: 0,
+                                y: 0,
+                                width: (window?.frame.width)!,
+                                height: (window?.frame.height)!)
+            
             window?.addSubview(self)
         }
         
         DispatchQueue.main.async { [self] in
-
+            
             addSubview(loadingView)
             
             NSLayoutConstraint.activate([
@@ -47,8 +50,7 @@ class Loading : UIView {
         }
     }
     
-     func hideLoading(_ deadline: CFTimeInterval = 0.0) {
-        
+    func hideLoading(_ deadline: CFTimeInterval = 0.0) {
         DispatchQueue.main.asyncAfter(deadline: .now() + deadline ){ [self] in
             removeFromSuperview()
             loadingView.removeFromSuperview()

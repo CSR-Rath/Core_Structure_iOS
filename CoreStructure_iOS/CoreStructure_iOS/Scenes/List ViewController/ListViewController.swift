@@ -21,12 +21,14 @@ class ListViewController: UIViewController {
         tableView.register(UITableViewCell.self,
                            forCellReuseIdentifier: "cell")
         view.addSubview(tableView)
+        
+        //MARK: Refresh table view
         tableView.setupRefreshControl()
         UITableView.actionRefresh = { [self] in
             print("Testing")
             tableView.endRefreshData()
         }
-
+        
     }
 }
 
@@ -43,19 +45,25 @@ extension  ListViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let vc =  DemoBottomSheetViewController()
-//        vc.transitioningDelegate = presentationStyle
-//        vc.modalPresentationStyle = .custom
-//        self.present(vc, animated: true) {
-//            
-//        }
-//        
-////        let vc = DemoBottomSheetViewController()
-////        vc.modalPresentationStyle = .overFullScreen
-////        present(vc, animated: true) {
+        let vc = VisitCommercialVC()
+        vc.modalPresentationStyle = .overCurrentContext
+
+        self.present(vc, animated: false) 
+        
+        
+//        let vc =  DemoBottomSheetViewController()
+////        vc.transitioningDelegate = presentationStyle
+////        vc.modalPresentationStyle = .custom
+////        self.present(vc, animated: true) {
 ////            
 ////        }
-        presentBottomSheet(viewController: vc)
+////        
+//////        let vc = DemoBottomSheetViewController()
+//////        vc.modalPresentationStyle = .overFullScreen
+//////        present(vc, animated: true) {
+//////            
+//////        }
+//        presentBottomSheet(viewController: vc)
         
     }
 }

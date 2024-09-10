@@ -28,7 +28,7 @@ class KeyboradVC: UIViewController {
     private var stackButton3: UIStackView! = nil
     private var stackButton4: UIStackView! = nil
     private var stackCircle: UIStackView! = nil
-//    private var isFromDelete: Bool = false
+
     
     private var textHandle: String = ""
 
@@ -90,10 +90,11 @@ extension KeyboradVC{
            }
         }
         
-        //MARK: Handle button have number
+        
         else{
+            //MARK: Handle button number
             if  textHandle.count < digit{
-                let i =  textHandle.count-1
+                let i =  textHandle.count
                 digitCircleView[i].backgroundColor = .orange
                 textHandle.append(text)
             }

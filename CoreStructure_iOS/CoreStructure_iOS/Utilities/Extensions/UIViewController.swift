@@ -7,6 +7,8 @@
 
 import UIKit
 
+
+//MARK: For action
 extension UIViewController{
     
     @objc  func dismiss(_ Complete: Complete ){
@@ -41,6 +43,19 @@ extension UIViewController{
    
     
 
+    
+}
+
+
+
+//MARK: For variable
+extension UIViewController{
+
+    static var size = 12
+    static var totalSize = 0
+    static var currentPage = 0
+    
+    
     
 }
 
