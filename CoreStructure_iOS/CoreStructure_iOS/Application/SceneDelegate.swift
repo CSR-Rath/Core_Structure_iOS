@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
          window = UIWindow(windowScene: windowScene)
 
          // Create a view hierarchy programmatically
-         let viewController = KeyboradVC()
+         let viewController = CustomTabBarVC()
          let navigation = UINavigationController(rootViewController: viewController)
 
          // Set the root view controller of the window with your view controller

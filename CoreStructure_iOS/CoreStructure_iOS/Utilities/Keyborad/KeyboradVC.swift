@@ -7,19 +7,20 @@
 
 import UIKit
 
-enum KeyboradType{
-    case loginPasscode
+enum PasscodeAction{
+    case payment
     case verifyPasscode
     case changePasscode
     case setupPasscode
     case confirmpasscode
+    case none
 }
 
 class KeyboradVC: UIViewController {
     
     var digit: Int = 6
-    private let  items : [String] = ["1","2","3","4","5","6",
-                                     "7","8","9", "","0",""]
+    private var textHandle: String = ""
+    private let items : [String] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0", ""]
     private var digitCircleView: [UIView] = []
     private var arrayButton: [UIButton] = []
     private var stackButton: UIStackView! = nil
@@ -28,10 +29,12 @@ class KeyboradVC: UIViewController {
     private var stackButton3: UIStackView! = nil
     private var stackButton4: UIStackView! = nil
     private var stackCircle: UIStackView! = nil
-
     
-    private var textHandle: String = ""
-
+    var isPasscodeAction : PasscodeAction = .none{
+        didSet{
+            
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,39 +44,41 @@ class KeyboradVC: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        FingerPrintAndFaceID.shared.fingerPrintFaceID({ (check) in
-//            switch check {
-//            case .success(_):
-//
-//
-////               let vc = ViewController()
-////                self.navigationController?.pushViewController(vc, animated: true)
-//                
-//            case .failure( _):
-//                
-//                print("failure")
-//                break
-//            case .no:
-//                print("no")
-//                break
-//            }
-//        })
+        
+        //        FingerPrintAndFaceID.shared.fingerPrintFaceID({ (check) in
+        //            switch check {
+        //            case .success(_):
+        //
+        //
+        ////               let vc = ViewController()
+        ////                self.navigationController?.pushViewController(vc, animated: true)
+        //
+        //            case .failure( _):
+        //
+        //                print("failure")
+        //                break
+        //            case .no:
+        //                print("no")
+        //                break
+        //            }
+        //        })
         
     }
-    
-    func completeDigit(){
-        
-    }
-    
 }
 
-
+//MARK: CompleteDigit passcode
 extension  KeyboradVC {
     
-
+   private func completeDigit(){
+        if isPasscodeAction == .changePasscode{
+            
+        }
+    }
 }
 
 
+
+//MARK: Setup Keyborad Constraint
 extension KeyboradVC{
     
     //MARK: Action on button keyborad
@@ -90,21 +95,26 @@ extension KeyboradVC{
            }
         }
         
-        
         else{
             //MARK: Handle button number
             if  textHandle.count < digit{
                 let i =  textHandle.count
                 digitCircleView[i].backgroundColor = .orange
                 textHandle.append(text)
+                
+                //MARK: Handle when complete passcode
+                if  textHandle.count == digit{
+                    print("complete passcode equal ==> \(digit)")
+                    completeDigit()
+                }
             }
         }
         
-        //MARK: Handle when complete passcode
-        if  textHandle.count == digit{
-            print("complete passcode equal ==> \(digit)")
-            completeDigit()
-        }
+//        //MARK: Handle when complete passcode
+//        if  textHandle.count == digit{
+//            print("complete passcode equal ==> \(digit)")
+//            completeDigit()
+//        }
     }
     
     // MARK: Setup UIView
@@ -165,12 +175,12 @@ extension KeyboradVC{
             button.layer.borderWidth = 2
             button.layer.borderColor = UIColor.orange.cgColor
             button.addTarget(self, action: #selector(buttonTappedKeyborad), for: .touchUpInside)
-            
+            button.tintColor = .orange
             
             if i == 11{
                 button.setImage(.icDelete, for: .normal)
             } else if i == 9{
-                button.layer.borderColor = UIColor.clear.cgColor
+                button.setImage(.icFaceID, for: .normal)
             }
             
             button.heightAnchor.constraint(equalToConstant: 80).isActive = true

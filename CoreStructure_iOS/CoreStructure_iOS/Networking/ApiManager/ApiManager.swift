@@ -37,7 +37,7 @@ class ApiManager {
     }
     
     static func apiConnection<T: Codable>(url: String,
-                                          method: HTTPMethod,
+                                          method: HTTPMethod = .GET,
                                           param: Parameters? = nil,
                                           modelCodable: Encodable? = nil,
                                           headers: HTTPHeaders? = ApiManager.getHeader(),
@@ -113,8 +113,8 @@ class ApiManager {
                 switch httpResponse.statusCode {
                 case 200..<300: // 200 - 299
                     print("statusCode == 2xx")
-                    Utilize.shared.debuggerResult(urlRequest: newRequest, data: data, error: false)
-                    Utilize.shared.validateModel(model: T.self, data: data) { objectData in
+                    Debugger.shared.debuggerResult(urlRequest: newRequest, data: data, error: false)
+                    Debugger.shared.validateModel(model: T.self, data: data) { objectData in
                         print("====> Validate model success")
                         res(objectData)
                     }
@@ -145,7 +145,7 @@ class ApiManager {
                                                   error: .error500)
 
                 default:
-                    Utilize.shared.debuggerResult(urlRequest: newRequest,
+                    Debugger.shared.debuggerResult(urlRequest: newRequest,
                                                   data: data, error: true)
                     AlertMessage.shared.showAlert(message: "\(httpResponse.statusCode)",
                                                   error: .none)

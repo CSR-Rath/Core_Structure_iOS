@@ -34,11 +34,14 @@
 			<key>text-context</key>
 			<dict>
 				<key>focused</key>
-				<string></string>
+				<string>//
+</string>
 				<key>leading</key>
 				<string></string>
 				<key>trailing</key>
-				<string>
+				<string>//  dev.xcconfig
+//  CoreStructure_iOS
+//
 </string>
 			</dict>
 			<key>type</key>

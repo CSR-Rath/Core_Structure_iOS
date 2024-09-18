@@ -3,4 +3,150 @@
    uuid = "9337376D-1F6E-4039-85EE-FCAE470E51A0"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "82371BD5-02D3-49D5-85D7-5215C0C69F97"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CoreStructure_iOS/Scenes/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "289"
+            endingLineNumber = "289"
+            landmarkName = "segmentChanged(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "73DDCF59-FDBC-4BDA-9448-9EFBDB668D2E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CoreStructure_iOS/UI + Scenes/Prevention Screen Shot &amp; Screen Recording/PreventionVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "preventScreenRecording(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "73DDCF59-FDBC-4BDA-9448-9EFBDB668D2E - cd254cfabc02ed1c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CoreStructure_iOS.PreventionVC.preventScreenRecording(Foundation.Notification) -&gt; ()"
+                  moduleName = "CoreStructure_iOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/macbook/Desktop/mySelf/Core_Structure_iOS/CoreStructure_iOS/CoreStructure_iOS/UI%20+%20Scenes/Prevention%20Screen%20Shot%20&amp;%20Screen%20Recording/PreventionVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "35"
+                  endingLineNumber = "35"
+                  offsetFromSymbolStart = "321">
+               </Location>
+               <Location
+                  uuid = "73DDCF59-FDBC-4BDA-9448-9EFBDB668D2E - cd254cfabc02ed1c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CoreStructure_iOS.PreventionVC.preventScreenRecording(Foundation.Notification) -&gt; ()"
+                  moduleName = "CoreStructure_iOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/macbook/Desktop/mySelf/Core_Structure_iOS/CoreStructure_iOS/CoreStructure_iOS/UI%20+%20Scenes/Prevention%20Screen%20Shot%20&amp;%20Screen%20Recording/PreventionVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "35"
+                  endingLineNumber = "35"
+                  offsetFromSymbolStart = "348">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D4D155DB-3E57-4A54-820B-C8CCE6EEFA37"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CoreStructure_iOS/UI + Scenes/Prevention Screen Shot &amp; Screen Recording/PreventionVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "preventScreenRecording(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "D4D155DB-3E57-4A54-820B-C8CCE6EEFA37 - cd254cfabc02edbf"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CoreStructure_iOS.PreventionVC.preventScreenRecording(Foundation.Notification) -&gt; ()"
+                  moduleName = "CoreStructure_iOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/macbook/Desktop/mySelf/Core_Structure_iOS/CoreStructure_iOS/CoreStructure_iOS/UI%20+%20Scenes/Prevention%20Screen%20Shot%20&amp;%20Screen%20Recording/PreventionVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "38"
+                  endingLineNumber = "38"
+                  offsetFromSymbolStart = "323">
+               </Location>
+               <Location
+                  uuid = "D4D155DB-3E57-4A54-820B-C8CCE6EEFA37 - cd254cfabc02edbf"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CoreStructure_iOS.PreventionVC.preventScreenRecording(Foundation.Notification) -&gt; ()"
+                  moduleName = "CoreStructure_iOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/macbook/Desktop/mySelf/Core_Structure_iOS/CoreStructure_iOS/CoreStructure_iOS/UI%20+%20Scenes/Prevention%20Screen%20Shot%20&amp;%20Screen%20Recording/PreventionVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "38"
+                  endingLineNumber = "38"
+                  offsetFromSymbolStart = "352">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9D70B494-37AD-45AD-80E0-352062C8D553"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CoreStructure_iOS/UI + Scenes/Prevention Screen Shot &amp; Screen Recording/PreventionVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "preventScreenRecording(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "68B8DD2F-669E-4AAA-A63E-0A611C04C8D9"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CoreStructure_iOS/UI + Scenes/Prevention Screen Shot &amp; Screen Recording/PreventionVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "preventScreenRecording(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
