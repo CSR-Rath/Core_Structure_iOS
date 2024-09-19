@@ -1,3 +1,10 @@
+//
+//  OneTimeCodeTextFieldDelegate.swift
+//  CoreStructure_iOS
+//
+//  Created by Rath! on 18/9/24.
+//
+
 import UIKit
 
 public class OneTimeCodeTextFieldDelegate: NSObject, UITextFieldDelegate {

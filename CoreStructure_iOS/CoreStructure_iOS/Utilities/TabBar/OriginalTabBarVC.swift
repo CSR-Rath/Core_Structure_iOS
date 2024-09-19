@@ -8,9 +8,11 @@
 import UIKit
 
 class OriginalTabBarVC: UITabBarController,UITabBarControllerDelegate {
+    private var previousIndex: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .clear
         
         setupViewControllers()
         
@@ -93,40 +95,24 @@ class OriginalTabBarVC: UITabBarController,UITabBarControllerDelegate {
             item.image = item.selectedImage?.withTintColor(.white) // Change color if needed
 //            item.image = item.selectedImage?.withRenderingMode(.alwaysOriginal)
         }, completion: nil)
+        
+        
+        // Animate the transition
+              if previousIndex != selectedIndex {
+                  let transition = CATransition()
+                  transition.duration = 0.15
+                  transition.type = selectedIndex > previousIndex ? .moveIn : .push
+                  transition.subtype = selectedIndex > previousIndex ? .fromRight : .fromLeft
+                  
+                  viewController.view.layer.add(transition, forKey: kCATransition)
+              }
+              
+              // Update the previous index
+              previousIndex = selectedIndex
+        
+        
     }
-    
-    
-    
-    
-    
-    
-    
-    // UITabBarControllerDelegate method
-//       func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-//           guard let tabBarItems = tabBar.items else { return }
-//
-//           // Get the index of the selected tab
-//           let selectedIndex = tabBarController.selectedIndex
-//           
-//           // Animate the tab bar item selection
-//           let item = tabBarItems[selectedIndex]
-//           
-//           // Scale animation for the tab bar item
-//           UIView.animate(withDuration: 0.3, animations: {
-//               item.image = item.selectedImage?.withRenderingMode(.alwaysOriginal)
-//               // Optionally, you can add a scale effect for the icon
-//               if let iconView = self.tabBar.subviews[selectedIndex + 1] as? UIView { // +1 to skip the background view
-//                   iconView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
-//               }
-//           }, completion: { _ in
-//               UIView.animate(withDuration: 0.3) {
-//                   if let iconView = self.tabBar.subviews[selectedIndex + 1] as? UIView {
-//                       iconView.transform = CGAffineTransform.identity
-//                   }
-//               }
-//           })
-//       }
-    
+        
 }
 
 

@@ -73,13 +73,15 @@ extension CustomTabBarVC:  UICollectionViewDelegate, UICollectionViewDataSource 
             cell.imgIcon.setImageColor(color: .black)
             cell.lblTitle.textColor = .black
             
-            UIView.animate(withDuration: 0.1, animations: {
+            UIView.animate(withDuration: 0.05, animations: {
                 
-                cell.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+//                cell.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+                cell.backgroundColor  = .white.withAlphaComponent(0.1)
                 
             }, completion: { _ in
-                UIView.animate(withDuration: 0.1) {
-                    cell.transform = CGAffineTransform.identity
+                UIView.animate(withDuration: 0.05) {
+//                    cell.transform = CGAffineTransform.identity
+                    cell.backgroundColor = .clear
                 }
             })
             

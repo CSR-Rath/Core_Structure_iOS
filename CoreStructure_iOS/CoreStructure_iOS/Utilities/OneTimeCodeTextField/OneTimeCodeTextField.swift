@@ -1,8 +1,16 @@
+//
+//  OneTimeCodeTextField.swift
+//  CoreStructure_iOS
+//
+//  Created by Rath! on 18/9/24.
+//
+
 import UIKit
 
 public class OneTimeCodeTextField: UITextField {
     // MARK: UI Components
     public var digitLabels = [UILabel]()
+//    public var digitLabels = [UIStackView]()
     
     // MARK: Delegates
     public lazy var oneTimeCodeDelegate = OneTimeCodeTextFieldDelegate(oneTimeCodeTextField: self)
@@ -69,7 +77,7 @@ public class OneTimeCodeTextField: UITextField {
     
     /// Needs to be called after `configure()`.
     /// Default value: 0
-    public var codeBorderWidth: CGFloat = 0 {
+    public var codeBorderWidth: CGFloat = 1 {
         didSet {
             digitLabels.forEach({ $0.layer.borderWidth = codeBorderWidth })
         }
@@ -77,7 +85,7 @@ public class OneTimeCodeTextField: UITextField {
     
     /// Needs to be called after `configure()`.
     /// Default value: `.none`
-    public var codeBorderColor: UIColor? = .none {
+    public var codeBorderColor: UIColor? = .lightGray {
         didSet {
             digitLabels.forEach({ $0.layer.borderColor = codeBorderColor?.cgColor })
         }
@@ -115,6 +123,56 @@ public class OneTimeCodeTextField: UITextField {
         becomeFirstResponder()
     }
     
+}
+
+
+//MARK: Setup action
+extension OneTimeCodeTextField{
+    
+    //MARK: Setup action on text did change
+    @objc private func textDidChange() {
+        guard let code = text, code.count <= digitLabels.count else { return }
+        
+        for i in 0 ..< digitLabels.count {
+            let currentLabel = digitLabels[i]
+
+            
+            if i < code.count {
+                let index = code.index(code.startIndex, offsetBy: i)
+                currentLabel.text = String(code[index]).uppercased()
+                
+                currentLabel.layer.borderColor = UIColor.orange.cgColor
+                
+            } else {
+                
+                currentLabel.layer.borderColor = codeBorderColor?.cgColor
+            
+                currentLabel.text?.removeAll()
+            }
+        }
+        
+        if code.count == digitLabels.count { didReceiveCode?(code) }
+    }
+    
+    //MARK: Setup Clear text
+    public func clear() {
+        guard isConfigured == true else { return }
+        digitLabels.forEach({
+            $0.text = ""
+            $0.layer.borderColor =  codeBorderColor?.cgColor
+        })
+        
+        text = "" // textfield is empty
+       
+    }
+}
+
+
+
+//MARK: Setup view OTP
+extension OneTimeCodeTextField{
+    
+    //MARK: Setup box All
     private func generateSlotsStackView(with count: Int, spacing: CGFloat) -> UIStackView {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -123,15 +181,43 @@ public class OneTimeCodeTextField: UITextField {
         stackView.distribution = .fillEqually
         stackView.spacing = spacing
         
-        for _ in 0..<count {
+        for index in 0..<count {
+            
+            let slotLine = generateSlotLine()
             let slotLabel = generateSlotLabel()
-            stackView.addArrangedSubview(slotLabel)
+            
+            let stack =  setupDigitView(label: slotLabel, lineView: slotLine)
+            
+            stackView.addArrangedSubview(stack)
+            
+            //MARK: Check center digit
+            if index == count/2-1 {
+                stackView.setCustomSpacing(25, after: stack)
+            }
+            
             digitLabels.append(slotLabel)
         }
         
         return stackView
     }
     
+    
+    //MARK: Setup Stack view Label with line
+    private func setupDigitView( label: UILabel, lineView: UIView) -> UIStackView{
+        
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.spacing = 5
+        stackView.addArrangedSubview(label)
+        stackView.addArrangedSubview(lineView)
+        return stackView
+       
+    }
+    
+    //MARK: Setup Label
     private func generateSlotLabel() -> UILabel {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -153,27 +239,13 @@ public class OneTimeCodeTextField: UITextField {
         
         return label
     }
-    
-    @objc private func textDidChange() {
-        guard let code = text, code.count <= digitLabels.count else { return }
-        
-        for i in 0 ..< digitLabels.count {
-            let currentLabel = digitLabels[i]
-            
-            if i < code.count {
-                let index = code.index(code.startIndex, offsetBy: i)
-                currentLabel.text = String(code[index]).uppercased()
-            } else {
-                currentLabel.text?.removeAll()
-            }
-        }
-        
-        if code.count == digitLabels.count { didReceiveCode?(code) }
+
+    //MARK: Setup line
+    private func generateSlotLine() -> UIView {
+        let lineView = UIView()
+        lineView.backgroundColor = .orange
+        lineView.heightAnchor.constraint(equalToConstant: 2).isActive = true
+        return lineView
     }
     
-    public func clear() {
-        guard isConfigured == true else { return }
-        digitLabels.forEach({ $0.text = "" })
-        text = ""
-    }
 }

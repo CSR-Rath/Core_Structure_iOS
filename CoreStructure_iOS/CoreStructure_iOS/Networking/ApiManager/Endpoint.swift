@@ -10,5 +10,8 @@ import Foundation
 struct Endpoint {
     
     static let test = "test"
+    static let wallet = "wallet"
+    static let userInfor = "userInfor"
+    
     
 }

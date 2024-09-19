@@ -1,5 +1,5 @@
 //
-//  Utilize.swift
+//  DebuggerRespose.swift
 //  CoreStructure_iOS
 //
 //  Created by Rath! on 12/8/24.
@@ -7,9 +7,9 @@
 
 import UIKit
 
-class Debugger {
+class DebuggerRespose {
     
-    static let shared = Debugger()
+    static let shared = DebuggerRespose()
     
     func debuggerResult(urlRequest: URLRequest, data: Data?, error: Bool) {
         let url = urlRequest.url!
@@ -67,7 +67,10 @@ class Debugger {
         printerFormat(url: url, data: jsonString, error: error)
     }
     
-    func validateModel<T: Codable>(model: T.Type, data: Data?, fun: String = "", response: (T) -> Void) {
+    func validateModel<T: Codable>(model: T.Type,
+                                   data: Data?,
+                                   fun: String = "",
+                                   response: (T) -> Void) {
         do {
             if let newData = data {
                 let json = try JSONDecoder().decode(T.self, from: newData)
@@ -89,7 +92,8 @@ class Debugger {
         }
     }
     
-    func showAlert(title: String = "", message: String) {
+    func showAlert(title: String = "", 
+                   message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alert.addAction(action)

@@ -72,7 +72,7 @@ class AlertInternetVC: UIViewController {
         contentView.animateShow(duration: 0.3)
         closeButton.animateShow(duration: 0.3)
         
-        view.backgroundColor = .black.withAlphaComponent(0)
+        view.backgroundColor = .black.withAlphaComponent(0.3)
         view.addSubview(contentView)
         contentView.addSubview(imgCenter)
         
@@ -83,21 +83,22 @@ class AlertInternetVC: UIViewController {
         contentView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             
-            contentView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            contentView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -30),
+            contentView.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 10),
+            contentView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10),
             contentView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            contentView.heightAnchor.constraint(equalToConstant: 180),
-
+            contentView.heightAnchor.constraint(equalToConstant: 70),
+            contentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
+            
         ])
     }
     
     
     
-
+    
     
     private func addPanGesture() {
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
-        contentView.addGestureRecognizer(panGesture)
+        view.addGestureRecognizer(panGesture)
     }
     
     @objc private func handlePan(_ gesture: UIPanGestureRecognizer) {
@@ -108,22 +109,27 @@ class AlertInternetVC: UIViewController {
         print("translation   \(translation.x)  , \(translation.y)")
         
         if gesture.state == .began {
-//            setupCloseButtonMove()
+            
             initialCenter = contentView.center
+            
         } else if gesture.state == .changed {
-            // Update the center based on both X and Y translations
-            contentView.center = CGPoint(x: initialCenter.x + translation.x,
-                                         y: initialCenter.y + translation.y)
+
+            // Allow movement only upwards
+            if translation.y < 0 { // Check if the translation is negative
+                contentView.center = CGPoint(x: initialCenter.x, // Keep the original x
+                                             y: initialCenter.y + translation.y) // Update y based on translation
+            }
+            
         } else if gesture.state == .ended || gesture.state == .cancelled {
             
             // Determine if the bottom sheet should be dismissed or snapped back
-            if abs(translation.y) > 200 || abs(translation.x) > 150 { // Threshold for dismissal
+            if abs(translation.y) > 100 || abs(translation.x) > 150 { // Threshold for dismissal
                 close()
-            } else {
+            } else{
                 UIView.animate(withDuration: 0.3) {
                     contentView.center = self.initialCenter
                 } completion: { _ in
-
+                    
                 }
             }
         }

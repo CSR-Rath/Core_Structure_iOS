@@ -17,7 +17,7 @@ enum HTTPMethod: String {
 }
 
 public typealias Parameters = [String: Any]
-//public typealias Success = (_ response: Data) -> Void
+public typealias Success = (_ response: Data) -> Void
 public typealias Complete = () -> Void
 public typealias HTTPHeaders = [String: String]
 
@@ -76,8 +76,8 @@ class ApiManager {
         
         //MARK:  Check internet connection
         if ApiManager.isConnectedToNetwork() {
-            AlertMessage.shared.showAlert(message: "Internet is't connected. Please check your internet.",
-                                          error: .none)
+            AlertMessage.shared.showAlertInternet(message: "Internet is't connected. Please check your internet.",
+                                                  status: .none)
             return
         }
         
@@ -91,19 +91,19 @@ class ApiManager {
                 switch error.code {
                 case NSURLErrorTimedOut:
                     AlertMessage.shared.showAlert(message: "Error: The request timed out. Please try again.",
-                                                  error: .none)
+                                                  status: .none)
                 case NSURLErrorCannotConnectToHost:
                     AlertMessage.shared.showAlert(message: "Error: Cannot connect to the host. Please check your internet connection.",
-                                                  error: .none)
+                                                  status: .none)
                 case NSURLErrorNotConnectedToInternet:
                     AlertMessage.shared.showAlert(message: "Error: Not connected to the Internet. Please check your network settings.",
-                                                  error: .none)
+                                                  status: .none)
                 case NSURLErrorBadURL:
                     AlertMessage.shared.showAlert(message: "Error: The URL is invalid.",
-                                                  error: .none)
+                                                  status: .none)
                 default:
                     AlertMessage.shared.showAlert(message: "Error: \(error.localizedDescription)",
-                                                  error: .none)
+                                                  status: .none)
                 }
                 return
             }
@@ -113,18 +113,18 @@ class ApiManager {
                 switch httpResponse.statusCode {
                 case 200..<300: // 200 - 299
                     print("statusCode == 2xx")
-                    Debugger.shared.debuggerResult(urlRequest: newRequest, data: data, error: false)
-                    Debugger.shared.validateModel(model: T.self, data: data) { objectData in
+                    DebuggerRespose.shared.debuggerResult(urlRequest: newRequest, data: data, error: false)
+                    DebuggerRespose.shared.validateModel(model: T.self, data: data) { objectData in
                         print("====> Validate model success")
                         res(objectData)
                     }
                 case 400:
                     AlertMessage.shared.showAlert(message: "Bad Request: 400",
-                                                  error: .error400)
+                                                  status: .code400)
                     
                 case 401:
                     AlertMessage.shared.showAlert(message: "Unauthorized: 401",
-                                                  error: .error400)
+                                                  status: .code401)
                     
 //                     self.refreshToken { data in
 //                         let header = ["Authorization": "Bearer \(data.results?.token ?? "")"]
@@ -138,17 +138,17 @@ class ApiManager {
                 case 404:
 
                     AlertMessage.shared.showAlert(message: "Not Found",
-                                                  error: .error404)
+                                                  status: .code404)
                 
                 case 500:
                     AlertMessage.shared.showAlert(message: "Internal Server Error: 500",
-                                                  error: .error500)
+                                                  status: .code500)
 
                 default:
-                    Debugger.shared.debuggerResult(urlRequest: newRequest,
+                    DebuggerRespose.shared.debuggerResult(urlRequest: newRequest,
                                                   data: data, error: true)
                     AlertMessage.shared.showAlert(message: "\(httpResponse.statusCode)",
-                                                  error: .none)
+                                                  status: .none)
                 }
             }
             

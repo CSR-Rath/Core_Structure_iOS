@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AlertMessageVC: UIViewController {
+class AlertErrorVC: UIViewController {
     
     private var initialCenter: CGPoint = .zero
     
@@ -72,7 +72,7 @@ class AlertMessageVC: UIViewController {
         contentView.animateShow(duration: 0.3)
         closeButton.animateShow(duration: 0.3)
         
-        view.backgroundColor = .black.withAlphaComponent(0)
+        view.backgroundColor = .black.withAlphaComponent(0.3)
         view.addSubview(contentView)
         contentView.addSubview(imgCenter)
          

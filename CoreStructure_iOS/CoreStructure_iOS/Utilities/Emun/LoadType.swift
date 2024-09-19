@@ -1,5 +1,5 @@
 //
-//  StatusLoading.swift
+//  LoadType.swift
 //  CoreStructure_iOS
 //
 //  Created by Rath! on 23/8/24.
@@ -8,9 +8,10 @@
 import Foundation
 
 
-enum StatusLoading{
-    case isLoading
-    case pullRefresh
+
+enum LoadType {
     case pagination
-    case none
+    case initialLoad
+    case refresh
+    case error
 }

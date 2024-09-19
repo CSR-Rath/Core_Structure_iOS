@@ -130,6 +130,38 @@
             endingLineNumber = "31"
             landmarkName = "preventScreenRecording(_:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "9D70B494-37AD-45AD-80E0-352062C8D553 - cd254cfabc02ed71"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CoreStructure_iOS.PreventionVC.preventScreenRecording(Foundation.Notification) -&gt; ()"
+                  moduleName = "CoreStructure_iOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/macbook/Desktop/mySelf/Core_Structure_iOS/CoreStructure_iOS/CoreStructure_iOS/UI%20+%20Scenes/Prevention%20Screen%20Shot%20&amp;%20Screen%20Recording/PreventionVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "32"
+                  endingLineNumber = "32"
+                  offsetFromSymbolStart = "303">
+               </Location>
+               <Location
+                  uuid = "9D70B494-37AD-45AD-80E0-352062C8D553 - cd254cfabc02ed71"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CoreStructure_iOS.PreventionVC.preventScreenRecording(Foundation.Notification) -&gt; ()"
+                  moduleName = "CoreStructure_iOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/macbook/Desktop/mySelf/Core_Structure_iOS/CoreStructure_iOS/CoreStructure_iOS/UI%20+%20Scenes/Prevention%20Screen%20Shot%20&amp;%20Screen%20Recording/PreventionVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "32"
+                  endingLineNumber = "32"
+                  offsetFromSymbolStart = "332">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -146,6 +178,38 @@
             endingLineNumber = "28"
             landmarkName = "preventScreenRecording(_:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "68B8DD2F-669E-4AAA-A63E-0A611C04C8D9 - cd254cfabc02eef5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CoreStructure_iOS.PreventionVC.preventScreenRecording(Foundation.Notification) -&gt; ()"
+                  moduleName = "CoreStructure_iOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/macbook/Desktop/mySelf/Core_Structure_iOS/CoreStructure_iOS/CoreStructure_iOS/UI%20+%20Scenes/Prevention%20Screen%20Shot%20&amp;%20Screen%20Recording/PreventionVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "110">
+               </Location>
+               <Location
+                  uuid = "68B8DD2F-669E-4AAA-A63E-0A611C04C8D9 - cd254cfabc02eef5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CoreStructure_iOS.PreventionVC.preventScreenRecording(Foundation.Notification) -&gt; ()"
+                  moduleName = "CoreStructure_iOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/macbook/Desktop/mySelf/Core_Structure_iOS/CoreStructure_iOS/CoreStructure_iOS/UI%20+%20Scenes/Prevention%20Screen%20Shot%20&amp;%20Screen%20Recording/PreventionVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "132">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

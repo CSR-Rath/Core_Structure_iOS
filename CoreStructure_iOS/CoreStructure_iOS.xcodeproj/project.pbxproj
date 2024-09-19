@@ -35,11 +35,11 @@
 		FA494BD42C6A0DAC0086D346 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA494BD32C6A0DAC0086D346 /* Environment.swift */; };
 		FA494BD62C6A0DCF0086D346 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA494BD52C6A0DCF0086D346 /* Endpoint.swift */; };
 		FA494BD82C6A0EC00086D346 /* Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA494BD72C6A0EC00086D346 /* Loading.swift */; };
-		FA494BDC2C6A12060086D346 /* Debugger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA494BDB2C6A12060086D346 /* Debugger.swift */; };
+		FA494BDC2C6A12060086D346 /* DebuggerRespose.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA494BDB2C6A12060086D346 /* DebuggerRespose.swift */; };
 		FA494BDE2C6A15210086D346 /* TimeAgoFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA494BDD2C6A15210086D346 /* TimeAgoFormatter.swift */; };
 		FA494BE02C6A16FE0086D346 /* FingerPrintAndFaceID.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA494BDF2C6A16FE0086D346 /* FingerPrintAndFaceID.swift */; };
 		FA494BE42C6A19C70086D346 /* KeyboradVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA494BE32C6A19C70086D346 /* KeyboradVC.swift */; };
-		FA612AAC2C787A23001E4365 /* StatusLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA612AAB2C787A23001E4365 /* StatusLoading.swift */; };
+		FA612AAC2C787A23001E4365 /* LoadType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA612AAB2C787A23001E4365 /* LoadType.swift */; };
 		FA6D52D62C9A748F00710D93 /* PreventionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6D52D52C9A748F00710D93 /* PreventionVC.swift */; };
 		FA81F0A62C7DCF72003B7EA6 /* BlurredBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA81F0A52C7DCF72003B7EA6 /* BlurredBackgroundView.swift */; };
 		FA81F0A82C7DD281003B7EA6 /* AESUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA81F0A72C7DD281003B7EA6 /* AESUtils.swift */; };
@@ -49,6 +49,8 @@
 		FA837DFF2C9AF35900213AE4 /* CustomTabBarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA837DFE2C9AF35800213AE4 /* CustomTabBarCell.swift */; };
 		FA837E032C9B31D300213AE4 /* VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA837E022C9B31D300213AE4 /* VC.swift */; };
 		FA837E052C9B3DD900213AE4 /* GoogleMapsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA837E042C9B3DD900213AE4 /* GoogleMapsVC.swift */; };
+		FA837E082C9BD85B00213AE4 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA837E072C9BD85A00213AE4 /* HomeVC.swift */; };
+		FA837E0A2C9BDB9900213AE4 /* HomeVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA837E092C9BDB9900213AE4 /* HomeVM.swift */; };
 		FA87CD782C799DB900349364 /* PagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA87CD772C799DB900349364 /* PagViewController.swift */; };
 		FA87CD7A2C799EB200349364 /* TitleValueModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA87CD792C799EB200349364 /* TitleValueModel.swift */; };
 		FA87CD872C799FFB00349364 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA87CD862C799FFB00349364 /* UITableView.swift */; };
@@ -66,7 +68,7 @@
 		FAB5D6452C6CB0E900A31A6F /* CheckmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB5D6442C6CB0E900A31A6F /* CheckmarkView.swift */; };
 		FAD0ABB52C992C0200608D7F /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD0ABB42C992C0200608D7F /* Note.swift */; };
 		FAD973932C9031EB00FAA8CE /* AlertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD973922C9031EB00FAA8CE /* AlertMessage.swift */; };
-		FAD973962C9039D000FAA8CE /* AlertMessageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD973952C9039D000FAA8CE /* AlertMessageVC.swift */; };
+		FAD973962C9039D000FAA8CE /* AlertErrorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD973952C9039D000FAA8CE /* AlertErrorVC.swift */; };
 		FAD973982C903A5800FAA8CE /* AlertInternetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD973972C903A5800FAA8CE /* AlertInternetVC.swift */; };
 		FAE400DE2C7D8CC4001D031F /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE400DD2C7D8CC4001D031F /* UIImageView.swift */; };
 /* End PBXBuildFile section */
@@ -105,11 +107,11 @@
 		FA494BD32C6A0DAC0086D346 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		FA494BD52C6A0DCF0086D346 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		FA494BD72C6A0EC00086D346 /* Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loading.swift; sourceTree = "<group>"; };
-		FA494BDB2C6A12060086D346 /* Debugger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debugger.swift; sourceTree = "<group>"; };
+		FA494BDB2C6A12060086D346 /* DebuggerRespose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebuggerRespose.swift; sourceTree = "<group>"; };
 		FA494BDD2C6A15210086D346 /* TimeAgoFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeAgoFormatter.swift; sourceTree = "<group>"; };
 		FA494BDF2C6A16FE0086D346 /* FingerPrintAndFaceID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FingerPrintAndFaceID.swift; sourceTree = "<group>"; };
 		FA494BE32C6A19C70086D346 /* KeyboradVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboradVC.swift; sourceTree = "<group>"; };
-		FA612AAB2C787A23001E4365 /* StatusLoading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusLoading.swift; sourceTree = "<group>"; };
+		FA612AAB2C787A23001E4365 /* LoadType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadType.swift; sourceTree = "<group>"; };
 		FA6D52D52C9A748F00710D93 /* PreventionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreventionVC.swift; sourceTree = "<group>"; };
 		FA81F0A52C7DCF72003B7EA6 /* BlurredBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurredBackgroundView.swift; sourceTree = "<group>"; };
 		FA81F0A72C7DD281003B7EA6 /* AESUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AESUtils.swift; sourceTree = "<group>"; };
@@ -119,6 +121,8 @@
 		FA837DFE2C9AF35800213AE4 /* CustomTabBarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarCell.swift; sourceTree = "<group>"; };
 		FA837E022C9B31D300213AE4 /* VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VC.swift; sourceTree = "<group>"; };
 		FA837E042C9B3DD900213AE4 /* GoogleMapsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapsVC.swift; sourceTree = "<group>"; };
+		FA837E072C9BD85A00213AE4 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		FA837E092C9BDB9900213AE4 /* HomeVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVM.swift; sourceTree = "<group>"; };
 		FA87CD772C799DB900349364 /* PagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagViewController.swift; sourceTree = "<group>"; };
 		FA87CD792C799EB200349364 /* TitleValueModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleValueModel.swift; sourceTree = "<group>"; };
 		FA87CD862C799FFB00349364 /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
@@ -136,7 +140,7 @@
 		FAB5D6442C6CB0E900A31A6F /* CheckmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckmarkView.swift; sourceTree = "<group>"; };
 		FAD0ABB42C992C0200608D7F /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		FAD973922C9031EB00FAA8CE /* AlertMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertMessage.swift; sourceTree = "<group>"; };
-		FAD973952C9039D000FAA8CE /* AlertMessageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertMessageVC.swift; sourceTree = "<group>"; };
+		FAD973952C9039D000FAA8CE /* AlertErrorVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertErrorVC.swift; sourceTree = "<group>"; };
 		FAD973972C903A5800FAA8CE /* AlertInternetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertInternetVC.swift; sourceTree = "<group>"; };
 		FAE400DD2C7D8CC4001D031F /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -155,7 +159,6 @@
 		FA068B0F2C97EA31006A5A58 /* OneTimeCodeTextField */ = {
 			isa = PBXGroup;
 			children = (
-				FA068B0A2C954E50006A5A58 /* OTPViewController.swift */,
 				FA068B102C97EA31006A5A58 /* OneTimeCodeTextFieldExtension.swift */,
 				FA068B112C97EA31006A5A58 /* OneTimeCodeTextFieldDelegate.swift */,
 				FA068B122C97EA31006A5A58 /* OneTimeCodeTextField.swift */,
@@ -217,7 +220,7 @@
 		FA45CE552C92D51A000DA118 /* Debugger */ = {
 			isa = PBXGroup;
 			children = (
-				FA494BDB2C6A12060086D346 /* Debugger.swift */,
+				FA494BDB2C6A12060086D346 /* DebuggerRespose.swift */,
 			);
 			path = Debugger;
 			sourceTree = "<group>";
@@ -319,9 +322,10 @@
 		FA494BB22C6A05950086D346 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				FAD973992C903B1000FAA8CE /* ApiManager */,
 				FA45CE542C92D486000DA118 /* Loading */,
 				FA45CE552C92D51A000DA118 /* Debugger */,
+				FAD973992C903B1000FAA8CE /* ApiManager */,
+				FAD973912C9031D200FAA8CE /* AlertManager */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -329,6 +333,7 @@
 		FA494BB32C6A05A20086D346 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				FA068B0F2C97EA31006A5A58 /* OneTimeCodeTextField */,
 				FA97E6812C9ACA33003C0966 /* TabBar */,
 				FA45CE592C92D81F000DA118 /* SaveObjectData */,
 				FA36BAEF2C7ECC2E005A49C5 /* Authentication */,
@@ -397,9 +402,10 @@
 		FA494BBA2C6A08C40086D346 /* UI + Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				FA837E152C9C21EA00213AE4 /* OTP */,
+				FA837E062C9BD83900213AE4 /* Home */,
 				FA837E002C9B30C100213AE4 /* GoolgeMaps */,
 				FA6D52D42C9A745C00710D93 /* Prevention Screen Shot & Screen Recording */,
-				FA068B0F2C97EA31006A5A58 /* OneTimeCodeTextField */,
 				FA4775CD2C7CA7E6002DC134 /* List ViewController */,
 				FA81F0AD2C7DDA53003B7EA6 /* DragdropCollection */,
 				FA4775C52C7C97DF002DC134 /* PresentViewController */,
@@ -435,8 +441,6 @@
 			isa = PBXGroup;
 			children = (
 				FAD9739B2C90435D00FAA8CE /* BottomSheet */,
-				FAD973912C9031D200FAA8CE /* AlertMessage */,
-				FAD973922C9031EB00FAA8CE /* AlertMessage.swift */,
 				FA81F0A92C7DD74D003B7EA6 /* PresentationStyle.swift */,
 			);
 			path = "Present + Alert";
@@ -456,6 +460,48 @@
 				FA837E022C9B31D300213AE4 /* VC.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		FA837E062C9BD83900213AE4 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				FA837E0B2C9BDBA400213AE4 /* View */,
+				FA837E0C2C9BDBAC00213AE4 /* ViewModel */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		FA837E0B2C9BDBA400213AE4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FA837E072C9BD85A00213AE4 /* HomeVC.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		FA837E0C2C9BDBAC00213AE4 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				FA837E092C9BDB9900213AE4 /* HomeVM.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		FA837E0E2C9BDF7000213AE4 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				FAD973952C9039D000FAA8CE /* AlertErrorVC.swift */,
+				FAD973972C903A5800FAA8CE /* AlertInternetVC.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		FA837E152C9C21EA00213AE4 /* OTP */ = {
+			isa = PBXGroup;
+			children = (
+				FA068B0A2C954E50006A5A58 /* OTPViewController.swift */,
+			);
+			path = OTP;
 			sourceTree = "<group>";
 		};
 		FA87CD802C799F9D00349364 /* Tables and Collections */ = {
@@ -514,25 +560,26 @@
 		FAB5D63F2C6C3D4800A31A6F /* Emun */ = {
 			isa = PBXGroup;
 			children = (
-				FA612AAB2C787A23001E4365 /* StatusLoading.swift */,
+				FA612AAB2C787A23001E4365 /* LoadType.swift */,
 			);
 			path = Emun;
 			sourceTree = "<group>";
 		};
-		FAD973912C9031D200FAA8CE /* AlertMessage */ = {
+		FAD973912C9031D200FAA8CE /* AlertManager */ = {
 			isa = PBXGroup;
 			children = (
-				FAD973952C9039D000FAA8CE /* AlertMessageVC.swift */,
-				FAD973972C903A5800FAA8CE /* AlertInternetVC.swift */,
+				FAD973922C9031EB00FAA8CE /* AlertMessage.swift */,
+				FA837E0E2C9BDF7000213AE4 /* ViewController */,
 			);
-			path = AlertMessage;
+			name = AlertManager;
+			path = "../Utilities/Present + Alert/AlertManager";
 			sourceTree = "<group>";
 		};
 		FAD973992C903B1000FAA8CE /* ApiManager */ = {
 			isa = PBXGroup;
 			children = (
-				FA494BD12C6A0D6D0086D346 /* ApiManager.swift */,
 				FA494BD52C6A0DCF0086D346 /* Endpoint.swift */,
+				FA494BD12C6A0D6D0086D346 /* ApiManager.swift */,
 			);
 			path = ApiManager;
 			sourceTree = "<group>";
@@ -628,26 +675,28 @@
 				FA81F0B12C7DE0CF003B7EA6 /* PresentTransactionVC.swift in Sources */,
 				FA4775B52C7C2289002DC134 /* String.swift in Sources */,
 				FA494BD42C6A0DAC0086D346 /* Environment.swift in Sources */,
-				FA494BDC2C6A12060086D346 /* Debugger.swift in Sources */,
+				FA494BDC2C6A12060086D346 /* DebuggerRespose.swift in Sources */,
 				FA36BAEB2C7EBD8A005A49C5 /* UIDevice.swift in Sources */,
 				FA837E032C9B31D300213AE4 /* VC.swift in Sources */,
 				FA4775B72C7C2295002DC134 /* Double.swift in Sources */,
 				FA97E6852C9AD1A7003C0966 /* CustomTabBarVC.swift in Sources */,
 				FA87CD9E2C79A09800349364 /* UIColor.swift in Sources */,
-				FA612AAC2C787A23001E4365 /* StatusLoading.swift in Sources */,
+				FA612AAC2C787A23001E4365 /* LoadType.swift in Sources */,
 				FAD0ABB52C992C0200608D7F /* Note.swift in Sources */,
 				FA4775BB2C7C22C7002DC134 /* Int.swift in Sources */,
 				FA068B132C97EA31006A5A58 /* OneTimeCodeTextFieldExtension.swift in Sources */,
 				FA6D52D62C9A748F00710D93 /* PreventionVC.swift in Sources */,
 				FA81F0A62C7DCF72003B7EA6 /* BlurredBackgroundView.swift in Sources */,
+				FA837E0A2C9BDB9900213AE4 /* HomeVM.swift in Sources */,
 				FA494BE42C6A19C70086D346 /* KeyboradVC.swift in Sources */,
 				FAD973982C903A5800FAA8CE /* AlertInternetVC.swift in Sources */,
 				FA494BA22C69EB9C0086D346 /* ViewController.swift in Sources */,
 				FA87CD8C2C79A01A00349364 /* UITableViewCell.swift in Sources */,
 				FA87CD8E2C79A02700349364 /* UICollectionViewCell.swift in Sources */,
+				FA837E082C9BD85B00213AE4 /* HomeVC.swift in Sources */,
 				FA36BAF12C7ECF6E005A49C5 /* GlobalVariables.swift in Sources */,
 				FAD973932C9031EB00FAA8CE /* AlertMessage.swift in Sources */,
-				FAD973962C9039D000FAA8CE /* AlertMessageVC.swift in Sources */,
+				FAD973962C9039D000FAA8CE /* AlertErrorVC.swift in Sources */,
 				FA81F0AC2C7DD913003B7EA6 /* AppCostants.swift in Sources */,
 				FA4775BD2C7C2F9C002DC134 /* UIViewController.swift in Sources */,
 				FA97E6832C9ACAFD003C0966 /* OriginalTabBarVC.swift in Sources */,
