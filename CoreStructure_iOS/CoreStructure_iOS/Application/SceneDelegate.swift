@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
          window = UIWindow(windowScene: windowScene)
 
          // Create a view hierarchy programmatically
-         let viewController = CenteringCollectionViewCellVC()
+         let viewController = ListViewController()
          let navigation = UINavigationController(rootViewController: viewController)
 
          // Set the root view controller of the window with your view controller

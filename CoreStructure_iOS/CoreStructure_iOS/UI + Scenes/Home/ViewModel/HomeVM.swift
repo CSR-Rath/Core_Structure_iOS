@@ -14,10 +14,8 @@ class HomeVM{
         ApiManager.apiConnection(url: Endpoint.wallet)
         { ( res : Response) in
             
-            DispatchQueue.main.async {
-                if AlertMessage.shared.isSuccessfulResponse(res){
-                    success(res)
-                }
+            AlertMessage.shared.isSuccessfulResponse(res) {
+                success(res)
             }
         }
     }
@@ -27,10 +25,8 @@ class HomeVM{
         ApiManager.apiConnection(url: Endpoint.userInfor)
         { ( res : Response) in
             
-            DispatchQueue.main.async {
-                if AlertMessage.shared.isSuccessfulResponse(res){
-                    success(res)
-                }
+            AlertMessage.shared.isSuccessfulResponse(res) {
+                success(res)
             }
         }
     }
