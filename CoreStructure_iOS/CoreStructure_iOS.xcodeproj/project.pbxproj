@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA022D4C2CB76A1C00D3C039 /* CenteringCollectionViewCellVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA022D4B2CB76A1C00D3C039 /* CenteringCollectionViewCellVC.swift */; };
+		FA022D4E2CB76A5800D3C039 /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA022D4D2CB76A5800D3C039 /* CardCell.swift */; };
+		FA022D502CB76AAA00D3C039 /* RelativeLayoutUtilityClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA022D4F2CB76AAA00D3C039 /* RelativeLayoutUtilityClass.swift */; };
+		FA022D522CB76AC600D3C039 /* UPCarouselFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA022D512CB76AC600D3C039 /* UPCarouselFlowLayout.swift */; };
 		FA068B0B2C954E50006A5A58 /* OTPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA068B0A2C954E50006A5A58 /* OTPViewController.swift */; };
 		FA068B132C97EA31006A5A58 /* OneTimeCodeTextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA068B102C97EA31006A5A58 /* OneTimeCodeTextFieldExtension.swift */; };
 		FA068B142C97EA31006A5A58 /* OneTimeCodeTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA068B112C97EA31006A5A58 /* OneTimeCodeTextFieldDelegate.swift */; };
@@ -74,6 +78,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FA022D4B2CB76A1C00D3C039 /* CenteringCollectionViewCellVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenteringCollectionViewCellVC.swift; sourceTree = "<group>"; };
+		FA022D4D2CB76A5800D3C039 /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
+		FA022D4F2CB76AAA00D3C039 /* RelativeLayoutUtilityClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelativeLayoutUtilityClass.swift; sourceTree = "<group>"; };
+		FA022D512CB76AC600D3C039 /* UPCarouselFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UPCarouselFlowLayout.swift; sourceTree = "<group>"; };
 		FA068B0A2C954E50006A5A58 /* OTPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPViewController.swift; sourceTree = "<group>"; };
 		FA068B102C97EA31006A5A58 /* OneTimeCodeTextFieldExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OneTimeCodeTextFieldExtension.swift; sourceTree = "<group>"; };
 		FA068B112C97EA31006A5A58 /* OneTimeCodeTextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OneTimeCodeTextFieldDelegate.swift; sourceTree = "<group>"; };
@@ -156,6 +164,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FA022D4A2CB769E000D3C039 /* CenteringCell */ = {
+			isa = PBXGroup;
+			children = (
+				FA022D4B2CB76A1C00D3C039 /* CenteringCollectionViewCellVC.swift */,
+				FA022D4D2CB76A5800D3C039 /* CardCell.swift */,
+			);
+			path = CenteringCell;
+			sourceTree = "<group>";
+		};
+		FA022D532CB7741400D3C039 /* BaseSize */ = {
+			isa = PBXGroup;
+			children = (
+				FA022D4F2CB76AAA00D3C039 /* RelativeLayoutUtilityClass.swift */,
+			);
+			path = BaseSize;
+			sourceTree = "<group>";
+		};
+		FA022D542CB7742C00D3C039 /* BaseUICollectionViewFlowLayout */ = {
+			isa = PBXGroup;
+			children = (
+				FA022D512CB76AC600D3C039 /* UPCarouselFlowLayout.swift */,
+			);
+			path = BaseUICollectionViewFlowLayout;
+			sourceTree = "<group>";
+		};
+		FA022D552CB7743D00D3C039 /* BaseTime */ = {
+			isa = PBXGroup;
+			children = (
+				FA494BDD2C6A15210086D346 /* TimeAgoFormatter.swift */,
+			);
+			path = BaseTime;
+			sourceTree = "<group>";
+		};
 		FA068B0F2C97EA31006A5A58 /* OneTimeCodeTextField */ = {
 			isa = PBXGroup;
 			children = (
@@ -393,8 +434,10 @@
 		FA494BB92C6A072D0086D346 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				FA022D542CB7742C00D3C039 /* BaseUICollectionViewFlowLayout */,
+				FA022D532CB7741400D3C039 /* BaseSize */,
 				FA494BCF2C6A0CFD0086D346 /* DateManager.swift */,
-				FA494BDD2C6A15210086D346 /* TimeAgoFormatter.swift */,
+				FA022D552CB7743D00D3C039 /* BaseTime */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -402,6 +445,7 @@
 		FA494BBA2C6A08C40086D346 /* UI + Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				FA022D4A2CB769E000D3C039 /* CenteringCell */,
 				FA837E152C9C21EA00213AE4 /* OTP */,
 				FA837E062C9BD83900213AE4 /* Home */,
 				FA837E002C9B30C100213AE4 /* GoolgeMaps */,
@@ -695,6 +739,7 @@
 				FA87CD8E2C79A02700349364 /* UICollectionViewCell.swift in Sources */,
 				FA837E082C9BD85B00213AE4 /* HomeVC.swift in Sources */,
 				FA36BAF12C7ECF6E005A49C5 /* GlobalVariables.swift in Sources */,
+				FA022D522CB76AC600D3C039 /* UPCarouselFlowLayout.swift in Sources */,
 				FAD973932C9031EB00FAA8CE /* AlertMessage.swift in Sources */,
 				FAD973962C9039D000FAA8CE /* AlertErrorVC.swift in Sources */,
 				FA81F0AC2C7DD913003B7EA6 /* AppCostants.swift in Sources */,
@@ -706,6 +751,7 @@
 				FA494BE02C6A16FE0086D346 /* FingerPrintAndFaceID.swift in Sources */,
 				FA494BDE2C6A15210086D346 /* TimeAgoFormatter.swift in Sources */,
 				FA068B142C97EA31006A5A58 /* OneTimeCodeTextFieldDelegate.swift in Sources */,
+				FA022D4E2CB76A5800D3C039 /* CardCell.swift in Sources */,
 				FA87CD7A2C799EB200349364 /* TitleValueModel.swift in Sources */,
 				FA494BD02C6A0CFD0086D346 /* DateManager.swift in Sources */,
 				FA068B152C97EA31006A5A58 /* OneTimeCodeTextField.swift in Sources */,
@@ -722,6 +768,7 @@
 				FA87CD782C799DB900349364 /* PagViewController.swift in Sources */,
 				FA4775B22C7C1FC8002DC134 /* Session.swift in Sources */,
 				FA87CD9A2C79A08100349364 /* UIImage.swift in Sources */,
+				FA022D4C2CB76A1C00D3C039 /* CenteringCollectionViewCellVC.swift in Sources */,
 				FA4775CF2C7CA821002DC134 /* ListViewController.swift in Sources */,
 				FA81F0A82C7DD281003B7EA6 /* AESUtils.swift in Sources */,
 				FA837E052C9B3DD900213AE4 /* GoogleMapsVC.swift in Sources */,
@@ -731,6 +778,7 @@
 				FA4775B92C7C22B3002DC134 /* Float.swift in Sources */,
 				FA87CD982C79A07700349364 /* UIStackView.swift in Sources */,
 				FA494BD62C6A0DCF0086D346 /* Endpoint.swift in Sources */,
+				FA022D502CB76AAA00D3C039 /* RelativeLayoutUtilityClass.swift in Sources */,
 				FAB5D6452C6CB0E900A31A6F /* CheckmarkView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
