@@ -11,6 +11,26 @@ import UIKit
 //MARK: For action
 extension UIViewController{
     
+    
+    @objc private func ImageSharing(viewSharing: UIView) {
+        
+        // Prepare the activity view controller
+        let activityViewController = UIActivityViewController(activityItems: [viewSharing],
+                                                              applicationActivities: nil)
+        
+        // For iPads, you must specify the source view
+        if let popoverController = activityViewController.popoverPresentationController {
+            popoverController.sourceView = viewSharing
+            popoverController.sourceRect = CGRect(x: viewSharing.bounds.midX,
+                                                  y: viewSharing.bounds.midY,
+                                                  width: 0, height: 0)
+            popoverController.permittedArrowDirections = []
+        }
+        
+        // Present the activity view controller
+        present(activityViewController, animated: true, completion: nil)
+    }
+    
     @objc func dismiss(_ Complete: Complete ){
         self.dismiss(animated: true) {
             
@@ -36,20 +56,6 @@ extension UIViewController{
         }
     }
     
-    
-
 }
 
-
-
-//MARK: For variable
-extension UIViewController{
-
-    static var size = 12
-    static var totalSize = 0
-    static var currentPage = 0
-    
-    
-    
-}
 

@@ -13,7 +13,7 @@ let passcode = "123456"
 let encryption = AESUtils.shared.encryptionAES(value: "\(passcode)",
                                                  key256 : "" , iv: "")
 //Advanced Encryption Standard
-class AESUtils:NSObject {
+class AESUtils{
     
     static let shared = AESUtils()
     

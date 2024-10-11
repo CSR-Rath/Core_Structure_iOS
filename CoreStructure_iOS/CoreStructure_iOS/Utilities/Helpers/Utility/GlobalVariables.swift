@@ -7,3 +7,6 @@
 
 import Foundation
 import UIKit
+
+var pageSize12: Int = 12
+var pageSize30: Int = 30

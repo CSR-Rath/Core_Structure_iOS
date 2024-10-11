@@ -37,6 +37,8 @@ extension UILabel{
     
     func fontBold(_ size: CGFloat){
         
+        self.font = UIFont.systemFont(ofSize: size, weight: .bold)
+        
 //        if  Localize.currentLanguage() == "en"{
 //            self.font = UIFont(name: Environment.English_BOLD  , size: size)
 //        }else{

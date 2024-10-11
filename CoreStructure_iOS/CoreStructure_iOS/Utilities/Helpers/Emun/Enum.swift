@@ -7,8 +7,6 @@
 
 import Foundation
 
-
-
 enum LoadTypeEnum {
     case pagination
     case initialLoad

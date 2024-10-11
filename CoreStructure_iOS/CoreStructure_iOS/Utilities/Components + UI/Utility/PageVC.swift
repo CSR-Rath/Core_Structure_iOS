@@ -106,8 +106,8 @@ class PageVC: UIViewController {
     func setupPageController(){
         addChild(pageController)
         view.addSubview(pageController.view)
-//        pageController.dataSource = self
-//        pageController.delegate = self
+        pageController.dataSource = self
+        pageController.delegate = self
         pageController.view.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
