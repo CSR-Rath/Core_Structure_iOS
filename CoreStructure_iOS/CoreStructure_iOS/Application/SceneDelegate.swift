@@ -13,7 +13,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
@@ -22,7 +21,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
          window = UIWindow(windowScene: windowScene)
 
          // Create a view hierarchy programmatically
-         let viewController = PasscodeVC()
+         let viewController = SelfSizingViewController()
+        viewController.view.backgroundColor = .white
          let navigation = UINavigationController(rootViewController: viewController)
 
          // Set the root view controller of the window with your view controller
@@ -31,7 +31,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
          // Make the window key and visible
          window?.makeKeyAndVisible()
     }
-    
+
+}
+
+
+extension SceneDelegate{
     
     func sceneDidDisconnect(_ scene: UIScene) {
         print("sceneDidDisconnect")
@@ -52,8 +56,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidEnterBackground(_ scene: UIScene) {
         print("sceneDidEnterBackground")
     }
-    
+
 }
-
-
 

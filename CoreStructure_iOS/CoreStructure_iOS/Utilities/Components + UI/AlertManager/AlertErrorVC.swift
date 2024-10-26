@@ -28,7 +28,7 @@ class AlertErrorVC: UIViewController {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.textColor = .black
-        lbl.fontBold(35)
+        lbl.fontBold(20)
         return lbl
     }()
     
@@ -36,7 +36,7 @@ class AlertErrorVC: UIViewController {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.textColor = .black
-        lbl.fontRegular(30)
+        lbl.fontRegular(14)
         lbl.numberOfLines = 0
         return lbl
     }()
@@ -63,10 +63,12 @@ class AlertErrorVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .black.withAlphaComponent(0.5)
+        view.backgroundColor = .black.withAlphaComponent(0.3)
         setupView()
         addPanGesture()
         closeButton.addTarget(self, action: #selector(close), for: .touchUpInside)
+        
+        contentView.addGestureRecognizer(target: self, action: #selector(close))
     }
     
     private func setupView() {
@@ -105,7 +107,7 @@ class AlertErrorVC: UIViewController {
             imgCenter.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             imgCenter.heightAnchor.constraint(equalToConstant: 120),
             
-            lblTitle.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 30),
+            lblTitle.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
             lblTitle.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             
             lblDescription.topAnchor.constraint(equalTo: lblTitle.bottomAnchor, constant: 40),

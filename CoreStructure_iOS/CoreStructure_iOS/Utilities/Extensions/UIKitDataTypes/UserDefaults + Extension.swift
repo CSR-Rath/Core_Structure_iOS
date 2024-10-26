@@ -9,7 +9,8 @@ import Foundation
 
 extension UserDefaults{
     
-    //MARK: Save array object
+    
+    //MARK: get object
     public func getObject<T: Codable>(_ type: T.Type, with key: String, usingDecoder decoder: JSONDecoder = JSONDecoder()) -> T? {
         guard let data = self.value(forKey: key) as? Data else { return nil }
         return try? decoder.decode(type.self, from: data)

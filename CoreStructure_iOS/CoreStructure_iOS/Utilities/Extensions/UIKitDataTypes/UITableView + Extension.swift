@@ -9,129 +9,179 @@ import Foundation
 import UIKit
 
 
-//MARK: For table empty
-extension UITableView {
+extension UITableView{
     
-    func setEmptyView(title: String = "Data Not Found ", messageImage: UIImage) {
-        
-        let emptyView = UIView(frame: CGRect(x: self.center.x,
-                                             y: self.center.y,
+//    func addRefreshControl(target: Any, action: Selector) {
+//        let refreshControl = UIRefreshControl()
+//        refreshControl.tintColor = .orange
+//        refreshControl.addTarget(target, action: action, for: .valueChanged)
+//        self.refreshControl = refreshControl // Assign the refresh control
+//    }
+
+}
+
+
+
+//MARK: Handle tableView list
+extension UITableView{
+
+    func setEmptyView(title: String = "Data Not Found", messageImage: UIImage = UIImage()) {
+        // Create the empty view
+        let emptyView = UIView(frame: CGRect(x: 0,
+                                             y: 0,
                                              width: self.bounds.size.width,
                                              height: self.bounds.size.height))
         
+        // Create the image view
         let messageImageView = UIImageView()
-        let titleLabel = UILabel()
-        
-        
-        messageImageView.backgroundColor = .clear
-        
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        messageImageView.image = messageImage
+        messageImageView.contentMode = .scaleAspectFill
         messageImageView.translatesAutoresizingMaskIntoConstraints = false
         
-        titleLabel.textColor = UIColor.black
+        // Create the title label
+        let titleLabel = UILabel()
+        titleLabel.text = title
+        titleLabel.textColor = .black
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 14) // Set the font
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        
-        emptyView.addSubview(titleLabel)
+        // Add subviews
         emptyView.addSubview(messageImageView)
+        emptyView.addSubview(titleLabel)
         
+        // Set constraints
         NSLayoutConstraint.activate([
             messageImageView.centerXAnchor.constraint(equalTo: emptyView.centerXAnchor),
             messageImageView.centerYAnchor.constraint(equalTo: emptyView.centerYAnchor, constant: -50),
             messageImageView.widthAnchor.constraint(equalToConstant: 100),
             messageImageView.heightAnchor.constraint(equalToConstant: 100),
-            //----
-            titleLabel.topAnchor.constraint(equalTo: messageImageView.bottomAnchor, constant: 10),
-            titleLabel.centerXAnchor.constraint(equalTo: emptyView.centerXAnchor),
             
+            titleLabel.topAnchor.constraint(equalTo: messageImageView.bottomAnchor, constant: 10),
+            titleLabel.centerXAnchor.constraint(equalTo: emptyView.centerXAnchor)
         ])
         
+        // Add animation to the image view
+        animateImageView(messageImageView)
         
-        messageImageView.contentMode = .scaleAspectFill
-        //        messageImageView.image = .imgEmpty
-        titleLabel.text = title
-        titleLabel.fontBold(14)
-        
-        UIView.animate(withDuration: 1, animations: {
-            
-            messageImageView.transform = CGAffineTransform(rotationAngle: .pi / 10)
-        }, completion: { (finish) in
-            UIView.animate(withDuration: 1, animations: {
-                messageImageView.transform = CGAffineTransform(rotationAngle: -1 * (.pi / 10))
-            }, completion: { (finishh) in
-                UIView.animate(withDuration: 1, animations: {
-                    messageImageView.transform = CGAffineTransform.identity
-                })
-            })
-            
-        })
-        
+        // Set background view and separator style
         self.backgroundView = emptyView
         self.separatorStyle = .none
     }
     
     func restore() {
+        // Restore the original table view state
         self.backgroundView = nil
-        self.separatorStyle =  .none  //.singleLine
+        self.separatorStyle = .singleLine
+    }
+    
+    private func animateImageView(_ imageView: UIImageView) {
+        UIView.animate(withDuration: 1.0, animations: {
+            imageView.transform = CGAffineTransform(rotationAngle: .pi / 10)
+        }, completion: { _ in
+            UIView.animate(withDuration: 1.0, animations: {
+                imageView.transform = CGAffineTransform(rotationAngle: -(.pi / 10))
+            }, completion: { _ in
+                UIView.animate(withDuration: 1.0, animations: {
+                    imageView.transform = .identity
+                })
+            })
+        })
     }
 }
 
 
-//MARK: For refreshController
-extension UITableView{
-    
-    static let refresh = UIRefreshControl()
-    static var actionRefresh: (()->())?
-    
-    func setupRefreshControl() {
-        UITableView.refresh.tintColor = .blue
-        UITableView.refresh.addTarget(self, action: #selector(refreshData), for: .valueChanged)
-        self.refreshControl = UITableView.refresh
-    }
-    
-    
-    @objc private func refreshData(){
-        UITableView.actionRefresh?()
-    }
-    
-    func endRefreshData(){
-        UITableView.refresh.endRefreshing()
-    }
-    
-}
 
 
 
-//func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//    let last = tableView.numberOfRows(inSection: 0)-1
-//    let items =  result.count
-//    if last == indexPath.row && allTotal > items{
-//        page += 1
-//        tableView.showLoadingSpinner(with: "Fetch data...")
-//        getDataApi(page: page, size: size, isLoading: false)
+
+//MARK: For table empty
+//extension UITableView {
+//    
+//    func setEmptyView(title: String = "Data Not Found ", messageImage: UIImage) {
+//        
+//        let emptyView = UIView(frame: CGRect(x: self.center.x,
+//                                             y: self.center.y,
+//                                             width: self.bounds.size.width,
+//                                             height: self.bounds.size.height))
+//        
+//        let messageImageView = UIImageView()
+//        let titleLabel = UILabel()
+//        
+//        
+//        messageImageView.backgroundColor = .clear
+//        
+//        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+//        messageImageView.translatesAutoresizingMaskIntoConstraints = false
+//        
+//        titleLabel.textColor = UIColor.black
+//        
+//        
+//        emptyView.addSubview(titleLabel)
+//        emptyView.addSubview(messageImageView)
+//        
+//        NSLayoutConstraint.activate([
+//            messageImageView.centerXAnchor.constraint(equalTo: emptyView.centerXAnchor),
+//            messageImageView.centerYAnchor.constraint(equalTo: emptyView.centerYAnchor, constant: -50),
+//            messageImageView.widthAnchor.constraint(equalToConstant: 100),
+//            messageImageView.heightAnchor.constraint(equalToConstant: 100),
+//            //----
+//            titleLabel.topAnchor.constraint(equalTo: messageImageView.bottomAnchor, constant: 10),
+//            titleLabel.centerXAnchor.constraint(equalTo: emptyView.centerXAnchor),
+//            
+//        ])
+//        
+//        
+//        messageImageView.contentMode = .scaleAspectFill
+//        //        messageImageView.image = .imgEmpty
+//        titleLabel.text = title
+//        titleLabel.fontBold(14)
+//        
+//        UIView.animate(withDuration: 1, animations: {
+//            
+//            messageImageView.transform = CGAffineTransform(rotationAngle: .pi / 10)
+//        }, completion: { (finish) in
+//            UIView.animate(withDuration: 1, animations: {
+//                messageImageView.transform = CGAffineTransform(rotationAngle: -1 * (.pi / 10))
+//            }, completion: { (finishh) in
+//                UIView.animate(withDuration: 1, animations: {
+//                    messageImageView.transform = CGAffineTransform.identity
+//                })
+//            })
+//            
+//        })
+//        
+//        self.backgroundView = emptyView
+//        self.separatorStyle = .none
+//    }
+//    
+//    func restore() {
+//        self.backgroundView = nil
+//        self.separatorStyle =  .none  //.singleLine
 //    }
 //}
+
 
 //MARK: Pagination fetch data
 extension UITableView{
     
-     func showLoadingSpinner(with title: String = "Fetch data.") {
+    func showLoadingSpinner(with title: String = "Fetch data.") {
         // Add a loading spinner and title to the table view
         let spinner = UIActivityIndicatorView(style: .large)
         spinner.startAnimating()
-
+        
         let titleLabel = UILabel()
         titleLabel.text = title
-         titleLabel.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+        titleLabel.font = UIFont.systemFont(ofSize: 12, weight: .bold)
         titleLabel.textColor = .red
         titleLabel.numberOfLines = 0
         titleLabel.lineBreakMode = .byWordWrapping
         titleLabel.sizeToFit()
         titleLabel.textAlignment = .center
-
+        
         let stackView = UIStackView(arrangedSubviews: [spinner, titleLabel])
         stackView.axis = .vertical
         stackView.spacing = 8
-
+        
         let containerView = UIView(frame: CGRect(x: 0, y: 0,
                                                  width: self.bounds.width,
                                                  height: titleLabel.frame.height + spinner.frame.height + 16))
@@ -142,13 +192,66 @@ extension UITableView{
             stackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
             stackView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor)
         ])
-         
-         
-         self.tableFooterView = containerView
+        
+        
+        self.tableFooterView = containerView
     }
     
-     func hideLoadingSpinner() {
+    func hideLoadingSpinner() {
         // Remove the loading spinner from the table view
         self.tableFooterView = nil
+    }
+}
+
+
+import UIKit
+
+class CustomRefreshControl: UIRefreshControl {
+    
+    private let customIcon: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    override init() {
+        super.init()
+        setup()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setup()
+    }
+    
+    private func setup() {
+        // Add the custom icon to the refresh control
+        self.addSubview(customIcon)
+        
+        // Set constraints for the icon
+        NSLayoutConstraint.activate([
+            customIcon.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            customIcon.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            customIcon.widthAnchor.constraint(equalToConstant: 30), // Adjust size
+            customIcon.heightAnchor.constraint(equalToConstant: 30) // Adjust size
+        ])
+    }
+    
+    // Function to set the icon image
+    func setIcon(image: UIImage?) {
+        customIcon.image = image
+    }
+    
+    override func beginRefreshing() {
+        setIcon(image: .icFaceID)
+        super.beginRefreshing()
+        // You can start animations here if needed
+    }
+    
+    override func endRefreshing() {
+        super.endRefreshing()
+        // Stop animations here if needed
+        
     }
 }

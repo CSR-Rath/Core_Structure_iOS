@@ -8,11 +8,12 @@
 import Foundation
 import UIKit
 
-extension UITableViewCell{
-    func animateScrollCell(index: Int){
+
+extension UITableViewCell {
+    func animateScrollCell(index: Int) {
         // Animate the cell
         self.alpha = 0
-        UIView.animate(withDuration: 0.5, delay: Double(index) * 0.1, options: .curveEaseOut) {
+        UIView.animate(withDuration: 0.0, delay: Double(index), options: .curveEaseIn) {
             self.alpha = 1
         }
     }

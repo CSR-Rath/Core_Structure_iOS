@@ -8,7 +8,7 @@
 import UIKit
 
 
-enum StatusCode{
+enum HandleMessageResponse{
     case code200
     case code400
     case code401
@@ -73,9 +73,9 @@ class AlertMessage{
         }
     }
     
-    func alertError(title: String = "Message!",
-                   message: String? = "Something Went Wrong",
-                   status: StatusCode = .none
+    func alertError(title: String = "Error",
+                   message: String? = "Something Went Wrong!",
+                   status: HandleMessageResponse = .none
     ) {
         
         DispatchQueue.main.async {
@@ -108,51 +108,6 @@ class AlertMessage{
         }
     }
     
-//    func showAlertInternet(title: String = "Message!",
-//                   message: String? = "Internet isn't connected.",
-//                   status: StatusCode = .none
-//    ) {
-//        
-//        DispatchQueue.main.async {
-//            
-//            let vc = AlertInternetVC()
-//            vc.modalTransitionStyle = .crossDissolve
-//            vc.modalPresentationStyle = .overFullScreen
-//            vc.lblTitle.text = title
-//            
-//            if  message == nil || message == "" {
-//                vc.lblDescription.text =  status == .none ? message :  status.message
-//            }else{
-//                vc.lblDescription.text =  message
-//            }
-//            
-//            //MARK: Handle image error
-//            switch status{
-//            case .code200:
-//                break
-//            case .code400:
-//                break
-//            case .code401:
-//                break
-//            case .code404:
-//                break
-//            case .code500:
-//                break
-//            case .none:
-//                break
-//            }
-//            
-//       
-//            
-//            if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-//                sceneDelegate.window?.rootViewController?.present(vc,
-//                                                                  animated: true,
-//                                                                  completion: {
-//                    Loading.shared.hideLoading()
-//                })
-//            }
-//        }
-//    }
 
 }
 

@@ -29,18 +29,15 @@ extension UIView{
 //MARK: For action on UIView
 extension UIView{
     
-    static var didTapGesture:(()->())?
+
     
-    func addGestureRecognizer() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+    func addGestureRecognizer(target: Any, action: Selector) {
+        let tapGesture = UITapGestureRecognizer(target: target, action: action)
         self.addGestureRecognizer(tapGesture)
         self.isUserInteractionEnabled = true // Ensure user interaction is enabled
     }
     
-    @objc private func handleTap() {
-        UIView.didTapGesture?()
-        print("View tapped!")
-    }
+
 }
 
 

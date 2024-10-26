@@ -15,6 +15,7 @@ class CustomTabBarCell: UICollectionViewCell {
         let lbl = UILabel()
         lbl.text = "Name"
         lbl.textColor = .black
+        lbl.fontRegular(13)
         return lbl
     }()
     
@@ -30,7 +31,8 @@ class CustomTabBarCell: UICollectionViewCell {
         stack.axis = .vertical
         stack.alignment = .center
         stack.distribution = .fill
-        stack.layoutMargins = UIEdgeInsets(top: 5, left: 0, bottom: 18, right: 0)
+        stack.spacing = 5
+        stack.layoutMargins = UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0)
         stack.isLayoutMarginsRelativeArrangement = true
         return stack
     }()
@@ -57,8 +59,8 @@ class CustomTabBarCell: UICollectionViewCell {
             stack.leftAnchor.constraint(equalTo: leftAnchor),
             stack.rightAnchor.constraint(equalTo: rightAnchor),
 
-            imgIcon.heightAnchor.constraint(equalToConstant: 35),
-            imgIcon.widthAnchor.constraint(equalToConstant: 35),
+            imgIcon.heightAnchor.constraint(equalToConstant: 25),
+            imgIcon.widthAnchor.constraint(equalToConstant: 25),
         ])
     }
 }

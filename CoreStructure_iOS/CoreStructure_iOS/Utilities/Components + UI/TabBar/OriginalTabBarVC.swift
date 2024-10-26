@@ -27,7 +27,7 @@ class OriginalTabBarVC: UITabBarController,UITabBarControllerDelegate {
     
     private func setupViewControllers() {
         // Create instances of view controllers
-        let firstVC = FirstViewController()
+        let firstVC = DemoFeatureVC()
         let secondVC = SecondViewController()
         let threeVC = ThreeViewController()
         let fourtVC = FourViewController()

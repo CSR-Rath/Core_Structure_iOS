@@ -23,12 +23,12 @@ class ListViewController: UIViewController {
         view.addSubview(tableView)
         
         //MARK: Refresh table view
-        tableView.setupRefreshControl()
-        UITableView.actionRefresh = { [self] in
-            print("Testing")
-            tableView.endRefreshData()
-        }
-        
+//        tableView.setupRefreshControl()
+//        UITableView.actionRefresh = { [self] in
+//            print("Testing")
+//            tableView.endRefreshData()
+//        }
+//        
     }
 }
 

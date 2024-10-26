@@ -47,6 +47,9 @@ extension UILabel{
     }
     
     func fontRegular(_ size: CGFloat){
+        self.font = UIFont.systemFont(ofSize: size, weight: .regular)
+        
+        
         //        self.textColor = .white
 //        if  Localize.currentLanguage() == "en"{
 //            self.font = UIFont(name: Environment.English_REGUAR  , size: size) // English_Font

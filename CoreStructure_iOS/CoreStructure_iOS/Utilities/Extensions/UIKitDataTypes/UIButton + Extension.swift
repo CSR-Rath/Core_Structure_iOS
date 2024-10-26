@@ -10,10 +10,11 @@ import UIKit
 
 extension UIButton{
     
-//    func addTargetAction(action: Selector) {
-//        self.addTarget(self, action: action, for: .touchUpInside)
-//    }
-    
-    
+    func addTargetButton(target: Any, action: Selector){
+        self.addTarget(target, action: action, for: .touchUpInside)
+    }
     
 }
+
+
+
