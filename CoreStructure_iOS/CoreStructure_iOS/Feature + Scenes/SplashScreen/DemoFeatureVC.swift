@@ -27,9 +27,9 @@ class DemoFeatureVC: UIViewController {
         ListModel(id: 3, name: "OTPVC", viewController: OTPVC()),
         ListModel(id: 4, name: "BoardCollectionVC", viewController: BoardCollectionVC()),
         ListModel(id: 5, name: "DemoBottomSheetViewController", viewController: DemoBottomSheetViewController()),
-        ListModel(id: 6, name: "CenteringCollectionViewCellVC", viewController: CenteringCollectionViewCellVC()),
+        ListModel(id: 6, name: "CenteringCollectionViewCellVC", viewController: CenteringCellVC()),
         ListModel(id: 7, name: "Cell Alert Error", viewController: nil),
-        ListModel(id: 8, name: "Testing", viewController: UIViewController()),
+        ListModel(id: 8, name: "PanGestureVC", viewController: PanGestureVC()),
     ]
     
 
@@ -77,9 +77,18 @@ class DemoFeatureVC: UIViewController {
 //                let vc = item.viewController as! TableHandlerVC
 //                vc.handleTableView.updateItems(inSection: 0, newItems: ["a","b"])
                 
-                if item.id == 7 {
+                if item.id == 7  {
                     AlertMessage.shared.alertError()
+                }else if item.id == 8{
+                    
+                    let vc = item.viewController
+                    vc?.modalPresentationStyle = .custom
+                    vc?.transitioningDelegate = presentVC
+                    
+                    self.present(vc!, animated: true)
+                    
                 }else{
+                        
                     self.navigationController?.pushViewController(item.viewController!, animated: true)
                 }
 

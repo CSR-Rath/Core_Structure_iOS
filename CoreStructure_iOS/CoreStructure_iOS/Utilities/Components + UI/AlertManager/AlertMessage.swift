@@ -82,8 +82,9 @@ class AlertMessage{
             
             let bottomSheetVC = AlertErrorVC()
 
-            bottomSheetVC.modalTransitionStyle = .crossDissolve
-            bottomSheetVC.modalPresentationStyle = .overFullScreen
+            bottomSheetVC.modalPresentationStyle = .custom
+            bottomSheetVC.transitioningDelegate = presentVC
+
             
             bottomSheetVC.lblTitle.text = title
             

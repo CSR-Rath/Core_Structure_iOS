@@ -7,3 +7,8 @@
 
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
+
+
+url_server = http:/$()/159.138.83.213:8081/v1/api/mobile/
+
+bundle_identifier =  pro

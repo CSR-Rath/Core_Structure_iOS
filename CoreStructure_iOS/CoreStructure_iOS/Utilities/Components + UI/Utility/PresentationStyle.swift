@@ -39,7 +39,7 @@ class PresentationController: UIPresentationController {
     override func presentationTransitionWillBegin() {
         guard let containerView = containerView else { return }
         let dimmingView = UIView(frame: containerView.bounds)
-        dimmingView.backgroundColor = UIColor.black.withAlphaComponent(0.60)
+        dimmingView.backgroundColor = UIColor.black.withAlphaComponent(0.3)
         containerView.insertSubview(dimmingView, at: 0)
         self.dimmingView = dimmingView
     }

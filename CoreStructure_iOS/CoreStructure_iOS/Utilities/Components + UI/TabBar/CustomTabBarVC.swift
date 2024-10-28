@@ -51,6 +51,9 @@ class CustomTabBarVC: UITabBarController {
     }()
     
     
+
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,6 +103,12 @@ class CustomTabBarVC: UITabBarController {
             collactionView.heightAnchor.constraint(equalToConstant: 85),
         
         ])
+        
+
+        print( "statusBarHeight ==> ", ConstantsHeight.statusBarHeight,
+               "\navigationBarHeight ==> " , ConstantsHeight.navigationBarHeight,
+               "\navailableHeight ==> ", ConstantsHeight.availableHeight)
+        
     }
 }
 

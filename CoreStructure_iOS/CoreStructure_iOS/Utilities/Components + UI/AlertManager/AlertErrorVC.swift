@@ -197,7 +197,7 @@ extension AlertErrorVC{
             contentView.transform = CGAffineTransform(scaleX: 0.001, y: 0.001)
         }) { _ in
             
-            self.dismiss(animated: true, completion: { [self] in
+            self.dismiss(animated: false, completion: { [self] in
                 setupCloseButton()
             })
         }

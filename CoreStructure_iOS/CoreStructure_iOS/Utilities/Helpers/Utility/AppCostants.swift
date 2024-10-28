@@ -9,7 +9,7 @@ import Foundation
 
 
 
-class AppCostants{
+struct AppCostants{
     
     static let saveTimer = "saveTimer"
     static let userInfor = "userInfor"

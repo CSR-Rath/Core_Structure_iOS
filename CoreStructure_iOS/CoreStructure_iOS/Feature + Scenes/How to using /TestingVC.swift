@@ -13,13 +13,9 @@ class TestingVC: UIViewController {
         super.touchesBegan(touches, with: event)
         AlertMessage.shared.alertError()
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .orange
     }
-    
-
-
-
 }

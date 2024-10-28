@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FA022D4C2CB76A1C00D3C039 /* CenteringCollectionViewCellVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA022D4B2CB76A1C00D3C039 /* CenteringCollectionViewCellVC.swift */; };
+		FA022D4C2CB76A1C00D3C039 /* CenteringCellVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA022D4B2CB76A1C00D3C039 /* CenteringCellVC.swift */; };
 		FA022D4E2CB76A5800D3C039 /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA022D4D2CB76A5800D3C039 /* CardCell.swift */; };
 		FA022D5E2CB777AE00D3C039 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA022D582CB777AE00D3C039 /* Board.swift */; };
 		FA022D5F2CB777AE00D3C039 /* BoardCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA022D5A2CB777AE00D3C039 /* BoardCollectionVC.swift */; };
@@ -22,6 +22,7 @@
 		FA068B142C97EA31006A5A58 /* OneTimeCodeTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA068B112C97EA31006A5A58 /* OneTimeCodeTextFieldDelegate.swift */; };
 		FA068B152C97EA31006A5A58 /* OneTimeCodeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA068B122C97EA31006A5A58 /* OneTimeCodeTextField.swift */; };
 		FA11394F2CBCF35600F76FF2 /* MainPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA11394E2CBCF35600F76FF2 /* MainPageVC.swift */; };
+		FA2356552CCF2D8300BD685B /* PanGestureVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2356542CCF2D8300BD685B /* PanGestureVC.swift */; };
 		FA2B10882CB785690095CDB1 /* UIColor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2B10872CB785690095CDB1 /* UIColor + Extension.swift */; };
 		FA2B108E2CB786EF0095CDB1 /* AlertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2B108A2CB786EF0095CDB1 /* AlertMessage.swift */; };
 		FA2B108F2CB786EF0095CDB1 /* AlertErrorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2B108C2CB786EF0095CDB1 /* AlertErrorVC.swift */; };
@@ -78,6 +79,9 @@
 		FA87CD8E2C79A02700349364 /* UICollectionViewCell + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA87CD8D2C79A02700349364 /* UICollectionViewCell + Extension.swift */; };
 		FA87CD9A2C79A08100349364 /* UIImage + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA87CD992C79A08100349364 /* UIImage + Extension.swift */; };
 		FA87CD9C2C79A08D00349364 /* UIFont + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA87CD9B2C79A08D00349364 /* UIFont + Extension.swift */; };
+		FA88FD382CCCE1E400FD115B /* SplashScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA88FD372CCCE1E400FD115B /* SplashScreenVC.swift */; };
+		FA88FD3A2CCCE23500FD115B /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA88FD392CCCE23500FD115B /* AppConstants.swift */; };
+		FA8E80DE2CCCED600091EDF1 /* ConstantsHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8E80DD2CCCED600091EDF1 /* ConstantsHeight.swift */; };
 		FA97E6832C9ACAFD003C0966 /* OriginalTabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA97E6822C9ACAFD003C0966 /* OriginalTabBarVC.swift */; };
 		FA97E6852C9AD1A7003C0966 /* CustomTabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA97E6842C9AD1A7003C0966 /* CustomTabBarVC.swift */; };
 		FA9C000A2CCBEE6500F277E3 /* TestingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9C00092CCBEE6500F277E3 /* TestingVC.swift */; };
@@ -91,7 +95,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		FA022D4B2CB76A1C00D3C039 /* CenteringCollectionViewCellVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenteringCollectionViewCellVC.swift; sourceTree = "<group>"; };
+		FA022D4B2CB76A1C00D3C039 /* CenteringCellVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenteringCellVC.swift; sourceTree = "<group>"; };
 		FA022D4D2CB76A5800D3C039 /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
 		FA022D582CB777AE00D3C039 /* Board.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		FA022D5A2CB777AE00D3C039 /* BoardCollectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardCollectionVC.swift; sourceTree = "<group>"; };
@@ -106,6 +110,7 @@
 		FA068B112C97EA31006A5A58 /* OneTimeCodeTextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OneTimeCodeTextFieldDelegate.swift; sourceTree = "<group>"; };
 		FA068B122C97EA31006A5A58 /* OneTimeCodeTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OneTimeCodeTextField.swift; sourceTree = "<group>"; };
 		FA11394E2CBCF35600F76FF2 /* MainPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageVC.swift; sourceTree = "<group>"; };
+		FA2356542CCF2D8300BD685B /* PanGestureVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanGestureVC.swift; sourceTree = "<group>"; };
 		FA2B10872CB785690095CDB1 /* UIColor + Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor + Extension.swift"; sourceTree = "<group>"; };
 		FA2B108A2CB786EF0095CDB1 /* AlertMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertMessage.swift; sourceTree = "<group>"; };
 		FA2B108C2CB786EF0095CDB1 /* AlertErrorVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertErrorVC.swift; sourceTree = "<group>"; };
@@ -167,6 +172,9 @@
 		FA87CD8D2C79A02700349364 /* UICollectionViewCell + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell + Extension.swift"; sourceTree = "<group>"; };
 		FA87CD992C79A08100349364 /* UIImage + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + Extension.swift"; sourceTree = "<group>"; };
 		FA87CD9B2C79A08D00349364 /* UIFont + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont + Extension.swift"; sourceTree = "<group>"; };
+		FA88FD372CCCE1E400FD115B /* SplashScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenVC.swift; sourceTree = "<group>"; };
+		FA88FD392CCCE23500FD115B /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
+		FA8E80DD2CCCED600091EDF1 /* ConstantsHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantsHeight.swift; sourceTree = "<group>"; };
 		FA97E6822C9ACAFD003C0966 /* OriginalTabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OriginalTabBarVC.swift; sourceTree = "<group>"; };
 		FA97E6842C9AD1A7003C0966 /* CustomTabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarVC.swift; sourceTree = "<group>"; };
 		FA9C00092CCBEE6500F277E3 /* TestingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingVC.swift; sourceTree = "<group>"; };
@@ -193,7 +201,7 @@
 		FA022D4A2CB769E000D3C039 /* CenteringCell */ = {
 			isa = PBXGroup;
 			children = (
-				FA022D4B2CB76A1C00D3C039 /* CenteringCollectionViewCellVC.swift */,
+				FA022D4B2CB76A1C00D3C039 /* CenteringCellVC.swift */,
 				FA022D4D2CB76A5800D3C039 /* CardCell.swift */,
 			);
 			path = CenteringCell;
@@ -294,6 +302,8 @@
 				FA022D652CB77CA300D3C039 /* RelativeLayoutUtilityClass.swift */,
 				FA9FEC2A2CC76342008D421D /* TimerStartAndStop.swift */,
 				FA849AE42CCB2B5300A34B89 /* ContentSizedTableAndCollectionView.swift */,
+				FA88FD392CCCE23500FD115B /* AppConstants.swift */,
+				FA8E80DD2CCCED600091EDF1 /* ConstantsHeight.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -318,6 +328,7 @@
 				FA81F0AD2C7DDA53003B7EA6 /* DragdropCollection */,
 				FA2B109C2CB8CD170095CDB1 /* ScanQR */,
 				FA2B109B2CB8CD040095CDB1 /* Passcode */,
+				FA2356542CCF2D8300BD685B /* PanGestureVC.swift */,
 			);
 			path = MissingFeature;
 			sourceTree = "<group>";
@@ -573,6 +584,7 @@
 			children = (
 				FA837E022C9B31D300213AE4 /* DemoFeatureVC.swift */,
 				FA9C00102CCC10A800F277E3 /* SelfSizingViewController.swift */,
+				FA88FD372CCCE1E400FD115B /* SplashScreenVC.swift */,
 			);
 			path = SplashScreen;
 			sourceTree = "<group>";
@@ -696,6 +708,7 @@
 				FA2B10A12CB8E0D80095CDB1 /* UIButton + Extension.swift in Sources */,
 				FA022D6B2CB77CA300D3C039 /* RelativeLayoutUtilityClass.swift in Sources */,
 				FA81F0A62C7DCF72003B7EA6 /* BlurredBackgroundView.swift in Sources */,
+				FA88FD3A2CCCE23500FD115B /* AppConstants.swift in Sources */,
 				FA837E0A2C9BDB9900213AE4 /* HomeVM.swift in Sources */,
 				FA494BE42C6A19C70086D346 /* PasscodeVC.swift in Sources */,
 				FA87CD8C2C79A01A00349364 /* UITableViewCell + Extension.swift in Sources */,
@@ -738,7 +751,7 @@
 				FA11394F2CBCF35600F76FF2 /* MainPageVC.swift in Sources */,
 				FA4775B22C7C1FC8002DC134 /* DataManager.swift in Sources */,
 				FA87CD9A2C79A08100349364 /* UIImage + Extension.swift in Sources */,
-				FA022D4C2CB76A1C00D3C039 /* CenteringCollectionViewCellVC.swift in Sources */,
+				FA022D4C2CB76A1C00D3C039 /* CenteringCellVC.swift in Sources */,
 				FA022D5F2CB777AE00D3C039 /* BoardCollectionVC.swift in Sources */,
 				FA4775CF2C7CA821002DC134 /* ListViewController.swift in Sources */,
 				FA81F0A82C7DD281003B7EA6 /* AESUtils.swift in Sources */,
@@ -747,11 +760,14 @@
 				FA8409D62CCA2FD7004293A9 /* TableHandlerVC.swift in Sources */,
 				FA4775C42C7C8EDB002DC134 /* UIView + Extension.swift in Sources */,
 				FA2B109E2CB8D0930095CDB1 /* FileSharing.swift in Sources */,
+				FA8E80DE2CCCED600091EDF1 /* ConstantsHeight.swift in Sources */,
+				FA88FD382CCCE1E400FD115B /* SplashScreenVC.swift in Sources */,
 				FA87CD892C79A00900349364 /* UICollectionView + Extension.swift in Sources */,
 				FA9C000A2CCBEE6500F277E3 /* TestingVC.swift in Sources */,
 				FA4775B92C7C22B3002DC134 /* Float + Extension.swift in Sources */,
 				FA2B10922CB78C000095CDB1 /* UserDefaults + Extension.swift in Sources */,
 				FA2B108F2CB786EF0095CDB1 /* AlertErrorVC.swift in Sources */,
+				FA2356552CCF2D8300BD685B /* PanGestureVC.swift in Sources */,
 				FA494BD62C6A0DCF0086D346 /* Endpoints.swift in Sources */,
 				FAB5D6452C6CB0E900A31A6F /* CheckmarkView.swift in Sources */,
 				FA022D612CB777AE00D3C039 /* BoardCollectionViewCell.swift in Sources */,

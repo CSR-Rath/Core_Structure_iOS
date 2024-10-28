@@ -8,7 +8,7 @@
 import UIKit
 
 
-class CenteringCollectionViewCellVC: UIViewController {
+class CenteringCellVC: UIViewController {
 
     // Declared CollectionView variable:
     var collectionView : UICollectionView?
@@ -39,7 +39,7 @@ class CenteringCollectionViewCellVC: UIViewController {
 
         if let collection = collectionView{
             NSLayoutConstraint.activate([
-                collection.topAnchor.constraint(equalTo: view.topAnchor),
+                collection.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
                 collection.leftAnchor.constraint(equalTo: view.leftAnchor),
                 collection.rightAnchor.constraint(equalTo: view.rightAnchor),
                 collection.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -82,7 +82,7 @@ class CenteringCollectionViewCellVC: UIViewController {
 
 
 // MARK: - Card Collection Delegate & DataSource
-extension CenteringCollectionViewCellVC: UICollectionViewDelegate, UICollectionViewDataSource{
+extension CenteringCellVC: UICollectionViewDelegate, UICollectionViewDataSource{
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1

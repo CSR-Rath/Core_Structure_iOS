@@ -16,7 +16,7 @@ class DataManager {
     private let phoneNumberKey = "phoneNumber"
 }
 
-// MARK: - Save Data
+// MARK: - Save object
 extension DataManager {
     
     func saveUserData(data: UserInforModel) {
@@ -28,7 +28,7 @@ extension DataManager {
     }
 }
 
-// MARK: - Get Data
+// MARK: - Get object
 extension DataManager {
     
     func getInfoUser() -> [CheckPhoneNumberResult]? {

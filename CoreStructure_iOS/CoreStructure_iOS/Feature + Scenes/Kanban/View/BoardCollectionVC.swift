@@ -79,14 +79,40 @@ extension BoardCollectionVC{
     private func setupCollectionView() {
         
         flowLayout = UICollectionViewFlowLayout()
-        flowLayout.itemSize = CGSize(width: 300, height: view.frame.height * 0.9)
+        
+        
+        
+        
+        flowLayout.itemSize = CGSize(width: 150, height: view.frame.height * 0.9)
         flowLayout.scrollDirection = .horizontal
         flowLayout.minimumLineSpacing = 30
-        // Initialize UICollectionView with the flow layout
+        
+        
+//        // Calculate the frame excluding the navigation bar
+//        let navigationBarHeight = navigationController?.navigationBar.frame.height ?? 0
+////        let statusBarHeight = UIApplication.shared.statusBarFrame.height
+//        
+//        let statusBarHeight: CGFloat
+//        if let windowScene = view.window?.windowScene {
+//            statusBarHeight = windowScene.statusBarManager?.statusBarFrame.height ?? 0
+//        } else {
+//            statusBarHeight = 0
+//        }
+//        
+//        
+//        let underStatusbar = navigationBarHeight + statusBarHeight + 20
+//        
+//        let availableHeight = view.bounds.height - underStatusbar
+
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: flowLayout)
+
+        
+        
+        // Initialize UICollectionView with the flow layout
+//        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: flowLayout)
         view.addSubview(collectionView)
         collectionView.dataSource = self
-        collectionView.backgroundColor = .clear
+        collectionView.backgroundColor = .orange
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.contentInset = UIEdgeInsets(top: 50, left: 50, bottom: 50, right: 50)
         collectionView.register(BoardCollectionViewCell.self, forCellWithReuseIdentifier: "cell")

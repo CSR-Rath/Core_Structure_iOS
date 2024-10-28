@@ -11,13 +11,13 @@ class BoardTableViewCell: UITableViewCell {
     
     static let identifier = "BoardTableViewCell"
     
-//    lazy var containView: UIView = {
-//        let view = UIView()
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        view.layer.cornerRadius = 10
-//        view.backgroundColor = .white
-//        return view
-//    }()
+    lazy var containView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.cornerRadius = 10
+        view.backgroundColor = .white
+        return view
+    }()
     
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
