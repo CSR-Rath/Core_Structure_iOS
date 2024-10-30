@@ -108,8 +108,6 @@ class AlertMessage{
             }
         }
     }
-    
-
 }
 
 

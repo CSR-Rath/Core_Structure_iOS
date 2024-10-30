@@ -13,11 +13,8 @@ class PanGestureVC: UIViewController {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .clear
-//        view.backgroundColor = .red
         return view
     }()
-    
-    
     
     lazy var containerView: UIView = {
         let view = UIView()
@@ -40,15 +37,12 @@ class PanGestureVC: UIViewController {
         view.addSubview(containerView)
         
         backGrountView.addTapGesture()
+        view.addPanGesture()
         UIView.didTapGesture = {
             print("didTapGesture")
             self.dismiss(animated: true)
             
         }
-        
-        view.addPanGesture()
-        
-        
         
         NSLayoutConstraint.activate([
             
@@ -57,15 +51,13 @@ class PanGestureVC: UIViewController {
             backGrountView.rightAnchor.constraint(equalTo: view.rightAnchor),
             backGrountView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
-            containerView.heightAnchor.constraint(equalToConstant: 300),
+            containerView.heightAnchor.constraint(equalToConstant: 400),
             containerView.leftAnchor.constraint(equalTo: view.leftAnchor),
             containerView.rightAnchor.constraint(equalTo: view.rightAnchor),
             containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         
         ])
-        
     }
-
 
 }
 

@@ -30,9 +30,12 @@ class DemoFeatureVC: UIViewController {
         ListModel(id: 6, name: "CenteringCollectionViewCellVC", viewController: CenteringCellVC()),
         ListModel(id: 7, name: "Cell Alert Error", viewController: nil),
         ListModel(id: 8, name: "PanGestureVC", viewController: PanGestureVC()),
+        ListModel(id: 9, name: "GroupDateVC", viewController: GroupDateVC()),
+        ListModel(id: 9, name: "ExspandTableVC", viewController: ExspandTableVC()),
+        ListModel(id: 9, name: "DragDropCollectionVC", viewController: DragDropCollectionVC()),
+        
+        
     ]
-    
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,12 +57,12 @@ class DemoFeatureVC: UIViewController {
         
         
         dataTable = TableViewHandler(cellIdentifier: "cell",
-                                     cellHeight: nil,
+                                     cellHeight: 70,
                                      sections: [items])
         
         tableView.dataSource = dataTable
         tableView.delegate = dataTable
-        tableView.addRefreshControl(target: self, action: #selector(refreshControl))
+        tableView.addRefreshControl(target: self, action: #selector(pullRefresh))
         
         
         
@@ -69,14 +72,13 @@ class DemoFeatureVC: UIViewController {
             
         }
         
+        dataTable.headerHeightForSection = { section in
+            return 0
+        }
         dataTable.didDelectCell = { item, indexPath in
             print("item ==>",item)
             
             if let item = item as? ListModel{
-//                print("Selected item: \(item.name)")
-//                let vc = item.viewController as! TableHandlerVC
-//                vc.handleTableView.updateItems(inSection: 0, newItems: ["a","b"])
-                
                 if item.id == 7  {
                     AlertMessage.shared.alertError()
                 }else if item.id == 8{
@@ -91,28 +93,26 @@ class DemoFeatureVC: UIViewController {
                         
                     self.navigationController?.pushViewController(item.viewController!, animated: true)
                 }
-
             }
+        }
+        
+        
+        dataTable.configureHeader = { viewH, item, indexPath in 
             
-           
             
         }
         
+        
         dataTable.selectedCell = { item in
-//            print("Selected item: \(item)")
-            
+
             if let item = item as? ListModel{
                 print("Selected item: \(item.name)")
             }
             
-            
-            
         }
-        
     }
     
-    
-    @objc private func refreshControl(){
+    @objc private func pullRefresh(){
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
             

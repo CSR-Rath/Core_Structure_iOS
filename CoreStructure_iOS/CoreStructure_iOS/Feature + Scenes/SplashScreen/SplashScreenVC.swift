@@ -8,11 +8,65 @@
 import UIKit
 
 class SplashScreenVC: UIViewController {
+    
+    lazy var btnCustomTabBar: UIButton = {
+        let btn = UIButton()
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.setTitle("Custom", for: .normal)
+        btn.backgroundColor = .orange
+        btn.addTargetButton(target: self, action: #selector(didTappedButton))
+        btn.tag = 0
+        return btn
+    }()
+    
+    lazy var btnOriginal: UIButton = {
+        let btn = UIButton()
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.setTitle("Original", for: .normal)
+        btn.backgroundColor = .orange
+        btn.addTargetButton(target: self, action: #selector(didTappedButton))
+        btn.tag = 1
+        return btn
+    }()
+    
+    
+    lazy var stackButton: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [btnCustomTabBar,btnOriginal])
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.axis = .vertical
+        stack.spacing = 20
+        stack.distribution = .fill
+        stack.alignment = .fill
+        return stack
+    }()
+    
+   @objc private func didTappedButton(sender: UIButton){
+        
+       if sender.tag == 0 {
+           let tabbar = CustomTabBarVC()
+           self.navigationController?.pushViewController(tabbar, animated: true)
+       }else{
+           let tabbar = OriginalTabBarVC()
+           self.navigationController?.pushViewController(tabbar, animated: true)
+       }
+    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-      
+        view.addSubview(stackButton)
+        
+        NSLayoutConstraint.activate([
+            
+            stackButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            stackButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            stackButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
+            
+        
+            btnCustomTabBar.heightAnchor.constraint(equalToConstant: 50),
+            btnOriginal.heightAnchor.constraint(equalToConstant: 50)
+        
+        ])
     }
-    
 }

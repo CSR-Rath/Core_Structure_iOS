@@ -116,9 +116,7 @@ class TableHandlerVC: UIViewController {
         
         // Provide header height dynamically
         handleTableView.headerHeightForSection = { section in
-            
-
-            return 0
+            return  50
         }
         
         // Handle cell selection

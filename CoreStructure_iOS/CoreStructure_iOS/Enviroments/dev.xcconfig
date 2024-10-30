@@ -11,4 +11,4 @@
 
 url_server = http:/$()/159.138.83.213:8081/v1/api/mobile/
 
-bundle_identifier =  dev
+bundle_identifier =  com.rath.CoreStructure-iOS

@@ -78,9 +78,10 @@ class TableViewHandler<CELL: UITableViewCell, T>: NSObject, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
+//        UITableView.automaticDimension
         
         
-        return headerHeightForSection(section) == 0 ?  UITableView.automaticDimension : headerHeightForSection(section)  // Get height from closure
+        return headerHeightForSection(section)  // Get height from closure
     }
     
     func updateItems(inSection section: Int, newItems: [T]) {

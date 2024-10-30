@@ -109,6 +109,8 @@ extension UIView {
                 self.transform = CGAffineTransform(translationX: 0, y: translation.y)
             }
         case .ended:
+            print("translation.y ===> \(translation.y)")
+            
             // Dismiss the view if the swipe is downward
             if translation.y > UIView.dropHeight {
                 cancelDismiss()

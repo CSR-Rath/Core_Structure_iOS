@@ -58,7 +58,7 @@ class CustomTabBarVC: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        tabBar.isHidden = true
+//        tabBar.isHidden = true
         setupConstraintAndSetupController()
     }
     
@@ -104,7 +104,6 @@ class CustomTabBarVC: UITabBarController {
         
         ])
         
-
         print( "statusBarHeight ==> ", ConstantsHeight.statusBarHeight,
                "\navigationBarHeight ==> " , ConstantsHeight.navigationBarHeight,
                "\navailableHeight ==> ", ConstantsHeight.availableHeight)
@@ -127,6 +126,11 @@ extension CustomTabBarVC:  UICollectionViewDelegate, UICollectionViewDataSource 
         
         cell.lblTitle.text = dataList[indexPath.item].name
         
+        
+        UIView.animate(withDuration: 0.3, animations: {
+//            cell.imgIcon.image = item.selectedImage?.withTintColor(.white) // Change color if needed
+//            item.image = item.selectedImage?.withRenderingMode(.alwaysOriginal)
+        }, completion: nil)
         
         if indexSelected  == indexPath.item {
             

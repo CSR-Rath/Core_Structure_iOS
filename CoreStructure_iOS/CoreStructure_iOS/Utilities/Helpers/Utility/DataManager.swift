@@ -14,10 +14,16 @@ class DataManager {
     
     private let userInforKey = "userInfor"
     private let phoneNumberKey = "phoneNumber"
+    
+    private let dragDropMenu = "dragDropMenu"
 }
 
 // MARK: - Save object
 extension DataManager {
+    
+    func saveDragDropMenu(data: [MenuListModel]) {
+        saveObject(object: data, forKey: dragDropMenu)
+    }
     
     func saveUserData(data: UserInforModel) {
         saveObject(object: data, forKey: userInforKey)
@@ -30,6 +36,9 @@ extension DataManager {
 
 // MARK: - Get object
 extension DataManager {
+    func getDragDropMenu() -> [MenuListModel]? {
+        return getObject([MenuListModel].self, with: dragDropMenu) ?? []
+    }
     
     func getInfoUser() -> [CheckPhoneNumberResult]? {
         return getObject([CheckPhoneNumberResult].self, with: phoneNumberKey) ?? []
