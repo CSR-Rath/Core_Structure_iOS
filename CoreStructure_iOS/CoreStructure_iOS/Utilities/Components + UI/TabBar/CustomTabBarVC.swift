@@ -106,7 +106,10 @@ class CustomTabBarVC: UITabBarController {
         
         print( "statusBarHeight ==> ", ConstantsHeight.statusBarHeight,
                "\navigationBarHeight ==> " , ConstantsHeight.navigationBarHeight,
-               "\navailableHeight ==> ", ConstantsHeight.availableHeight)
+               "\navailableHeight ==> ", ConstantsHeight.availableHeight,
+               "\nConstantsHeight.safeAreaTop ==> ", ConstantsHeight.safeAreaTop,
+               "\nConstantsHeight.safeAreaBottom ==> ", ConstantsHeight.safeAreaBottom
+        )
         
     }
 }

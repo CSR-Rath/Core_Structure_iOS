@@ -9,7 +9,10 @@ import Foundation
 import UIKit
 
 
-class YellowButton: UIButton {
+class MainButton: UIButton {
+    
+    
+    var isActionButton: Bool = true
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -23,11 +26,22 @@ class YellowButton: UIButton {
     
     private func setupButton(){
         
-        self.setTitle("title", for: .normal)
-        self.backgroundColor = .mainColor
-        self.layer.cornerRadius = 10
+        self.setTitle("Button", for: .normal)
+      
+        self.layer.cornerRadius = 25
+        self.layer.borderWidth = 1
         self.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
-    }
+        if isActionButton {
 
+            self.isUserInteractionEnabled = true
+            self.layer.borderColor = UIColor.clear.cgColor
+            self.backgroundColor = .mainColor
+        }else{
+
+            self.isUserInteractionEnabled = false
+            self.layer.borderColor = UIColor.lightGray.cgColor
+            self.backgroundColor = .mainColor.withAlphaComponent(0.5)
+        }
+    }
 }

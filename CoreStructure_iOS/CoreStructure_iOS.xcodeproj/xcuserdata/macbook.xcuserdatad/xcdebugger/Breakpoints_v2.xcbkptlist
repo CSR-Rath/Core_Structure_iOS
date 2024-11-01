@@ -62,8 +62,8 @@
             filePath = "CoreStructure_iOS/Feature + Scenes/DragDropCollection/DragDropCollectionVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "157"
-            endingLineNumber = "157"
+            startingLineNumber = "155"
+            endingLineNumber = "155"
             landmarkName = "collectionView(_:performDropWith:)"
             landmarkType = "7">
             <Locations>
@@ -127,7 +127,83 @@
                   endingLineNumber = "158"
                   offsetFromSymbolStart = "212">
                </Location>
+               <Location
+                  uuid = "24A50FCB-7FC9-4A60-82D1-5187C87AEA60 - 4293c281ae3d90bb"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 @Sendable (Swift.Optional&lt;__C.NSItemProviderReading&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in CoreStructure_iOS.DragDropCollectionVC.collectionView(_: __C.UICollectionView, performDropWith: __C.UICollectionViewDropCoordinator) -&gt; ()"
+                  moduleName = "CoreStructure_iOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/macbook/Desktop/mySelf/Core_Structure_iOS/CoreStructure_iOS/CoreStructure_iOS/Feature%20+%20Scenes/DragDropCollection/DragDropCollectionVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "155"
+                  endingLineNumber = "155"
+                  offsetFromSymbolStart = "468">
+               </Location>
+               <Location
+                  uuid = "24A50FCB-7FC9-4A60-82D1-5187C87AEA60 - 7ea6bcb5524fde42"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in closure #3 @Sendable (Swift.Optional&lt;__C.NSItemProviderReading&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in CoreStructure_iOS.DragDropCollectionVC.collectionView(_: __C.UICollectionView, performDropWith: __C.UICollectionViewDropCoordinator) -&gt; ()"
+                  moduleName = "CoreStructure_iOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/macbook/Desktop/mySelf/Core_Structure_iOS/CoreStructure_iOS/CoreStructure_iOS/Feature%20+%20Scenes/DragDropCollection/DragDropCollectionVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "156"
+                  endingLineNumber = "156"
+                  offsetFromSymbolStart = "212">
+               </Location>
+               <Location
+                  uuid = "24A50FCB-7FC9-4A60-82D1-5187C87AEA60 - 4293c281ae3d90bb"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 @Sendable (Swift.Optional&lt;__C.NSItemProviderReading&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in CoreStructure_iOS.DragDropCollectionVC.collectionView(_: __C.UICollectionView, performDropWith: __C.UICollectionViewDropCoordinator) -&gt; ()"
+                  moduleName = "CoreStructure_iOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/macbook/Desktop/mySelf/Core_Structure_iOS/CoreStructure_iOS/CoreStructure_iOS/Feature%20+%20Scenes/DragDropCollection/DragDropCollectionVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "155"
+                  endingLineNumber = "155"
+                  offsetFromSymbolStart = "512">
+               </Location>
+               <Location
+                  uuid = "24A50FCB-7FC9-4A60-82D1-5187C87AEA60 - 7ea6bcb5524fde42"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in closure #3 @Sendable (Swift.Optional&lt;__C.NSItemProviderReading&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in CoreStructure_iOS.DragDropCollectionVC.collectionView(_: __C.UICollectionView, performDropWith: __C.UICollectionViewDropCoordinator) -&gt; ()"
+                  moduleName = "CoreStructure_iOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/macbook/Desktop/mySelf/Core_Structure_iOS/CoreStructure_iOS/CoreStructure_iOS/Feature%20+%20Scenes/DragDropCollection/DragDropCollectionVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "156"
+                  endingLineNumber = "156"
+                  offsetFromSymbolStart = "180">
+               </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "28944556-3A94-44D1-AA43-CDFDA65EDF29"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CoreStructure_iOS/Feature + Scenes/DemoScreen/ButtonOntheKeyboradVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "textField"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

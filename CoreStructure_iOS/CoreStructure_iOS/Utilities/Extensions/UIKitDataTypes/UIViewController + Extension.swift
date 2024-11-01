@@ -39,7 +39,6 @@ extension UIViewController{
     
     @objc func popViewController(){
         self.navigationController?.popViewController(animated: true)
-        
     }
     
     @objc func popToViewController(){
@@ -52,10 +51,46 @@ extension UIViewController{
         vc.transitioningDelegate = presentVC
         vc.modalPresentationStyle = .custom
         present(vc, animated: true) {
-           //
         }
+    }
+}
+
+
+//MARK: Handle NavigationBar
+extension UIViewController{
+    
+    func leftBarButton(action: Selector? = #selector(popVC),
+                       iconButton: UIImage? = UIImage(named: "icBack")
+    ){
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: iconButton?.withRenderingMode(.alwaysOriginal),
+            style: .plain,
+            target: self,
+            action: action
+        )
+    }
+    
+    func rightBarButton(action: Selector? = #selector(popVC),
+                        iconButton: UIImage? = UIImage(named: "icNext")
+    ){
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: iconButton?.withRenderingMode(.alwaysOriginal),
+            style: .plain,
+            target: self,
+            action: action
+        )
+    }
+    
+    func setupFontNavigationBar(){
+        
+    }
+    
+    
+    
+   @objc private func popVC(){
+       print("popVC ===> buttonBack")
+        self.navigationController?.popViewController(animated: true)
     }
     
 }
-
 

@@ -29,7 +29,6 @@ extension UIView{
 extension UIView{
     
     func isHasSafeAreaInsets() -> Bool {
-        
         // Check if any of the insets are greater than zero
         if self.safeAreaInsets.top > 0 {
             return true
@@ -46,7 +45,7 @@ extension UIView{
         label.sizeToFit()
         return label.frame.width
     }
-
+    
 }
 
 //MARK: Handle addGestureRecognizer have param UIView
@@ -88,8 +87,8 @@ extension UIView {
     static var dropHeight: CGFloat = 200 // Dismiss view contoller
     
     // Adds a tap gesture recognizer to dismiss the view
-    func addTapGesture() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(cancelDismiss))
+    func addTapGesture(target: Any,action: Selector ) {
+        let tapGesture = UITapGestureRecognizer(target: target, action: action)
         self.addGestureRecognizer(tapGesture)
     }
     
@@ -131,7 +130,74 @@ extension UIView {
         UIView.animate(withDuration: 0.1) {
             self.transform = .identity
         }
+
+//        UIViewController.dismiss(true)
         
-        UIView.didTapGesture?()
+//        UIViewController().dismiss(animated: true)
     }
 }
+
+
+
+//MARK: Keyborad on button
+extension UIView{
+    //    deinit {
+    //        NotificationCenter.default.removeObserver(self)
+    //    }
+    
+    static var actionKeyboardWillShow: ((_ keyboardHeight: CGFloat)->())?
+    static var actionKeyboardWillHide: (()->())?
+    
+    func setupKeyboardObservers() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillShow),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillHide),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
+    }
+    
+    @objc private func keyboardWillShow(notification: NSNotification) {
+        if let userInfo = notification.userInfo,
+           let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let  keyboardHeight = keyboardFrame.cgRectValue.height
+            
+            print("keyboardHeight ==> ",keyboardHeight)
+            
+            UIView.actionKeyboardWillShow?(keyboardHeight)
+        }
+    }
+    
+    @objc private func keyboardWillHide(notification: NSNotification) {
+        UIView.actionKeyboardWillHide?()
+    }
+}
+
+
+//MARK: Create
+extension UIView {
+
+    func createToolbar() -> UIToolbar {
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+
+        // Create a flexible space to push the buttons to the right
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+
+        // Create a "Done" button
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneButtonTapped))
+
+        // Add buttons to the toolbar
+        toolbar.items = [flexibleSpace, doneButton]
+        return toolbar
+    }
+
+    @objc func doneButtonTapped() {
+        // Dismiss keyboard
+        self.endEditing(true)
+    }
+}
+
+

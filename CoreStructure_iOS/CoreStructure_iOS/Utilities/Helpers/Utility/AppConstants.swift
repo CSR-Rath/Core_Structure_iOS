@@ -10,12 +10,12 @@ import UIKit
 
 
 //MARK: - key UserDefaults
-struct AppConstants{
-    
-
+public struct AppConstants{
     
     static let loginSuccesFull = "loginSuccesFull"
-   
+    public  static let language = "language"
     
+    static let saveTimer = "saveTimer"
+    static let userInfor = "userInfor"
     
 }

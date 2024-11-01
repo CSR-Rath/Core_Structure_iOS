@@ -26,13 +26,16 @@ class DemoFeatureVC: UIViewController {
         ListModel(id: 2, name: "PasscodeVC", viewController: PasscodeVC()),
         ListModel(id: 3, name: "OTPVC", viewController: OTPVC()),
         ListModel(id: 4, name: "BoardCollectionVC", viewController: BoardCollectionVC()),
-        ListModel(id: 5, name: "DemoBottomSheetViewController", viewController: DemoBottomSheetViewController()),
+        ListModel(id: 5, name: "PanGestureTwoVC", viewController: PanGestureTwoVC()),
         ListModel(id: 6, name: "CenteringCollectionViewCellVC", viewController: CenteringCellVC()),
         ListModel(id: 7, name: "Cell Alert Error", viewController: nil),
         ListModel(id: 8, name: "PanGestureVC", viewController: PanGestureVC()),
         ListModel(id: 9, name: "GroupDateVC", viewController: GroupDateVC()),
-        ListModel(id: 9, name: "ExspandTableVC", viewController: ExspandTableVC()),
-        ListModel(id: 9, name: "DragDropCollectionVC", viewController: DragDropCollectionVC()),
+        ListModel(id: 10, name: "ExspandTableVC", viewController: ExspandTableVC()),
+        ListModel(id: 11, name: "DragDropCollectionVC", viewController: DragDropCollectionVC()),
+        ListModel(id: 12, name: "ButtonOntheKeyboradVC", viewController: ButtonOntheKeyboradVC()),
+        ListModel(id: 13, name: "FullVC", viewController: HandleNavigationBarVC()),
+        
         
         
     ]
@@ -81,7 +84,7 @@ class DemoFeatureVC: UIViewController {
             if let item = item as? ListModel{
                 if item.id == 7  {
                     AlertMessage.shared.alertError()
-                }else if item.id == 8{
+                }else if item.id == 8 ||  item.id == 5 {
                     
                     let vc = item.viewController
                     vc?.modalPresentationStyle = .custom

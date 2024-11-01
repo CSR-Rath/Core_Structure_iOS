@@ -57,26 +57,22 @@ extension ExspandSingleSectionVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        
-        
+
         //MARK: Single section expended
         if expandedSectionIndex == section{
             return data[section].1.count
         }else{
             return 0
         }
-        
+
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ExpandableTableViewCell", for: indexPath) as! ExpandableTableViewCell
         
         cell.textLabel?.text = data[indexPath.section].1[indexPath.row]
-        
         cell.textLabel?.textAlignment = .center
         cell.backgroundColor = .cyan
-        
         
         return cell
     }

@@ -75,12 +75,9 @@ class MenuDragDropCell: UICollectionViewCell {
         nsWidth.isActive = true
         
         NSLayoutConstraint.activate([
-
-
             imgIcone.centerXAnchor.constraint(equalTo: centerXAnchor),
             imgIcone.centerYAnchor.constraint(equalTo: centerYAnchor,constant: -8),
             
-
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,constant: -8)

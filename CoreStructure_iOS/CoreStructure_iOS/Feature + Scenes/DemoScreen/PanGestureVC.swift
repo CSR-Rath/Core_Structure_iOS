@@ -9,6 +9,8 @@ import UIKit
 
 class PanGestureVC: UIViewController {
     
+   
+    
     lazy var backGrountView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -36,12 +38,11 @@ class PanGestureVC: UIViewController {
         view.addSubview(backGrountView)
         view.addSubview(containerView)
         
-        backGrountView.addTapGesture()
+        backGrountView.addTapGesture(target: self, action: #selector(didTappedDismiss))
         view.addPanGesture()
         UIView.didTapGesture = {
             print("didTapGesture")
             self.dismiss(animated: true)
-            
         }
         
         NSLayoutConstraint.activate([
@@ -58,11 +59,26 @@ class PanGestureVC: UIViewController {
         
         ])
     }
+    
+    @objc func didTappedDismiss(){
 
+        UIView.animate(withDuration: 0.1) {
+            self.containerView.transform = .identity
+        }
+        
+        self.dismiss(animated: true)
+        
+    }
 }
 
 
 
+extension PanGestureVC {
+    
+
+    
+  
+}
 
 
 

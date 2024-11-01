@@ -16,7 +16,7 @@ class AlertErrorVC: UIViewController {
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.backgroundColor = .white.withAlphaComponent(0.95)
         btn.layer.cornerRadius = 20
-        btn.setImage(.icClose.withRenderingMode(.alwaysOriginal), for: .normal)
+//        btn.setImage(.icClose..withRenderingMode(.alwaysOriginal), for: .normal)
         btn.layer.shadowColor = UIColor.black.cgColor
         btn.layer.shadowOpacity = 0.3
         btn.layer.shadowOffset = CGSize(width: 0, height: -5)

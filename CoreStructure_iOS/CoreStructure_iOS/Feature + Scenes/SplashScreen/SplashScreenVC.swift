@@ -9,26 +9,23 @@ import UIKit
 
 class SplashScreenVC: UIViewController {
     
-    lazy var btnCustomTabBar: UIButton = {
-        let btn = UIButton()
+    lazy var btnCustomTabBar: MainButton = {
+        let btn = MainButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setTitle("Custom", for: .normal)
-        btn.backgroundColor = .orange
         btn.addTargetButton(target: self, action: #selector(didTappedButton))
         btn.tag = 0
         return btn
     }()
     
-    lazy var btnOriginal: UIButton = {
-        let btn = UIButton()
+    lazy var btnOriginal: MainButton = {
+        let btn = MainButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setTitle("Original", for: .normal)
-        btn.backgroundColor = .orange
         btn.addTargetButton(target: self, action: #selector(didTappedButton))
         btn.tag = 1
         return btn
     }()
-    
     
     lazy var stackButton: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [btnCustomTabBar,btnOriginal])
@@ -51,10 +48,8 @@ class SplashScreenVC: UIViewController {
        }
     }
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
-
         view.addSubview(stackButton)
         
         NSLayoutConstraint.activate([
@@ -63,10 +58,8 @@ class SplashScreenVC: UIViewController {
             stackButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             stackButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
             
-        
             btnCustomTabBar.heightAnchor.constraint(equalToConstant: 50),
             btnOriginal.heightAnchor.constraint(equalToConstant: 50)
-        
         ])
     }
 }

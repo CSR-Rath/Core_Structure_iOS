@@ -89,8 +89,6 @@ extension DragDropCollectionVC{
  
     }
     
-    
-    
     // MARK: - UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -163,17 +161,6 @@ extension DragDropCollectionVC{
                         }
                     }
                 })
-                
-//                item.dragItem.itemProvider.loadObject(ofClass: NSString.self, completionHandler: { (object, error) in
-//                             if let draggedItem = object as? NSString {
-//                                 DispatchQueue.main.async {
-//                                     placeholderContext.commitInsertion(dataSourceUpdates: { insertionIndexPath in
-//                                         let titleImageModel = TitleImageModel(image: .icFunManu, title: draggedItem as String)
-//                                         self.dataList.insert(titleImageModel, at: insertionIndexPath.item)
-//                                         collectionView.insertItems(at: [insertionIndexPath])
-//                                     })
-//                                 }
-//                             }
             }
         }
         
