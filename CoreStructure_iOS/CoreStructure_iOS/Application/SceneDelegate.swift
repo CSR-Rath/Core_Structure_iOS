@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         
         // Create a view hierarchy programmatically
-        let viewController = DemoFeatureVC()
+        let viewController = SplashScreenVC()
         viewController.view.backgroundColor = .white
         let navigation = UINavigationController(rootViewController: viewController)
         

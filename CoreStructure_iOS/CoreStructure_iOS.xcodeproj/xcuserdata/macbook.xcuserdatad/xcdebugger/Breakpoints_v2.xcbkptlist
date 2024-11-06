@@ -193,17 +193,64 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "28944556-3A94-44D1-AA43-CDFDA65EDF29"
+            uuid = "F2250811-62FF-45AD-BBAA-193C6C35F833"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CoreStructure_iOS/Feature + Scenes/DemoScreen/ButtonOntheKeyboradVC.swift"
+            filePath = "CoreStructure_iOS/Utilities/Components + UI/Utility/SegmentedView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "15"
-            endingLineNumber = "15"
-            landmarkName = "textField"
-            landmarkType = "24">
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "unknown"
+            landmarkType = "0">
+            <Locations>
+               <Location
+                  uuid = "F2250811-62FF-45AD-BBAA-193C6C35F833 - e2c2304a0a0ae62c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CoreStructure_iOS.SegmentedView.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;CoreStructure_iOS.SegmentedView&gt;"
+                  moduleName = "CoreStructure_iOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/macbook/Desktop/mySelf/Core_Structure_iOS/CoreStructure_iOS/CoreStructure_iOS/Utilities/Components%20+%20UI/Utility/SegmentedView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "73"
+                  endingLineNumber = "73"
+                  offsetFromSymbolStart = "632">
+               </Location>
+               <Location
+                  uuid = "F2250811-62FF-45AD-BBAA-193C6C35F833 - e2c2304a0a0ae60f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CoreStructure_iOS.SegmentedView.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;CoreStructure_iOS.SegmentedView&gt;"
+                  moduleName = "CoreStructure_iOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/macbook/Desktop/mySelf/Core_Structure_iOS/CoreStructure_iOS/CoreStructure_iOS/Utilities/Components%20+%20UI/Utility/SegmentedView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "72"
+                  endingLineNumber = "72"
+                  offsetFromSymbolStart = "636">
+               </Location>
+               <Location
+                  uuid = "F2250811-62FF-45AD-BBAA-193C6C35F833 - e2c2304a0a0ae60f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CoreStructure_iOS.SegmentedView.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;CoreStructure_iOS.SegmentedView&gt;"
+                  moduleName = "CoreStructure_iOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/macbook/Desktop/mySelf/Core_Structure_iOS/CoreStructure_iOS/CoreStructure_iOS/Utilities/Components%20+%20UI/Utility/SegmentedView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "72"
+                  endingLineNumber = "72"
+                  offsetFromSymbolStart = "708">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

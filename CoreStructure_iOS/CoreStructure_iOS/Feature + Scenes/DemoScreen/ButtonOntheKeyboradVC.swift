@@ -35,15 +35,7 @@ class ButtonOntheKeyboradVC: UIViewController {
         view.setupKeyboardObservers()
         setupConstraint()
         
-
-
-        
-//        ApiManager.
-        
-//        ApiManager.apiConnection(url: String) { <#Decodable & Encodable#> in
-//            
-//        }
-        
+    
     }
     
     deinit{

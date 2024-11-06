@@ -60,7 +60,7 @@ extension UIViewController{
 extension UIViewController{
     
     func leftBarButton(action: Selector? = #selector(popVC),
-                       iconButton: UIImage? = UIImage(named: "icBack")
+                       iconButton: UIImage? = UIImage(named: "icBackWhite")
     ){
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: iconButton?.withRenderingMode(.alwaysOriginal),
@@ -71,7 +71,7 @@ extension UIViewController{
     }
     
     func rightBarButton(action: Selector? = #selector(popVC),
-                        iconButton: UIImage? = UIImage(named: "icNext")
+                        iconButton: UIImage? = UIImage(named: "icNextWhite")
     ){
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: iconButton?.withRenderingMode(.alwaysOriginal),
@@ -91,6 +91,31 @@ extension UIViewController{
        print("popVC ===> buttonBack")
         self.navigationController?.popViewController(animated: true)
     }
+  
     
 }
 
+
+//MARK: Handle NavigationViewController
+extension UIViewController{
+    
+    func setupTitleNavigationBar( font: UIFont? = UIFont.systemFont(ofSize: 17,
+                                                                    weight: .regular),
+                                  titleColor: UIColor = .white , backColor: UIColor = .mainColor){
+        
+
+        // setup title font color
+            let titleAttribute = [
+                NSAttributedString.Key.font: font,
+                                  NSAttributedString.Key.foregroundColor: titleColor,
+            ]
+
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = backColor
+            appearance.shadowColor = backColor
+            appearance.titleTextAttributes = titleAttribute as [NSAttributedString.Key : Any]
+            navigationController?.navigationBar.standardAppearance = appearance
+            navigationController?.navigationBar.scrollEdgeAppearance = appearance
+    }
+}

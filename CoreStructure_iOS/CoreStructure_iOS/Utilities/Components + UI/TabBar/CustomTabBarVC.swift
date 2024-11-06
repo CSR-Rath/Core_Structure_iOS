@@ -58,7 +58,7 @@ class CustomTabBarVC: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-//        tabBar.isHidden = true
+        leftBarButton()
         setupConstraintAndSetupController()
     }
     

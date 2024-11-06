@@ -37,19 +37,22 @@ class SplashScreenVC: UIViewController {
         return stack
     }()
     
-   @objc private func didTappedButton(sender: UIButton){
-        
-       if sender.tag == 0 {
-           let tabbar = CustomTabBarVC()
-           self.navigationController?.pushViewController(tabbar, animated: true)
-       }else{
-           let tabbar = OriginalTabBarVC()
-           self.navigationController?.pushViewController(tabbar, animated: true)
-       }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.barStyle  = .default
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
+        setupConstraint()
+    }
+}
+
+
+extension SplashScreenVC{
+    
+    private func setupConstraint(){
         view.addSubview(stackButton)
         
         NSLayoutConstraint.activate([
@@ -61,5 +64,21 @@ class SplashScreenVC: UIViewController {
             btnCustomTabBar.heightAnchor.constraint(equalToConstant: 50),
             btnOriginal.heightAnchor.constraint(equalToConstant: 50)
         ])
+        
     }
+    
+    
+    @objc private func didTappedButton(sender: UIButton){
+         
+        if sender.tag == 0 {
+            let tabbar = CustomTabBarVC()
+         
+            self.navigationController?.pushViewController(tabbar, animated: true)
+        }else{
+            let tabbar = OriginalTabBarVC()
+           
+            self.navigationController?.pushViewController(tabbar, animated: true)
+        }
+     }
+    
 }

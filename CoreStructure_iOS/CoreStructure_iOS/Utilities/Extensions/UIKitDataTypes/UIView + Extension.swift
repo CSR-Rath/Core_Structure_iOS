@@ -187,7 +187,9 @@ extension UIView {
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
 
         // Create a "Done" button
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneButtonTapped))
+        let doneButton = UIBarButtonItem(title: "Done",
+                                         style: .plain, target: self,
+                                         action: #selector(doneButtonTapped))
 
         // Add buttons to the toolbar
         toolbar.items = [flexibleSpace, doneButton]

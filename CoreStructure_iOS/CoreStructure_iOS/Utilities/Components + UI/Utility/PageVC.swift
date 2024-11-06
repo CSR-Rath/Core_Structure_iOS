@@ -10,7 +10,7 @@ import UIKit
 class PageVC: UIViewController {
     
     private var collectionView: UICollectionView!
-    private var pageController =  UIPageViewController(transitionStyle: .scroll,
+     var pageController =  UIPageViewController(transitionStyle: .scroll,
                                                        navigationOrientation: .horizontal,options: nil)
     private var lineViewTop: UIView? = nil
     private var istransitionCompleted: Bool = true

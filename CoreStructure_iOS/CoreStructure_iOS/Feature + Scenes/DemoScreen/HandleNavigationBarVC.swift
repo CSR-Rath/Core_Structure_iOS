@@ -15,33 +15,32 @@ class HandleNavigationBarVC: UIViewController, UIGestureRecognizerDelegate {
         return table
     }()
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        setupTitleNavigationBar()
+        
+        
+    }
+        
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupTitleNavigationBar(font:  UIFont.systemFont(ofSize: 30, weight: .regular),
+                                titleColor: .red,
+                                backColor: .orange
+        )
+    }
+
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+        title = "Hello"
         tableView.frame = view.bounds
         view.addSubview(tableView)
         
-        title = "Hello"
-        
-    
-        //MARK: Setup Button left and right
-        leftBarButton()
+      
         rightBarButton()
-        
-
-        //MARK: Setup navigationBar
-        // setup title font color
-        let titleAttribute = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 25, weight: .bold),
-                              NSAttributedString.Key.foregroundColor: UIColor.white
-        ]
-       
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = .orange
-        appearance.titleTextAttributes = titleAttribute
-        navigationController?.navigationBar.standardAppearance = appearance
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
 
         //Enable back swipe gesture
         navigationController?.interactivePopGestureRecognizer?.delegate = self
@@ -55,3 +54,7 @@ class HandleNavigationBarVC: UIViewController, UIGestureRecognizerDelegate {
     
     
 }
+
+
+
+

@@ -34,7 +34,14 @@ class DemoFeatureVC: UIViewController {
         ListModel(id: 10, name: "ExspandTableVC", viewController: ExspandTableVC()),
         ListModel(id: 11, name: "DragDropCollectionVC", viewController: DragDropCollectionVC()),
         ListModel(id: 12, name: "ButtonOntheKeyboradVC", viewController: ButtonOntheKeyboradVC()),
-        ListModel(id: 13, name: "FullVC", viewController: HandleNavigationBarVC()),
+        ListModel(id: 13, name: "HandleNavigationBarVC", viewController: HandleNavigationBarVC()),
+        ListModel(id: 14, name: "LocalNotificationVC", viewController: LocalNotificationVC()),
+        ListModel(id: 15, name: "PagViewControllerWithButtonVC", viewController: PagViewControllerWithButtonVC()),
+        ListModel(id: 16, name: "ViewController", viewController: PageViewController()),
+        
+        
+        
+        
         
         
         
@@ -63,6 +70,7 @@ class DemoFeatureVC: UIViewController {
                                      cellHeight: 70,
                                      sections: [items])
         
+        tableView.backgroundColor = .white
         tableView.dataSource = dataTable
         tableView.delegate = dataTable
         tableView.addRefreshControl(target: self, action: #selector(pullRefresh))
@@ -93,7 +101,8 @@ class DemoFeatureVC: UIViewController {
                     self.present(vc!, animated: true)
                     
                 }else{
-                        
+ 
+                    item.viewController?.leftBarButton()
                     self.navigationController?.pushViewController(item.viewController!, animated: true)
                 }
             }

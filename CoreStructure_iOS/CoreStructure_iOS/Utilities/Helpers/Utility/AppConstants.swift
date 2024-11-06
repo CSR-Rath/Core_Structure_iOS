@@ -18,4 +18,6 @@ public struct AppConstants{
     static let saveTimer = "saveTimer"
     static let userInfor = "userInfor"
     
+    static let keyboradHeight = "keyboradHeight"
+    
 }
