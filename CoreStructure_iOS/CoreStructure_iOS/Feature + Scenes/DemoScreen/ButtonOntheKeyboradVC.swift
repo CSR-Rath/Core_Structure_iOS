@@ -8,7 +8,7 @@
 import UIKit
 
 
-class ButtonOntheKeyboradVC: UIViewController {
+class ButtonOntheKeyboradVC: UIViewController, UIGestureRecognizerDelegate {
     
     var nsButton = NSLayoutConstraint()
     
@@ -32,10 +32,12 @@ class ButtonOntheKeyboradVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        
         view.setupKeyboardObservers()
         setupConstraint()
         
-    
+        //Enable back swipe gesture
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
     
     deinit{

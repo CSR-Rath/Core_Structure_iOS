@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PanGestureTwoVC: UIViewController {
+class PanGestureTwoVC: UIViewController, UIGestureRecognizerDelegate {
     
     let height = ConstantsHeight.screen.height*0.9
     
@@ -37,7 +37,8 @@ class PanGestureTwoVC: UIViewController {
         setupConstraint()
         addPanGesture()
         backGrountView.addTapGesture(target: self, action: #selector(didTappedDismiss))
-
+        //Enable back swipe gesture
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
     
     

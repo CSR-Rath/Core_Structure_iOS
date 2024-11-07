@@ -138,7 +138,7 @@ extension DragDropCollectionVC{
         
         for item in coordinator.items {
             if let sourceIndexPath = item.sourceIndexPath,
-               let cell = item.dragItem.localObject as? MenuDragDropCell {
+               let _ = item.dragItem.localObject as? MenuDragDropCell {
                 collectionView.performBatchUpdates({
                     let movedItem = dataList.remove(at: sourceIndexPath.item)
                     dataList.insert(movedItem, at: destinationIndexPath.item)

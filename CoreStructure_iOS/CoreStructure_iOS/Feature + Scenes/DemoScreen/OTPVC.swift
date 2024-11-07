@@ -7,14 +7,18 @@
 
 import UIKit
 
-class OTPVC: UIViewController {
+class OTPVC: UIViewController, UIGestureRecognizerDelegate {
     var codeTxt: OneTimeCodeTextField!
     
-    var btnClear = UIButton()
+    var btnClear = MainButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        
+        //Enable back swipe gesture
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
+        
         codeTxt = OneTimeCodeTextField()
         
         view.addSubview(codeTxt)

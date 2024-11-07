@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  CoreStructure_iOS
+
+  Created by Rath! on 7/11/24.
+  
+*/
+
+
+
+"welcome_message" = "Welcome to our app!";
+"goodbye_message" = "Goodbye!";
+"error_message" = "An error has occurred. Please try again.";

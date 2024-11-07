@@ -29,7 +29,7 @@ class ExspandSingleSectionVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Exspand Single Section"
+        title = "Single Exspand "
         view.backgroundColor = .orange
         tableView.delegate = self
         tableView.dataSource = self

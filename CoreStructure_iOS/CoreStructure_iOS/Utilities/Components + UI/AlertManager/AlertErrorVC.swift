@@ -11,8 +11,8 @@ class AlertErrorVC: UIViewController {
     
     private var initialCenter: CGPoint = .zero
     
-    let closeButton : UIButton = {
-        let btn = UIButton(type: .system)
+    let closeButton : MainButton = {
+        let btn = MainButton(type: .system)
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.backgroundColor = .white.withAlphaComponent(0.95)
         btn.layer.cornerRadius = 20

@@ -12,7 +12,7 @@ extension UIScrollView{ // including tableView collectionView
     
     func addRefreshControl(target: Any, action: Selector) {
         let refreshControl = UIRefreshControl()
-        refreshControl.tintColor = .orange
+        refreshControl.tintColor = .mainBlueColor
         refreshControl.addTarget(target, action: action, for: .valueChanged)
         self.refreshControl = refreshControl // Assign the refresh control
     }
@@ -26,3 +26,7 @@ extension UIScrollView{ // including tableView collectionView
     }
 
 }
+
+
+
+

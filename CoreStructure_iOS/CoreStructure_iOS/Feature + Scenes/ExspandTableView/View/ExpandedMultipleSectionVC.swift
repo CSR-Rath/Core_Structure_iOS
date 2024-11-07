@@ -22,7 +22,7 @@ class ExpandedMultipleSectionVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Expand Multiple Section"
+        title = "Multiple Expand"
         view.backgroundColor = .orange
         tableView.delegate = self
         tableView.dataSource = self

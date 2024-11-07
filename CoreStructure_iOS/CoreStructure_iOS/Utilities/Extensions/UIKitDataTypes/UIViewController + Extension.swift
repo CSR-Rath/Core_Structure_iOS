@@ -101,7 +101,7 @@ extension UIViewController{
     
     func setupTitleNavigationBar( font: UIFont? = UIFont.systemFont(ofSize: 17,
                                                                     weight: .regular),
-                                  titleColor: UIColor = .white , backColor: UIColor = .mainColor){
+                                  titleColor: UIColor = .white , backColor: UIColor = .mainBlueColor){
         
 
         // setup title font color

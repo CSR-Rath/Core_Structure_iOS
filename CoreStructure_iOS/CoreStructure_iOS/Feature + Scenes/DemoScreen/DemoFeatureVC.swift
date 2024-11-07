@@ -12,9 +12,9 @@ struct ListModel{
     let name: String
     let viewController: UIViewController?
 }
+//"goodbye_message".localizeString()
 
-
-class DemoFeatureVC: UIViewController {
+class DemoFeatureVC: UIViewController, UIGestureRecognizerDelegate {
     
     private var tableView: UITableView! = nil
     
@@ -22,6 +22,7 @@ class DemoFeatureVC: UIViewController {
     
     
     let items : [ListModel] = [
+        
         ListModel(id: 1, name: "TableHandlerVC", viewController: TableHandlerVC()),
         ListModel(id: 2, name: "PasscodeVC", viewController: PasscodeVC()),
         ListModel(id: 3, name: "OTPVC", viewController: OTPVC()),
@@ -38,19 +39,30 @@ class DemoFeatureVC: UIViewController {
         ListModel(id: 14, name: "LocalNotificationVC", viewController: LocalNotificationVC()),
         ListModel(id: 15, name: "PagViewControllerWithButtonVC", viewController: PagViewControllerWithButtonVC()),
         ListModel(id: 16, name: "ViewController", viewController: PageViewController()),
-        
-        
-        
-        
-        
-        
-        
+        ListModel(id: 17, name: "LocalizableContoller", viewController: LocalizableContoller())
+    
     ]
+//    @objc override open var preferredStatusBarStyle: UIStatusBarStyle {
+//        return .lightContent
+//    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+           return .darkContent // or .default based on your needs
+       }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupConstraint()
+        //Enable back swipe gesture
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
 
     }
     

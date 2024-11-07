@@ -9,21 +9,19 @@ import UIKit
 
 class ExspandTableVC: UIViewController {
     
-    lazy var btnSingleExspand: UIButton = {
-        let btn = UIButton(type: .roundedRect)
+    lazy var btnSingleExspand: MainButton = {
+        let btn = MainButton()
         btn.setTitle("Single Exspand", for: .normal)
         btn.backgroundColor = .orange
-        btn.layer.cornerRadius = 10
         btn.setTitleColor(.white, for: .normal)
         btn.addTarget(self, action: #selector(tappedBtnSingle), for: .touchUpInside)
         return btn
     }()
     
-    lazy var btnMuntipleExspand: UIButton = {
-        let btn = UIButton(type: .roundedRect)
+    lazy var btnMuntipleExspand: MainButton = {
+        let btn = MainButton()
         btn.setTitle("Muntiple Exspand", for: .normal)
         btn.backgroundColor = .red
-        btn.layer.cornerRadius = 10
         btn.setTitleColor(.white, for: .normal)
         btn.addTarget(self, action: #selector(tappedBtnMuntiple), for: .touchUpInside)
         return btn
@@ -41,19 +39,21 @@ class ExspandTableVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Chooses"
+        title = "Exspand Table"
         view.backgroundColor = .white
         setupConstrain()
     }
 
     @objc private func tappedBtnMuntiple(){
         let vc = ExpandedMultipleSectionVC()
+        vc.leftBarButton()
         navigationController?.pushViewController(vc, animated: true)
         
     }
     
     @objc private func tappedBtnSingle(){
         let vc = ExspandSingleSectionVC()
+        vc.leftBarButton()
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -66,6 +66,5 @@ class ExspandTableVC: UIViewController {
             btnSingleExspand.heightAnchor.constraint(equalToConstant: 50),
         ])
     }
-
 }
 

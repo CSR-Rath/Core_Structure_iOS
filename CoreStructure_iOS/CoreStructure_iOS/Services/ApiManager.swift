@@ -21,27 +21,42 @@ public typealias Success = (_ response: Data) -> Void
 public typealias Complete = () -> Void
 public typealias HTTPHeaders = [String: String]
 
+// MARK: - Header request
+//private let getHeader : HTTPHeaders = [
+//    "Authorization": "Bearer \(UserDefaults.standard.value(forKey: AppConstants.language) ?? "")",
+//    "Content-Type": "application/json",
+//    "Authorize": "4ee0d884634c0b04360c5d26060eb0dac61209c0db21d84aa9b315f1599e9a41",
+//    "Auth": "6213cbd30b40d782b27bcaf41f354fb8aa2353a9e59c66fba790febe9ab4cf44",
+//    "lang": "\(UserDefaults.standard.value(forKey: AppConstants.language) ?? "")"
+//]
 
-class ApiManager {
+func getHeader() -> HTTPHeaders{
     
-    // Get the default headers
-    static func getHeader() -> HTTPHeaders {
-        let token = ""
-        return [
+    let token = UserDefaults.standard.value(forKey: AppConstants.token) ?? ""
+    let lang = UserDefaults.standard.value(forKey: AppConstants.language) ?? "en"
+    
+    
+    return  [
             "Authorization": "Bearer \(token)",
             "Content-Type": "application/json",
             "Authorize": "4ee0d884634c0b04360c5d26060eb0dac61209c0db21d84aa9b315f1599e9a41",
             "Auth": "6213cbd30b40d782b27bcaf41f354fb8aa2353a9e59c66fba790febe9ab4cf44",
-            "lang": "en"
+            "lang": "\(lang)"
         ]
-    }
+}
+
+
+class ApiManager {
     
-    static func apiConnection<T: Codable>(url: String,
-                                          method: HTTPMethod = .GET,
-                                          param: Parameters? = nil,
-                                          modelCodable: Encodable? = nil,
-                                          headers: HTTPHeaders? = ApiManager.getHeader(),
-                                          res: @escaping (T) -> ()) {
+   static let shared = ApiManager()
+
+    
+    func apiConnection<T: Codable>(url: String,
+                                   method: HTTPMethod = .GET,
+                                   param: Parameters? = nil,
+                                   modelCodable: Encodable? = nil,
+                                   headers: HTTPHeaders? = getHeader(),
+                                   res: @escaping (T) -> ()) {
         
         let stringUrl = URL(string: url)
         let request = NSMutableURLRequest()
@@ -76,7 +91,7 @@ class ApiManager {
         
         
         //MARK: Check internet connection
-        if ApiManager.isConnectedToNetwork() {
+        if isConnectedToNetwork() {
             AlertMessage.shared.alertError(status: .internet)
         }
         
@@ -140,36 +155,36 @@ class ApiManager {
                                                   data: data, error: true)
                 }
             }
-            
         })
         task.resume()
     }
-    
-    static func isConnectedToNetwork() -> Bool {
-
-        var zeroAddress = sockaddr_in(sin_len: 0, sin_family: 0, sin_port: 0, sin_addr: in_addr(s_addr: 0), sin_zero: (0, 0, 0, 0, 0, 0, 0, 0))
-        zeroAddress.sin_len = UInt8(MemoryLayout.size(ofValue: zeroAddress))
-        zeroAddress.sin_family = sa_family_t(AF_INET)
-
-        let defaultRouteReachability = withUnsafePointer(to: &zeroAddress) {
-            $0.withMemoryRebound(to: sockaddr.self, capacity: 1) {zeroSockAddress in
-                SCNetworkReachabilityCreateWithAddress(nil, zeroSockAddress)
-            }
-        }
-
-        var flags: SCNetworkReachabilityFlags = SCNetworkReachabilityFlags(rawValue: 0)
-        if SCNetworkReachabilityGetFlags(defaultRouteReachability!, &flags) == false {
-            return false
-        }
-
-        // Working for Cellular and WIFI
-        let isReachable = (flags.rawValue & UInt32(kSCNetworkFlagsReachable)) != 0
-        let needsConnection = (flags.rawValue & UInt32(kSCNetworkFlagsConnectionRequired)) != 0
-        let ret = (isReachable && !needsConnection)
-
-        return ret
-    }
-    
 }
 
 
+
+
+// MARK: - Check internet connection
+func isConnectedToNetwork() -> Bool {
+
+   var zeroAddress = sockaddr_in(sin_len: 0, sin_family: 0, sin_port: 0, sin_addr: in_addr(s_addr: 0), sin_zero: (0, 0, 0, 0, 0, 0, 0, 0))
+   zeroAddress.sin_len = UInt8(MemoryLayout.size(ofValue: zeroAddress))
+   zeroAddress.sin_family = sa_family_t(AF_INET)
+
+   let defaultRouteReachability = withUnsafePointer(to: &zeroAddress) {
+       $0.withMemoryRebound(to: sockaddr.self, capacity: 1) {zeroSockAddress in
+           SCNetworkReachabilityCreateWithAddress(nil, zeroSockAddress)
+       }
+   }
+
+   var flags: SCNetworkReachabilityFlags = SCNetworkReachabilityFlags(rawValue: 0)
+   if SCNetworkReachabilityGetFlags(defaultRouteReachability!, &flags) == false {
+       return false
+   }
+
+   // Working for Cellular and WIFI
+   let isReachable = (flags.rawValue & UInt32(kSCNetworkFlagsReachable)) != 0
+   let needsConnection = (flags.rawValue & UInt32(kSCNetworkFlagsConnectionRequired)) != 0
+   let ret = (isReachable && !needsConnection)
+
+   return ret
+}

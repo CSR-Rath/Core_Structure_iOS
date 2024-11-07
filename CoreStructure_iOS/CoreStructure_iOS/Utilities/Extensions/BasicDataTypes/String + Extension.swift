@@ -33,14 +33,22 @@ extension String{
         var attribStr = NSMutableAttributedString()
         do {
             
-            attribStr = try NSMutableAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding:String.Encoding.utf8.rawValue], documentAttributes: nil)
+            attribStr = try NSMutableAttributedString(data: data,
+                                                      options: [.documentType: NSAttributedString.DocumentType.html,
+                                                                .characterEncoding:String.Encoding.utf8.rawValue],
+                                                      documentAttributes: nil)
             
             let paragraphStyle = NSMutableParagraphStyle()
             
-            var font:UIFont = UIFont.systemFont(ofSize: 14, weight: .regular)
+            let font: UIFont = UIFont.systemFont(ofSize: 14, weight: .regular)
             
             let textRangeForFont : NSRange = NSMakeRange(0, attribStr.length)
-            attribStr.addAttributes([ NSAttributedString.Key.foregroundColor:UIColor.white, NSAttributedString.Key.paragraphStyle: paragraphStyle,NSAttributedString.Key.font:font], range: textRangeForFont)
+            attribStr.addAttributes([ 
+                NSAttributedString.Key.foregroundColor:UIColor.white,
+                NSAttributedString.Key.paragraphStyle: paragraphStyle,
+                NSAttributedString.Key.font:font],
+                                    range: textRangeForFont
+            )
             
         } catch {
             return NSAttributedString()
@@ -52,7 +60,6 @@ extension String{
     var htmlToString: String {
         return htmlToAttributedString?.string ?? ""
     }
-    
     
 }
 

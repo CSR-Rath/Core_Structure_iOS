@@ -7,13 +7,16 @@
 
 import UIKit
 
-class LocalNotificationVC: UIViewController {
-    let buttonPush = UIButton()
+class LocalNotificationVC: UIViewController, UIGestureRecognizerDelegate {
+    let buttonPush = MainButton()
        
        override func viewDidLoad() {
            super.viewDidLoad()
            title = "Push Notification"
            view.backgroundColor = .white
+           //Enable back swipe gesture
+           navigationController?.interactivePopGestureRecognizer?.delegate = self
+           
            setupUIView()
            setupContainer()
        }

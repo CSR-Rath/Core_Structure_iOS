@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  CoreStructure_iOS
+
+  Created by Rath! on 7/11/24.
+  
+*/
+
+
+"welcome_message" = "សូមស្វាគមន៍មកកាន់កម្មវិធីរបស់យើង!";
+"goodbye_message" = "លាហើយ!";
+"error_message" = "មានកំហុសមួយកើតឡើង។ សូមព្យាយាមម្តងទៀត។";

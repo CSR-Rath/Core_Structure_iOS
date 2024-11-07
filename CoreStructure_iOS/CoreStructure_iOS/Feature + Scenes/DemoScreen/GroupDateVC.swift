@@ -13,7 +13,7 @@ struct TansationDate: Codable {
     var desc: String?
 }
 
-class GroupDateVC: UIViewController {
+class GroupDateVC: UIViewController, UIGestureRecognizerDelegate {
     
     private var models: [TansationDate] = [
         TansationDate(type: "Deposit", created: 1724424400, desc: "Salary deposit"),
@@ -57,7 +57,8 @@ class GroupDateVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         title = "Group Date"
-        navigationController?.navigationBar.isHidden  = false
+        //Enable back swipe gesture
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
         setupUI()
         groupEvents(models)
         totleAll = models.count

@@ -22,7 +22,7 @@ class CustomTabBarVC: UITabBarController {
         TitleIconModel(name: "Package", iconName: ""),
         TitleIconModel(name: "Padding", iconName: ""),
         TitleIconModel(name: "Find", iconName: ""),
-    
+
     ]
 
     var indexSelected: Int = 0{
@@ -30,7 +30,7 @@ class CustomTabBarVC: UITabBarController {
             self.selectedIndex = indexSelected
             collactionView.reloadData()
             // Update the title based on the selected index
-               self.title = viewControllers?[indexSelected].title
+            self.title = viewControllers?[indexSelected].title
         }
     }
     
@@ -41,9 +41,7 @@ class CustomTabBarVC: UITabBarController {
         layout.scrollDirection = .horizontal
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collection.translatesAutoresizingMaskIntoConstraints = false
-//        collection.layer.borderWidth = 0.16
-//        collection.layer.borderColor = UIColor.black.cgColor
-        collection.backgroundColor = .lightGray
+        collection.backgroundColor = .mainBlueColor
         collection.delegate = self
         collection.dataSource = self
         collection.register(CustomTabBarCell.self, forCellWithReuseIdentifier: CustomTabBarCell.identifier)
@@ -52,7 +50,25 @@ class CustomTabBarVC: UITabBarController {
     
     
 
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        let firstVC = DemoFeatureVC()
+        firstVC.title =  "goodbye_message".localizeString()//"Demo Feature"
+        
+        let secondVC = SecondViewController()
+        secondVC.title = "Demo 2"
+        
+        let threeVC = ThreeViewController()
+        threeVC.title = "Hello 3"
+        
+        let fourtVC = FourViewController()
+        fourtVC.title = "Hello 4"
+        
+        viewControllers = [firstVC, secondVC, threeVC, fourtVC]
+        
+       title = viewControllers?[indexSelected].title?.localizeString()
+    }
     
     
     override func viewDidLoad() {
@@ -78,22 +94,7 @@ class CustomTabBarVC: UITabBarController {
     
     //MARK: Handle Setup ViewController
     private func setupConstraintAndSetupController(){
-        
-        let firstVC = DemoFeatureVC()
-        firstVC.title = "Demo Feature"
-        
-        let secondVC = SecondViewController()
-        secondVC.title = "Demo 2"
-        
-        let threeVC = ThreeViewController()
-        threeVC.title = "Hello 3"
-        
-        let fourtVC = FourViewController()
-        fourtVC.title = "Hello 4"
-        
-        viewControllers = [firstVC, secondVC, threeVC, fourtVC]
-        self.title = viewControllers?[indexSelected].title
-        
+    
         view.addSubview(collactionView)
         NSLayoutConstraint.activate([
         
@@ -156,16 +157,17 @@ extension CustomTabBarVC:  UICollectionViewDelegate, UICollectionViewDataSource 
 
 private func configureSelectedCell(_ cell: CustomTabBarCell) {
     
-    cell.imgIcon.setImageColor(color: .black)
-    cell.lblTitle.textColor = .black
+    cell.imgIcon.setImageColor(color: .white)
+    cell.lblTitle.textColor = .white
+    cell.lblTitle.fontBold(13)
 
     animateCellSelection(cell)
 }
 
 private func configureDeselectedCell(_ cell: CustomTabBarCell) {
-   
-    cell.imgIcon.setImageColor(color: .red)
-    cell.lblTitle.textColor = .red
+    cell.imgIcon.setImageColor(color: .gray)
+    cell.lblTitle.textColor = .gray
+    cell.lblTitle.fontRegular(13)
 }
 
 private func animateCellSelection(_ cell: CustomTabBarCell) {

@@ -6,17 +6,46 @@
 //
 
 import UIKit
-import UserNotifications //import UserNotifications 1
+import UserNotifications //import UserNotifications 1 local
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        setLanguage(langCode: "en") // default language en
+        
+        
+        let app = AppConfiguration()
+        print("apiBaseURL", app.apiBaseURL, "\n", "apiKey", app.apiKey, "\n","bundleID", app.bundleID)
+        
+        
+        
+        
+        
+        
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
+               if granted {
+                   DispatchQueue.main.async {
+                       UIApplication.shared.registerForRemoteNotifications()
+                   }
+               } else {
+                   print("Permission for push notifications denied.")
+               }
+           }
+        
+        
+        
+        
+
+        
         setupTitleNavigationBar()
-        configureNotification()  // push notification 2
+//        configureNotification()  // push notification 2 local
         print("didFinishLaunchingWithOptions") //AIzaSyBApx6bA_YNHU8zL_XBrpSI10wol9EBVsA
         return true
     }
+    
+  
 
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         print("configurationForConnecting")
@@ -28,6 +57,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
 }
+
+
+
+extension AppDelegate{
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
+        print("Device Token: \(token)")
+    }
+    
+//    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+//        // Handle the notification and perform necessary actions
+//        completionHandler()
+//    }
+    
+    
+    
+}
+
+
 
 //MARK: Handle navigation contoller
 extension AppDelegate{
@@ -42,9 +91,9 @@ extension AppDelegate{
        
        let appearance = UINavigationBarAppearance()
        appearance.configureWithOpaqueBackground()
-       appearance.shadowColor = .mainColor
+       appearance.shadowColor = .mainBlueColor
 
-       appearance.backgroundColor = .mainColor
+       appearance.backgroundColor = .mainBlueColor
        appearance.titleTextAttributes = titleAttribute as [NSAttributedString.Key : Any]
         
         
@@ -65,7 +114,7 @@ extension AppDelegate{
 //firebase //https://github.com/firebase/firebase-ios-sdk
 
 
-//MARK: Setup Push Notification
+//MARK: Setup Push Notification Local
 extension AppDelegate: UNUserNotificationCenterDelegate {
     
     

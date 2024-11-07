@@ -24,7 +24,7 @@ class PasscodeVC: UIViewController {
     private var isCallBio : Bool = false
     private let items : [String] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0", ""]
     private var digitCircleView: [UIView] = []
-    private var arrayButton: [UIButton] = []
+    private var arrayButton: [MainButton] = []
     private var stackButton: UIStackView! = nil
     private var stackButton1: UIStackView! = nil
     private var stackButton2: UIStackView! = nil
@@ -220,7 +220,7 @@ extension PasscodeVC{
         
         for i in 0...11 {
             
-            let button = UIButton(type: .system)   //UIButton(type: .system)
+            let button = MainButton(type: .system)   //UIButton(type: .system)
             button.backgroundColor = .clear
             button.setTitleColor(.orange, for: .normal)
             button.setTitle(items[i], for: .normal)

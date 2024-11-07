@@ -78,14 +78,14 @@ class OriginalTabBarVC: UITabBarController,UITabBarControllerDelegate {
 
           // Set up the colors for the appearance
           appearance.configureWithOpaqueBackground()
-          appearance.backgroundColor = .orange // Background color of the tab bar
-          appearance.stackedLayoutAppearance.normal.iconColor = .red // Unselected icon color
+          appearance.backgroundColor = .mainBlueColor // Background color of the tab bar
+          appearance.stackedLayoutAppearance.normal.iconColor = .gray // Unselected icon color
           appearance.stackedLayoutAppearance.selected.iconColor = .white // Selected icon color
-          appearance.stackedLayoutAppearance.normal.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.red] // Unselected title color
+          appearance.stackedLayoutAppearance.normal.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.gray] // Unselected title color
           appearance.stackedLayoutAppearance.selected.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white] // Selected title color
 
           // Assign the appearance to the tab bar
-        tabBar.backgroundColor = .orange // Background color of the tab bar
+          tabBar.backgroundColor = .mainBlueColor // Background color of the tab bar
           tabBar.standardAppearance = appearance
 //          tabBar.scrollEdgeAppearance = appearance // For scrollable content
 

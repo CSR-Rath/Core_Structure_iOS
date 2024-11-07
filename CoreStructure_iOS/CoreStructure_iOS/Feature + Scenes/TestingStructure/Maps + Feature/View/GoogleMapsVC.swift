@@ -9,8 +9,6 @@ import UIKit
 //import GoogleMaps
 //import GoogleMaps
 
-
-
 class GoogleMapsVC: UIViewController {
 
     override func viewDidLoad() {

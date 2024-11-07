@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PagViewControllerWithButtonVC: UIViewController {
+class PagViewControllerWithButtonVC: UIViewController, UIGestureRecognizerDelegate {
     
     let pageview = PageViewController()
     let segmentedView = SegmentedView()
@@ -26,7 +26,8 @@ class PagViewControllerWithButtonVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         title = "PagviewController"
-        
+        //Enable back swipe gesture
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
         setupConstraint()
         
         
