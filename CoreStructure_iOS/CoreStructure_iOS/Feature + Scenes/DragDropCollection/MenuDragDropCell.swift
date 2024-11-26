@@ -13,6 +13,11 @@ class MenuDragDropCell: UICollectionViewCell {
     var nsWidth = NSLayoutConstraint()
     var nsHeight = NSLayoutConstraint()
     
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("touchesEnded")
+    }
+    
     var sizeImage:CGFloat = 64{
         didSet{
 

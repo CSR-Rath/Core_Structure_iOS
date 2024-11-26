@@ -45,6 +45,8 @@ class MainButton: UIButton {
         
         // Add target for touch down event
         self.addTarget(self, action: #selector(buttonPressed), for: .touchDown)
+//        self.addTarget(self, action: #selector(buttonReleased), for: [.touchUpInside, .touchUpOutside, .touchCancel])
+        
         self.addTarget(self, action: #selector(buttonReleased), for: [.touchUpInside, .touchUpOutside, .touchCancel])
     }
     

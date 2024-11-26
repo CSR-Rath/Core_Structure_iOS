@@ -107,19 +107,21 @@ extension UIView {
             if translation.y > 0 {
                 self.transform = CGAffineTransform(translationX: 0, y: translation.y)
             }
+            
         case .ended:
             print("translation.y ===> \(translation.y)")
             
             // Dismiss the view if the swipe is downward
-            if translation.y > UIView.dropHeight {
-                cancelDismiss()
-            } else {
-                // Reset position
+//            if translation.y > UIView.dropHeight {
+//                cancelDismiss()
+//            } else {
+//                // Reset position
                 UIView.animate(withDuration: 0.1) {
                     self.transform = .identity
                 }
-            }
+//            }
         default:
+            
             break
         }
     }
@@ -131,9 +133,7 @@ extension UIView {
             self.transform = .identity
         }
 
-//        UIViewController.dismiss(true)
-        
-//        UIViewController().dismiss(animated: true)
+
     }
 }
 
@@ -190,6 +190,11 @@ extension UIView {
         let doneButton = UIBarButtonItem(title: "Done",
                                          style: .plain, target: self,
                                          action: #selector(doneButtonTapped))
+        
+        // Create a "Done" button
+//        let cancelButton = UIBarButtonItem(title: "Cancel",
+//                                         style: .plain, target: self,
+//                                         action: #selector(cancelButtonTapped))
 
         // Add buttons to the toolbar
         toolbar.items = [flexibleSpace, doneButton]
@@ -200,6 +205,14 @@ extension UIView {
         // Dismiss keyboard
         self.endEditing(true)
     }
+    
+    
+//    @objc func cancelButtonTapped() {
+//        // Dismiss keyboard
+//
+//        self.endEditing(true)
+//    }
+//    
 }
 
 

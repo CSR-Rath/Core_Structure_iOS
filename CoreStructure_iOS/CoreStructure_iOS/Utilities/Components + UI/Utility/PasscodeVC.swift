@@ -24,7 +24,7 @@ class PasscodeVC: UIViewController {
     private var isCallBio : Bool = false
     private let items : [String] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0", ""]
     private var digitCircleView: [UIView] = []
-    private var arrayButton: [MainButton] = []
+    private var arrayButton: [UIButton] = []
     private var stackButton: UIStackView! = nil
     private var stackButton1: UIStackView! = nil
     private var stackButton2: UIStackView! = nil
@@ -167,7 +167,7 @@ extension PasscodeVC{
         btnForGot.setTitleColor(.orange, for: .normal)
         btnForGot.titleLabel?.fontBold(14)
         btnForGot.translatesAutoresizingMaskIntoConstraints = false
-//        btnForGot.addTargetAction(action: #selector(didTappedForgot))
+
         btnForGot.addTarget(self, action:  #selector(didTappedForgot), for: .touchUpInside)
         
         NSLayoutConstraint.activate([

@@ -14,8 +14,8 @@ class Loading : UIView {
     
     private let loadingView: UIActivityIndicatorView = {
         let loading = UIActivityIndicatorView()
-        loading.color = .blue
-        loading.style = .large
+        loading.color = .mainBlueColor
+        loading.style = .medium
         loading.backgroundColor = UIColor.white.withAlphaComponent(0.5)
         loading.translatesAutoresizingMaskIntoConstraints = false
         return loading
@@ -24,8 +24,9 @@ class Loading : UIView {
     
     func showLoading() {
         
-        DispatchQueue.main.async {
-            let window = SceneDelegate().window //UIApplication.shared.windows.first
+        DispatchQueue.main.async { [self] in
+            
+            let window = SceneDelegate().window
             
             self.frame = CGRect(x: 0,
                                 y: 0,
@@ -33,9 +34,6 @@ class Loading : UIView {
                                 height: (window?.frame.height)!)
             
             window?.addSubview(self)
-        }
-        
-        DispatchQueue.main.async { [self] in
             
             addSubview(loadingView)
             
@@ -52,7 +50,7 @@ class Loading : UIView {
     
     func hideLoading(_ deadline: CFTimeInterval = 0.0) {
         DispatchQueue.main.asyncAfter(deadline: .now() + deadline ){ [self] in
-            removeFromSuperview()
+//            removeFromSuperview()
             loadingView.removeFromSuperview()
             loadingView.stopAnimating()
         }

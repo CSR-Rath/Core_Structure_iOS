@@ -28,6 +28,8 @@ import UIKit
 
 
 
+// MARK: App Name base by scheme if (Bundle display name) not have
 
+// MARK: - App icon Project target build setting asset catalog -> Primary App icon set name
 
 

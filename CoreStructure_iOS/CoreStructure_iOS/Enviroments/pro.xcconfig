@@ -17,3 +17,7 @@ BUNDLE_ID = com.rath.CoreStructure-iOS.prod
 
 PLIST_VERSION = 1
 
+Bundle_display_name = iOS PROD // app name 
+
+
+

@@ -18,12 +18,12 @@ class DemoFeatureVC: UIViewController, UIGestureRecognizerDelegate {
     
     private var tableView: UITableView! = nil
     
-    private var dataTable : TableViewHandler<CustomTableViewCell, Any>!
+    //    private var dataTable : TableViewHandler<CustomTableViewCell, Any>!
     
     
     let items : [ListModel] = [
         
-        ListModel(id: 1, name: "TableHandlerVC", viewController: TableHandlerVC()),
+        ListModel(id: 1, name: "TableHandlerVC", viewController: ScannerController()),
         ListModel(id: 2, name: "PasscodeVC", viewController: PasscodeVC()),
         ListModel(id: 3, name: "OTPVC", viewController: OTPVC()),
         ListModel(id: 4, name: "BoardCollectionVC", viewController: BoardCollectionVC()),
@@ -39,21 +39,21 @@ class DemoFeatureVC: UIViewController, UIGestureRecognizerDelegate {
         ListModel(id: 14, name: "LocalNotificationVC", viewController: LocalNotificationVC()),
         ListModel(id: 15, name: "PagViewControllerWithButtonVC", viewController: PagViewControllerWithButtonVC()),
         ListModel(id: 16, name: "ViewController", viewController: PageViewController()),
-        ListModel(id: 17, name: "LocalizableContoller", viewController: LocalizableContoller())
-    
+        ListModel(id: 17, name: "LocalizableContoller", viewController: LocalizableContoller()),
+        ListModel(id: 18, name: "SliderController", viewController: SliderController()),
+        ListModel(id: 18, name: "SectionedTableViewController", viewController: DragDropTableViewCellContoler()),
+        
     ]
-//    @objc override open var preferredStatusBarStyle: UIStatusBarStyle {
-//        return .lightContent
-//    }
+
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-           return .darkContent // or .default based on your needs
-       }
+        return .darkContent // or .default based on your needs
+    }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
     }
     
     
@@ -63,77 +63,24 @@ class DemoFeatureVC: UIViewController, UIGestureRecognizerDelegate {
         setupConstraint()
         //Enable back swipe gesture
         navigationController?.interactivePopGestureRecognizer?.delegate = self
-
+        
     }
     
     private func setupConstraint(){
         tableView = UITableView(frame: view.bounds, style: .plain)
+        tableView.rowHeight = 60
         view.addSubview(tableView)
-        tableView.backgroundColor = .lightText
+        tableView.backgroundColor = .clear
+        tableView.dataSource = self
+        tableView.delegate = self
         if #available(iOS 15.0, *) {
             tableView.sectionHeaderTopPadding = 0
         } else {
             // Fallback on earlier versions
         }
         tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "cell")
-        
-        
-        dataTable = TableViewHandler(cellIdentifier: "cell",
-                                     cellHeight: 70,
-                                     sections: [items])
-        
-        tableView.backgroundColor = .white
-        tableView.dataSource = dataTable
-        tableView.delegate = dataTable
         tableView.addRefreshControl(target: self, action: #selector(pullRefresh))
         
-        
-        
-        dataTable.configureCell = { [self] cell, item, indexPath in
-            
-            cell.titleLabel.text = items[indexPath.item].id.description + " - " + items[indexPath.item].name
-            
-        }
-        
-        dataTable.headerHeightForSection = { section in
-            return 0
-        }
-        dataTable.didDelectCell = { item, indexPath in
-            print("item ==>",item)
-            
-            if let item = item as? ListModel{
-                if item.id == 7  {
-                    AlertMessage.shared.alertError()
-                }else if item.id == 8 ||  item.id == 5 {
-                    
-                    let vc = item.viewController
-                    vc?.modalPresentationStyle = .custom
-                    vc?.transitioningDelegate = presentVC
-                    
-                    self.present(vc!, animated: true)
-                    
-                }else{
- 
-                    item.viewController?.leftBarButton()
-                    self.navigationController?.pushViewController(item.viewController!, animated: true)
-                }
-            }
-        }
-        
-        
-        dataTable.configureHeader = { viewH, item, indexPath in 
-            
-            
-        }
-        
-        
-        dataTable.selectedCell = { item in
-
-            if let item = item as? ListModel{
-                print("Selected item: \(item.name)")
-            }
-            
-        }
     }
     
     @objc private func pullRefresh(){
@@ -146,6 +93,52 @@ class DemoFeatureVC: UIViewController, UIGestureRecognizerDelegate {
     }
     
 }
+
+
+
+extension DemoFeatureVC: UITableViewDelegate, UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return items.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomTableViewCell
+        cell.titleLabel.text = items[indexPath.item].id.description + " - " + items[indexPath.item].name
+        return cell
+    }
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let item =  items[indexPath.row]
+        
+        
+        if item.id == 7  {
+            AlertMessage.shared.alertError()
+        }else if item.id == 8 ||  item.id == 5 {
+            
+            let vc = item.viewController
+            vc?.modalPresentationStyle = .custom
+            vc?.transitioningDelegate = presentVC
+            
+            self.present(vc!, animated: true)
+            
+        }else{
+            
+            item.viewController?.leftBarButton()
+            self.navigationController?.pushViewController(item.viewController!, animated: true)
+        }
+    }
+    
+    
+}
+
+
+
+
+
+
+
 
 class SecondViewController: UIViewController {
     

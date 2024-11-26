@@ -31,17 +31,16 @@ extension UIViewController{
         present(activityViewController, animated: true, completion: nil)
     }
     
-    @objc func dismiss(_ Complete: Complete ){
+    @objc func touchDismiss(_ Complete: Complete ){
         self.dismiss(animated: true) {
-            
         }
     }
     
-    @objc func popViewController(){
+    @objc func touchPopViewController(){
         self.navigationController?.popViewController(animated: true)
     }
     
-    @objc func popToViewController(){
+    @objc func touchPopToViewController(){
         self.navigationController?.popToViewController(self, animated: true)
     }
     
@@ -81,12 +80,8 @@ extension UIViewController{
         )
     }
     
-    func setupFontNavigationBar(){
-        
-    }
     
-    
-    
+
    @objc private func popVC(){
        print("popVC ===> buttonBack")
         self.navigationController?.popViewController(animated: true)

@@ -59,3 +59,7 @@ class OTPVC: UIViewController, UIGestureRecognizerDelegate {
        codeTxt.clear()
     }
 }
+
+
+
+

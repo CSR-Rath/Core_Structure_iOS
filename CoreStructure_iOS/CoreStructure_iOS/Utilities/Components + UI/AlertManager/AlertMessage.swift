@@ -45,7 +45,7 @@ enum HandleMessageResponse{
         case .badURL:
             return "The URL is invalid."
         case .requestError:
-            return "" // need missage from server
+            return "Request Error" // need missage from server
         case .notConnectedToInternet:
             return "Not connected to the Internet. Please check your network settings."
        
@@ -74,7 +74,7 @@ class AlertMessage{
     }
     
     func alertError(title: String = "Error",
-                   message: String? = "Something Went Wrong!",
+                   message: String? = "", // "Something Went Wrong!",
                    status: HandleMessageResponse = .none
     ) {
         
@@ -89,7 +89,7 @@ class AlertMessage{
             bottomSheetVC.lblTitle.text = title
             
             if message == nil || message == "" {
-                bottomSheetVC.lblDescription.text =  status == .none ? message :  status.message
+                bottomSheetVC.lblDescription.text = status.message
             }else{
                bottomSheetVC.lblDescription.text =  message
             }
@@ -97,15 +97,20 @@ class AlertMessage{
             print("message ==> ", status.message)
             
        
+            SceneDelegate().window?.rootViewController?.present(bottomSheetVC,
+                                                                animated: false,
+                                                                completion: {
+                Loading.shared.hideLoading()
+                return // Stop resuming
+            })
             
-            if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-                sceneDelegate.window?.rootViewController?.present(bottomSheetVC,
-                                                                  animated: false,
-                                                                  completion: {
-                    Loading.shared.hideLoading()
-                    return // Stop resuming
-                })
-            }
+//            if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+//                sceneDelegate.window?.rootViewController?.present(bottomSheetVC,
+//                                                                  animated: false,
+//                                                                  completion: {
+
+//                })
+//            }
         }
     }
 }

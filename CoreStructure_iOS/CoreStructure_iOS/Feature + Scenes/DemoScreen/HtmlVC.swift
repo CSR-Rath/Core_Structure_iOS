@@ -34,10 +34,4 @@ class HtmlVC: UIViewController, UIGestureRecognizerDelegate{
 }
 
 
-let htmlString: String = """
-
-
-
-
-
-"""
+let htmlString: String = ""

@@ -10,7 +10,15 @@ import UIKit
 
 extension UIDevice {
     
-    func iPhone()->Bool{
+    static func isLandscape() -> Bool{
+            if UIDevice.current.orientation.isLandscape {
+                return true
+            }else{
+                return false
+            }
+        }
+    
+    static func iPhone()->Bool{
         if UIDevice.current.userInterfaceIdiom == .phone{
             return true
         }else{
@@ -18,7 +26,7 @@ extension UIDevice {
         }
     }
     
-    func iPaid()->Bool{
+    static func iPaid()->Bool{
         if UIDevice.current.userInterfaceIdiom == .pad{
             return true
         }else{
@@ -27,4 +35,6 @@ extension UIDevice {
     }
     
 }
+
+
 

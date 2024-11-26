@@ -83,7 +83,7 @@ class PagViewControllerWithButtonVC: UIViewController, UIGestureRecognizerDelega
     
     private func setupConstraint(){
         view.addSubview(pageview.view)
-        pageview.view
+       
         pageview.view.translatesAutoresizingMaskIntoConstraints = false
 
         view.addSubview(segmentedView)

@@ -9,14 +9,23 @@ import UIKit
 
 extension OneTimeCodeTextField {
     public override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
-        false
+        
+        print("canPerformAction")
+        
+       return false
     }
     
     public override func caretRect(for position: UITextPosition) -> CGRect {
-        .zero
+        
+        print("caretRect")
+        
+       return .zero
     }
     
     public override func selectionRects(for range: UITextRange) -> [UITextSelectionRect] {
-        []
+
+        print("selectionRects")
+
+        return   []
     }
 }

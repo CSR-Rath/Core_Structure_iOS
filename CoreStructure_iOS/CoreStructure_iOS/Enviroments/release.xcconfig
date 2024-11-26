@@ -15,3 +15,5 @@ API_KEY = AIzaSyB7phb_51lTr2yjxAeY0flXXiE_w2q2tFM
 BUNDLE_ID = com.rath.CoreStructure-iOS.release
 
 PLIST_VERSION = 1
+
+Bundle_display_name = iOS RELEASE // app name

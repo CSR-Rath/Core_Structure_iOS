@@ -8,6 +8,9 @@
 import Foundation
 //MARK: - Get from info
  class AppConfiguration {
+     
+     static let shared = AppConfiguration()
+     
     lazy var apiKey: String = {
         guard let apiKey = Bundle.main.object(forInfoDictionaryKey: "API_KEY") as? String else {
             fatalError("ApiKey must not be empty in plist")
