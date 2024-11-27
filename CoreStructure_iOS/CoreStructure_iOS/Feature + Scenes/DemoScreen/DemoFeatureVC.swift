@@ -23,7 +23,7 @@ class DemoFeatureVC: UIViewController, UIGestureRecognizerDelegate {
     
     let items : [ListModel] = [
         
-        ListModel(id: 1, name: "TableHandlerVC", viewController: ScannerController()),
+        ListModel(id: 1, name: "TableHandlerVC", viewController: TableHandlerVC()),
         ListModel(id: 2, name: "PasscodeVC", viewController: PasscodeVC()),
         ListModel(id: 3, name: "OTPVC", viewController: OTPVC()),
         ListModel(id: 4, name: "BoardCollectionVC", viewController: BoardCollectionVC()),
@@ -42,6 +42,9 @@ class DemoFeatureVC: UIViewController, UIGestureRecognizerDelegate {
         ListModel(id: 17, name: "LocalizableContoller", viewController: LocalizableContoller()),
         ListModel(id: 18, name: "SliderController", viewController: SliderController()),
         ListModel(id: 18, name: "SectionedTableViewController", viewController: DragDropTableViewCellContoler()),
+        ListModel(id: 18, name: "SectionedTableViewController", viewController: ScannerController()),
+        
+        
         
     ]
 
