@@ -12,7 +12,7 @@ import UIKit
 //MARK: Handle tableView list
 extension UITableView{
 
-    func setEmptyView(title: String = "Data Not Found", messageImage: UIImage = UIImage()) {
+    func setEmptyView(title: String = "Data Not Found", messageImage: UIImage = .imgEmptyList) {
         // Create the empty view
         let emptyView = UIView(frame: CGRect(x: 0,
                                              y: 0,

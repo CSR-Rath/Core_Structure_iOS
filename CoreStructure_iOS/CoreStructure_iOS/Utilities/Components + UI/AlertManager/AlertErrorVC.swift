@@ -16,7 +16,7 @@ class AlertErrorVC: UIViewController {
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.backgroundColor = .white.withAlphaComponent(0.95)
         btn.layer.cornerRadius = 20
-//        btn.setImage(.icClose..withRenderingMode(.alwaysOriginal), for: .normal)
+        btn.setImage(.icClose, for: .normal)
         btn.layer.shadowColor = UIColor.black.cgColor
         btn.layer.shadowOpacity = 0.3
         btn.layer.shadowOffset = CGSize(width: 0, height: -5)
@@ -28,7 +28,7 @@ class AlertErrorVC: UIViewController {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.textColor = .black
-        lbl.fontBold(20)
+        lbl.fontBold(25)
         return lbl
     }()
     
@@ -36,7 +36,7 @@ class AlertErrorVC: UIViewController {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.textColor = .black
-        lbl.fontRegular(14)
+        lbl.fontRegular(18)
         lbl.numberOfLines = 0
         return lbl
     }()

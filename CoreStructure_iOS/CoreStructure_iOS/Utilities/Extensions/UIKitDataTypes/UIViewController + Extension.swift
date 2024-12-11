@@ -31,14 +31,20 @@ extension UIViewController{
         present(activityViewController, animated: true, completion: nil)
     }
     
-    @objc func touchDismiss(_ Complete: Complete ){
+    @objc func touchDismiss(){
         self.dismiss(animated: true) {
         }
     }
     
-    @objc func touchPopViewController(){
-        self.navigationController?.popViewController(animated: true)
+    @objc func touchPopViewController(animated: Bool = true){
+        self.navigationController?.popViewController(animated: animated)
     }
+    
+    @objc func touchPopToRootViewController(animated: Bool = true){
+        self.navigationController?.popToRootViewController(animated: animated)
+    }
+    
+    
     
     @objc func touchPopToViewController(){
         self.navigationController?.popToViewController(self, animated: true)
@@ -59,10 +65,11 @@ extension UIViewController{
 extension UIViewController{
     
     func leftBarButton(action: Selector? = #selector(popVC),
-                       iconButton: UIImage? = UIImage(named: "icBackWhite")
+                       iconButton: UIImage? = UIImage(named: "icBackWhite"),
+                       tintColor: UIColor = .white
     ){
         navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: iconButton?.withRenderingMode(.alwaysOriginal),
+            image: iconButton?.withRenderingMode(.alwaysOriginal).withTintColor(tintColor),
             style: .plain,
             target: self,
             action: action

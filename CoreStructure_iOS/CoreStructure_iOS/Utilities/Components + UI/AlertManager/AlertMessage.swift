@@ -48,14 +48,14 @@ enum HandleMessageResponse{
             return "Request Error" // need missage from server
         case .notConnectedToInternet:
             return "Not connected to the Internet. Please check your network settings."
-       
+            
         }
     }
 }
 
 struct Response:Codable {
-    var status: Int?
-    var message: String?
+    var status: Int
+    var message: String
 }
 
 
@@ -68,49 +68,43 @@ class AlertMessage{
             if response.status == 200{
                 success()
             }else{
-                self.alertError(message: response.message ?? nil)
+                self.alertError(message: response.message )
             }
         }
     }
     
     func alertError(title: String = "Error",
-                   message: String? = "", // "Something Went Wrong!",
-                   status: HandleMessageResponse = .none
+                    message: String? = "", // "Something Went Wrong!",
+                    status: HandleMessageResponse = .none
     ) {
         
         DispatchQueue.main.async {
             
             let bottomSheetVC = AlertErrorVC()
-
+            
             bottomSheetVC.modalPresentationStyle = .custom
             bottomSheetVC.transitioningDelegate = presentVC
-
+            
             
             bottomSheetVC.lblTitle.text = title
             
             if message == nil || message == "" {
                 bottomSheetVC.lblDescription.text = status.message
             }else{
-               bottomSheetVC.lblDescription.text =  message
+                bottomSheetVC.lblDescription.text =  message
             }
             
             print("message ==> ", status.message)
             
-       
-            SceneDelegate().window?.rootViewController?.present(bottomSheetVC,
-                                                                animated: false,
-                                                                completion: {
-                Loading.shared.hideLoading()
-                return // Stop resuming
-            })
+            Loading.shared.hideLoading()
             
-//            if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-//                sceneDelegate.window?.rootViewController?.present(bottomSheetVC,
-//                                                                  animated: false,
-//                                                                  completion: {
-
-//                })
-//            }
+            if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+                sceneDelegate.window?.rootViewController?.present(bottomSheetVC,
+                                                                  animated: false,
+                                                                  completion: {
+                    
+                })
+            }
         }
     }
 }

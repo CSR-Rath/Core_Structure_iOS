@@ -80,6 +80,8 @@ extension UIView{
 }
 
 
+
+
 //MARK: Handle UITapGestureRecognizer and UIPanGestureRecognizer
 extension UIView {
     
@@ -162,7 +164,7 @@ extension UIView{
     @objc private func keyboardWillShow(notification: NSNotification) {
         if let userInfo = notification.userInfo,
            let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let  keyboardHeight = keyboardFrame.cgRectValue.height
+            let  keyboardHeight = keyboardFrame.cgRectValue.height + 20
             
             print("keyboardHeight ==> ",keyboardHeight)
             

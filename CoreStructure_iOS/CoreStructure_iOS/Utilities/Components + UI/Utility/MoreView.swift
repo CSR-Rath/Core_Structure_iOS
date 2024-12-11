@@ -15,9 +15,9 @@ class MoreView: UIView{
     
     var heightView: CGFloat = 40{
         didSet{
-            nsConstraint.isActive = false
-            nsConstraint.constant = heightView
-            nsConstraint.isActive = true
+//            nsConstraint.isActive = false
+//            nsConstraint.constant = heightView
+//            nsConstraint.isActive = true
         }
     }
     
@@ -31,15 +31,15 @@ class MoreView: UIView{
         return label
     }()
     
-    lazy var actionView: UIView = {
-        let view = UIView()
+    lazy var actionView: MainButton = {
+        let view = MainButton()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .clear
         view.layer.cornerRadius = 5
-        
+       
         // Add a tap gesture recognizer
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleActionViewTap))
-        view.addGestureRecognizer(tapGesture)
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleActionViewTap))
+//        view.addGestureRecognizer(tapGesture)
         
         return view
     }()
@@ -67,13 +67,14 @@ class MoreView: UIView{
         stack.spacing = 10
         stack.distribution = .fill
         stack.alignment = .center
+        stack.isUserInteractionEnabled = false
         return stack
     }()
     
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .orange
+        self.backgroundColor = .clear
         nsConstraint =  self.heightAnchor.constraint(equalToConstant: heightView)
         nsConstraint.isActive = true
         setupUI()
@@ -86,13 +87,14 @@ class MoreView: UIView{
     @objc func handleActionViewTap() {
         // Add your action here
         print("Action view tapped!")
-        actionMore?()
+      
         
-        UIView.animate(withDuration: 0.1, animations: {
+        UIView.animate(withDuration: 0.05, animations: {
             self.actionView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
         }) { _ in
+            self.actionMore?()
             // Scale back to original size
-            UIView.animate(withDuration: 0.1) {
+            UIView.animate(withDuration: 0.05) {
                 self.actionView.transform = CGAffineTransform.identity
             }
         }

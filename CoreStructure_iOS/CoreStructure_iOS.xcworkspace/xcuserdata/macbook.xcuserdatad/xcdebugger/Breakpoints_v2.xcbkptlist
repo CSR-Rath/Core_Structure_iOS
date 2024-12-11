@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "A5F8BEF6-8214-4A29-8CED-D503FF32F3DB"
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7A7A3066-7860-4C92-8986-3D8918F1C9A3"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CoreStructure_iOS/Feature + Scenes/Learning/Views/SuccessController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "viewWillDisappear(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8512D85A-D509-45A1-ACAE-614237532385"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CoreStructure_iOS/Feature + Scenes/Learning/Views/TransationDeatilController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "viewWillAppear(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "8512D85A-D509-45A1-ACAE-614237532385 - 7136e8ddb4e8720f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CoreStructure_iOS.TransationDeatilController.viewWillAppear(Swift.Bool) -&gt; ()"
+                  moduleName = "CoreStructure_iOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/macbook/Desktop/Git_Repositeries/Core_Structure_iOS/CoreStructure_iOS/CoreStructure_iOS/Feature%20+%20Scenes/Learning/Views/TransationDeatilController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "31"
+                  endingLineNumber = "31"
+                  offsetFromSymbolStart = "248">
+               </Location>
+               <Location
+                  uuid = "8512D85A-D509-45A1-ACAE-614237532385 - 7136e8ddb4e8720f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CoreStructure_iOS.TransationDeatilController.viewWillAppear(Swift.Bool) -&gt; ()"
+                  moduleName = "CoreStructure_iOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/macbook/Desktop/Git_Repositeries/Core_Structure_iOS/CoreStructure_iOS/CoreStructure_iOS/Feature%20+%20Scenes/Learning/Views/TransationDeatilController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "31"
+                  endingLineNumber = "31"
+                  offsetFromSymbolStart = "228">
+               </Location>
+               <Location
+                  uuid = "8512D85A-D509-45A1-ACAE-614237532385 - 7136e8ddb4e8722c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CoreStructure_iOS.TransationDeatilController.viewWillAppear(Swift.Bool) -&gt; ()"
+                  moduleName = "CoreStructure_iOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/macbook/Desktop/Git_Repositeries/Core_Structure_iOS/CoreStructure_iOS/CoreStructure_iOS/Feature%20+%20Scenes/Learning/Views/TransationDeatilController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "32"
+                  endingLineNumber = "32"
+                  offsetFromSymbolStart = "432">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8734A61A-6726-4B92-BE9D-E2EF90F0F72D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CoreStructure_iOS/Feature + Scenes/Learning/Views/TransationDeatilController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "viewWillAppear(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "8734A61A-6726-4B92-BE9D-E2EF90F0F72D - 7136e8ddb4e87292"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CoreStructure_iOS.TransationDeatilController.viewWillAppear(Swift.Bool) -&gt; ()"
+                  moduleName = "CoreStructure_iOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/macbook/Desktop/Git_Repositeries/Core_Structure_iOS/CoreStructure_iOS/CoreStructure_iOS/Feature%20+%20Scenes/Learning/Views/TransationDeatilController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "34"
+                  endingLineNumber = "34"
+                  offsetFromSymbolStart = "352">
+               </Location>
+               <Location
+                  uuid = "8734A61A-6726-4B92-BE9D-E2EF90F0F72D - 7136e8ddb4e87292"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CoreStructure_iOS.TransationDeatilController.viewWillAppear(Swift.Bool) -&gt; ()"
+                  moduleName = "CoreStructure_iOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/macbook/Desktop/Git_Repositeries/Core_Structure_iOS/CoreStructure_iOS/CoreStructure_iOS/Feature%20+%20Scenes/Learning/Views/TransationDeatilController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "34"
+                  endingLineNumber = "34"
+                  offsetFromSymbolStart = "344">
+               </Location>
+               <Location
+                  uuid = "8734A61A-6726-4B92-BE9D-E2EF90F0F72D - 7136e8ddb4e872b3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CoreStructure_iOS.TransationDeatilController.viewWillAppear(Swift.Bool) -&gt; ()"
+                  moduleName = "CoreStructure_iOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/macbook/Desktop/Git_Repositeries/Core_Structure_iOS/CoreStructure_iOS/CoreStructure_iOS/Feature%20+%20Scenes/Learning/Views/TransationDeatilController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "35"
+                  endingLineNumber = "35"
+                  offsetFromSymbolStart = "552">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "06AAE38E-8150-467B-9EEF-614590FE3D50"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CoreStructure_iOS/Feature + Scenes/Learning/Views/CreateAndUpdateProductController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "163"
+            endingLineNumber = "163"
+            landmarkName = "didTappedPhoto()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

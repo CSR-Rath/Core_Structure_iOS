@@ -13,4 +13,9 @@ struct Endpoints {
     static let wallet = "wallet"
     static let userInfor = "userInfor"
     
+    static let guests = "geusts"
+    static let room = "rooms"
+    static let roomType = "room_types"
+    static let reservations = "reservations"
+    
 }

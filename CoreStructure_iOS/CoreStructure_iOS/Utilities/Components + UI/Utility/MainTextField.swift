@@ -14,6 +14,9 @@ class FloatingLabelTextField: UITextField {
     
     var isOptionalField: Bool = false
     var didEditingDidBegin:(()->())?
+    var  didEditingChanged:(()->())?
+    
+    var  didEditingDidEnd:(()->())?
     
     
     override var backgroundColor: UIColor?{
@@ -88,8 +91,8 @@ class FloatingLabelTextField: UITextField {
     private let borderView: UIView = {
         let view = UIView()
         view.backgroundColor = .clear
-        view.layer.cornerRadius = 5
-        view.layer.borderColor = UIColor.orange.cgColor
+        view.layer.cornerRadius = 10
+        view.layer.borderColor = UIColor.black.cgColor
         view.layer.borderWidth = 1.5
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -154,6 +157,14 @@ class FloatingLabelTextField: UITextField {
         }
         
         self.becomeFirstResponder()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        if text != ""{
+            animateFloatingLabel(to: 1)
+        }
     }
     
     override init(frame: CGRect) {
@@ -240,6 +251,8 @@ extension FloatingLabelTextField{
         borderView.layer.borderColor = UIColor.mainBlueColor.cgColor
         borderView.layer.borderWidth = 2
         
+        didEditingChanged?()
+        
     }
     
     
@@ -248,7 +261,7 @@ extension FloatingLabelTextField{
         
         statusTextField = .editingDidEnd
         
-        borderView.layer.borderColor = UIColor.orange.cgColor
+        borderView.layer.borderColor = UIColor.black.cgColor
         borderView.layer.borderWidth = 1.5
         
         
@@ -341,7 +354,6 @@ extension UIView{
             
             if (item.text == "" || item.text == "  ") && item.isOptionalField == false{
                 
-                
                 item.isValidate = false
                 failure(item)
                 
@@ -368,5 +380,6 @@ extension UILabel {
         self.attributedText = attributedString
     }
 }
+
 
 

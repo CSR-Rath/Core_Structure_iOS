@@ -12,11 +12,10 @@ extension UIImage {
     
     
     //សមាមាត្រ
-    func getImageRatio(view:UIView ) -> CGFloat {
+    func getImageRatio(view: UIView ) -> CGFloat {
         let imageRatio = CGFloat(self.size.width / self.size.height)
         return view.frame.width / imageRatio
     }
-    
     
     
     func roundedImage() -> UIImage? {
@@ -33,5 +32,19 @@ extension UIImage {
         UIGraphicsEndImageContext()
         
         return roundedImage
+    }
+    
+    
+    func imageToString() -> String? {
+        guard let image = CIImage(image: self) else {
+            return nil
+        }
+        let detector = CIDetector(ofType: CIDetectorTypeQRCode,
+                                  context: nil,
+                                  options: [CIDetectorAccuracy: CIDetectorAccuracyHigh])
+        let features = detector?.features(in: image) ?? []
+        return features.compactMap { feature in
+            return (feature as? CIQRCodeFeature)?.messageString
+        }.joined()
     }
 }

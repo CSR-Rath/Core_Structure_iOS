@@ -8,6 +8,8 @@
 import UIKit
 
 
+
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
@@ -15,21 +17,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        
-        // Create a new UIWindow using the windowScene constructor
         window = UIWindow(windowScene: windowScene)
         
-        // Create a view hierarchy programmatically
-        let viewController = DemoFeatureVC()
-        viewController.view.backgroundColor = .white
-        let navigation = UINavigationController(rootViewController: viewController)
-        
-        // Set the root view controller of the window with your view controller
-        window?.rootViewController = navigation
-        
-        // Make the window key and visible
-        window?.makeKeyAndVisible()
+        let loginSuccesFull = UserDefaults.standard.bool(forKey: KeyUser.loginSuccesFull)
 
+        //MARK: - Check loginSuccesFull 
+        let controller: UIViewController =  HomeViewController()//ReservationViewController() // GeustController() //HomeViewController() //loginSuccesFull ? SplashScreenController() : WelcomeContoller()
+        
+        let navigation = UINavigationController(rootViewController: controller)
+        window?.rootViewController = navigation
+        window?.makeKeyAndVisible()
     }
 }
 

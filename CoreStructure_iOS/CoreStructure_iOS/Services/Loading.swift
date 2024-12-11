@@ -15,42 +15,51 @@ class Loading : UIView {
     private let loadingView: UIActivityIndicatorView = {
         let loading = UIActivityIndicatorView()
         loading.color = .mainBlueColor
-        loading.style = .medium
-        loading.backgroundColor = UIColor.white.withAlphaComponent(0.5)
-        loading.translatesAutoresizingMaskIntoConstraints = false
+        loading.style = .large//.medium
+        loading.backgroundColor = UIColor.black.withAlphaComponent(0.4)
         return loading
+    }()
+    
+    lazy var lblLoading: UILabel = {
+        let lbl = UILabel()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        lbl.text = "Loading..."
+        lbl.textColor = .mainBlueColor
+        return lbl
     }()
     
     
     func showLoading() {
-        
+
         DispatchQueue.main.async { [self] in
+            guard let window = UIApplication.shared.windows.first else{
+                return
+            }
             
-            let window = SceneDelegate().window
+            self.frame = window.bounds
+            window.addSubview(self)
             
-            self.frame = CGRect(x: 0,
-                                y: 0,
-                                width: (window?.frame.width)!,
-                                height: (window?.frame.height)!)
-            
-            window?.addSubview(self)
-            
+            loadingView.frame = window.bounds
             addSubview(loadingView)
             
+            
+            addSubview(lblLoading)
             NSLayoutConstraint.activate([
-                loadingView.widthAnchor.constraint(equalTo: window!.widthAnchor),
-                loadingView.heightAnchor.constraint(equalTo: window!.heightAnchor),
-                loadingView.centerYAnchor.constraint(equalTo: window!.centerYAnchor),
-                loadingView.centerXAnchor.constraint(equalTo: window!.centerXAnchor),
+                lblLoading.centerYAnchor.constraint(equalTo: centerYAnchor,constant: 50),
+                lblLoading.centerXAnchor.constraint(equalTo: centerXAnchor),
+                
             ])
             
             loadingView.startAnimating()
+            
         }
+
     }
     
     func hideLoading(_ deadline: CFTimeInterval = 0.0) {
         DispatchQueue.main.asyncAfter(deadline: .now() + deadline ){ [self] in
-//            removeFromSuperview()
+            self.removeFromSuperview()
+            lblLoading.removeFromSuperview()
             loadingView.removeFromSuperview()
             loadingView.stopAnimating()
         }

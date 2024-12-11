@@ -10,17 +10,37 @@ import UIKit
 
 
 //MARK: - key UserDefaults
-public struct AppConstants{
-    
-    
+ struct AppConstants{
     
     static let loginSuccesFull = "loginSuccesFull"
-    static let token = "token"
-    static let language = "language"
+   
+    
     
     static let saveTimer = "saveTimer"
     static let userInfor = "userInfor"
     
     static let keyboradHeight = "keyboradHeight"
+    
+}
+
+
+//MARK: - UserDefaults (key name)
+struct KeyUser{
+    static let token = "token"
+    static let language = "language"
+    static let refreshToken = "refreshToken"
+    static let loginSuccesFull = "loginSuccesFull"
+    
+    static let userRole = "userRole"
+    static let userType = "userType"
+}
+
+
+extension UserDefaults{
+    
+   static let userType = UserDefaults.standard.string(forKey: KeyUser.userType)
+   static let userRole = UserDefaults.standard.string(forKey: KeyUser.userRole)
+   static let loginSuccesFull = UserDefaults.standard.bool(forKey: KeyUser.loginSuccesFull)
+   
     
 }
