@@ -10,17 +10,9 @@
 		4BE1D14C6CA6CBE51A0DC2F7 /* Pods_CoreStructure_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D11530C57B2D2D4D5E0D1486 /* Pods_CoreStructure_iOS.framework */; };
 		FA0D0A152CFB7D370038D87C /* TransationDeatilController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0D0A142CFB7D370038D87C /* TransationDeatilController.swift */; };
 		FA16E3752CF9F9D2001A8E7F /* SuccessController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA16E3742CF9F9D2001A8E7F /* SuccessController.swift */; };
-		FA2830822D0138FF00E62D18 /* RoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2830812D0138FF00E62D18 /* RoomViewModel.swift */; };
 		FA494BA52C69EB9C0086D346 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA494BA32C69EB9C0086D346 /* Main.storyboard */; };
 		FA494BA72C69EBD70086D346 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA494BA62C69EBD70086D346 /* Assets.xcassets */; };
 		FA494BAA2C69EBD70086D346 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA494BA82C69EBD70086D346 /* LaunchScreen.storyboard */; };
-		FA739CCE2D00088C002100B5 /* GeustsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA739CCD2D00088C002100B5 /* GeustsListController.swift */; };
-		FA739CD02D000E10002100B5 /* GeustController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA739CCF2D000E10002100B5 /* GeustController.swift */; };
-		FA739CD22D003DCD002100B5 /* ReservationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA739CD12D003DCD002100B5 /* ReservationController.swift */; };
-		FA739CD42D003FC6002100B5 /* ReservationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA739CD32D003FC5002100B5 /* ReservationCell.swift */; };
-		FA739CD62D003FDC002100B5 /* ReservationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA739CD52D003FDC002100B5 /* ReservationListViewController.swift */; };
-		FA739CD82D004024002100B5 /* ReservationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA739CD72D004024002100B5 /* ReservationViewModel.swift */; };
-		FA739CDA2D0049CA002100B5 /* RoomListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA739CD92D0049CA002100B5 /* RoomListViewController.swift */; };
 		FA7FF8E82CDC722B00C824BD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FA7FF8EA2CDC722B00C824BD /* Localizable.strings */; };
 		FA8555FC2CFB67E00048B021 /* TransationHistoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8555FB2CFB67E00048B021 /* TransationHistoryController.swift */; };
 		FA88F1712CF9BD0000B37C73 /* DashedLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA88F1702CF9BD0000B37C73 /* DashedLineView.swift */; };
@@ -156,10 +148,6 @@
 		FA992F152CF8C0B9007B2EB8 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA992F142CF8C0B9007B2EB8 /* DatabaseManager.swift */; };
 		FA992F172CF8CA8F007B2EB8 /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA992F162CF8CA8E007B2EB8 /* ProductCell.swift */; };
 		FA992F192CF8CECE007B2EB8 /* MakeOrderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA992F182CF8CECE007B2EB8 /* MakeOrderController.swift */; };
-		FAA3DF252CFF061200AD6DA0 /* HotelModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA3DF242CFF061200AD6DA0 /* HotelModels.swift */; };
-		FAA3DF2C2CFF08E900AD6DA0 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA3DF2B2CFF08E900AD6DA0 /* HomeViewController.swift */; };
-		FAA3DF2E2CFF0A3800AD6DA0 /* GuestsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA3DF2D2CFF0A3800AD6DA0 /* GuestsViewModel.swift */; };
-		FAD97BE42D0937AB0001D9E8 /* RoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD97BE32D0937AB0001D9E8 /* RoomTableViewCell.swift */; };
 		FAF48E502CF9DF7200515D5D /* AlertLoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF48E4F2CF9DF7200515D5D /* AlertLoginController.swift */; };
 /* End PBXBuildFile section */
 
@@ -204,7 +192,6 @@
 		FA1627642CED78A500418ECD /* CALayer + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer + Extension.swift"; sourceTree = "<group>"; };
 		FA16E3742CF9F9D2001A8E7F /* SuccessController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessController.swift; sourceTree = "<group>"; };
 		FA2356542CCF2D8300BD685B /* PanGestureVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanGestureVC.swift; sourceTree = "<group>"; };
-		FA2830812D0138FF00E62D18 /* RoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomViewModel.swift; sourceTree = "<group>"; };
 		FA2B10872CB785690095CDB1 /* UIColor + Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor + Extension.swift"; sourceTree = "<group>"; };
 		FA2B108A2CB786EF0095CDB1 /* AlertMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertMessage.swift; sourceTree = "<group>"; };
 		FA2B108C2CB786EF0095CDB1 /* AlertErrorVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertErrorVC.swift; sourceTree = "<group>"; };
@@ -246,13 +233,6 @@
 		FA5C30FE2CF5CD45002ABA39 /* ScannerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerController.swift; sourceTree = "<group>"; };
 		FA612AAB2C787A23001E4365 /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
 		FA6D52D52C9A748F00710D93 /* PreventionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreventionVC.swift; sourceTree = "<group>"; };
-		FA739CCD2D00088C002100B5 /* GeustsListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeustsListController.swift; sourceTree = "<group>"; };
-		FA739CCF2D000E10002100B5 /* GeustController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeustController.swift; sourceTree = "<group>"; };
-		FA739CD12D003DCD002100B5 /* ReservationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationController.swift; sourceTree = "<group>"; };
-		FA739CD32D003FC5002100B5 /* ReservationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationCell.swift; sourceTree = "<group>"; };
-		FA739CD52D003FDC002100B5 /* ReservationListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationListViewController.swift; sourceTree = "<group>"; };
-		FA739CD72D004024002100B5 /* ReservationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationViewModel.swift; sourceTree = "<group>"; };
-		FA739CD92D0049CA002100B5 /* RoomListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomListViewController.swift; sourceTree = "<group>"; };
 		FA781D802CF7502600A167A1 /* WelcomeContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeContoller.swift; sourceTree = "<group>"; };
 		FA781D822CF750EC00A167A1 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		FA781D852CF7510B00A167A1 /* RegisterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
@@ -322,16 +302,12 @@
 		FA9FEC2A2CC76342008D421D /* TimerStartAndStop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerStartAndStop.swift; sourceTree = "<group>"; };
 		FAA16D3C2CDDA0B7004D1B97 /* MainTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTextField.swift; sourceTree = "<group>"; };
 		FAA16D3E2CDDAF82004D1B97 /* SSPaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSPaddingLabel.swift; sourceTree = "<group>"; };
-		FAA3DF242CFF061200AD6DA0 /* HotelModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelModels.swift; sourceTree = "<group>"; };
-		FAA3DF2B2CFF08E900AD6DA0 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		FAA3DF2D2CFF0A3800AD6DA0 /* GuestsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestsViewModel.swift; sourceTree = "<group>"; };
 		FAA80CF72CDC4D9C001A8EEA /* UINavigationController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController + Extension.swift"; sourceTree = "<group>"; };
 		FAA80CF92CDC4F81001A8EEA /* HtmlVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlVC.swift; sourceTree = "<group>"; };
 		FAAA11862CDFC01F00EA15E3 /* Notification + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification + Extension.swift"; sourceTree = "<group>"; };
 		FAB5D6402C6C3DA600A31A6F /* TitleWithValueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleWithValueTableViewCell.swift; sourceTree = "<group>"; };
 		FAB5D6442C6CB0E900A31A6F /* CheckmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckmarkView.swift; sourceTree = "<group>"; };
 		FAD0ABB42C992C0200608D7F /* Note + Read.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note + Read.swift"; sourceTree = "<group>"; };
-		FAD97BE32D0937AB0001D9E8 /* RoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomTableViewCell.swift; sourceTree = "<group>"; };
 		FAE400DD2C7D8CC4001D031F /* UIImageView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView + Extension.swift"; sourceTree = "<group>"; };
 		FAED81362CDB0A3800E5A2D5 /* SegmentedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedView.swift; sourceTree = "<group>"; };
 		FAEDA5732CD8C72D0031AB43 /* LocalNotificationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationVC.swift; sourceTree = "<group>"; };
@@ -700,7 +676,6 @@
 		FA494BBA2C6A08C40086D346 /* Feature + Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				FAA3DF1E2CFF05B600AD6DA0 /* Booking */,
 				FAA3DF292CFF07ED00AD6DA0 /* New Group */,
 			);
 			path = "Feature + Scenes";
@@ -911,65 +886,6 @@
 				FA88FD372CCCE1E400FD115B /* SplashScreenVC.swift */,
 			);
 			path = SplashScreen;
-			sourceTree = "<group>";
-		};
-		FAA3DF1E2CFF05B600AD6DA0 /* Booking */ = {
-			isa = PBXGroup;
-			children = (
-				FAA3DF212CFF05E800AD6DA0 /* ViewModels */,
-				FAA3DF202CFF05E200AD6DA0 /* Views */,
-				FAA3DF1F2CFF05D900AD6DA0 /* Models */,
-			);
-			path = Booking;
-			sourceTree = "<group>";
-		};
-		FAA3DF1F2CFF05D900AD6DA0 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				FAA3DF242CFF061200AD6DA0 /* HotelModels.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		FAA3DF202CFF05E200AD6DA0 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				FAA3DF232CFF05FB00AD6DA0 /* Cell */,
-				FAA3DF222CFF05F100AD6DA0 /* Controller */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		FAA3DF212CFF05E800AD6DA0 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				FAA3DF2D2CFF0A3800AD6DA0 /* GuestsViewModel.swift */,
-				FA739CD72D004024002100B5 /* ReservationViewModel.swift */,
-				FA2830812D0138FF00E62D18 /* RoomViewModel.swift */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		FAA3DF222CFF05F100AD6DA0 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				FAA3DF2B2CFF08E900AD6DA0 /* HomeViewController.swift */,
-				FA739CCD2D00088C002100B5 /* GeustsListController.swift */,
-				FA739CCF2D000E10002100B5 /* GeustController.swift */,
-				FA739CD12D003DCD002100B5 /* ReservationController.swift */,
-				FA739CD52D003FDC002100B5 /* ReservationListViewController.swift */,
-				FA739CD92D0049CA002100B5 /* RoomListViewController.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		FAA3DF232CFF05FB00AD6DA0 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				FA739CD32D003FC5002100B5 /* ReservationCell.swift */,
-				FAD97BE32D0937AB0001D9E8 /* RoomTableViewCell.swift */,
-			);
-			path = Cell;
 			sourceTree = "<group>";
 		};
 		FAA3DF292CFF07ED00AD6DA0 /* New Group */ = {
@@ -1325,7 +1241,6 @@
 				FA992E9E2CF8BE98007B2EB8 /* Endpoints.swift in Sources */,
 				FA8A2D1C2CFC72F500C06853 /* ChangePasswordController.swift in Sources */,
 				FA992E9F2CF8BE98007B2EB8 /* ApiManager.swift in Sources */,
-				FAA3DF252CFF061200AD6DA0 /* HotelModels.swift in Sources */,
 				FA992EA02CF8BE98007B2EB8 /* DebuggerRespose.swift in Sources */,
 				FA992EA12CF8BE98007B2EB8 /* Models_Local.swift in Sources */,
 				FA992EA22CF8BE98007B2EB8 /* CategoryCell.swift in Sources */,
@@ -1336,7 +1251,6 @@
 				FA992EA62CF8BE98007B2EB8 /* HomeController.swift in Sources */,
 				FA992EA72CF8BE98007B2EB8 /* ProductController.swift in Sources */,
 				FA992EA82CF8BE98007B2EB8 /* SettingController.swift in Sources */,
-				FA739CD42D003FC6002100B5 /* ReservationCell.swift in Sources */,
 				FA992EA92CF8BE98007B2EB8 /* SplashScreenController.swift in Sources */,
 				FA992EAA2CF8BE98007B2EB8 /* BVM_VIP_VC.swift in Sources */,
 				FA992EAB2CF8BE98007B2EB8 /* BVM_VIP_View.swift in Sources */,
@@ -1360,14 +1274,12 @@
 				FA992EBC2CF8BE98007B2EB8 /* DragDropCollectionVC.swift in Sources */,
 				FA992EBD2CF8BE98007B2EB8 /* ExpandedMultipleSectionCell.swift in Sources */,
 				FA992EBE2CF8BE98007B2EB8 /* ExspandTableVC.swift in Sources */,
-				FAD97BE42D0937AB0001D9E8 /* RoomTableViewCell.swift in Sources */,
 				FA992EBF2CF8BE98007B2EB8 /* ExspandSingleSectionVC.swift in Sources */,
 				FA992F152CF8C0B9007B2EB8 /* DatabaseManager.swift in Sources */,
 				FA992EC02CF8BE98007B2EB8 /* ExpandedMultipleSectionVC.swift in Sources */,
 				FA992EC12CF8BE98007B2EB8 /* GoogleMapsVC.swift in Sources */,
 				FA992F172CF8CA8F007B2EB8 /* ProductCell.swift in Sources */,
 				FA992EC22CF8BE98007B2EB8 /* SelfSizingViewController.swift in Sources */,
-				FAA3DF2E2CFF0A3800AD6DA0 /* GuestsViewModel.swift in Sources */,
 				FA992EC32CF8BE98007B2EB8 /* SplashScreenVC.swift in Sources */,
 				FA992EC42CF8BE98007B2EB8 /* TableHandlerVC.swift in Sources */,
 				FA992EC52CF8BE98007B2EB8 /* CollectionHandlerVC.swift in Sources */,
@@ -1379,13 +1291,11 @@
 				FA992ECB2CF8BE98007B2EB8 /* BoardTableViewCell.swift in Sources */,
 				FA992ECC2CF8BE98007B2EB8 /* BoardCollectionViewCell.swift in Sources */,
 				FA992ECD2CF8BE98007B2EB8 /* CenteringCellVC.swift in Sources */,
-				FA739CDA2D0049CA002100B5 /* RoomListViewController.swift in Sources */,
 				FA992ECE2CF8BE98007B2EB8 /* CardCell.swift in Sources */,
 				FA992ECF2CF8BE98007B2EB8 /* PreventionVC.swift in Sources */,
 				FA992ED02CF8BE98007B2EB8 /* ListViewController.swift in Sources */,
 				FA8F0B602CF9B2A60093B1F6 /* QRCodeController.swift in Sources */,
 				FA992ED12CF8BE98007B2EB8 /* DemoBottomSheetViewController.swift in Sources */,
-				FA739CD62D003FDC002100B5 /* ReservationListViewController.swift in Sources */,
 				FA992ED22CF8BE98007B2EB8 /* TableViewHandler.swift in Sources */,
 				FA992ED32CF8BE98007B2EB8 /* CollectionViewHandler.swift in Sources */,
 				FA16E3752CF9F9D2001A8E7F /* SuccessController.swift in Sources */,
@@ -1400,12 +1310,10 @@
 				FA992EDC2CF8BE98007B2EB8 /* RelativeLayoutUtilityClass.swift in Sources */,
 				FA992EDD2CF8BE98007B2EB8 /* TimerStartAndStop.swift in Sources */,
 				FA992EDE2CF8BE98007B2EB8 /* ContentSizedTableAndCollectionView.swift in Sources */,
-				FA739CCE2D00088C002100B5 /* GeustsListController.swift in Sources */,
 				FA992EDF2CF8BE98007B2EB8 /* AppConstants.swift in Sources */,
 				FA992EE02CF8BE98007B2EB8 /* ConstantsHeight.swift in Sources */,
 				FA992EE12CF8BE98007B2EB8 /* Language.swift in Sources */,
 				FA992EE22CF8BE98007B2EB8 /* SetupLanguage.swift in Sources */,
-				FA739CD02D000E10002100B5 /* GeustController.swift in Sources */,
 				FA992EE32CF8BE98007B2EB8 /* Enum.swift in Sources */,
 				FA992EE42CF8BE98007B2EB8 /* Models.swift in Sources */,
 				FA992EE52CF8BE98007B2EB8 /* Int + Extension.swift in Sources */,
@@ -1421,9 +1329,7 @@
 				FA992EED2CF8BE98007B2EB8 /* UIImage + Extension.swift in Sources */,
 				FA992EEE2CF8BE98007B2EB8 /* UIDevice + Extension.swift in Sources */,
 				FA992EEF2CF8BE98007B2EB8 /* UITableView + Extension.swift in Sources */,
-				FA739CD82D004024002100B5 /* ReservationViewModel.swift in Sources */,
 				FA992EF02CF8BE98007B2EB8 /* UIImageView + Extension.swift in Sources */,
-				FAA3DF2C2CFF08E900AD6DA0 /* HomeViewController.swift in Sources */,
 				FA992F192CF8CECE007B2EB8 /* MakeOrderController.swift in Sources */,
 				FA88F1712CF9BD0000B37C73 /* DashedLineView.swift in Sources */,
 				FA992EF12CF8BE98007B2EB8 /* UserDefaults + Extension.swift in Sources */,
@@ -1451,7 +1357,6 @@
 				FA992F052CF8BE98007B2EB8 /* MainPageVC.swift in Sources */,
 				FA992F062CF8BE98007B2EB8 /* MainButton.swift in Sources */,
 				FA992F072CF8BE98007B2EB8 /* MainTextField.swift in Sources */,
-				FA739CD22D003DCD002100B5 /* ReservationController.swift in Sources */,
 				FA992F082CF8BE98007B2EB8 /* SSPaddingLabel.swift in Sources */,
 				FA992F092CF8BE98007B2EB8 /* MoreView.swift in Sources */,
 				FA992F0A2CF8BE98007B2EB8 /* OneTimeCodeTextField.swift in Sources */,
@@ -1461,7 +1366,6 @@
 				FA992F0E2CF8BE98007B2EB8 /* CustomTabBarVC.swift in Sources */,
 				FA992F0F2CF8BE98007B2EB8 /* CustomTabBarCell.swift in Sources */,
 				FA992F102CF8BE98007B2EB8 /* AlertErrorVC.swift in Sources */,
-				FA2830822D0138FF00E62D18 /* RoomViewModel.swift in Sources */,
 				FA992F112CF8BE98007B2EB8 /* AlertMessage.swift in Sources */,
 				FA992F122CF8BE98007B2EB8 /* AlertInternetVC.swift in Sources */,
 				FA992F132CF8BE98007B2EB8 /* Note + Read.swift in Sources */,
