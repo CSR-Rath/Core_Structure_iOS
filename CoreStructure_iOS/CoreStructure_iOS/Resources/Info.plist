@@ -17,7 +17,7 @@
 			<string>myApp</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>myapp://some/path</string>
+				<string>myapp</string>
 			</array>
 		</dict>
 		<dict/>

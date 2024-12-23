@@ -17,23 +17,23 @@ struct TitleIconModel{
 class CustomTabBarVC: UITabBarController {
     
     private let dataList : [TitleIconModel] = [
-    
         TitleIconModel(name: "VC", iconName: ""),
         TitleIconModel(name: "Package", iconName: ""),
         TitleIconModel(name: "Padding", iconName: ""),
         TitleIconModel(name: "Find", iconName: ""),
-
     ]
 
     var indexSelected: Int = 0{
         didSet{
-            self.selectedIndex = indexSelected
-            collactionView.reloadData()
+            
+            print("indexSelected ==>\(indexSelected)")
+            
             // Update the title based on the selected index
-            self.title = viewControllers?[indexSelected].title
+            title = viewControllers?[indexSelected].title
+            selectedIndex = indexSelected
+            collactionView.reloadData()
         }
     }
-    
     
     
     lazy var collactionView: UICollectionView = {
@@ -49,10 +49,27 @@ class CustomTabBarVC: UITabBarController {
     }()
     
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false // disable
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true // enable
+    }
+    
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+    }
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .white
+    
         let firstVC = DemoFeatureVC()
         firstVC.title =  "goodbye_message".localizeString()//"Demo Feature"
         
@@ -63,19 +80,15 @@ class CustomTabBarVC: UITabBarController {
         threeVC.title = "Hello 3"
         
         let fourtVC = FourViewController()
+        fourtVC.view.backgroundColor = .orange
         fourtVC.title = "Hello 4"
         
         viewControllers = [firstVC, secondVC, threeVC, fourtVC]
         
        title = viewControllers?[indexSelected].title?.localizeString()
-    }
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .white
-        leftBarButton()
+        
         setupConstraintAndSetupController()
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -90,6 +103,7 @@ class CustomTabBarVC: UITabBarController {
             layout.itemSize = CGSize(width: itemWidth, height: itemHeight)
             layout.invalidateLayout()
         }
+        
     }
     
     //MARK: Handle Setup ViewController
@@ -130,14 +144,7 @@ extension CustomTabBarVC:  UICollectionViewDelegate, UICollectionViewDataSource 
         
         cell.lblTitle.text = dataList[indexPath.item].name
         
-        
-        UIView.animate(withDuration: 0.3, animations: {
-//            cell.imgIcon.image = item.selectedImage?.withTintColor(.white) // Change color if needed
-//            item.image = item.selectedImage?.withRenderingMode(.alwaysOriginal)
-        }, completion: nil)
-        
         if indexSelected  == indexPath.item {
-            
             configureSelectedCell(cell)
         } else {
             configureDeselectedCell(cell)

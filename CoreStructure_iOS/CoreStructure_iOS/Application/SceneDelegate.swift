@@ -16,14 +16,42 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         
-        let loginSuccesFull = UserDefaults.standard.bool(forKey: KeyUser.loginSuccesFull)
-
-        //MARK: - Check loginSuccesFull 
-        let controller: UIViewController = DemoFeatureVC()
+        let controller: UIViewController = SplashScreenVC()
         let navigation = UINavigationController(rootViewController: controller)
         window?.rootViewController = navigation
         window?.makeKeyAndVisible()
     }
+    
+}
+
+
+
+//MARK: - Handle change root controller
+extension SceneDelegate {
+    
+    private func changeRootViewController(_ vc: UIViewController, animated: Bool = false) {
+        guard let window = self.window else { return }
+        
+        let navigation = UINavigationController(rootViewController: vc) // Create a navigation controller with the new root view controller
+        
+        window.rootViewController = navigation  // Set the root view controller without animation
+        
+        window.makeKeyAndVisible() // Make the window key and visible
+    }
+    
+    func gotoTabBar(indexSelected: Int = 0){
+        
+        let  tabBarController = CustomTabBarVC() // Replace with your custom tab bar controller
+        tabBarController.indexSelected = indexSelected
+        
+        // Get the current scene delegate
+        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+            sceneDelegate.changeRootViewController(tabBarController)
+        }else{
+            print("error changeRootViewController")
+        }
+    }
+    
 }
 
 
@@ -32,21 +60,22 @@ extension SceneDelegate{
     func sceneDidDisconnect(_ scene: UIScene) {
         print("sceneDidDisconnect")
     }
-
+    
     func sceneDidBecomeActive(_ scene: UIScene) {
         print("sceneDidBecomeActive")
     }
-
+    
     func sceneWillResignActive(_ scene: UIScene) {
         print("sceneWillResignActive")
     }
-
+    
     func sceneWillEnterForeground(_ scene: UIScene) {
         print("sceneWillEnterForeground")
     }
-
+    
     func sceneDidEnterBackground(_ scene: UIScene) {
         print("sceneDidEnterBackground")
     }
-
+    
 }
+

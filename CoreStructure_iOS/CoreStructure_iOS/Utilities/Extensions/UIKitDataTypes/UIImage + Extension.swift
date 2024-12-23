@@ -10,7 +10,6 @@ import UIKit
 //MARK: Set circle imageview
 extension UIImage {
     
-    
     //សមាមាត្រ
     func getImageRatio(view: UIView ) -> CGFloat {
         let imageRatio = CGFloat(self.size.width / self.size.height)

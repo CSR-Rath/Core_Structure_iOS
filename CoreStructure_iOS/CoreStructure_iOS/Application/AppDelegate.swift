@@ -20,10 +20,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         //MARK: - Handle font navigation bar
     
-        
         handleNavicationTitle() // title navigation bar
         configureNotification()  // push notification 2 local
         print("didFinishLaunchingWithOptions") //AIzaSyBApx6bA_YNHU8zL_XBrpSI10wol9EBVsA
+
+        
+        
+        
         return true
     }
     
@@ -38,7 +41,80 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("didDiscardSceneSessions")
     }
     
+    
+ 
 }
+
+
+// MARK: - Handle Deep Link
+extension AppDelegate{
+    
+    // Step create deep link
+     /// 1 - click project --> target --> info -->  URL Type  -->  URL  scheme  --> set url for open it (Example: testingApp) (when open use  ====> testingApp://)
+     /// 2 - next add func below
+    ///
+    
+    // it still working when comment all this code
+    
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        
+//    myapp://path/to/content?id=123
+        guard let url = userActivity.webpageURL else {
+            return false
+        }
+
+        // Handle the URL similar to the URL scheme
+        let path = url.path
+        if path == "/path/to/content" {
+            if let id = url.queryParameters?["id"] {
+                navigateToContent(withId: id)
+            }
+        }
+
+        return true
+    }
+    
+    private func navigateToContent(withId id: String) {
+        
+        print("navigateToContent(withId id: String)")
+
+    }
+    
+    
+    // MARK: - Handle when call from enother App use Deep Link (Open this app)
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        
+//        if let url =  URL(string: "myapp://") {
+//            
+//            DispatchQueue.main.async {
+//                UIApplication.shared.open(url, options: [:]) { success in
+//                    print("Deep Link \(success)")
+//                    if !success {
+//                        UIApplication.shared.open(url, options: [:]) { success in
+//                            print("Deep Link to AppStore \(success)")
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
+    
+}
+
+
+
+// Extension to parse query parameters
+extension URL {
+    var queryParameters: [String: String]? {
+        guard let components = URLComponents(url: self, resolvingAgainstBaseURL: false),
+              let queryItems = components.queryItems else { return nil }
+        return queryItems.reduce(into: [String: String]()) { dict, item in
+            dict[item.name] = item.value
+        }
+    }
+}
+
+
 
 
 // MARK: - HAndle Deep Line
@@ -132,7 +208,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         let userInfo = notification.request.content.userInfo
         
         print("userInfo ==> \(userInfo)")
-        
+        updateBadgeCount()
         
         completionHandler([.alert, .sound, .badge])
     }
@@ -145,13 +221,20 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         
         print("userInfo: \(userInfo)")
     
-
+         let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
         // Get the current view controller
-        guard let window = UIApplication.shared.keyWindow,
-              let rootViewController = window.rootViewController else {
+//        guard let window = UIApplication.shared.keyWindow,
+//              let rootViewController = window.rootViewController else {
+//            completionHandler()
+//            return
+//        }
+        
+        guard let window = sceneDelegate?.window , let rootViewController = sceneDelegate?.window?.rootViewController else{
             completionHandler()
             return
         }
+        
+        
         
         let targetViewController = UIViewController()
         targetViewController.view.backgroundColor = .white
@@ -174,7 +257,25 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         completionHandler()
         
     }
+    
+    
+    func updateBadgeCount() { // handle badge notificaation on the app icon
+        // Badge sayısını güncelle
+        DispatchQueue.main.async {
+            UIApplication.shared.applicationIconBadgeNumber += 1
+        }
+    }
 }
+
+
+
+
+
+
+
+
+
+
 
 
 var config: Realm.Configuration!

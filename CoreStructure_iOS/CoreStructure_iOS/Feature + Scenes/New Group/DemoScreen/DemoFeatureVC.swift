@@ -14,11 +14,9 @@ struct ListModel{
 }
 //"goodbye_message".localizeString()
 
-class DemoFeatureVC: UIViewController, UIGestureRecognizerDelegate {
+class DemoFeatureVC: UIViewController {
     
     private var tableView: UITableView! = nil
-    
-    //    private var dataTable : TableViewHandler<CustomTableViewCell, Any>!
     
     
     let items : [ListModel] = [
@@ -44,8 +42,6 @@ class DemoFeatureVC: UIViewController, UIGestureRecognizerDelegate {
         ListModel(id: 18, name: "SectionedTableViewController", viewController: DragDropTableViewCellContoler()),
         ListModel(id: 18, name: "SectionedTableViewController", viewController: ScannerController()),
         
-        
-        
     ]
 
     
@@ -59,14 +55,21 @@ class DemoFeatureVC: UIViewController, UIGestureRecognizerDelegate {
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+//        navigationController?.interactivePopGestureRecognizer?.isEnabled = false //unable  prevent popGestureRecognizer
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+//        navigationController?.interactivePopGestureRecognizer?.isEnabled = true //enable prevent popGestureRecognizer
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupConstraint()
-        //Enable back swipe gesture
-        navigationController?.interactivePopGestureRecognizer?.delegate = self
-        
     }
     
     private func setupConstraint(){

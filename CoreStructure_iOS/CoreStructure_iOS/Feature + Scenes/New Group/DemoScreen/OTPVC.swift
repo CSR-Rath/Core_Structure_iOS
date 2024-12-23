@@ -12,12 +12,17 @@ class OTPVC: UIViewController, UIGestureRecognizerDelegate {
     
     var btnClear = MainButton()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .white
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         //Enable back swipe gesture
         navigationController?.interactivePopGestureRecognizer?.delegate = self
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .white
         
         codeTxt = OneTimeCodeTextField()
         

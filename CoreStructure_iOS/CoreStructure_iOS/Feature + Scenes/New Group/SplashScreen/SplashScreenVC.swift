@@ -67,18 +67,14 @@ extension SplashScreenVC{
         
     }
     
-    
-    @objc private func didTappedButton(sender: UIButton){
-         
-        if sender.tag == 0 {
-            let tabbar = CustomTabBarVC()
-         
-            self.navigationController?.pushViewController(tabbar, animated: true)
-        }else{
-            let tabbar = OriginalTabBarVC()
-           
-            self.navigationController?.pushViewController(tabbar, animated: true)
-        }
-     }
+    @objc private func didTappedButton(sender: UIButton) {
+        
+        SceneDelegate().gotoTabBar(indexSelected: 3)
+
+    }
     
 }
+
+
+
+

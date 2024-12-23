@@ -1349,7 +1349,7 @@
 				DEVELOPMENT_TEAM = HCSG6K6N58;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CoreStructure_iOS/Resources/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "$(Bundle_display_name)";
+				INFOPLIST_KEY_CFBundleDisplayName = Testing;
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires access to the camera to allow you to take photos and record videos.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app requires access to your photo library to save captured images.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1455,7 +1455,7 @@
 				DEVELOPMENT_TEAM = HCSG6K6N58;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CoreStructure_iOS/Resources/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "$(Bundle_display_name)";
+				INFOPLIST_KEY_CFBundleDisplayName = Testing;
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires access to the camera to allow you to take photos and record videos.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app requires access to your photo library to save captured images.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1561,7 +1561,7 @@
 				DEVELOPMENT_TEAM = HCSG6K6N58;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CoreStructure_iOS/Resources/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "$(Bundle_display_name)";
+				INFOPLIST_KEY_CFBundleDisplayName = Testing;
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires access to the camera to allow you to take photos and record videos.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app requires access to your photo library to save captured images.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

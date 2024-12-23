@@ -8,18 +8,7 @@
 import Foundation
 import UIKit
 
-func setLanguage(langCode: String) {
-    UserDefaults.standard.setValue(langCode, forKey: KeyUser.language)
-}
 
-extension String {
-    func localizeString() -> String {
-        let lang = UserDefaults.standard.string(forKey: KeyUser.language)
-        let path = Bundle.main.path(forResource: lang, ofType: "lproj")
-        let bundle = Bundle(path: path!)
-        return NSLocalizedString(self, tableName: nil, bundle: bundle!, value: "", comment: "")
-    }
-}
 
 class SideMenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     

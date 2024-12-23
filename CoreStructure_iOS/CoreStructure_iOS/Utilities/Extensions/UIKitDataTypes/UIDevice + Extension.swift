@@ -8,33 +8,21 @@
 import Foundation
 import UIKit
 
+import UIKit
+
 extension UIDevice {
     
-    static func isLandscape() -> Bool{
-            if UIDevice.current.orientation.isLandscape {
-                return true
-            }else{
-                return false
-            }
-        }
-    
-    static func iPhone()->Bool{
-        if UIDevice.current.userInterfaceIdiom == .phone{
-            return true
-        }else{
-            return false
-        }
+    static func isLandscape() -> Bool {
+        return UIDevice.current.orientation.isLandscape
     }
     
-    static func iPaid()->Bool{
-        if UIDevice.current.userInterfaceIdiom == .pad{
-            return true
-        }else{
-            return false
-        }
+    static func isIPhone() -> Bool {
+        return UIDevice.current.userInterfaceIdiom == .phone
     }
     
+    static func isIPad() -> Bool {
+        return UIDevice.current.userInterfaceIdiom == .pad
+    }
 }
-
 
 

@@ -9,7 +9,30 @@ import Foundation
 import UIKit
 
 
-//MARK: - how to use it
+//MARK: ==================== Handle localize ====================
+
+func setLanguage(langCode: String) {
+    UserDefaults.standard.setValue(langCode, forKey: KeyUser.language)
+}
+
+extension String {
+    
+    func localizeString() -> String {
+        let lang = UserDefaults.standard.string(forKey: KeyUser.language)
+        let path = Bundle.main.path(forResource: lang, ofType: "lproj")
+        let bundle = Bundle(path: path!)
+        return NSLocalizedString(self, tableName: nil, bundle: bundle!, value: "", comment: "")
+    }
+    
+}
+
+//MARK: ==================== End handle localize ====================
+
+
+
+
+//MARK: ==================== Handle webview ====================
+
 //lazy var descriptionLbl: UITextView = {
 //    let textView = UITextView()
 //    textView.translatesAutoresizingMaskIntoConstraints = false
@@ -23,8 +46,7 @@ import UIKit
 //    return textView
 //}()
 
-//MAR: HTML to string
-extension String{
+extension String{ // HTML to string
     
     var htmlToAttributedString: NSAttributedString? {
         
@@ -61,3 +83,4 @@ extension String{
     
 }
 
+//MARK: ==================== End handle webview ====================

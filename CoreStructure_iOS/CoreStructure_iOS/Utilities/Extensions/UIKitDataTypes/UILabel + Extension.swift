@@ -11,7 +11,7 @@ import UIKit
 
 extension UILabel {
     /// Adjusts the label's width to fit its content in a stack view.
-    func autoWidthInStack() {
+    func adjustLabelSizeToFitContent() { // auto with label in the Stack
         // Set horizontal hugging and compression resistance priorities to required
         self.setContentHuggingPriority(.required, for: .horizontal)
         self.setContentCompressionResistancePriority(.required, for: .horizontal)
