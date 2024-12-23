@@ -9,6 +9,8 @@ import Foundation
 //MARK: - Get from info
 class AppConfiguration {
     
+   let a = SceneDelegate.shared.window
+    
     static let shared = AppConfiguration()
     
     lazy var apiKey: String = {

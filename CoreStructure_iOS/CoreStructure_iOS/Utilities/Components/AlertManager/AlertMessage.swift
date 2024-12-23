@@ -95,13 +95,13 @@ class AlertMessage{
             
             Loading.shared.hideLoading()
             
-            if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-                sceneDelegate.window?.rootViewController?.present(bottomSheetVC,
-                                                                  animated: true,
-                                                                  completion: {
-                    
-                })
+            guard let window = SceneDelegate.shared.sceneDelegate?.window else{
+                return
             }
+    
+            window.rootViewController?.present(bottomSheetVC, animated: true, completion: {
+                print("Present completion")
+            })
         }
     }
 }

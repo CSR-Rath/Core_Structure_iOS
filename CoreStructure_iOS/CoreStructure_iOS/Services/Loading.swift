@@ -33,15 +33,11 @@ class Loading : UIView {
 
         DispatchQueue.main.async { [self] in
             
-            
-            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
-                return
-            }
 
-            guard let window = windowScene.windows.first else {
+            guard let window = SceneDelegate.shared.sceneDelegate?.window else{
                 return
             }
-            
+    
             self.frame = window.bounds
             window.addSubview(self)
             

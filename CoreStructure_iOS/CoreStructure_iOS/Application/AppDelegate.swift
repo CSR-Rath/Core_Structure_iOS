@@ -11,7 +11,7 @@ import RealmSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         setLanguage(langCode: "en") // default language en
@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         handleNavicationTitle() // title navigation bar
         configureNotification() // push notification 2 local
         print("didFinishLaunchingWithOptions") //AIzaSyBApx6bA_YNHU8zL_XBrpSI10wol9EBVsA
-
+        
         return true
     }
     
@@ -29,33 +29,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("configurationForConnecting")
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
-
+    
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
         print("didDiscardSceneSessions")
     }
     
-    
- 
 }
 
+//MARK: =================================== End AppDelegate ===================================
 
-// MARK: - Handle Deep Link
+
+
+
+
+// MARK: =============================== Start Handle Deep Link ================================
 extension AppDelegate{
     
     // Step create deep link
-     /// 1 - click project --> target --> info -->  URL Type  -->  URL  scheme  --> set url for open it (Example: testingApp) (when open use  ====> testingApp://)
-     /// 2 - next add func below
+    /// 1 - click project --> target --> info -->  URL Type  -->  URL  scheme  --> set url for open it (Example: testingApp) (when open use  ====> testingApp://)
+    /// 2 - next add func below
     ///
     
     // it still working when comment all this code
     
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         
-//    myapp://path/to/content?id=123
-        guard let url = userActivity.webpageURL else {
+        guard let url = userActivity.webpageURL else { //    myapp://path/to/content?id=123
             return false
         }
-
+        
         // Handle the URL similar to the URL scheme
         let path = url.path
         if path == "/path/to/content" {
@@ -63,38 +65,36 @@ extension AppDelegate{
                 navigateToContent(withId: id)
             }
         }
-
+        
         return true
     }
     
     private func navigateToContent(withId id: String) {
         
         print("navigateToContent(withId id: String)")
-
+        
     }
     
     
     // MARK: - Handle when call from another App use Deep Link (Open this app)
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        
-//        if let url =  URL(string: "myapp://") {
-//            
-//            DispatchQueue.main.async {
-//                UIApplication.shared.open(url, options: [:]) { success in
-//                    print("Deep Link \(success)")
-//                    if !success {
-//                        UIApplication.shared.open(url, options: [:]) { success in
-//                            print("Deep Link to AppStore \(success)")
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    }
+    //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    //
+    //        if let url =  URL(string: "myapp://") {
+    //
+    //            DispatchQueue.main.async {
+    //                UIApplication.shared.open(url, options: [:]) { success in
+    //                    print("Deep Link \(success)")
+    //                    if !success {
+    //                        UIApplication.shared.open(url, options: [:]) { success in
+    //                            print("Deep Link to AppStore \(success)")
+    //                        }
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
     
 }
-
-
 
 // Extension to parse query parameters
 extension URL {
@@ -107,82 +107,59 @@ extension URL {
     }
 }
 
+// MARK: =============================== End Handle Deep Link ===================================
 
 
+// MARK: =============================== Start Handle navigation contoller =======================
 
-// MARK: - HAndle Deep Line
 extension AppDelegate{
-    
-   
-    private func handleIncomingURL(_ url: URL) {
-        // Parse the URL and navigate accordingly
-        let urlString = url.absoluteString
-        print("Received URL: \(urlString)")
-
-        // Example: Handle a specific path
-        if urlString.contains("some/path") {
-            // Navigate to the specific view controller
-            // You can use a NotificationCenter or a delegate to inform your view controller
-        }
-    }
-
-    
-    
-}
-
-
-
-//MARK: Handle navigation contoller
-extension AppDelegate{
-    
     
     private func handleNavicationTitle(){
         let font = UIFont.systemFont(ofSize: 18, weight: .medium)
-         
-         let titleAttribute = [
-             NSAttributedString.Key.font: font,
-             NSAttributedString.Key.foregroundColor: UIColor.white
-             
-         ]
-
+        
+        let titleAttribute = [
+            NSAttributedString.Key.font: font,
+            NSAttributedString.Key.foregroundColor: UIColor.white
+            
+        ]
+        
         UINavigationBarAppearance().titleTextAttributes = titleAttribute as [NSAttributedString.Key : Any]
         
     }
     
-   private func setupTitleNavigationBar(font: UIFont? = UIFont.systemFont(ofSize: 17, weight: .regular),
-                                 titleColor: UIColor = .white){
+    private func setupTitleNavigationBar(font: UIFont? = UIFont.systemFont(ofSize: 17, weight: .regular),
+                                         titleColor: UIColor = .white){
         
         let titleAttribute = [
             NSAttributedString.Key.font: font,
             NSAttributedString.Key.foregroundColor: titleColor
         ]
-       
-       let appearance = UINavigationBarAppearance()
-       appearance.configureWithOpaqueBackground()
-       appearance.shadowColor = .mainBlueColor
- 
-       appearance.backgroundColor = .mainBlueColor
-       appearance.titleTextAttributes = titleAttribute as [NSAttributedString.Key : Any]
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.shadowColor = .mainBlueColor
+        
+        appearance.backgroundColor = .mainBlueColor
+        appearance.titleTextAttributes = titleAttribute as [NSAttributedString.Key : Any]
         
         
-       UINavigationBar.appearance().standardAppearance = appearance
-       UINavigationBar.appearance().scrollEdgeAppearance = appearance
-       UINavigationBar.appearance().tintColor = .white
+        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        UINavigationBar.appearance().tintColor = .white
         
-       UINavigationBar.appearance().backItem?.title = ""
-
+        UINavigationBar.appearance().backItem?.title = ""
+        
     }
 }
 
+// MARK: =============================== End Handle navigation contoller =========================
 
 
 
-//firebase //https://github.com/firebase/firebase-ios-sdk
-
-
-//MARK: Setup Push Notification Local
+// MARK: =============================== Start Setup Push Notification ============================
 extension AppDelegate: UNUserNotificationCenterDelegate {
     
+    // Request notification
     private func configureNotification(){
         // Request user authorization for notifications
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
@@ -193,111 +170,89 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     }
     
     
-    // Handle the display of notifications while the app is in the foreground
+    // Will loading notification
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        // Customize the presentation options as needed
-//        completionHandler([.alert, .sound])
+        Loading.shared.hideLoading()
         
-        let userInfo = notification.request.content.userInfo
+        updateBadgeIncrease() // call increase badge notivication
         
-        print("userInfo ==> \(userInfo)")
-        updateBadgeCount()
+        // Handle the notification
+        let userInfo = notification.request.content.userInfo;  print("userInfo ==> \(userInfo)")
         
-        completionHandler([.alert, .sound, .badge])
+        completionHandler([.list, .banner, .sound])
+
     }
     
-    // Handle the user's response to the notification (e.g., tapping on it) tapped on notification
+    // didSelected notification
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        // Handle the response as needed
-        // Handle the notification response here
-        let userInfo = response.notification.request.content.userInfo
         
-        print("userInfo: \(userInfo)")
-    
-        guard  let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate,
-               let window = sceneDelegate.window,
-               let rootViewController = sceneDelegate.window?.rootViewController  else{
-           
-            completionHandler()
+      
+        // Handle the notification response here
+        let userInfo = response.notification.request.content.userInfo; print("userInfo: \(userInfo)")
+        
+       
+        
+        guard let window = SceneDelegate.shared.sceneDelegate?.window,
+              let navigationController = window.rootViewController as? UINavigationController  else{
             
+            print("Error: Unable to access window or root view controller.")
+            
+            completionHandler()
             return
         }
         
-        
-        
         let targetViewController = UIViewController()
-        targetViewController.view.backgroundColor = .white
-      
+        targetViewController.view.backgroundColor = .red
+        navigationController.pushViewController(targetViewController, animated: false)
         
-        // Push the target view controller onto the navigation stack
-        if let navigationController = rootViewController as? UINavigationController {
-            
-            print("navigationController ===>")
-            
-            navigationController.pushViewController(targetViewController, animated: false)
-      
-        } else {
-            
-            print("else navigationController ===>")
-            
-            let navigationController = UINavigationController(rootViewController: targetViewController)
-            window.rootViewController = navigationController
-        }
-        
-        // Call the completion handler when you're done processing the notification
-        completionHandler()
+        completionHandler() // Call the completion handler when you're done processing the notification
         
     }
     
     
-    func updateBadgeCount() { // handle badge notificaation on the app icon
-        // Badge sayısını güncelle
-        DispatchQueue.main.async {
+    func updateBadgeIncrease() { // handle badge notificaation on the app icon
+        
+        DispatchQueue.main.async {  // Badge sayısını güncelle
             UIApplication.shared.applicationIconBadgeNumber += 1
         }
     }
+    
 }
 
+// MARK: =============================== End Setup Push Notification ==============================
 
 
-
-
-
-
-
-
-
-
+// MARK: =============================== Start Hanlde Realm Swift =================================
 
 var config: Realm.Configuration!
 var realm: Realm!
 
 func handleConfigurationRealmSwift(){
-
+    
     let servion: UInt64 = 114
-       config = Realm.Configuration(
-          schemaVersion: servion,
-          migrationBlock: { migration, oldSchemaVersion in
-              
-              switch oldSchemaVersion{
-                  
-              case 0..<2:
-                  
-                 break
-              case 2..<3:
-                  
-                 break
-              case 3..<4:
-                  
-                 break
-              default:
-                  break
-              }
-          }
-      )
-      
-      Realm.Configuration.defaultConfiguration = config
-
+    config = Realm.Configuration(
+        schemaVersion: servion,
+        migrationBlock: { migration, oldSchemaVersion in
+            
+            switch oldSchemaVersion{
+                
+            case 0..<2:
+                
+                break
+            case 2..<3:
+                
+                break
+            case 3..<4:
+                
+                break
+            default:
+                break
+            }
+        }
+    )
+    
+    Realm.Configuration.defaultConfiguration = config
+    
     do {
         realm = try Realm(configuration: config)
         print("Realm file location: \(realm.configuration.fileURL?.path ?? "Unknown")")
@@ -305,3 +260,5 @@ func handleConfigurationRealmSwift(){
         print("Error initializing Realm: \(error.localizedDescription)")
     }
 }
+
+// MARK: =============================== End Hanlde Realm Swift ===================================

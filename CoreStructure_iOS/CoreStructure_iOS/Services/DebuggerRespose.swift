@@ -97,9 +97,15 @@ class DebuggerRespose {
         let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alert.addAction(action)
         
-        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-            sceneDelegate.window?.rootViewController?.present(alert, animated: true)
+        guard let window = SceneDelegate.shared.sceneDelegate?.window else{
+            return
         }
+        
+        window.rootViewController?.present(alert, animated: true)
+        
+//        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+//            sceneDelegate.window?.rootViewController?.present(alert, animated: true)
+//        }
     }
 }
 

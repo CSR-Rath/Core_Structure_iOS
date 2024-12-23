@@ -9,12 +9,15 @@ import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
+    static let shared = SceneDelegate()
+    
     var window: UIWindow?
+    let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        window = UIWindow(windowScene: windowScene)
+         window = UIWindow(windowScene: windowScene)
         
         let controller: UIViewController = SplashScreenVC()
         let navigation = UINavigationController(rootViewController: controller)
@@ -24,19 +27,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
 }
 
-
-
 //MARK: - Handle change root controller
 extension SceneDelegate {
     
     private func changeRootViewController(_ vc: UIViewController, animated: Bool = false) {
-        guard let window = self.window else { return }
-        
-        let navigation = UINavigationController(rootViewController: vc) // Create a navigation controller with the new root view controller
-        
-        window.rootViewController = navigation  // Set the root view controller without animation
-        
-        window.makeKeyAndVisible() // Make the window key and visible
+//        guard let window = self.window else { return }
+//        
+//        let navigation = UINavigationController(rootViewController: vc) // Create a navigation controller with the new root view controller
+//        
+//        window.rootViewController = navigation  // Set the root view controller without animation
+//        
+//        window.makeKeyAndVisible() // Make the window key and visible
     }
     
     func gotoTabBar(indexSelected: Int = 0){
@@ -45,7 +46,7 @@ extension SceneDelegate {
         tabBarController.indexSelected = indexSelected
         
         // Get the current scene delegate
-        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+        if let sceneDelegate = sceneDelegate {
             sceneDelegate.changeRootViewController(tabBarController)
         }else{
             print("error changeRootViewController")
@@ -53,7 +54,6 @@ extension SceneDelegate {
     }
     
 }
-
 
 extension SceneDelegate{
     

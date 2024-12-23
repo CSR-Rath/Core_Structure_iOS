@@ -53,6 +53,7 @@ class LocalNotificationVC: UIViewController, UIGestureRecognizerDelegate {
     @objc private func didTappedButtonPush(){
         print("didTappedButtonPush")
         self.scheduleLocalNotification(body: "Testing")
+        Loading.shared.showLoading()
     }
     
     //       func scheduleLocalNotification(body: String = "") {
@@ -83,7 +84,7 @@ class LocalNotificationVC: UIViewController, UIGestureRecognizerDelegate {
         content.body = body.isEmpty ? "500.00$ ទទួលបានក្នុងគណនី XXX XXX XXX" : body // Use the passed body or a default message (body default: testing)
         content.sound = UNNotificationSound.default
         
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false) // 60 seconds for testing
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false) // 60 seconds for testing
         
         let request = UNNotificationRequest(identifier: "scheduledNotification", content: content, trigger: trigger)
         
