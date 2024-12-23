@@ -41,7 +41,7 @@ extension SceneDelegate {
     
     func gotoTabBar(indexSelected: Int = 0){
         
-        let  tabBarController = CustomTabBarVC() // Replace with your custom tab bar controller
+        let tabBarController = CustomTabBarVC() // Replace with your custom tab bar controller
         tabBarController.indexSelected = indexSelected
         
         // Get the current scene delegate

@@ -17,21 +17,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setLanguage(langCode: "en") // default language en
         handleConfigurationRealmSwift()
         
-
         //MARK: - Handle font navigation bar
-    
         handleNavicationTitle() // title navigation bar
-        configureNotification()  // push notification 2 local
+        configureNotification() // push notification 2 local
         print("didFinishLaunchingWithOptions") //AIzaSyBApx6bA_YNHU8zL_XBrpSI10wol9EBVsA
 
-        
-        
-        
         return true
     }
     
-  
-
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         print("configurationForConnecting")
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
@@ -221,16 +214,12 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         
         print("userInfo: \(userInfo)")
     
-         let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
-        // Get the current view controller
-//        guard let window = UIApplication.shared.keyWindow,
-//              let rootViewController = window.rootViewController else {
-//            completionHandler()
-//            return
-//        }
-        
-        guard let window = sceneDelegate?.window , let rootViewController = sceneDelegate?.window?.rootViewController else{
+        guard  let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate,
+               let window = sceneDelegate.window,
+               let rootViewController = sceneDelegate.window?.rootViewController  else{
+           
             completionHandler()
+            
             return
         }
         
@@ -244,11 +233,13 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         if let navigationController = rootViewController as? UINavigationController {
             
             print("navigationController ===>")
+            
             navigationController.pushViewController(targetViewController, animated: false)
       
         } else {
             
             print("else navigationController ===>")
+            
             let navigationController = UINavigationController(rootViewController: targetViewController)
             window.rootViewController = navigationController
         }
