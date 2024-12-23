@@ -8,6 +8,7 @@
 import UIKit
 
 
+//ត្រីកោណកែង
 class TriangleView: UIView {
 
     override func draw(_ rect: CGRect) {
@@ -27,4 +28,5 @@ class TriangleView: UIView {
         UIColor.white.setFill() // You can change the color
         path.fill()
     }
+    
 }

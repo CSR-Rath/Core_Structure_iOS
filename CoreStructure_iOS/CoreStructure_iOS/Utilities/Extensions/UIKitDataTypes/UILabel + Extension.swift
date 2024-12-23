@@ -9,11 +9,14 @@ import Foundation
 import UIKit
 
 
-extension UILabel{
-    func autoWidthInstack(){
-        //Set auto width in stack
+extension UILabel {
+    /// Adjusts the label's width to fit its content in a stack view.
+    func autoWidthInStack() {
+        // Set horizontal hugging and compression resistance priorities to required
         self.setContentHuggingPriority(.required, for: .horizontal)
         self.setContentCompressionResistancePriority(.required, for: .horizontal)
+        
+        // Resize the label to fit its content
         self.sizeToFit()
     }
 }

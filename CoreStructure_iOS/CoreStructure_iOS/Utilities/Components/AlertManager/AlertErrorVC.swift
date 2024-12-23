@@ -63,7 +63,6 @@ class AlertErrorVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .black.withAlphaComponent(0.3)
         setupView()
         addPanGesture()
         closeButton.addTarget(self, action: #selector(close), for: .touchUpInside)
@@ -72,21 +71,7 @@ class AlertErrorVC: UIViewController {
     }
     
     private func setupView() {
-        
-        closeButton.alpha = 0
-        contentView.alpha = 0
-        
-        UIView.animate(withDuration: 0.5, animations: { [self] in
-            closeButton.alpha = 1
-            contentView.alpha = 1
-            
-            contentView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
-            closeButton.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
-        }) { [self] _ in
-            contentView.transform = .identity
-            closeButton.transform = .identity
 
-        }
         
         view.addSubview(contentView)
         contentView.addSubview(imgCenter)

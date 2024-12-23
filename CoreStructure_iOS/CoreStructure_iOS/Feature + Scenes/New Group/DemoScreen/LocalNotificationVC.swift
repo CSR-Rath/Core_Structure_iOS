@@ -68,19 +68,3 @@ class LocalNotificationVC: UIViewController, UIGestureRecognizerDelegate {
    }
 
 
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        super.touchesBegan(touches, with: event)
-//        
-//        
-//    }
-//    
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        view.backgroundColor = .white
-//
-//        // Do any additional setup after loading the view.
-//    }
-//    
-//
-//
-//}

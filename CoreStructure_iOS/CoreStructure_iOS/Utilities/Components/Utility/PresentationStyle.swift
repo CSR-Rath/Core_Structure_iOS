@@ -18,7 +18,6 @@ func usingPresentationController( controller: UIViewController) {
     controller.present(vc, animated: true) {
         
     }
-    
 }
 
 let presentVC = PresentationStyle()
@@ -48,8 +47,6 @@ class PresentationController: UIPresentationController {
     override func dismissalTransitionWillBegin() {
         guard let dimmingView = dimmingView else { return }
         
-//        dimmingView.removeFromSuperview()
-        // Animate the dimming view's alpha to 0 with a short duration
         UIView.animate(withDuration: 0.2, animations: {
             dimmingView.alpha = 0.0
         }) { _ in

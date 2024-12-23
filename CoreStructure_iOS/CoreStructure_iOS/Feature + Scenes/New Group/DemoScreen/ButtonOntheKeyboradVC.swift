@@ -36,6 +36,7 @@ class ButtonOntheKeyboradVC: UIViewController, UIGestureRecognizerDelegate {
         view.setupKeyboardObservers()
         setupConstraint()
         
+        self.hideKeyboardWhenTappedAround()
         //Enable back swipe gesture
         navigationController?.interactivePopGestureRecognizer?.delegate = self
     }

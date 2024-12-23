@@ -37,6 +37,7 @@ class DebuggerRespose {
     }
     
     private func printerFormat(url: String, data: String, error: Bool) {
+        
         let printer = """
         URL -->: \(url)
         Response Received -->: \(data)
@@ -49,18 +50,16 @@ class DebuggerRespose {
         }
     }
     
-    private func formatArrayOfDictionaries(json: [[String: Any]],
-                                           url: String,
-                                           error: Bool) {
+    private func formatArrayOfDictionaries(json: [[String: Any]], url: String, error: Bool) {
+        
         guard let jsonData = try? JSONSerialization.data(withJSONObject: json, options: .prettyPrinted),
               let jsonString = String(data: jsonData, encoding: .utf8) else { return }
         
         printerFormat(url: url, data: jsonString, error: error)
     }
     
-    private func formatDictionary(json: [String: Any],
-                                  url: String,
-                                  error: Bool) {
+    private func formatDictionary(json: [String: Any], url: String, error: Bool) {
+        
         guard let jsonData = try? JSONSerialization.data(withJSONObject: json, options: .prettyPrinted),
               let jsonString = String(data: jsonData, encoding: .utf8) else { return }
         

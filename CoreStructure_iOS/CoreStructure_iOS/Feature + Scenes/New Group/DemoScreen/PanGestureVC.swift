@@ -9,13 +9,6 @@ import UIKit
 
 class PanGestureVC: UIViewController {
     
-    lazy var backGrountView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .clear
-        return view
-    }()
-    
     lazy var containerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -30,27 +23,20 @@ class PanGestureVC: UIViewController {
         setupConstraint()
         // Do any additional setup after loading the view.
     }
-    
-    
+
     private func setupConstraint(){
-        view.addSubview(backGrountView)
         view.addSubview(containerView)
+
+        HandleTapPanGesture.shared.addTapGesture(to: view)
+        HandleTapPanGesture.shared.addPanGesture(to: view)
+        HandleTapPanGesture.shared.onTap = {
+            self.didTappedDismiss()
+        }
+
+        containerView.tapGestureRecognizer()
         
-        backGrountView.addTapGesture(target: self, action: #selector(didTappedDismiss))
-        
-        
-        view.addPanGesture()
-        //        UIView.didTapGesture = {
-        //            print("didTapGesture")
-        //            self.dismiss(animated: true)
-        //        }
         
         NSLayoutConstraint.activate([
-            
-            backGrountView.topAnchor.constraint(equalTo: view.topAnchor),
-            backGrountView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            backGrountView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            backGrountView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
             containerView.heightAnchor.constraint(equalToConstant: 400),
             containerView.leftAnchor.constraint(equalTo: view.leftAnchor),
@@ -61,11 +47,6 @@ class PanGestureVC: UIViewController {
     }
     
     @objc func didTappedDismiss(){
-        
-        //        UIView.animate(withDuration: 0.1) {
-        //            self.containerView.transform = .identity
-        //        }
-        
         self.dismiss(animated: true)
         
     }
@@ -73,9 +54,7 @@ class PanGestureVC: UIViewController {
 
 
 
-extension PanGestureVC {
-    
-    
-    
-    
-}
+
+
+
+

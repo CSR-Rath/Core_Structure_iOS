@@ -48,7 +48,6 @@ enum HandleMessageResponse{
             return "Request Error" // need missage from server
         case .notConnectedToInternet:
             return "Not connected to the Internet. Please check your network settings."
-            
         }
     }
 }
@@ -81,10 +80,8 @@ class AlertMessage{
         DispatchQueue.main.async {
             
             let bottomSheetVC = AlertErrorVC()
-            
             bottomSheetVC.modalPresentationStyle = .custom
             bottomSheetVC.transitioningDelegate = presentVC
-            
             
             bottomSheetVC.lblTitle.text = title
             
@@ -100,7 +97,7 @@ class AlertMessage{
             
             if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
                 sceneDelegate.window?.rootViewController?.present(bottomSheetVC,
-                                                                  animated: false,
+                                                                  animated: true,
                                                                   completion: {
                     
                 })

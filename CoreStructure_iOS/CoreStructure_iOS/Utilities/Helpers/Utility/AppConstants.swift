@@ -13,9 +13,6 @@ import UIKit
  struct AppConstants{
     
     static let loginSuccesFull = "loginSuccesFull"
-   
-    
-    
     static let saveTimer = "saveTimer"
     static let userInfor = "userInfor"
     

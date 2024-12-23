@@ -46,9 +46,7 @@ extension String{
             attribStr.addAttributes([ 
                 NSAttributedString.Key.foregroundColor:UIColor.white,
                 NSAttributedString.Key.paragraphStyle: paragraphStyle,
-                NSAttributedString.Key.font:font],
-                                    range: textRangeForFont
-            )
+                NSAttributedString.Key.font:font], range: textRangeForFont)
             
         } catch {
             return NSAttributedString()

@@ -11,10 +11,8 @@ class DataManager {
     
     static let shared = DataManager() // Singleton pattern
     private let userDefaults = UserDefaults.standard
-    
     private let userInforKey = "userInfor"
     private let phoneNumberKey = "phoneNumber"
-    
     private let dragDropMenu = "dragDropMenu"
 }
 

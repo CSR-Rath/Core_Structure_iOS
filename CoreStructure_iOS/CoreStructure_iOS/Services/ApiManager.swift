@@ -49,10 +49,10 @@ class ApiManager {
         res: @escaping (T) -> ()
     ) {
         // Check internet connection
-//        if isConnectedToNetwork(){
-//            AlertMessage.shared.alertError(status: .internet)
-//            return
-//        }
+        if isConnectedToNetwork(){
+            AlertMessage.shared.alertError(status: .internet)
+            return
+        }
 
         let stringUrl = URL(string: AppConfiguration.shared.apiBaseURL + url)!
         print("stringUrl ===> \(stringUrl)")
@@ -67,8 +67,6 @@ class ApiManager {
         // Add additional headers
         if let finalHeaders = headers {
             for (headerField, headerValue) in finalHeaders {
-                print("headerField ==> \(headerField)")
-                print("finalHeaders ==> \(finalHeaders)")
                 request.setValue(headerValue, forHTTPHeaderField: headerField)
             }
         }
@@ -76,9 +74,9 @@ class ApiManager {
         // Add parameters
         do {
             if let modelCodable = modelCodable {
+                
                 request.httpBody = try JSONEncoder().encode(modelCodable)
                 print("modelCodable ==> \(modelCodable)")
-                
             } else if let param = param {
 
                 request.httpBody = try JSONSerialization.data(withJSONObject: param, options: [])
@@ -107,8 +105,7 @@ class ApiManager {
             switch httpResponse.statusCode {
             case 200..<300:
 
-                DebuggerRespose.shared.debuggerResult(urlRequest: request,
-                                              data: data, error: false)
+                DebuggerRespose.shared.debuggerResult(urlRequest: request, data: data, error: false)
                 
                 DebuggerRespose.shared.validateModel(model: T.self, data: data) { objectData in
                     res(objectData)
@@ -118,7 +115,7 @@ class ApiManager {
             default:
                 
                 AlertMessage.shared.alertError(message: "\(httpResponse.statusCode)", status: .none)
-
+                
             }
         }
         task.resume()
@@ -142,7 +139,6 @@ extension ApiManager{
             AlertMessage.shared.alertError(message: "\(error.localizedDescription)", status: .requestError)
         }
     }
-    
 }
 
 
@@ -171,57 +167,4 @@ func isConnectedToNetwork() -> Bool {
     let ret = (isReachable && !needsConnection)
     
     return ret
-}
-
-
-import Foundation
-
-class ApiClient {
-    static let shared = ApiClient()
-    
-    private let baseUrl = "http://192.168.0.110:1110/api" // Replace with your actual API URL
-    private var authToken: String? // Store your JWT token if needed
-
-    // Function to post guest data
-    func postGuest(guest: Guest, completion: @escaping (Result<Void, Error>) -> Void) {
-        guard let url = URL(string: "\(baseUrl)/guests") else {
-            completion(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
-            return
-        }
-
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-
-        // Add the Authorization header if you're using token-based authentication
-        if let token = authToken {
-            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        }
-
-        // Encode the guest object to JSON
-        do {
-            request.httpBody = try JSONEncoder().encode(guest)
-        } catch {
-            completion(.failure(error))
-            return
-        }
-
-        // Create a URLSession data task
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                completion(.failure(error))
-                return
-            }
-
-            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
-                let errorMessage = String(data: data ?? Data(), encoding: .utf8) ?? "Unknown error"
-                completion(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: errorMessage])))
-                return
-            }
-
-            // Successfully posted
-            completion(.success(()))
-        }
-        task.resume()
-    }
 }

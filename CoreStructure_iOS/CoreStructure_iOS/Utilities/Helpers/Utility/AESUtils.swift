@@ -10,42 +10,28 @@ import CommonCrypto
 import CryptoKit
 
 let passcode = "123456"
-let encryption = AESUtils.shared.encryptionAES(value: "\(passcode)",
-                                                 key256 : "" , iv: "")
-//Advanced Encryption Standard
+let encryption = AESUtils.shared.encryptionAES(value: "\(passcode)", key256 : "", iv: "")
+
 class AESUtils{
     
     static let shared = AESUtils()
     
-    func encryptionAES(value: String,key256: String,iv: String) -> String {
+    func encryptionAES(value: String, key256: String, iv: String) -> String {
         let result = value.aesEncrypt(key: key256, iv: iv)
         return result ?? ""
     }
     
-    func decryptionAES(value: String,key256: String,iv: String) -> String {
+    func decryptionAES(value: String, key256: String, iv: String) -> String {
         let result = value.aesDecrypt(key: key256, iv: iv)
         return result ?? ""
     }
     
-    let generateTradeNOKNumber = 15
-    
-    func generateTradeNO() -> String? {
-        
-        let sourceStr = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        var resultStr = ""
-
-        for _ in 0..<self.generateTradeNOKNumber {
-            let index = UInt(Int(arc4random()) % sourceStr.count)
-            let oneStr = (sourceStr as NSString).substring(with: NSRange(location: Int(index), length: 1))
-            resultStr += oneStr
-        }
-        return resultStr
-    }
 }
 
 extension String {
     
-    func aesEncrypt(key:String, iv:String, options:Int = kCCOptionPKCS7Padding) -> String? {
+   fileprivate func aesEncrypt(key: String, iv: String, options: Int = kCCOptionPKCS7Padding) -> String? {
+       
         if let keyData = key.data(using: String.Encoding.utf8),
            let data = self.data(using: String.Encoding.utf8),
            let cryptData    = NSMutableData(length: Int((data.count)) + kCCBlockSizeAES128) {
@@ -81,7 +67,8 @@ extension String {
         return nil
     }
     
-    func aesDecrypt(key: String, iv: String, options: Int = kCCOptionPKCS7Padding) -> String? {
+  fileprivate func aesDecrypt(key: String, iv: String, options: Int = kCCOptionPKCS7Padding) -> String? {
+      
         if let keyData = key.data(using: .utf8),
            let data = Data(base64Encoded: self),
            let cryptData = NSMutableData(length: Int(data.count) + kCCBlockSizeAES128) {
@@ -111,34 +98,8 @@ extension String {
             else{
                 return nil
             }
-            
         }
         return nil
     }
-    
-    func sha256() -> String{
-        if let stringData = self.data(using: String.Encoding.utf8) {
-            return hexStringFromData(input: digest(input: stringData as NSData))
-        }
-        return ""
-    }
-    
-    private func digest(input : NSData) -> NSData {
-        let digestLength = Int(CC_SHA256_DIGEST_LENGTH)
-        var hash = [UInt8](repeating: 0, count: digestLength)
-        CC_SHA256(input.bytes, UInt32(input.length), &hash)
-        return NSData(bytes: hash, length: digestLength)
-    }
-    
-    private  func hexStringFromData(input: NSData) -> String {
-        var bytes = [UInt8](repeating: 0, count: input.length)
-        input.getBytes(&bytes, length: input.length)
-        
-        var hexString = ""
-        for byte in bytes {
-            hexString += String(format:"%02x", UInt8(byte))
-        }
-        return hexString
-    }
-    
 }
+

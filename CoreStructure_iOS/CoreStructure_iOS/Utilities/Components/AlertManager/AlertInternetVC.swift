@@ -93,9 +93,6 @@ class AlertInternetVC: UIViewController {
     }
     
     
-    
-    
-    
     private func addPanGesture() {
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
         view.addGestureRecognizer(panGesture)

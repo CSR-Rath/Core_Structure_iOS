@@ -29,12 +29,8 @@ extension UIView{
 extension UIView{
     
     func isHasSafeAreaInsets() -> Bool {
-        // Check if any of the insets are greater than zero
-        if self.safeAreaInsets.top > 0 {
-            return true
-        }else{
-            return false
-        }
+        // Check if the top inset is greater than zero
+        return self.safeAreaInsets.top > 0
     }
     
     //MARK: calculate text label width
@@ -56,6 +52,19 @@ extension UIView{
         self.addGestureRecognizer(tapGesture)
         self.isUserInteractionEnabled = true // Ensure user interaction is enabled
     }
+    
+    
+    func tapGestureRecognizer(){
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
+        addGestureRecognizer(tapGesture)
+        isUserInteractionEnabled = true
+    }
+    
+    @objc func viewTapped() {
+        print("View was tapped! ==> Helper")
+    }
+    
+    
 }
 
 //MARK: Handle cornerRadius
@@ -80,8 +89,6 @@ extension UIView{
 }
 
 
-
-
 //MARK: Handle UITapGestureRecognizer and UIPanGestureRecognizer
 extension UIView {
     
@@ -100,6 +107,11 @@ extension UIView {
         self.addGestureRecognizer(panGesture)
     }
     
+    
+
+    
+    
+    
     @objc private func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: self.superview)
         
@@ -114,14 +126,28 @@ extension UIView {
             print("translation.y ===> \(translation.y)")
             
             // Dismiss the view if the swipe is downward
-//            if translation.y > UIView.dropHeight {
-//                cancelDismiss()
-//            } else {
-//                // Reset position
+            
+            if translation.y > UIView.dropHeight {
+                
+            } else {
                 UIView.animate(withDuration: 0.1) {
-                    self.transform = .identity
+                    self.transform = .identity //Reset position
                 }
-//            }
+            }
+            
+            
+            UIView.animate(withDuration: 0.1) {
+                self.transform = .identity //Reset position
+            }
+            
+            //            if translation.y > UIView.dropHeight {
+            //
+            //            } else {
+            //                UIView.animate(withDuration: 0.1) {
+            //                    self.transform = .identity //Reset position
+            //                }
+            //            }
+            
         default:
             
             break
@@ -134,8 +160,8 @@ extension UIView {
         UIView.animate(withDuration: 0.1) {
             self.transform = .identity
         }
-
-
+        
+        
     }
 }
 
@@ -180,41 +206,130 @@ extension UIView{
 
 //MARK: Create
 extension UIView {
-
+    
     func createToolbar() -> UIToolbar {
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
-
+        
         // Create a flexible space to push the buttons to the right
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-
+        
         // Create a "Done" button
         let doneButton = UIBarButtonItem(title: "Done",
                                          style: .plain, target: self,
                                          action: #selector(doneButtonTapped))
         
         // Create a "Done" button
-//        let cancelButton = UIBarButtonItem(title: "Cancel",
-//                                         style: .plain, target: self,
-//                                         action: #selector(cancelButtonTapped))
-
+        //        let cancelButton = UIBarButtonItem(title: "Cancel",
+        //                                         style: .plain, target: self,
+        //                                         action: #selector(cancelButtonTapped))
+        
         // Add buttons to the toolbar
         toolbar.items = [flexibleSpace, doneButton]
         return toolbar
     }
-
+    
     @objc func doneButtonTapped() {
         // Dismiss keyboard
         self.endEditing(true)
     }
     
-    
-//    @objc func cancelButtonTapped() {
-//        // Dismiss keyboard
-//
-//        self.endEditing(true)
-//    }
-//    
 }
 
 
+
+// MARK: - UITapGestureRecognizer and UIPanGestureRecognizer
+
+class HandleTapPanGesture {
+
+    static let shared = HandleTapPanGesture()
+    
+    // Callback properties
+     var onTap: (() -> Void)?
+     var onPan: ((CGFloat) -> Void)?
+
+    
+    private init() {} // Prevent external initialization
+    
+    
+    func tapGestureHelper(to view: UIView){
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTappedHelper))
+        view.addGestureRecognizer(tapGesture)
+        view.isUserInteractionEnabled = true
+    }
+    
+    @objc func viewTappedHelper() {
+        print("View was tapped! ==> Helper")
+    }
+
+    func addTapGesture(to view: UIView) {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
+        view.addGestureRecognizer(tapGesture)
+        view.isUserInteractionEnabled = true // Ensure user interaction is enabled
+    }
+
+    func addPanGesture(to view: UIView) {
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
+        view.addGestureRecognizer(panGesture)
+        view.isUserInteractionEnabled = true // Ensure user interaction is enabled
+    }
+
+    @objc private func viewTapped(_ gesture: UITapGestureRecognizer) {
+ 
+        onTap?()
+        
+    }
+
+    
+    
+    @objc private func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
+        let view = gesture.view
+        let translation = gesture.translation(in: gesture.view?.superview)
+        
+        switch gesture.state {
+        case .changed: break
+            // Move the view with the gesture
+            if translation.y > 0 {
+                view?.transform = CGAffineTransform(translationX: 0, y: translation.y)
+            }
+//            else{
+//                translation.y = 0
+//            }
+            
+        case .ended:
+            print("translation.y ===> \(translation.y)")
+            
+            // Dismiss the view if the swipe is downward
+            
+            if translation.y > UIView.dropHeight {
+                onTap?()
+            } else {
+                UIView.animate(withDuration: 0.1) {
+                    view?.transform = .identity //Reset position
+                }
+            }
+            
+            
+//            UIView.animate(withDuration: 0.1) {
+//                view.transform = .identity //Reset position
+//            }
+            
+            //            if translation.y > UIView.dropHeight {
+            //
+            //            } else {
+            //                UIView.animate(withDuration: 0.1) {
+            //                    self.transform = .identity //Reset position
+            //                }
+            //            }
+            
+        default:
+            
+            break
+        }
+    }
+
+    
+
+}
+    
+    

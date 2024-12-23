@@ -17,7 +17,7 @@ class TitleWithValueCell: UITableViewCell {
     lazy var lblTitle: UILabel = {
         let lbl = UILabel()
         lbl.text = "_"
-        lbl.autoWidthInstack()
+        lbl.autoWidthInStack()
         lbl.fontRegular(14)
         lbl.textColor = .black
         return lbl

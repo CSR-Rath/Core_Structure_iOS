@@ -17,39 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setLanguage(langCode: "en") // default language en
         handleConfigurationRealmSwift()
         
-        let app = AppConfiguration()
-        print("apiBaseURL",
-              app.apiBaseURL,
-              "\n",
-              "apiKey",
-              app.apiKey,
-              "\n",
-              "bundleID",
-              app.bundleID)
-        
-    
-//        // Handle any incoming URL when the app is launched
-//           if let url = launchOptions?[.url] as? URL {
-//               handleIncomingURL(url)
-//           }
 
         //MARK: - Handle font navigation bar
     
-            
-            let font = UIFont.systemFont(ofSize: 18, weight: .medium)
-             
-             let titleAttribute = [
-                 NSAttributedString.Key.font: font,
-                 NSAttributedString.Key.foregroundColor: UIColor.white
-                 
-             ]
-
-            UINavigationBarAppearance().titleTextAttributes = titleAttribute as [NSAttributedString.Key : Any]
         
-        
-        
-        
-//        setupTitleNavigationBar()
+        handleNavicationTitle() // title navigation bar
         configureNotification()  // push notification 2 local
         print("didFinishLaunchingWithOptions") //AIzaSyBApx6bA_YNHU8zL_XBrpSI10wol9EBVsA
         return true
@@ -84,12 +56,7 @@ extension AppDelegate{
             // You can use a NotificationCenter or a delegate to inform your view controller
         }
     }
-    
-//    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-//        // Handle the notification and perform necessary actions
-//        completionHandler()
-//    }
-    
+
     
     
 }
@@ -98,6 +65,20 @@ extension AppDelegate{
 
 //MARK: Handle navigation contoller
 extension AppDelegate{
+    
+    
+    private func handleNavicationTitle(){
+        let font = UIFont.systemFont(ofSize: 18, weight: .medium)
+         
+         let titleAttribute = [
+             NSAttributedString.Key.font: font,
+             NSAttributedString.Key.foregroundColor: UIColor.white
+             
+         ]
+
+        UINavigationBarAppearance().titleTextAttributes = titleAttribute as [NSAttributedString.Key : Any]
+        
+    }
     
    private func setupTitleNavigationBar(font: UIFont? = UIFont.systemFont(ofSize: 17, weight: .regular),
                                  titleColor: UIColor = .white){
@@ -119,9 +100,8 @@ extension AppDelegate{
        UINavigationBar.appearance().scrollEdgeAppearance = appearance
        UINavigationBar.appearance().tintColor = .white
         
-        UINavigationBar.appearance().backItem?.title = ""
+       UINavigationBar.appearance().backItem?.title = ""
 
- 
     }
 }
 
@@ -133,9 +113,6 @@ extension AppDelegate{
 
 //MARK: Setup Push Notification Local
 extension AppDelegate: UNUserNotificationCenterDelegate {
-    
-    
-    
     
     private func configureNotification(){
         // Request user authorization for notifications
@@ -150,7 +127,14 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     // Handle the display of notifications while the app is in the foreground
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         // Customize the presentation options as needed
-        completionHandler([.alert, .sound])
+//        completionHandler([.alert, .sound])
+        
+        let userInfo = notification.request.content.userInfo
+        
+        print("userInfo ==> \(userInfo)")
+        
+        
+        completionHandler([.alert, .sound, .badge])
     }
     
     // Handle the user's response to the notification (e.g., tapping on it) tapped on notification
@@ -169,20 +153,21 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             return
         }
         
-//        let rootViewController = UIApplication.shared.windows.first?.rootViewController
-        
-     
-        let targetViewController = TransationDeatilController()
-        isFromNotification = true
-        targetViewController.dataList =  DatabaseManager().getLastTransactionByIndex() ?? Transaction()
+        let targetViewController = UIViewController()
+        targetViewController.view.backgroundColor = .white
+      
         
         // Push the target view controller onto the navigation stack
         if let navigationController = rootViewController as? UINavigationController {
+            
+            print("navigationController ===>")
             navigationController.pushViewController(targetViewController, animated: false)
+      
         } else {
+            
+            print("else navigationController ===>")
             let navigationController = UINavigationController(rootViewController: targetViewController)
             window.rootViewController = navigationController
-//            rootViewController?.present(navigationController, animated: true, completion: nil)
         }
         
         // Call the completion handler when you're done processing the notification

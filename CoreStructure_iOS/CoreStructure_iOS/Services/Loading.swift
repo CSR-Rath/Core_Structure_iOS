@@ -32,7 +32,13 @@ class Loading : UIView {
     func showLoading() {
 
         DispatchQueue.main.async { [self] in
-            guard let window = UIApplication.shared.windows.first else{
+            
+            
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
+                return
+            }
+
+            guard let window = windowScene.windows.first else {
                 return
             }
             
@@ -47,17 +53,14 @@ class Loading : UIView {
             NSLayoutConstraint.activate([
                 lblLoading.centerYAnchor.constraint(equalTo: centerYAnchor,constant: 50),
                 lblLoading.centerXAnchor.constraint(equalTo: centerXAnchor),
-                
             ])
             
             loadingView.startAnimating()
-            
         }
-
     }
     
-    func hideLoading(_ deadline: CFTimeInterval = 0.0) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + deadline ){ [self] in
+    func hideLoading(delay: CFTimeInterval = 0.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay ){ [self] in
             self.removeFromSuperview()
             lblLoading.removeFromSuperview()
             loadingView.removeFromSuperview()
