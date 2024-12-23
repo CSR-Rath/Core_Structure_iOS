@@ -81,7 +81,7 @@ extension AppDelegate{
     }
     
     
-    // MARK: - Handle when call from enother App use Deep Link (Open this app)
+    // MARK: - Handle when call from another App use Deep Link (Open this app)
 //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 //        
 //        if let url =  URL(string: "myapp://") {
