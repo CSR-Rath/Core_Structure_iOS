@@ -5,10 +5,9 @@
 //  Created by Rath! on 28/8/24.
 //
 
-import Foundation
-import UIKit
 
 import UIKit
+import AudioToolbox
 
 extension UIDevice {
     
@@ -22,6 +21,17 @@ extension UIDevice {
     
     static func isIPad() -> Bool {
         return UIDevice.current.userInterfaceIdiom == .pad
+    }
+    
+    static func vibrateOnWrongPassword() {
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+        print("Vibrated")
+    }
+    
+    static func generateButtonFeedback(){
+        let generator = UIImpactFeedbackGenerator(style: .light) // You can change the style to .medium or .heavy
+        generator.prepare()
+        generator.impactOccurred()
     }
 }
 

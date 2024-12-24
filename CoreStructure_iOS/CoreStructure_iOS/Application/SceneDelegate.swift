@@ -11,7 +11,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     static let shared = SceneDelegate()
     
-    var window: UIWindow?
+    internal var window: UIWindow?
     let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -24,20 +24,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.rootViewController = navigation
         window?.makeKeyAndVisible()
     }
-    
 }
 
 //MARK: - Handle change root controller
 extension SceneDelegate {
     
     private func changeRootViewController(_ vc: UIViewController, animated: Bool = false) {
-//        guard let window = self.window else { return }
-//        
-//        let navigation = UINavigationController(rootViewController: vc) // Create a navigation controller with the new root view controller
-//        
-//        window.rootViewController = navigation  // Set the root view controller without animation
-//        
-//        window.makeKeyAndVisible() // Make the window key and visible
+        guard let window = self.window else { return }
+        
+        let navigation = UINavigationController(rootViewController: vc) // Create a navigation controller with the new root view controller
+        
+        window.rootViewController = navigation  // Set the root view controller without animation
+        
+        window.makeKeyAndVisible() // Make the window key and visible
     }
     
     func gotoTabBar(indexSelected: Int = 0){
@@ -52,7 +51,6 @@ extension SceneDelegate {
             print("error changeRootViewController")
         }
     }
-    
 }
 
 extension SceneDelegate{

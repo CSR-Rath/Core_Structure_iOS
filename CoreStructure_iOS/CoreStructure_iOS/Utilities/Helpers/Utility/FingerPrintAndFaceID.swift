@@ -12,7 +12,7 @@ import LocalAuthentication
 enum DataFingerIDFaceIdResult {
     case success(status: Bool)
     case failure(String)
-    case no(Int)
+    case unavailable(Int)
 }
 
 class BiometricAuthenticationManager {
@@ -37,7 +37,8 @@ class BiometricAuthenticationManager {
                 }
             }
         } else {
-            status(.no(error?.code ?? -1))
+//            status(.no(error?.code ?? -1))
+            status(.unavailable(error?.code ?? -1))
         }
     }
     
@@ -86,7 +87,7 @@ func helper() {
             print("Authentication successful: \(status)")
         case .failure(let message):
             print("Authentication failed: \(message)")
-        case .no(let errorCode):
+        case .unavailable(let errorCode):
             print("Biometric authentication not available, error code: \(errorCode)")
         }
     }

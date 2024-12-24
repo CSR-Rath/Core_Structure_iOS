@@ -20,7 +20,7 @@ class Loading : UIView {
         return loading
     }()
     
-    lazy var lblLoading: UILabel = {
+    private let lblLoading: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.text = "Loading..."
@@ -28,23 +28,18 @@ class Loading : UIView {
         return lbl
     }()
     
-    
     func showLoading() {
-
+        
         DispatchQueue.main.async { [self] in
             
-
-            guard let window = SceneDelegate.shared.sceneDelegate?.window else{
-                return
-            }
-    
+            guard let window = SceneDelegate.shared.sceneDelegate?.window else { return }
+            
             self.frame = window.bounds
             window.addSubview(self)
             
             loadingView.frame = window.bounds
             addSubview(loadingView)
-            
-            
+        
             addSubview(lblLoading)
             NSLayoutConstraint.activate([
                 lblLoading.centerYAnchor.constraint(equalTo: centerYAnchor,constant: 50),
@@ -63,4 +58,5 @@ class Loading : UIView {
             loadingView.stopAnimating()
         }
     }
+    
 }

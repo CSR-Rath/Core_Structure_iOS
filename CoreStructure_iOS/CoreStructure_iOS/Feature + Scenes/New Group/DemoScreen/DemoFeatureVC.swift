@@ -39,8 +39,9 @@ class DemoFeatureVC: UIViewController {
         ListModel(id: 16, name: "ViewController", viewController: PageViewController()),
         ListModel(id: 17, name: "LocalizableContoller", viewController: LocalizableContoller()),
         ListModel(id: 18, name: "SliderController", viewController: SliderController()),
-        ListModel(id: 18, name: "SectionedTableViewController", viewController: DragDropTableViewCellContoler()),
-        ListModel(id: 18, name: "SectionedTableViewController", viewController: ScannerController()),
+        ListModel(id: 19, name: "SectionedTableViewController", viewController: DragDropTableViewCellContoler()),
+        ListModel(id: 20, name: "SectionedTableViewController", viewController: ScannerController()),
+        ListModel(id: 21, name: "PreventionScreen", viewController: PreventionScreen()),
         
     ]
 
@@ -57,13 +58,11 @@ class DemoFeatureVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        navigationController?.interactivePopGestureRecognizer?.isEnabled = false //unable  prevent popGestureRecognizer
-    }
+  }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-//        navigationController?.interactivePopGestureRecognizer?.isEnabled = true //enable prevent popGestureRecognizer
-    }
+ }
     
     
     override func viewDidLoad() {

@@ -150,7 +150,19 @@ extension CustomTabBarVC:  UICollectionViewDelegate, UICollectionViewDataSource 
             configureDeselectedCell(cell)
         }
         
-        cell.imgIcon.image = UIImage(systemName: "\(indexPath.item+1).circle")
+        if indexPath.row == 0{
+            cell.imgIcon.image = UIImage(systemName: "swift" )
+        }else if indexPath.row == 1{
+            cell.imgIcon.image = UIImage(systemName: "swift" )
+        }else if indexPath.row == 2{
+            cell.imgIcon.image = UIImage(systemName: "swift" )
+        }else if indexPath.row == 3{
+            cell.imgIcon.image = UIImage(systemName: "swift" )
+        }else if indexPath.row == 4{
+            cell.imgIcon.image = UIImage(systemName: "swift" )
+        }
+        
+        //"\(indexPath.item+1).circle"
         
         return cell
     }

@@ -129,6 +129,7 @@
 		FA992F122CF8BE98007B2EB8 /* AlertInternetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2B108D2CB786EF0095CDB1 /* AlertInternetVC.swift */; };
 		FA992F132CF8BE98007B2EB8 /* Note + Read.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD0ABB42C992C0200608D7F /* Note + Read.swift */; };
 		FAD38F2F2D14132200588DFA /* TransactionTypesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD38F2E2D14132200588DFA /* TransactionTypesEnum.swift */; };
+		FAF42EF02D1A47F50070AF49 /* DisplayWebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF42EEF2D1A47F50070AF49 /* DisplayWebController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -272,6 +273,7 @@
 		FAE400DD2C7D8CC4001D031F /* UIImageView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView + Extension.swift"; sourceTree = "<group>"; };
 		FAED81362CDB0A3800E5A2D5 /* SegmentedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedView.swift; sourceTree = "<group>"; };
 		FAEDA5732CD8C72D0031AB43 /* LocalNotificationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationVC.swift; sourceTree = "<group>"; };
+		FAF42EEF2D1A47F50070AF49 /* DisplayWebController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayWebController.swift; sourceTree = "<group>"; };
 		FAFCDC392CCF940200BACEC5 /* GroupDateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupDateVC.swift; sourceTree = "<group>"; };
 		FAFCDC492CCF993400BACEC5 /* ExpandedMultipleSectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandedMultipleSectionCell.swift; sourceTree = "<group>"; };
 		FAFCDC4A2CCF993400BACEC5 /* ExspandTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExspandTableVC.swift; sourceTree = "<group>"; };
@@ -636,7 +638,9 @@
 		FA494BBA2C6A08C40086D346 /* Feature + Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				FAF42EF82D1A72FC0070AF49 /* New Group1 */,
 				FAA3DF292CFF07ED00AD6DA0 /* New Group */,
+				FAF42EEF2D1A47F50070AF49 /* DisplayWebController.swift */,
 			);
 			path = "Feature + Scenes";
 			sourceTree = "<group>";
@@ -825,6 +829,61 @@
 				FAD38F2E2D14132200588DFA /* TransactionTypesEnum.swift */,
 			);
 			path = Emun;
+			sourceTree = "<group>";
+		};
+		FAF42EF12D1A48D10070AF49 /* Home + Feature */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Home + Feature";
+			sourceTree = "<group>";
+		};
+		FAF42EF22D1A48F20070AF49 /* Setting + Feature */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Setting + Feature";
+			sourceTree = "<group>";
+		};
+		FAF42EF32D1A49090070AF49 /* GoogleMaps + Feature */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "GoogleMaps + Feature";
+			sourceTree = "<group>";
+		};
+		FAF42EF42D1A495A0070AF49 /* TabBar + Feature */ = {
+			isa = PBXGroup;
+			children = (
+				FAF42EF32D1A49090070AF49 /* GoogleMaps + Feature */,
+				FAF42EF22D1A48F20070AF49 /* Setting + Feature */,
+				FAF42EF12D1A48D10070AF49 /* Home + Feature */,
+			);
+			path = "TabBar + Feature";
+			sourceTree = "<group>";
+		};
+		FAF42EF52D1A49670070AF49 /* Login + Feature */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Login + Feature";
+			sourceTree = "<group>";
+		};
+		FAF42EF62D1A497E0070AF49 /* Register + Feature */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Register + Feature";
+			sourceTree = "<group>";
+		};
+		FAF42EF82D1A72FC0070AF49 /* New Group1 */ = {
+			isa = PBXGroup;
+			children = (
+				FAF42EF62D1A497E0070AF49 /* Register + Feature */,
+				FAF42EF52D1A49670070AF49 /* Login + Feature */,
+				FAF42EF42D1A495A0070AF49 /* TabBar + Feature */,
+			);
+			path = "New Group1";
 			sourceTree = "<group>";
 		};
 		FAFCDC332CCF68C400BACEC5 /* Home + Feature */ = {
@@ -1133,6 +1192,7 @@
 				FA992EAF2CF8BE98007B2EB8 /* LocalNotificationVC.swift in Sources */,
 				FA992EB02CF8BE98007B2EB8 /* GroupDateVC.swift in Sources */,
 				FA992EB12CF8BE98007B2EB8 /* PanGestureVC.swift in Sources */,
+				FAF42EF02D1A47F50070AF49 /* DisplayWebController.swift in Sources */,
 				FA992EB22CF8BE98007B2EB8 /* DemoFeatureVC.swift in Sources */,
 				FA992EB32CF8BE98007B2EB8 /* ButtonOntheKeyboradVC.swift in Sources */,
 				FA992EB42CF8BE98007B2EB8 /* PanGestureTwoVC.swift in Sources */,

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import ReplayKit
 
 enum PasscodeAction{
     case payment
@@ -16,12 +17,30 @@ enum PasscodeAction{
     case none
 }
 
-class PasscodeVC: UIViewController {
+
+//extension UIView {
+//    func screenShotPrevension() {
+//        let preventedView = UITextField()
+//        let view = UIView()
+//        view.frame = UIScreen.main.bounds
+//        preventedView.isSecureTextEntry = true
+//        self.addSubview(preventedView)
+//        preventedView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+//        preventedView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+//        self.layer.superlayer?.addSublayer(preventedView.layer)
+//        preventedView.layer.sublayers?.last?.addSublayer(self.layer)
+//        preventedView.leftView = view
+//        preventedView.leftViewMode = .always
+//    }
+//}
+
+
+class PasscodeVC: UIViewController, UIGestureRecognizerDelegate {
     
-    var digit: Int = 6
-    var isComplateDigit: ((String)->())?
+    
+    private var digit: Int = 6
     private var textHandle: String = ""
-    private var isCallBio : Bool = false
+    private var isFaceID : Bool = false
     private let items : [String] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0", ""]
     private var digitCircleView: [UIView] = []
     private var arrayButton: [UIButton] = []
@@ -34,45 +53,83 @@ class PasscodeVC: UIViewController {
     private var btnForGot = UIButton()
     
     var isPasscodeAction : PasscodeAction = .none
-//    {
-//        didSet{
-//            
-//        }
-//    }
+    private var captureWarningView: UIView!
+    
+
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupUIView()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        navigationController?.interactivePopGestureRecognizer?.delegate = self // enable swap
+        setupObservers()
+        setupCaptureWarningView()
         
-        //        BiometricAuthenticationManager.shared.fingerPrintFaceID({ (check) in
-        //            switch check {
-        //            case .success(_):
-        //
-        //
-        ////               let vc = ViewController()
-        ////                self.navigationController?.pushViewController(vc, animated: true)
-        //
-        //            case .failure( _):
-        //
-        //                print("failure")
-        //                break
-        //            case .no:
-        //                print("no")
-        //                break
-        //            }
-        //        })
-        
+        // Add observer for screen capture status change
+//        NotificationCenter.default.addObserver(self, selector: #selector(preventScreenRecording), name: UIScreen.capturedDidChangeNotification, object: nil)
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-    }
+
+    private func setupCaptureWarningView() {
+            captureWarningView = UIView(frame: self.view.bounds)
+            captureWarningView.backgroundColor = UIColor.black.withAlphaComponent(0.8)
+            captureWarningView.isHidden = true
+            
+            let warningLabel = UILabel()
+            warningLabel.text = "Screen recording is active."
+            warningLabel.textColor = .white
+            warningLabel.textAlignment = .center
+            warningLabel.translatesAutoresizingMaskIntoConstraints = false
+            
+            captureWarningView.addSubview(warningLabel)
+            self.view.addSubview(captureWarningView)
+
+            // Constraints for the label
+            NSLayoutConstraint.activate([
+                warningLabel.centerXAnchor.constraint(equalTo: captureWarningView.centerXAnchor),
+                warningLabel.centerYAnchor.constraint(equalTo: captureWarningView.centerYAnchor)
+            ])
+        }
+
+        private func setupObservers() {
+            NotificationCenter.default.addObserver(self,
+                                                   selector: #selector(screenCaptureStatusChanged),
+                                                   name: UIScreen.capturedDidChangeNotification,
+                                                   object: nil)
+        }
+
+        @objc private func screenCaptureStatusChanged() {
+            if UIScreen.main.isCaptured {
+                // Show the warning view when screen capture is detected
+                captureWarningView.isHidden = false
+                showAlternateView()
+            } else {
+                // Hide the warning view when screen capture is stopped
+                captureWarningView.isHidden = true
+                hideAlternateView()
+            }
+        }
+
+        private func showAlternateView() {
+            // Logic to switch to another view
+            // For example, you can replace the current view with a placeholder
+            // or navigate to a different screen
+            let alternateVC = UIViewController()
+            alternateVC.view.backgroundColor = .gray // Example color
+            alternateVC.modalPresentationStyle = .fullScreen
+            self.present(alternateVC, animated: true, completion: nil)
+        }
+
+        private func hideAlternateView() {
+            // Logic to dismiss the alternate view if it's presented
+            if let presentedVC = self.presentedViewController {
+                presentedVC.dismiss(animated: true, completion: nil)
+            }
+        }
+
+        deinit {
+            NotificationCenter.default.removeObserver(self)
+        }
     
 }
 
@@ -80,37 +137,73 @@ class PasscodeVC: UIViewController {
 extension  PasscodeVC {
     
     private func completeDigit(passcod: String){
+        
+        if passcod == "999999"{
+            print("True")
+        }else{
+            UIDevice.vibrateOnWrongPassword()
+        }
+        
+        
         if isPasscodeAction == .changePasscode{
             
         }
     }
 }
 
-
+// MARK: - Handle biometricAuthentication
 extension PasscodeVC{
     
     private func biometricAuthentication(){
-        BiometricAuthenticationManager.shared.fingerPrintFaceID({ (check) in
-            switch check {
-            case .success(_):
+        //
+        BiometricAuthenticationManager.shared.fingerPrintFaceID { result in
+            switch result {
+            case .success(let status):
+                print("Authentication successful: \(status)") // Navigate or perform action based on success
                 
                 let vc = UIViewController()
                 vc.view.backgroundColor = .green
                 self.navigationController?.pushViewController(vc, animated: true)
                 
-            case .failure( _):
+            case .failure(let message):
                 
-                print("failure")
-                break
-            case .no:
-                print("no")
-                break
+                print("Authentication failed: \(message)")
+                
+            case .unavailable(let errorCode):
+                print("Biometric authentication not available, error code: \(errorCode)")
+                // Optionally show an alert
+                self.showAlert(message: "Biometric authentication not available. Error code: \(errorCode)")
             }
-        })
+        }
     }
     
-    //MARK: Action on button keyborad
+    
+    private func showAlert(message: String) {
+        let alert = UIAlertController(title: "Authentication Status", message: message, preferredStyle: .alert)
+        
+        // Add "OK" action
+        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+        
+        // Add "Settings" action to open the app's settings
+        alert.addAction(UIAlertAction(title: "Settings", style: .default, handler: { _ in
+            if let url = URL(string: UIApplication.openSettingsURLString) {
+                if UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
+            }
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+}
+
+// MARK: Handle action on button keyborad
+extension PasscodeVC{
+    
     @objc private func buttonTappedKeyborad(_ sender: UIButton) {
+        
+        UIDevice.generateButtonFeedback()
         
         let text = items[sender.tag]
         print("text  ==> \(text)")
@@ -124,14 +217,13 @@ extension PasscodeVC{
             }
         }
         else if sender.tag == 9{
-      
-            if !isCallBio{
-                biometricAuthentication()
-                isCallBio = true
-            }
             
+            if !isFaceID{
+                biometricAuthentication()
+            }
         }
         else{
+            
             //MARK: Handle button number
             if  textHandle.count < digit{
                 let i =  textHandle.count
@@ -142,19 +234,18 @@ extension PasscodeVC{
                 if  textHandle.count == digit{
                     print("complete passcode equal ==> \(digit)")
                     completeDigit(passcod: textHandle)
-                    isComplateDigit?(textHandle)
+                    
+                }else{
+                    
                 }
             }
         }
-        
-        //        //MARK: Handle when complete passcode
-        //        if  textHandle.count == digit{
-        //        completeDigit(passcod: textHandle)
-        //        isComplateDigit?(textHandle)
-        //        }
     }
-    
+}
 
+// MARK: Handle NSLayoutConstraint
+extension PasscodeVC{
+    
     private func setupUIView(){
         setupCircleView()
         setupKeyborad()
@@ -167,7 +258,7 @@ extension PasscodeVC{
         btnForGot.setTitleColor(.orange, for: .normal)
         btnForGot.titleLabel?.fontBold(14)
         btnForGot.translatesAutoresizingMaskIntoConstraints = false
-
+        
         btnForGot.addTarget(self, action:  #selector(didTappedForgot), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
@@ -179,7 +270,6 @@ extension PasscodeVC{
                                                 constant: -50),
             stackButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            
             btnForGot.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,constant: -20),
             btnForGot.rightAnchor.constraint(equalTo: stackButton.rightAnchor),
             
@@ -190,6 +280,7 @@ extension PasscodeVC{
     @objc func didTappedForgot(){
         print("didTappedForgot")
     }
+    
     
     // MARK: Setup Circle View Passcode
     private func setupCircleView(){
@@ -218,24 +309,24 @@ extension PasscodeVC{
     // MARK: Setup Button View Keyborad
     private func setupKeyborad(){
         
-        for i in 0...11 {
+        for index in 0...11 {
             
             let button = MainButton(type: .system)   //UIButton(type: .system)
             button.backgroundColor = .clear
             button.setTitleColor(.orange, for: .normal)
-            button.setTitle(items[i], for: .normal)
+            button.setTitle(items[index], for: .normal)
             button.layer.cornerRadius = 40
-            button.tag = i
+            button.tag = index
             button.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .bold)
             button.layer.borderWidth = 2
             button.layer.borderColor = UIColor.orange.cgColor
             button.addTarget(self, action: #selector(buttonTappedKeyborad), for: .touchUpInside)
             button.tintColor = .orange
             
-            if i == 11{
-                button.setImage(.icDelete, for: .normal)
-            } else if i == 9{
+            if index == 9{
                 button.setImage(.icFaceID, for: .normal)
+            } else if index == 11{
+                button.setImage(.icDeletePasscode, for: .normal)
             }
             
             button.heightAnchor.constraint(equalToConstant: 80).isActive = true
@@ -259,28 +350,7 @@ extension PasscodeVC{
                                                       arrayButton[10],
                                                       arrayButton[11]])
         
-        let spacing: CGFloat = 20
-        
-        stackButton1.axis = .horizontal
-        stackButton1.distribution = .fillEqually
-        stackButton1.alignment = .fill
-        stackButton1.spacing = spacing
-        
-        stackButton2.axis = .horizontal
-        stackButton2.distribution = .fillEqually
-        stackButton2.alignment = .fill
-        stackButton2.spacing = spacing
-        
-        stackButton3.axis = .horizontal
-        stackButton3.distribution = .fillEqually
-        stackButton3.alignment = .fill
-        stackButton3.spacing = spacing
-        
-        stackButton4.axis = .horizontal
-        stackButton4.distribution = .fillEqually
-        stackButton4.alignment = .fill
-        stackButton4.spacing = spacing
-        
+        setupStackButton(stack: [stackButton1, stackButton2, stackButton3, stackButton4])
         
         stackButton = UIStackView(arrangedSubviews: [stackButton1,
                                                      stackButton2,
@@ -291,8 +361,17 @@ extension PasscodeVC{
         stackButton.distribution = .fillEqually
         stackButton.alignment = .fill
         stackButton.spacing = 15
+        stackButton.makeSecure()
     }
     
+    private func setupStackButton(stack: [UIStackView]){
+        stack.forEach({ itemStack in
+            itemStack.axis = .horizontal
+            itemStack.distribution = .fillEqually
+            itemStack.alignment = .fill
+            itemStack.spacing = 20
+        })
+    }
 }
 
 

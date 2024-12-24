@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        setLanguage(langCode: "en") // default language en
+        setLanguage(langCode: .english) // default language en
         handleConfigurationRealmSwift()
         
         //MARK: - Handle font navigation bar
@@ -36,13 +36,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
 }
 
-//MARK: =================================== End AppDelegate ===================================
+//MARK: =================================== End AppDelegate ====================================
 
 
 
 
 
-// MARK: =============================== Start Handle Deep Link ================================
+// MARK: =============================== Start Handle Deep Link =================================
 extension AppDelegate{
     
     // Step create deep link

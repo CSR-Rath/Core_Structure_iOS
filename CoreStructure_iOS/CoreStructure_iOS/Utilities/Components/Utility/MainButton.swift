@@ -11,8 +11,6 @@ import UIKit
 
 class MainButton: UIButton {
     
-    
-    
     var isActionButton: Bool = true {
         didSet {
             setupButton()

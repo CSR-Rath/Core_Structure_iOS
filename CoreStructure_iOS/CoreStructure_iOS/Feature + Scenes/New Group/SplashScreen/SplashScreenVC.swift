@@ -69,7 +69,7 @@ extension SplashScreenVC{
     
     @objc private func didTappedButton(sender: UIButton) {
         
-        SceneDelegate().gotoTabBar(indexSelected: 3)
+        SceneDelegate().gotoTabBar(indexSelected: 0)
 
     }
     

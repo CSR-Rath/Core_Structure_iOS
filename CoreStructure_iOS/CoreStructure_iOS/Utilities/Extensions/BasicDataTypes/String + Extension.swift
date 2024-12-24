@@ -11,11 +11,15 @@ import UIKit
 
 //MARK: ==================== Handle localize ====================
 
-func setLanguage(langCode: String) {
-    UserDefaults.standard.setValue(langCode, forKey: KeyUser.language)
+func setLanguage(langCode: LanguageEnum) {
+    UserDefaults.standard.setValue(langCode.rawValue, forKey: KeyUser.language)
 }
 
 extension String {
+    
+    func getLangauge()->String{
+        return UserDefaults.standard.string(forKey: KeyUser.language) ?? "en"
+    }
     
     func localizeString() -> String {
         let lang = UserDefaults.standard.string(forKey: KeyUser.language)

@@ -13,3 +13,14 @@ enum LoadTypeEnum {
     case refresh
     case error
 }
+
+enum LanguageEnum: String {
+    case khmer = "km" // Khmer language
+    case english = "en" // English language
+    case french = "fr" // French language
+    case spanish = "es" // Spanish language
+
+    // Add more languages as needed
+}
+
+
