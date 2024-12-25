@@ -16,49 +16,61 @@ extension UIImageView {
         self.image = templateImage
         self.tintColor = color
     }
+    
 }
 
 
-//cell.imgLogo.imageFromURL(urlString: data.url ?? "")
 extension UIImageView {
-    public func imageFromURL(urlString: String, defaultImage: UIImage = UIImage(named: "img")!) {
-        let activityIndicator = UIActivityIndicatorView(style: .medium)
+    
+    func loadingImage(urlString: String,
+                      defaultImage: UIImage = .imgEmpty,
+                      style: UIActivityIndicatorView.Style = .medium ) {
+        // Create and configure the activity indicator
+        let activityIndicator = UIActivityIndicatorView(style: style)
         activityIndicator.color = .blue
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        
+        // Add the activity indicator to the image view
         self.addSubview(activityIndicator)
         
         // Center the activity indicator
-        let centerXConstraint = NSLayoutConstraint(item: activityIndicator, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0.0)
-        let centerYConstraint = NSLayoutConstraint(item: activityIndicator, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0.0)
-        self.addConstraints([centerXConstraint, centerYConstraint])
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: self.centerYAnchor)
+        ])
         
+        // Start animating the activity indicator
         activityIndicator.startAnimating()
         
-        if self.image == nil {
-            self.image = defaultImage // default background before call get url image.
+        // Set the default image while loading
+        self.image = defaultImage
+        
+        // Ensure the URL is valid
+        guard let url = URL(string: urlString) else {
+            activityIndicator.stopAnimating()
+            activityIndicator.removeFromSuperview()
+            return
         }
         
-        URLSession.shared.dataTask(with: NSURL(string: urlString)! as URL, completionHandler: { (data, response, error) -> Void in
-            if let error = error {
-                print(error)
-                DispatchQueue.main.async {
-                    activityIndicator.stopAnimating()
-                    activityIndicator.removeFromSuperview()
+        // Fetch the image data
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            DispatchQueue.main.async {
+                activityIndicator.stopAnimating()
+                activityIndicator.removeFromSuperview()
+                
+                if let error = error {
+                    print("Error loading image: \(error)")
+                    self.image = defaultImage // Set default image on error
+                    return
                 }
-                return
-            }
-            
-            DispatchQueue.main.async(execute: { () -> Void in
+                
+                // Check for valid data and create the image
                 if let imageData = data, let image = UIImage(data: imageData) {
-                    activityIndicator.stopAnimating()
-                    activityIndicator.removeFromSuperview()
-                    self.image = image // success image.
+                    self.image = image // Set the loaded image
                 } else {
-                    activityIndicator.stopAnimating()
-                    activityIndicator.removeFromSuperview()
-                    self.image = .add // set default image is nil.
+                    self.image = defaultImage // Set default image if data is invalid
                 }
-            })
-        }).resume()
+            }
+        }.resume()
     }
 }

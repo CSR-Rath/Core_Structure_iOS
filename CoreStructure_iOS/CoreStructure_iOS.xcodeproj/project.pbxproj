@@ -131,6 +131,7 @@
 		FA992F132CF8BE98007B2EB8 /* Note + Read.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD0ABB42C992C0200608D7F /* Note + Read.swift */; };
 		FAD38F2F2D14132200588DFA /* TransactionTypesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD38F2E2D14132200588DFA /* TransactionTypesEnum.swift */; };
 		FAF42EF02D1A47F50070AF49 /* DisplayWebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF42EEF2D1A47F50070AF49 /* DisplayWebController.swift */; };
+		FAFD6EA22D1BA817001CD0B3 /* ImageSlideshowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFD6EA12D1BA817001CD0B3 /* ImageSlideshowController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -284,6 +285,7 @@
 		FAFCDC522CCF9AA100BACEC5 /* MainButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainButton.swift; sourceTree = "<group>"; };
 		FAFCDC572CCF9D7700BACEC5 /* MenuDragDropCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuDragDropCell.swift; sourceTree = "<group>"; };
 		FAFCDC582CCF9D7700BACEC5 /* DragDropCollectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DragDropCollectionVC.swift; sourceTree = "<group>"; };
+		FAFD6EA12D1BA817001CD0B3 /* ImageSlideshowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSlideshowController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -753,7 +755,7 @@
 		FA8653FD2D1AAE1A00D87D6F /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				FA8653FB2D1AAE0300D87D6F /* createDeepLinkApp.png */,
+				FAFD6EA32D1BAD01001CD0B3 /* Utiliti */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -813,6 +815,7 @@
 				FA6D52D42C9A745C00710D93 /* PreventionScreen */,
 				FA4775CD2C7CA7E6002DC134 /* List ViewController */,
 				FA4775C52C7C97DF002DC134 /* PresentViewController */,
+				FAFD6EA12D1BA817001CD0B3 /* ImageSlideshowController.swift */,
 			);
 			path = "New Group";
 			sourceTree = "<group>";
@@ -1069,6 +1072,14 @@
 			path = DragDropCollection;
 			sourceTree = "<group>";
 		};
+		FAFD6EA32D1BAD01001CD0B3 /* Utiliti */ = {
+			isa = PBXGroup;
+			children = (
+				FA8653FB2D1AAE0300D87D6F /* createDeepLinkApp.png */,
+			);
+			path = Utiliti;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1283,6 +1294,7 @@
 				FA992EFA2CF8BE98007B2EB8 /* NotificationName + Extension.swift in Sources */,
 				FA992EFB2CF8BE98007B2EB8 /* CALayer + Extension.swift in Sources */,
 				FA992EFC2CF8BE98007B2EB8 /* PageViewController.swift in Sources */,
+				FAFD6EA22D1BA817001CD0B3 /* ImageSlideshowController.swift in Sources */,
 				FA992EFD2CF8BE98007B2EB8 /* SegmentedView.swift in Sources */,
 				FA992EFE2CF8BE98007B2EB8 /* TitleWithValueTableViewCell.swift in Sources */,
 				FA992EFF2CF8BE98007B2EB8 /* PageVC.swift in Sources */,

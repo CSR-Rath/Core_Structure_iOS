@@ -18,22 +18,6 @@ enum PasscodeAction{
 }
 
 
-//extension UIView {
-//    func screenShotPrevension() {
-//        let preventedView = UITextField()
-//        let view = UIView()
-//        view.frame = UIScreen.main.bounds
-//        preventedView.isSecureTextEntry = true
-//        self.addSubview(preventedView)
-//        preventedView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-//        preventedView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-//        self.layer.superlayer?.addSublayer(preventedView.layer)
-//        preventedView.layer.sublayers?.last?.addSublayer(self.layer)
-//        preventedView.leftView = view
-//        preventedView.leftViewMode = .always
-//    }
-//}
-
 
 class PasscodeVC: UIViewController, UIGestureRecognizerDelegate {
     
@@ -63,73 +47,9 @@ class PasscodeVC: UIViewController, UIGestureRecognizerDelegate {
         view.backgroundColor = .white
         setupUIView()
         navigationController?.interactivePopGestureRecognizer?.delegate = self // enable swap
-        setupObservers()
-        setupCaptureWarningView()
-        
-        // Add observer for screen capture status change
-//        NotificationCenter.default.addObserver(self, selector: #selector(preventScreenRecording), name: UIScreen.capturedDidChangeNotification, object: nil)
+
     }
 
-    private func setupCaptureWarningView() {
-            captureWarningView = UIView(frame: self.view.bounds)
-            captureWarningView.backgroundColor = UIColor.black.withAlphaComponent(0.8)
-            captureWarningView.isHidden = true
-            
-            let warningLabel = UILabel()
-            warningLabel.text = "Screen recording is active."
-            warningLabel.textColor = .white
-            warningLabel.textAlignment = .center
-            warningLabel.translatesAutoresizingMaskIntoConstraints = false
-            
-            captureWarningView.addSubview(warningLabel)
-            self.view.addSubview(captureWarningView)
-
-            // Constraints for the label
-            NSLayoutConstraint.activate([
-                warningLabel.centerXAnchor.constraint(equalTo: captureWarningView.centerXAnchor),
-                warningLabel.centerYAnchor.constraint(equalTo: captureWarningView.centerYAnchor)
-            ])
-        }
-
-        private func setupObservers() {
-            NotificationCenter.default.addObserver(self,
-                                                   selector: #selector(screenCaptureStatusChanged),
-                                                   name: UIScreen.capturedDidChangeNotification,
-                                                   object: nil)
-        }
-
-        @objc private func screenCaptureStatusChanged() {
-            if UIScreen.main.isCaptured {
-                // Show the warning view when screen capture is detected
-                captureWarningView.isHidden = false
-                showAlternateView()
-            } else {
-                // Hide the warning view when screen capture is stopped
-                captureWarningView.isHidden = true
-                hideAlternateView()
-            }
-        }
-
-        private func showAlternateView() {
-            // Logic to switch to another view
-            // For example, you can replace the current view with a placeholder
-            // or navigate to a different screen
-            let alternateVC = UIViewController()
-            alternateVC.view.backgroundColor = .gray // Example color
-            alternateVC.modalPresentationStyle = .fullScreen
-            self.present(alternateVC, animated: true, completion: nil)
-        }
-
-        private func hideAlternateView() {
-            // Logic to dismiss the alternate view if it's presented
-            if let presentedVC = self.presentedViewController {
-                presentedVC.dismiss(animated: true, completion: nil)
-            }
-        }
-
-        deinit {
-            NotificationCenter.default.removeObserver(self)
-        }
     
 }
 
@@ -350,18 +270,17 @@ extension PasscodeVC{
                                                       arrayButton[10],
                                                       arrayButton[11]])
         
-        setupStackButton(stack: [stackButton1, stackButton2, stackButton3, stackButton4])
+        let stackAll: [UIStackView] = [stackButton1, stackButton2, stackButton3, stackButton4]
         
-        stackButton = UIStackView(arrangedSubviews: [stackButton1,
-                                                     stackButton2,
-                                                     stackButton3,
-                                                     stackButton4])
+        setupStackButton(stack: stackAll)
+        
+        stackButton = UIStackView(arrangedSubviews: stackAll)
         stackButton.translatesAutoresizingMaskIntoConstraints = false
         stackButton.axis = .vertical
         stackButton.distribution = .fillEqually
         stackButton.alignment = .fill
         stackButton.spacing = 15
-        stackButton.makeSecure()
+
     }
     
     private func setupStackButton(stack: [UIStackView]){

@@ -35,7 +35,6 @@ class CenteringCellVC: UIViewController {
 
     private func setupLayout(){
         
-//        configureSelectedCell(CustomTabBarCell)
 
         if let collection = collectionView{
             NSLayoutConstraint.activate([

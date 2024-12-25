@@ -292,10 +292,7 @@ class HandleTapPanGesture {
             if translation.y > 0 {
                 view?.transform = CGAffineTransform(translationX: 0, y: translation.y)
             }
-//            else{
-//                translation.y = 0
-//            }
-            
+
         case .ended:
             print("translation.y ===> \(translation.y)")
             
@@ -308,17 +305,12 @@ class HandleTapPanGesture {
                     view?.transform = .identity //Reset position
                 }
             }
-            
         
-            
         default:
             
             break
         }
     }
-
-    
-
 }
     
     

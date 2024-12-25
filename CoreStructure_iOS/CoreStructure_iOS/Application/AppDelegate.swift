@@ -226,36 +226,43 @@ var realm: Realm!
 
 func handleConfigurationRealmSwift(){
     
-    let servion: UInt64 = 114
-    config = Realm.Configuration(
-        schemaVersion: servion,
+
+    var config = Realm.Configuration(
+
+        // Set the new schema version. This must be greater than the previously used
+        // version (if you've never set a schema version before, the version is 0).
+
+        schemaVersion: 0,
+
+        // Set the block which will be called automatically when opening a Realm with
+        // a schema version lower than the one set above
+
         migrationBlock: { migration, oldSchemaVersion in
-            
-            switch oldSchemaVersion{
-                
-            case 0..<2:
-                
-                break
-            case 2..<3:
-                
-                break
-            case 3..<4:
-                
-                break
-            default:
-                break
+
+            // We haven’t migrated anything yet, so oldSchemaVersion == 0
+
+            if (oldSchemaVersion < 3) {
+                // Nothing to do!
+                // Realm will automatically detect new properties and removed properties
+                // And will update the schema on disk automatically
             }
-        }
-    )
-    
+    })
+
     Realm.Configuration.defaultConfiguration = config
+    config = Realm.Configuration()
+//    config.deleteRealmIfMigrationNeeded = true
     
-    do {
-        realm = try Realm(configuration: config)
-        print("Realm file location: \(realm.configuration.fileURL?.path ?? "Unknown")")
-    } catch {
-        print("Error initializing Realm: \(error.localizedDescription)")
-    }
+        let fileManager = FileManager.default
+        let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let realmURL = documentsDirectory.appendingPathComponent("default.realm")
+    
+        if fileManager.fileExists(atPath: realmURL.path) {
+            print("Realm file exists at: \(realmURL.path)")
+        } else {
+            print("Realm file does not exist.")
+        }
 }
 
 // MARK: =============================== End Hanlde Realm Swift ===================================
+
+
