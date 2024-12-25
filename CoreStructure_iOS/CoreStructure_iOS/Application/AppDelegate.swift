@@ -15,11 +15,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         setLanguage(langCode: .english) // default language en
-        handleConfigurationRealmSwift()
-        
-        //MARK: - Handle font navigation bar
-        handleNavicationTitle() // title navigation bar
-        configureNotification() // push notification 2 local
+        handleConfigurationRealmSwift() // Realm Swift
+        handleNavicationTitle() // Title navigation bar
+        configureNotification() // Push notification 2 local
         print("didFinishLaunchingWithOptions") //AIzaSyBApx6bA_YNHU8zL_XBrpSI10wol9EBVsA
         
         return true
@@ -74,7 +72,6 @@ extension AppDelegate{
         print("navigateToContent(withId id: String)")
         
     }
-    
     
     // MARK: - Handle when call from another App use Deep Link (Open this app)
     //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

@@ -309,18 +309,7 @@ class HandleTapPanGesture {
                 }
             }
             
-            
-//            UIView.animate(withDuration: 0.1) {
-//                view.transform = .identity //Reset position
-//            }
-            
-            //            if translation.y > UIView.dropHeight {
-            //
-            //            } else {
-            //                UIView.animate(withDuration: 0.1) {
-            //                    self.transform = .identity //Reset position
-            //                }
-            //            }
+        
             
         default:
             
