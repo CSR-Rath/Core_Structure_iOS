@@ -48,13 +48,6 @@ class DisplayWebController: UIViewController, WKNavigationDelegate, UIGestureRec
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-//        modalPresentationCapturesStatusBarAppearance = true
-//        navigationController?.navigationBar.backgroundColor = .mainYellow
-//        navigationItem.setupCustomTitle(titleString: "KHQR", textColor: .newBase)
-//        navigationController?.navigationBar.tintColor = .deepBlue
-//        navigationController?.navigationBar.barStyle = .default
-//        navigationController?.setNeedsStatusBarAppearanceUpdate()
-        
         DispatchQueue.main.async { [self] in
             let url = URL(string: "\(khQRlink ?? "")")!
             self.webView.load(URLRequest(url: url))

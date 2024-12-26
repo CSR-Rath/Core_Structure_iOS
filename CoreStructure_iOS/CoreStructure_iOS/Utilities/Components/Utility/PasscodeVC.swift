@@ -8,6 +8,7 @@
 import UIKit
 import ReplayKit
 
+
 enum PasscodeAction{
     case payment
     case verifyPasscode
@@ -17,39 +18,31 @@ enum PasscodeAction{
     case none
 }
 
-
-
 class PasscodeVC: UIViewController, UIGestureRecognizerDelegate {
-    
     
     private var digit: Int = 6
     private var textHandle: String = ""
     private var isFaceID : Bool = false
     private let items : [String] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0", ""]
     private var digitCircleView: [UIView] = []
-    private var arrayButton: [UIButton] = []
     private var stackButton: UIStackView! = nil
-    private var stackButton1: UIStackView! = nil
-    private var stackButton2: UIStackView! = nil
-    private var stackButton3: UIStackView! = nil
-    private var stackButton4: UIStackView! = nil
     private var stackCircle: UIStackView! = nil
     private var btnForGot = UIButton()
     
     var isPasscodeAction : PasscodeAction = .none
     private var captureWarningView: UIView!
     
-
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupUIView()
-        navigationController?.interactivePopGestureRecognizer?.delegate = self // enable swap
-
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        navigationController?.interactivePopGestureRecognizer?.delegate = self // enable swap
+    }
     
 }
 
@@ -63,7 +56,6 @@ extension  PasscodeVC {
         }else{
             UIDevice.vibrateOnWrongPassword()
         }
-        
         
         if isPasscodeAction == .changePasscode{
             
@@ -115,7 +107,6 @@ extension PasscodeVC{
         
         self.present(alert, animated: true, completion: nil)
     }
-    
 }
 
 // MARK: Handle action on button keyborad
@@ -228,6 +219,15 @@ extension PasscodeVC{
     
     // MARK: Setup Button View Keyborad
     private func setupKeyborad(){
+        
+        
+         var stackButton1: UIStackView! = nil
+         var stackButton2: UIStackView! = nil
+         var stackButton3: UIStackView! = nil
+         var stackButton4: UIStackView! = nil
+         var arrayButton: [UIButton] = []
+        
+        
         
         for index in 0...11 {
             

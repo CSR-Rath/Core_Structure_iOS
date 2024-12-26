@@ -13,6 +13,7 @@
 		FA494BAA2C69EBD70086D346 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA494BA82C69EBD70086D346 /* LaunchScreen.storyboard */; };
 		FA7FF8E82CDC722B00C824BD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FA7FF8EA2CDC722B00C824BD /* Localizable.strings */; };
 		FA8653FC2D1AAE0300D87D6F /* createDeepLinkApp.png in Resources */ = {isa = PBXBuildFile; fileRef = FA8653FB2D1AAE0300D87D6F /* createDeepLinkApp.png */; };
+		FA883E6F2D1D56D800F39E4B /* InteractionBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA883E6E2D1D56D800F39E4B /* InteractionBaseViewController.swift */; };
 		FA88F1712CF9BD0000B37C73 /* DashedLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA88F1702CF9BD0000B37C73 /* DashedLineView.swift */; };
 		FA88F1732CF9C04800B37C73 /* TriangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA88F1722CF9C04800B37C73 /* TriangleView.swift */; };
 		FA992E992CF8B84E007B2EB8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA8D7D782CDBC80200B45826 /* GoogleService-Info.plist */; };
@@ -245,6 +246,7 @@
 		FA87CD8D2C79A02700349364 /* UICollectionViewCell + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell + Extension.swift"; sourceTree = "<group>"; };
 		FA87CD992C79A08100349364 /* UIImage + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + Extension.swift"; sourceTree = "<group>"; };
 		FA87CD9B2C79A08D00349364 /* UIFont + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont + Extension.swift"; sourceTree = "<group>"; };
+		FA883E6E2D1D56D800F39E4B /* InteractionBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionBaseViewController.swift; sourceTree = "<group>"; };
 		FA887FA42CEB21F100AFD96C /* BVM_VIP_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BVM_VIP_VC.swift; sourceTree = "<group>"; };
 		FA887FA62CEB220700AFD96C /* BVM_VIP_View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BVM_VIP_View.swift; sourceTree = "<group>"; };
 		FA88C16B2CDE7E1A00E006D0 /* DragDropTableViewCellContoler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragDropTableViewCellContoler.swift; sourceTree = "<group>"; };
@@ -429,6 +431,7 @@
 				FA7EFA2C2CF57CAD001FDFEC /* MoreView.swift */,
 				FA88F1702CF9BD0000B37C73 /* DashedLineView.swift */,
 				FA88F1722CF9C04800B37C73 /* TriangleView.swift */,
+				FA883E6E2D1D56D800F39E4B /* InteractionBaseViewController.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -1206,6 +1209,7 @@
 				FA992E9D2CF8BE98007B2EB8 /* Loading.swift in Sources */,
 				FA992E9E2CF8BE98007B2EB8 /* Endpoints.swift in Sources */,
 				FA992E9F2CF8BE98007B2EB8 /* ApiManager.swift in Sources */,
+				FA883E6F2D1D56D800F39E4B /* InteractionBaseViewController.swift in Sources */,
 				FA992EA02CF8BE98007B2EB8 /* DebuggerRespose.swift in Sources */,
 				FA992EAA2CF8BE98007B2EB8 /* BVM_VIP_VC.swift in Sources */,
 				FA992EAB2CF8BE98007B2EB8 /* BVM_VIP_View.swift in Sources */,

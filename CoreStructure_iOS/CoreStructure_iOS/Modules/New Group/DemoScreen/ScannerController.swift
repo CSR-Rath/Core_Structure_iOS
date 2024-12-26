@@ -8,6 +8,7 @@
 import UIKit
 import AVFoundation
 
+
 class ScannerController: UIViewController, UIGestureRecognizerDelegate  {
     
     private var captureSession: AVCaptureSession!

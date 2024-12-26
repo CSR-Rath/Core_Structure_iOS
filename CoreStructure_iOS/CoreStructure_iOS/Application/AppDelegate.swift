@@ -8,6 +8,7 @@
 import UIKit
 import UserNotifications //import UserNotifications 1 local
 import RealmSwift
+import LocalAuthentication
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         handleConfigurationRealmSwift() // Realm Swift
         handleNavicationTitle() // Title navigation bar
         configureNotification() // Push notification 2 local
+        print ( " getBiometricsName()" , getBiometricsName()) // Get Biometrice name
         print("didFinishLaunchingWithOptions") //AIzaSyBApx6bA_YNHU8zL_XBrpSI10wol9EBVsA
         
         return true
@@ -37,6 +39,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //MARK: =================================== End AppDelegate ====================================
 
 
+extension AppDelegate{
+    
+   private func getBiometricsType() -> LABiometryType {
+        let context = LAContext()
+        var error: NSError?
+        guard context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) else { return .none }
+        return context.biometryType
+    }
+
+    private func getBiometricsName() -> String {
+        switch getBiometricsType() {
+        case .faceID:
+            print("FaceID"); return "FaceID"
+        case .touchID:
+            print("TouchID"); return "TouchID"
+        case .none:
+            print("Biometrics Unavailable"); return "Biometrics Unavailable"
+        case .opticID:
+            print("Biometrics opticID"); return "Biometrics opticID"
+        @unknown default:
+            print("Biometrics Unavailable"); return "Biometrics Unavailable"
+        }
+    }
+}
+
+
+
+
+
+
 
 
 
@@ -49,6 +81,25 @@ extension AppDelegate{
     ///
     
     // it still working when comment all this code
+    
+    
+    
+    //MARK: -  Handle Deplink
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        
+        print("UIApplication.OpenURLOptionsKey")
+        
+        let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
+        if let scheme = urlComponents?.scheme{
+           
+            if (urlComponents?.host) != nil {
+                print("scheme \(scheme)")
+
+            }
+        }
+        return true
+    }
+    
     
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         
@@ -187,8 +238,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         // Handle the notification response here
         let userInfo = response.notification.request.content.userInfo; print("userInfo: \(userInfo)")
         
-       
-        
         guard let window = SceneDelegate.shared.sceneDelegate?.window,
               let navigationController = window.rootViewController as? UINavigationController  else{
             
@@ -207,7 +256,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     }
     
     
-    func updateBadgeIncrease() { // handle badge notificaation on the app icon
+   private func updateBadgeIncrease() { // handle badge notificaation on the app icon
         
         DispatchQueue.main.async {  // Badge sayısını güncelle
             UIApplication.shared.applicationIconBadgeNumber += 1

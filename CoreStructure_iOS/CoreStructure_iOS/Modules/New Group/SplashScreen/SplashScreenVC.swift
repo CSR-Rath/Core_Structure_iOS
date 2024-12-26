@@ -7,13 +7,15 @@
 
 import UIKit
 
-class SplashScreenVC: UIViewController {
+
+
+class SplashScreenVC: InteractionBaseViewController {
     
     lazy var btnCustomTabBar: MainButton = {
         let btn = MainButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setTitle("Custom", for: .normal)
-        btn.addTargetButton(target: self, action: #selector(didTappedButton))
+        btn.addTarget(self, action: #selector(didTappedButton), for: .touchUpInside)
         btn.tag = 0
         return btn
     }()
@@ -22,13 +24,13 @@ class SplashScreenVC: UIViewController {
         let btn = MainButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setTitle("Original", for: .normal)
-        btn.addTargetButton(target: self, action: #selector(didTappedButton))
+        btn.addTarget(self, action: #selector(didTappedButton), for: .touchUpInside)
         btn.tag = 1
         return btn
     }()
     
     lazy var stackButton: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [btnCustomTabBar,btnOriginal])
+        let stack = UIStackView(arrangedSubviews: [btnCustomTabBar, btnOriginal])
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .vertical
         stack.spacing = 20
@@ -39,7 +41,7 @@ class SplashScreenVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.barStyle  = .default
+        navigationController?.navigationBar.barStyle = .default
     }
     
     override func viewDidLoad() {
@@ -47,34 +49,31 @@ class SplashScreenVC: UIViewController {
         view.backgroundColor = .white
         setupConstraint()
     }
-}
-
-
-extension SplashScreenVC{
     
-    private func setupConstraint(){
+    private func setupConstraint() {
         view.addSubview(stackButton)
         
         NSLayoutConstraint.activate([
-            
             stackButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             stackButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             stackButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
-            
             btnCustomTabBar.heightAnchor.constraint(equalToConstant: 50),
             btnOriginal.heightAnchor.constraint(equalToConstant: 50)
         ])
-        
     }
     
     @objc private func didTappedButton(sender: UIButton) {
-        
-        SceneDelegate().gotoTabBar(indexSelected: 0)
-
+        let vc = TestVC()
+        vc.view.backgroundColor = .gray
+        self.navigationController?.pushViewController(vc, animated: true)
     }
-    
 }
 
-
-
-
+class TestVC: InteractionBaseViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Additional setup for TestVC
+    }
+    
+    
+}
