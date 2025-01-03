@@ -13,8 +13,6 @@ extension Notification.Name {
     static let didUpdateData = Notification.Name("didUpdateData")
 }
 
-
-
 class Test : UIViewController{
     
     func testing(){

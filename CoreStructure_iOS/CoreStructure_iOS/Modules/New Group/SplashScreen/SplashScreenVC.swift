@@ -7,21 +7,19 @@
 
 import UIKit
 
-
-
-class SplashScreenVC: InteractionBaseViewController {
+class SplashScreenVC: BaseInteractionController {
     
-    lazy var btnCustomTabBar: MainButton = {
-        let btn = MainButton()
+    lazy var btnCustomTabBar: BaseUIButton = {
+        let btn = BaseUIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.setTitle("Custom", for: .normal)
+        btn.titleButton = "Custom"
         btn.addTarget(self, action: #selector(didTappedButton), for: .touchUpInside)
         btn.tag = 0
         return btn
     }()
     
-    lazy var btnOriginal: MainButton = {
-        let btn = MainButton()
+    lazy var btnOriginal: BaseUIButton = {
+        let btn = BaseUIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setTitle("Original", for: .normal)
         btn.addTarget(self, action: #selector(didTappedButton), for: .touchUpInside)
@@ -57,23 +55,27 @@ class SplashScreenVC: InteractionBaseViewController {
             stackButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             stackButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             stackButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
-            btnCustomTabBar.heightAnchor.constraint(equalToConstant: 50),
-            btnOriginal.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
     
     @objc private func didTappedButton(sender: UIButton) {
-        let vc = TestVC()
-        vc.view.backgroundColor = .gray
-        self.navigationController?.pushViewController(vc, animated: true)
+        
+        let vc = UIViewController()
+        vc.view.backgroundColor = .white
+        
+        if sender.tag == 0 {
+            btnCustomTabBar.startLoading()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }else{
+            Loading.shared.showLoading()
+            btnCustomTabBar.stopLoading()
+        }
     }
 }
 
-class TestVC: InteractionBaseViewController {
+class TestVC: BaseInteractionController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Additional setup for TestVC
+        view.backgroundColor = .white
     }
-    
-    
 }

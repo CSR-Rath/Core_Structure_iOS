@@ -7,20 +7,6 @@
 
 import UIKit
 
-//UICollectionView().addRefreshControl(target: <#T##Any#>, action: <#T##Selector#>)
-
-extension UICollectionView{
-    
-//    func addRefreshControl(target: Any, action: Selector) {
-//         let refreshControl = UIRefreshControl()
-//         refreshControl.tintColor = .orange
-//         refreshControl.addTarget(target, action: action, for: .valueChanged)
-//         self.refreshControl = refreshControl // Assign the refresh control
-//     }
-    
-}
-
-
 
 // MARK: - Handle list collectionView
 extension UICollectionView {

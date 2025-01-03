@@ -64,7 +64,7 @@ extension UIViewController{
 //MARK: Handle NavigationBar
 extension UIViewController{
     
-    func leftBarButton(action: Selector? = #selector(popVC),
+    func leftBackButton(action: Selector? = #selector(popVC),
                        iconButton: UIImage? = UIImage(named: "icBackWhite"),
                        tintColor: UIColor = .white
     ){
@@ -135,5 +135,19 @@ extension UIViewController {
 
     @objc func dismissKeyboard() {
         view.endEditing(true)
+    }
+}
+
+
+extension UIView {
+
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        self.addGestureRecognizer(tap)
+    }
+
+    @objc func dismissKeyboard() {
+        self.endEditing(true)
     }
 }

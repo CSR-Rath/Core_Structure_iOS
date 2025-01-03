@@ -34,6 +34,7 @@ public typealias HTTPHeaders = [String: String]
         "Auth": "6213cbd30b40d782b27bcaf41f354fb8aa2353a9e59c66fba790febe9ab4cf44",
         "lang": "en"
     ]
+    
 }
 
 class ApiManager {
@@ -49,17 +50,17 @@ class ApiManager {
         res: @escaping (T) -> ()
     ) {
         // Check internet connection
-        if isConnectedToNetwork(){
+        if !isConnectedToNetwork(){
             AlertMessage.shared.alertError(status: .internet)
             return
         }
 
         let stringUrl = URL(string: AppConfiguration.shared.apiBaseURL + url)!
-        print("stringUrl ===> \(stringUrl)")
-                
         var request = URLRequest(url: stringUrl)
-        request.timeoutInterval = 60  // Set timeout duration
+        request.timeoutInterval = 60 // Set timeout duration
         request.httpMethod = method.rawValue
+        
+        print("stringUrl ===> \(stringUrl)")
         
         // Set Content-Type header
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -73,14 +74,17 @@ class ApiManager {
 
         // Add parameters
         do {
+            
             if let modelCodable = modelCodable {
                 
-                request.httpBody = try JSONEncoder().encode(modelCodable)
+                request.httpBody = try JSONEncoder().encode(modelCodable) // encode to date
                 print("modelCodable ==> \(modelCodable)")
+                
             } else if let param = param {
 
-                request.httpBody = try JSONSerialization.data(withJSONObject: param, options: [])
+                request.httpBody = try JSONSerialization.data(withJSONObject: param, options: []) // json to data
                 print("param ==> \(param)")
+                
             }
         }
         catch {
@@ -120,7 +124,6 @@ class ApiManager {
         }
         task.resume()
     }
-    
 }
 
 extension ApiManager{
@@ -139,14 +142,18 @@ extension ApiManager{
             AlertMessage.shared.alertError(message: "\(error.localizedDescription)", status: .requestError)
         }
     }
+    
 }
 
-
-
 // MARK: - Check internet connection
-func isConnectedToNetwork() -> Bool {
+private func isConnectedToNetwork() -> Bool {
     
-    var zeroAddress = sockaddr_in(sin_len: 0, sin_family: 0, sin_port: 0, sin_addr: in_addr(s_addr: 0), sin_zero: (0, 0, 0, 0, 0, 0, 0, 0))
+    var zeroAddress = sockaddr_in(sin_len: 0,
+                                  sin_family: 0,
+                                  sin_port: 0,
+                                  sin_addr: in_addr(s_addr: 0),
+                                  sin_zero: (0, 0, 0, 0, 0, 0, 0, 0))
+    
     zeroAddress.sin_len = UInt8(MemoryLayout.size(ofValue: zeroAddress))
     zeroAddress.sin_family = sa_family_t(AF_INET)
     
@@ -168,3 +175,4 @@ func isConnectedToNetwork() -> Bool {
     
     return ret
 }
+

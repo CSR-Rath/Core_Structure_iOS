@@ -31,8 +31,8 @@ class MoreView: UIView{
         return label
     }()
     
-    lazy var actionView: MainButton = {
-        let view = MainButton()
+    lazy var actionView: BaseUIButton = {
+        let view = BaseUIButton()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .clear
         view.layer.cornerRadius = 5
@@ -106,8 +106,6 @@ class MoreView: UIView{
         addSubview(lblName)
         addSubview(actionView)
         actionView.addSubview(stackMore)
-        
-        
         NSLayoutConstraint.activate([
             
             lblName.centerYAnchor.constraint(equalTo: centerYAnchor),
@@ -124,8 +122,6 @@ class MoreView: UIView{
             
             imageNext.heightAnchor.constraint(equalToConstant: 15),
             imageNext.widthAnchor.constraint(equalToConstant: 15),
-            
-            
         ])
     }
 }

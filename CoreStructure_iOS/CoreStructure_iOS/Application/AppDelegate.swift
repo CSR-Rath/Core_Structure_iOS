@@ -7,8 +7,8 @@
 
 import UIKit
 import UserNotifications //import UserNotifications 1 local
-import RealmSwift
-import LocalAuthentication
+import RealmSwift //For DB locale data
+import LocalAuthentication // For Get Biometrics Name
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         configureNotification() // Push notification 2 local
         print ( " getBiometricsName()" , getBiometricsName()) // Get Biometrice name
         print("didFinishLaunchingWithOptions") //AIzaSyBApx6bA_YNHU8zL_XBrpSI10wol9EBVsA
-        
+    
         return true
     }
     

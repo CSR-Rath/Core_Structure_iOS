@@ -12,8 +12,7 @@ class DebuggerRespose {
     static let shared = DebuggerRespose()
     
     func debuggerResult(urlRequest: URLRequest, data: Data?, error: Bool) {
-        let url = urlRequest.url!
-        let strUrl = url.absoluteString
+        let strUrl = urlRequest.url?.absoluteString
         let allHeaders = urlRequest.allHTTPHeaderFields ?? [:]
         let body = urlRequest.httpBody.flatMap { String(decoding: $0, as: UTF8.self) }
         
@@ -27,9 +26,9 @@ class DebuggerRespose {
         
         do {
             if let jsonObject = try JSONSerialization.jsonObject(with: newData, options: []) as? [String: Any] {
-                formatDictionary(json: jsonObject, url: strUrl, error: error )
+                formatDictionary(json: jsonObject, url: strUrl!, error: error )
             } else if let arrayObject = try JSONSerialization.jsonObject(with: newData, options: []) as? [[String: Any]] {
-                formatArrayOfDictionaries(json: arrayObject, url: strUrl, error: error )
+                formatArrayOfDictionaries(json: arrayObject, url: strUrl!, error: error )
             }
         } catch {
             print("Error parsing response: \(error.localizedDescription)")
@@ -66,41 +65,39 @@ class DebuggerRespose {
         printerFormat(url: url, data: jsonString, error: error)
     }
     
-    func validateModel<T: Codable>(model: T.Type,
-                                   data: Data?,
-                                   fun: String = "",
-                                   response: (T) -> Void) {
+    func validateModel<T: Codable>(
+        model: T.Type,
+        data: Data?,
+        fun: String = "",
+        response: @escaping (T) -> Void
+    ) {
         do {
             if let newData = data {
-                let json = try JSONDecoder().decode(T.self, from: newData)
+                let json = try JSONDecoder().decode(T.self, from: newData) // date to codable
                 response(json)
             }
         } catch let DecodingError.typeMismatch(type, context) {
             DispatchQueue.main.async {
                 print("Validator error: =>\(type), \(context.codingPath), \(context.debugDescription)")
-                print("Validator error: =>\(context.showError(functionName: fun))")
                 self.showAlert(message: context.showError(functionName: fun))
                 Loading.shared.hideLoading()
             }
         } catch {
             DispatchQueue.main.async {
-                print("Error decoding model: \(error.localizedDescription)")
-                self.showAlert(message: error.localizedDescription)
-                Loading.shared.hideLoading()
+                print("General error decoding model: \(error.localizedDescription)")
+                self.showAlert(message: "Error decoding model: \(error.localizedDescription)")
             }
         }
     }
     
-    func showAlert(title: String = "", 
+    func showAlert(title: String = "",
                    message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alert.addAction(action)
         
-        guard let window = SceneDelegate.shared.sceneDelegate?.window else{
-            return
-        }
-        
+        guard let window = SceneDelegate.shared.sceneDelegate?.window else { return }
+
         window.rootViewController?.present(alert, animated: true)
     }
 }

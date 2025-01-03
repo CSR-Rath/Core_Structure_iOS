@@ -10,7 +10,7 @@ import UIKit
 class OTPVC: UIViewController, UIGestureRecognizerDelegate {
     var codeTxt: OneTimeCodeTextField!
     
-    var btnClear = MainButton()
+    var btnClear = BaseUIButton()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

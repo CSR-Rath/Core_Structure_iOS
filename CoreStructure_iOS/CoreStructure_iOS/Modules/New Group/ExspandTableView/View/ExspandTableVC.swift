@@ -9,8 +9,8 @@ import UIKit
 
 class ExspandTableVC: UIViewController {
     
-    lazy var btnSingleExspand: MainButton = {
-        let btn = MainButton()
+    lazy var btnSingleExspand: BaseUIButton = {
+        let btn = BaseUIButton()
         btn.setTitle("Single Exspand", for: .normal)
         btn.backgroundColor = .orange
         btn.setTitleColor(.white, for: .normal)
@@ -18,8 +18,8 @@ class ExspandTableVC: UIViewController {
         return btn
     }()
     
-    lazy var btnMuntipleExspand: MainButton = {
-        let btn = MainButton()
+    lazy var btnMuntipleExspand: BaseUIButton = {
+        let btn = BaseUIButton()
         btn.setTitle("Muntiple Exspand", for: .normal)
         btn.backgroundColor = .red
         btn.setTitleColor(.white, for: .normal)
@@ -46,14 +46,14 @@ class ExspandTableVC: UIViewController {
 
     @objc private func tappedBtnMuntiple(){
         let vc = ExpandedMultipleSectionVC()
-        vc.leftBarButton()
+        vc.leftBackButton()
         navigationController?.pushViewController(vc, animated: true)
         
     }
     
     @objc private func tappedBtnSingle(){
         let vc = ExspandSingleSectionVC()
-        vc.leftBarButton()
+        vc.leftBackButton()
         navigationController?.pushViewController(vc, animated: true)
     }
     

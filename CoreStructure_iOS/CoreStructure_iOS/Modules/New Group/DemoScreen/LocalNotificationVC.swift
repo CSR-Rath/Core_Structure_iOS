@@ -8,7 +8,7 @@
 import UIKit
 
 class LocalNotificationVC: UIViewController, UIGestureRecognizerDelegate {
-    let buttonPush = MainButton()
+    let buttonPush = BaseUIButton()
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         

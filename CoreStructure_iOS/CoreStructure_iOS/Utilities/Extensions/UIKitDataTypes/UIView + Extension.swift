@@ -287,7 +287,7 @@ class HandleTapPanGesture {
         let translation = gesture.translation(in: gesture.view?.superview)
         
         switch gesture.state {
-        case .changed: break
+        case .changed: // break
             // Move the view with the gesture
             if translation.y > 0 {
                 view?.transform = CGAffineTransform(translationX: 0, y: translation.y)

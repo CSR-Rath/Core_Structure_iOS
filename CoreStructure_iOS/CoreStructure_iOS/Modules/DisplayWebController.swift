@@ -15,7 +15,7 @@ class DisplayWebController: UIViewController, WKNavigationDelegate, UIGestureRec
     
     var callBackKHQRTapped:(() -> ())?
     var webView: WKWebView!
-    var khQRlink: String?
+    var khQRlink: String? = "https://web.whatsapp.com/"
     var pluse = 0
     
     lazy var topView: UIView = {
@@ -98,7 +98,6 @@ class DisplayWebController: UIViewController, WKNavigationDelegate, UIGestureRec
         }
         
 //    https://checkout-sandbox.payway.com.kh/www.staticmerchanturl.com/Success
-//        www.staticmerchanturl.com/Success
         
         print("path:\(url.pathComponents)")
 
@@ -106,11 +105,6 @@ class DisplayWebController: UIViewController, WKNavigationDelegate, UIGestureRec
             navigationController?.popViewController(animated: true)
             callBackKHQRTapped?()
         }
-        
-//        if url.pathComponents.last!.contains("Success") {
-//            navigationController?.popViewController(animated: true)
-//            callBackKHQRTapped?()
-//        }
         
         print("url:\(url)")
         decisionHandler(WKNavigationActionPolicy.allow)

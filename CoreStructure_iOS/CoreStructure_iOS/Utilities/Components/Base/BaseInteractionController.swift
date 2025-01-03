@@ -10,7 +10,7 @@ import UIKit
 fileprivate var timer: Timer?
 fileprivate var duration: Int?
 
-class InteractionBaseViewController: UIViewController, UIGestureRecognizerDelegate {
+class BaseInteractionController: UIViewController, UIGestureRecognizerDelegate {
     
     private var increase: Int = 1
     
@@ -64,8 +64,9 @@ class InteractionBaseViewController: UIViewController, UIGestureRecognizerDelega
         duration! += increase
         print("Timer ==> \(duration!)")
         
-        if duration == 50{
-            AlertMessage.shared.alertError()
+        if duration == 30{
+            Loading.shared.hideLoading()
+//            AlertMessage.shared.alertError()
         }
     }
     

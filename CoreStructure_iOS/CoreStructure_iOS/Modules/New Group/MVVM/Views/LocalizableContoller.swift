@@ -12,8 +12,8 @@ class LocalizableContoller: UIViewController {
     var isKhmerLanguage: Bool = false
     private var textFields : [FloatingLabelTextField] = []
     
-    lazy var btnSwitchLang: MainButton = {
-        let btn = MainButton()
+    lazy var btnSwitchLang: BaseUIButton = {
+        let btn = BaseUIButton()
         btn.setTitle("Switch", for: .normal)
         btn.addTapGesture(target: self, action: #selector(didSwitch))
         return btn

@@ -231,7 +231,7 @@ extension PasscodeVC{
         
         for index in 0...11 {
             
-            let button = MainButton(type: .system)   //UIButton(type: .system)
+            let button = BaseUIButton(type: .system)   //UIButton(type: .system)
             button.backgroundColor = .clear
             button.setTitleColor(.orange, for: .normal)
             button.setTitle(items[index], for: .normal)

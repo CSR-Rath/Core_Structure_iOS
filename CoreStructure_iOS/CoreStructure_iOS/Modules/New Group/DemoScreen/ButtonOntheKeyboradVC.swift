@@ -22,8 +22,8 @@ class ButtonOntheKeyboradVC: UIViewController, UIGestureRecognizerDelegate {
         return textField
     }()
     
-    lazy var btnButton: MainButton = {
-        let btn = MainButton()
+    lazy var btnButton: BaseUIButton = {
+        let btn = BaseUIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setTitle("Done", for: .normal)
         return btn

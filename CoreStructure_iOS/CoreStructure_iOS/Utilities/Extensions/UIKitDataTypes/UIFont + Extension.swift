@@ -32,6 +32,4 @@ extension UILabel{
     func fontSemiBold(_ size: CGFloat ){
         self.font = UIFont.systemFont(ofSize: size, weight: .semibold)
     }
-    
-
 }

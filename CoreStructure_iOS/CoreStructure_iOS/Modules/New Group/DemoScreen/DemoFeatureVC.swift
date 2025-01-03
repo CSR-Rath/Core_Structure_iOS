@@ -130,7 +130,7 @@ extension DemoFeatureVC: UITableViewDelegate, UITableViewDataSource{
             
         }else{
             
-            item.viewController?.leftBarButton()
+            item.viewController?.leftBackButton()
             self.navigationController?.pushViewController(item.viewController!, animated: true)
         }
     }

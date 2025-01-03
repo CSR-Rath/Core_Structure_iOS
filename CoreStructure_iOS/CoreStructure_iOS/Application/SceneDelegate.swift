@@ -19,7 +19,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
          window = UIWindow(windowScene: windowScene)
         
-        let controller: UIViewController =  SplashScreenVC()
+        let controller: UIViewController =  SplashScreenVC() //DisplayWebController()//SplashScreenVC()
+        controller.view.backgroundColor = .gray
         let navigation = UINavigationController(rootViewController: controller)
         window?.rootViewController = navigation
         window?.makeKeyAndVisible()
@@ -77,3 +78,13 @@ extension SceneDelegate{
     
 }
 
+
+extension UIWindow{
+    
+     func changeRootViewController(_ vc: UIViewController) {
+        let navigation = UINavigationController(rootViewController: vc)
+        self.rootViewController = navigation  // Set the root view controller without animation
+        self.makeKeyAndVisible() // Make the window key and visible
+    }
+    
+}
