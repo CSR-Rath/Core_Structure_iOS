@@ -14,6 +14,7 @@
 		FA494BAA2C69EBD70086D346 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA494BA82C69EBD70086D346 /* LaunchScreen.storyboard */; };
 		FA70E73C2D264FC300A5EAE8 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70E73B2D264FC300A5EAE8 /* BaseViewController.swift */; };
 		FA70E73E2D264FD400A5EAE8 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70E73D2D264FD400A5EAE8 /* BaseView.swift */; };
+		FA7B07EA2D279FB5009EB9B7 /* CustomSegmentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7B07E92D279FB5009EB9B7 /* CustomSegmentedView.swift */; };
 		FA7FF8E82CDC722B00C824BD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FA7FF8EA2CDC722B00C824BD /* Localizable.strings */; };
 		FA8653FC2D1AAE0300D87D6F /* createDeepLinkApp.png in Resources */ = {isa = PBXBuildFile; fileRef = FA8653FB2D1AAE0300D87D6F /* createDeepLinkApp.png */; };
 		FA883E6F2D1D56D800F39E4B /* BaseInteractionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA883E6E2D1D56D800F39E4B /* BaseInteractionController.swift */; };
@@ -222,6 +223,7 @@
 		FA6D52D52C9A748F00710D93 /* PreventionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreventionVC.swift; sourceTree = "<group>"; };
 		FA70E73B2D264FC300A5EAE8 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		FA70E73D2D264FD400A5EAE8 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		FA7B07E92D279FB5009EB9B7 /* CustomSegmentedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedView.swift; sourceTree = "<group>"; };
 		FA7C0B2D2CDE1CEB00DDB3E6 /* SliderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderController.swift; sourceTree = "<group>"; };
 		FA7EFA2C2CF57CAD001FDFEC /* MoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreView.swift; sourceTree = "<group>"; };
 		FA7FF8D82CDC655300C824BD /* SetupLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupLanguage.swift; sourceTree = "<group>"; };
@@ -652,6 +654,7 @@
 		FA494BB62C6A06900086D346 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				FA7B07E82D279F95009EB9B7 /* Custom */,
 				FA70E73A2D264F8900A5EAE8 /* Base */,
 				FA9AE47B2CDB2B4300A07C50 /* PagviewController */,
 				FAB5D63C2C6C3D1900A31A6F /* TableViewCell + Components */,
@@ -692,6 +695,14 @@
 				FA883E6E2D1D56D800F39E4B /* BaseInteractionController.swift */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		FA7B07E82D279F95009EB9B7 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				FA7B07E92D279FB5009EB9B7 /* CustomSegmentedView.swift */,
+			);
+			path = Custom;
 			sourceTree = "<group>";
 		};
 		FA7FF8D22CDC581300C824BD /* Supporting */ = {
@@ -1333,6 +1344,7 @@
 				FA992EE72CF8BE98007B2EB8 /* String + Extension.swift in Sources */,
 				FA992EE82CF8BE98007B2EB8 /* Double + Extension.swift in Sources */,
 				FA992EE92CF8BE98007B2EB8 /* UIFont + Extension.swift in Sources */,
+				FA7B07EA2D279FB5009EB9B7 /* CustomSegmentedView.swift in Sources */,
 				FA992EEA2CF8BE98007B2EB8 /* UIView + Extension.swift in Sources */,
 				FA992EEB2CF8BE98007B2EB8 /* UILabel + Extension.swift in Sources */,
 				FA992EEC2CF8BE98007B2EB8 /* UIColor + Extension.swift in Sources */,

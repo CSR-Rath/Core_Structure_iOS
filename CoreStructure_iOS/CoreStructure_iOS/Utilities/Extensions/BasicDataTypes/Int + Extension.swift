@@ -7,19 +7,6 @@
 
 import Foundation
 
-enum DateFormat: String {
-    
-    case time = "h:mm a"  /// Time format (e.g., 5:30 PM)
-   
-    case short = "dd-MM-yyyy"  /// Short date format (e.g., 31/12/2023)
-    case shortSlash = "dd/MM/yyyy"  /// Short date format (e.g., 31/12/2023)
- 
-    case medium = "dd-MMMM-yyyy"   /// Medium date format (e.g., 31-December-2023)
-    case mediumSlash = "dd/MMMM/yyyy"   /// Medium date format (e.g., 31-December-2023)
-
-    case long = "EEEE, dd MMMM yyyy"  /// Long date format (e.g., Sunday, 31 December 2023)
-    case full = "EEEE, dd MMMM yyyy h:mm a"  /// Full date and time format (e.g., Sunday, 31 December 2023 5:30 PM)
-}
 
 
 extension Int{ // timestapm int to string date

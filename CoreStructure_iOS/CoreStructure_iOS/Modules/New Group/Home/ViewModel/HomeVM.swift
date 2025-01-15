@@ -11,7 +11,7 @@ class HomeVM{
     
     static func getWalet(success: @escaping (_ response: Response) -> Void){
         
-        ApiManager.shared.apiConnection(url: Endpoints.wallet)
+        ApiManager.shared.apiConnection(url: .wallet)
         { ( res : Response) in
             
             AlertMessage.shared.isSuccessfulResponse(res) {
@@ -22,7 +22,7 @@ class HomeVM{
     
     static func getUserInfor(success: @escaping (_ response: Response) -> Void){
         
-        ApiManager.shared.apiConnection(url: Endpoints.userInfor)
+        ApiManager.shared.apiConnection(url: .userInfor)
         { ( res : Response) in
             
             AlertMessage.shared.isSuccessfulResponse(res) {

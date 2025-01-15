@@ -12,7 +12,7 @@ import UIKit
 class TitleWithValueCell: UITableViewCell {
 
    static let identifier = "TitleWithValueCell"
-     let stack = UIStackView()
+    let stack = UIStackView()
     
     lazy var lblTitle: UILabel = {
         let lbl = UILabel()
@@ -23,7 +23,6 @@ class TitleWithValueCell: UITableViewCell {
         return lbl
     }()
     
-    
     lazy var lblValue: UILabel = {
         let lbl = UILabel()
         lbl.text = "_"
@@ -32,7 +31,6 @@ class TitleWithValueCell: UITableViewCell {
         lbl.textColor = .black
         return lbl
     }()
-    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

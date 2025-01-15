@@ -166,12 +166,6 @@ extension PageVC: UIPageViewControllerDataSource, UIPageViewControllerDelegate{
     func pageViewController(_ pageViewController: UIPageViewController,
                             willTransitionTo pendingViewControllers: [UIViewController]) {
         
-        //        guard let pendingViewController = pendingViewControllers.first,
-        //              let index = contentViewController.firstIndex(of: pendingViewController) else {
-        //            return
-        //        }
-        //
-        //        pendingPage = index
         
     }
     
@@ -226,7 +220,7 @@ extension PageVC : UICollectionViewDelegate, UICollectionViewDataSource, UIColle
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-//        if istransitionCompleted && currentPage != indexPath.item {
+
             istransitionCompleted = false
             let index = indexPath.item
             let direction: UIPageViewController.NavigationDirection = index > currentPage ? .forward : .reverse
@@ -237,9 +231,7 @@ extension PageVC : UICollectionViewDelegate, UICollectionViewDataSource, UIColle
                
                 print("status or istransitionCompleted == > " ,status)
             }
-//        }else{
-//            istransitionCompleted = true
-//        }
+
         self.currentPage = indexPath.item // Update current page after transition
 
     }
@@ -309,16 +301,4 @@ class TitleCell: UICollectionViewCell {
         ])
     }
     
-//    override var isSelected: Bool{
-//        didSet{
-//            if isSelected{
-//                lblTitle.textColor = .white
-//                backgroundColor = .orange
-//            }
-//            else{
-//                lblTitle.textColor = .white
-//                backgroundColor = .gray
-//            }
-//        }
-//    }
 }

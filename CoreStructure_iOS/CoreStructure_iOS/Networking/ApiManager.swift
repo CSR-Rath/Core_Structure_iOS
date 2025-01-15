@@ -42,7 +42,7 @@ class ApiManager {
     static let shared = ApiManager()
     
     func apiConnection<T: Codable>(
-        url: String,
+        url: Endpoint,
         method: HTTPMethod = .GET,
         param: Parameters? = nil,
         modelCodable: Encodable? = nil,
@@ -55,7 +55,7 @@ class ApiManager {
             return
         }
 
-        let stringUrl = URL(string: AppConfiguration.shared.apiBaseURL + url)!
+        let stringUrl = URL(string: AppConfiguration.shared.apiBaseURL + url.rawValue)!
         var request = URLRequest(url: stringUrl)
         request.timeoutInterval = 60 // Set timeout duration
         request.httpMethod = method.rawValue
