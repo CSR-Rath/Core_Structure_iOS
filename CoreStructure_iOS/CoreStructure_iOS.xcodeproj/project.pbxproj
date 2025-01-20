@@ -16,6 +16,7 @@
 		FA70E73E2D264FD400A5EAE8 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70E73D2D264FD400A5EAE8 /* BaseView.swift */; };
 		FA7B07EA2D279FB5009EB9B7 /* CustomSegmentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7B07E92D279FB5009EB9B7 /* CustomSegmentedView.swift */; };
 		FA7FF8E82CDC722B00C824BD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FA7FF8EA2CDC722B00C824BD /* Localizable.strings */; };
+		FA8534832D37AD90006A3688 /* DragDropViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8534822D37AD90006A3688 /* DragDropViewController.swift */; };
 		FA8653FC2D1AAE0300D87D6F /* createDeepLinkApp.png in Resources */ = {isa = PBXBuildFile; fileRef = FA8653FB2D1AAE0300D87D6F /* createDeepLinkApp.png */; };
 		FA883E6F2D1D56D800F39E4B /* BaseInteractionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA883E6E2D1D56D800F39E4B /* BaseInteractionController.swift */; };
 		FA88F1712CF9BD0000B37C73 /* DashedLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA88F1702CF9BD0000B37C73 /* DashedLineView.swift */; };
@@ -246,6 +247,7 @@
 		FA8409D82CCA3A0F004293A9 /* CollectionViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewHandler.swift; sourceTree = "<group>"; };
 		FA8409DA2CCA3A67004293A9 /* CollectionHandlerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionHandlerVC.swift; sourceTree = "<group>"; };
 		FA849AE42CCB2B5300A34B89 /* ContentSizedTableAndCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentSizedTableAndCollectionView.swift; sourceTree = "<group>"; };
+		FA8534822D37AD90006A3688 /* DragDropViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragDropViewController.swift; sourceTree = "<group>"; };
 		FA8653FB2D1AAE0300D87D6F /* createDeepLinkApp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = createDeepLinkApp.png; sourceTree = "<group>"; };
 		FA87CD772C799DB900349364 /* PageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageVC.swift; sourceTree = "<group>"; };
 		FA87CD792C799EB200349364 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
@@ -284,9 +286,6 @@
 		FAB5D6442C6CB0E900A31A6F /* CheckmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckmarkView.swift; sourceTree = "<group>"; };
 		FABB75392D237C57009463BC /* AuthenticationServicesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationServicesController.swift; sourceTree = "<group>"; };
 		FABB75402D237F0F009463BC /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
-		FABB75432D237F0F009463BC /* AccountAuthenticationModificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAuthenticationModificationViewController.swift; sourceTree = "<group>"; };
-		FABB75462D237F0F009463BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
-		FABB75482D237F0F009463BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FAD0ABB42C992C0200608D7F /* Note + Read.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note + Read.swift"; sourceTree = "<group>"; };
 		FAD38F2E2D14132200588DFA /* TransactionTypesEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTypesEnum.swift; sourceTree = "<group>"; };
 		FAE400DD2C7D8CC4001D031F /* UIImageView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView + Extension.swift"; sourceTree = "<group>"; };
@@ -570,7 +569,6 @@
 			isa = PBXGroup;
 			children = (
 				FA494B9C2C69EB9C0086D346 /* CoreStructure_iOS */,
-				FABB75422D237F0F009463BC /* Auth */,
 				FA494B9B2C69EB9C0086D346 /* Products */,
 				9FF0C3991FCAEC5EFAE4242D /* Pods */,
 				3A10CB71BE3CCF8869ECF84F /* Frameworks */,
@@ -674,6 +672,7 @@
 				FAF42EF82D1A72FC0070AF49 /* New Group1 */,
 				FAA3DF292CFF07ED00AD6DA0 /* New Group */,
 				FAF42EEF2D1A47F50070AF49 /* DisplayWebController.swift */,
+				FA8534822D37AD90006A3688 /* DragDropViewController.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -899,16 +898,6 @@
 				FABB75392D237C57009463BC /* AuthenticationServicesController.swift */,
 			);
 			path = AuthenticationServices;
-			sourceTree = "<group>";
-		};
-		FABB75422D237F0F009463BC /* Auth */ = {
-			isa = PBXGroup;
-			children = (
-				FABB75432D237F0F009463BC /* AccountAuthenticationModificationViewController.swift */,
-				FABB75452D237F0F009463BC /* MainInterface.storyboard */,
-				FABB75482D237F0F009463BC /* Info.plist */,
-			);
-			path = Auth;
 			sourceTree = "<group>";
 		};
 		FAF42EF12D1A48D10070AF49 /* Home + Feature */ = {
@@ -1296,6 +1285,7 @@
 				FA992EBB2CF8BE98007B2EB8 /* MenuDragDropCell.swift in Sources */,
 				FA88F1732CF9C04800B37C73 /* TriangleView.swift in Sources */,
 				FA992EBC2CF8BE98007B2EB8 /* DragDropCollectionVC.swift in Sources */,
+				FA8534832D37AD90006A3688 /* DragDropViewController.swift in Sources */,
 				FA992EBD2CF8BE98007B2EB8 /* ExpandedMultipleSectionCell.swift in Sources */,
 				FA992EBE2CF8BE98007B2EB8 /* ExspandTableVC.swift in Sources */,
 				FA992EBF2CF8BE98007B2EB8 /* ExspandSingleSectionVC.swift in Sources */,
@@ -1422,14 +1412,6 @@
 				FA7FF8EB2CDC722D00C824BD /* en */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		FABB75452D237F0F009463BC /* MainInterface.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FABB75462D237F0F009463BC /* Base */,
-			);
-			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

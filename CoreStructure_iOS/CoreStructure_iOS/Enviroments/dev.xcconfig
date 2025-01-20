@@ -9,12 +9,10 @@
 // https://help.apple.com/xcode/#/dev745c5c974
 
 
-BASE_URL =  http:/$()/192.168.0.110:1110/api/
+BASE_URL = http:/$()/192.168.0.110:1110/api/
 
 API_KEY = AIzaSyB7phb_51lTr2yjxAeY0flXXiE_w2q2tFM
 
 BUNDLE_ID = com.rath.CoreStructure-iOS
 
-PLIST_VERSION = 1
-
-Bundle_display_name =  Testing // app name
+Bundle_display_name = Testing

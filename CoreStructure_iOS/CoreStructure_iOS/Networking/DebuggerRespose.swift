@@ -65,12 +65,10 @@ class DebuggerRespose {
         printerFormat(url: url, data: jsonString, error: error)
     }
     
-    func validateModel<T: Codable>(
-        model: T.Type,
-        data: Data?,
-        fun: String = "",
-        response: @escaping (T) -> Void
-    ) {
+    func validateModel<T: Codable>(model: T.Type,
+                                   data: Data?,
+                                   fun: String = "",
+                                   response: @escaping (T) -> Void) {
         do {
             if let newData = data {
                 let json = try JSONDecoder().decode(T.self, from: newData) // date to codable

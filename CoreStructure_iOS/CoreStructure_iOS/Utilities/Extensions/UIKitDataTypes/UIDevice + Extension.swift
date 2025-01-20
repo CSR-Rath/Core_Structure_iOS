@@ -28,8 +28,8 @@ extension UIDevice {
         print("Vibrated")
     }
     
-    static func generateButtonFeedback(){
-        let generator = UIImpactFeedbackGenerator(style: .light) // You can change the style to .medium or .heavy
+    static func generateButtonFeedback(style: UIImpactFeedbackGenerator.FeedbackStyle = .medium){
+        let generator = UIImpactFeedbackGenerator(style: style)
         generator.prepare()
         generator.impactOccurred()
     }

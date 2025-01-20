@@ -15,6 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        print(queryPageSize(page: 10, size: 100, query: "Hello"))
+        
         setLanguage(langCode: .english) // default language en
         handleConfigurationRealmSwift() // Realm Swift
         handleNavicationTitle() // Title navigation bar

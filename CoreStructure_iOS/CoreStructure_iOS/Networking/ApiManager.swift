@@ -17,13 +17,13 @@ enum HTTPMethod: String {
 }
 
 public typealias Parameters = [String: Any]
-public typealias Success = (_ response: Data) -> Void
-public typealias Complete = () -> Void
+//public typealias Success = (_ response: Data) -> Void
+//public typealias Complete = () -> Void
 public typealias HTTPHeaders = [String: String]
 
 
 
- func getHeader() -> HTTPHeaders {
+func getHeader() -> HTTPHeaders {
     
     let token = ""   //UserDefaults.standard.string(forKey: DefaultKeys.accessToken) ?? ""
     
@@ -41,21 +41,21 @@ class ApiManager {
     
     static let shared = ApiManager()
     
-    func apiConnection<T: Codable>(
-        url: Endpoint,
-        method: HTTPMethod = .GET,
-        param: Parameters? = nil,
-        modelCodable: Encodable? = nil,
-        headers: HTTPHeaders? =  nil,
-        res: @escaping (T) -> ()
-    ) {
-        // Check internet connection
+    func apiConnection<T: Codable>(url: Endpoint,
+                                   method: HTTPMethod = .GET,
+                                   param: Parameters? = nil,
+                                   modelCodable: Encodable? = nil,
+                                   headers: HTTPHeaders? =  nil,
+                                   query: String = "",
+                                   res: @escaping (T) -> ()) {
+        
         if !isConnectedToNetwork(){
+            //Check internet connection
             AlertMessage.shared.alertError(status: .internet)
             return
         }
-
-        let stringUrl = URL(string: AppConfiguration.shared.apiBaseURL + url.rawValue)!
+        
+        let stringUrl = URL(string: AppConfiguration.shared.apiBaseURL + url.rawValue + query)!
         var request = URLRequest(url: stringUrl)
         request.timeoutInterval = 60 // Set timeout duration
         request.httpMethod = method.rawValue
@@ -65,23 +65,24 @@ class ApiManager {
         // Set Content-Type header
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        // Add additional headers
+       
         if let finalHeaders = headers {
+            // Add additional headers
             for (headerField, headerValue) in finalHeaders {
                 request.setValue(headerValue, forHTTPHeaderField: headerField)
             }
         }
-
-        // Add parameters
+        
+        
         do {
-            
+            // Add parameters
             if let modelCodable = modelCodable {
                 
-                request.httpBody = try JSONEncoder().encode(modelCodable) // encode to date
+                request.httpBody = try JSONEncoder().encode(modelCodable) // Encodable to date
                 print("modelCodable ==> \(modelCodable)")
                 
             } else if let param = param {
-
+                
                 request.httpBody = try JSONSerialization.data(withJSONObject: param, options: []) // json to data
                 print("param ==> \(param)")
                 
@@ -91,7 +92,7 @@ class ApiManager {
             print("Error setting HTTP body: \(error.localizedDescription)")
             return
         }
-
+        
         // Send the request
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             
@@ -108,14 +109,14 @@ class ApiManager {
             
             switch httpResponse.statusCode {
             case 200..<300:
-
+                
                 DebuggerRespose.shared.debuggerResult(urlRequest: request, data: data, error: false)
                 
                 DebuggerRespose.shared.validateModel(model: T.self, data: data) { objectData in
                     res(objectData)
                     print("validateModel ==> Success")
                 }
-
+                
             default:
                 
                 AlertMessage.shared.alertError(message: "\(httpResponse.statusCode)", status: .none)
@@ -176,3 +177,26 @@ private func isConnectedToNetwork() -> Bool {
     return ret
 }
 
+
+
+func queryPageSize(page: Int, size: Int, query: String? = nil) -> String {
+    var components = ["page=\(page)", "size=\(size)"]
+    
+    // privent has spacing query
+    if let query = query?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+        components.append("query=\(query)")
+    }
+    
+    return "?\(components.joined(separator: "&"))"
+}
+
+
+func A(){
+    ApiManager.shared.apiConnection(url: .guests,
+                                    query: queryPageSize(page: 0, size: 12)
+                                    
+    ) { (res: User) in
+        
+    }
+    
+}

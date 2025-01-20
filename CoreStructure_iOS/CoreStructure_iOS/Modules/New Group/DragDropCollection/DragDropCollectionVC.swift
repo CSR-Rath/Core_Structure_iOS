@@ -186,7 +186,6 @@ extension DragDropCollectionVC{
         let selectedItem = dataList[indexPath.item]
         print("selectedItem: \(selectedItem)")
         
-//        didSelectItemsCell?(MenuTitle(rawValue: selectedItem) ?? MenuTitle.none)
     }
 }
 

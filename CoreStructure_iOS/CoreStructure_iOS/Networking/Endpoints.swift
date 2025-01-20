@@ -7,19 +7,6 @@
 
 import Foundation
 
-struct Endpoints {
-    
-    static let test = "test"
-    static let wallet = "wallet"
-    static let userInfor = "userInfor"
-    
-    static let guests = "geusts"
-    static let room = "rooms"
-    static let roomType = "room_types"
-    static let reservations = "reservations"
-    
-}
-
 
 enum Endpoint: String {
     case test = "test"

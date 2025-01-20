@@ -14,7 +14,19 @@ class DataManager {
     private let userInforKey = "userInfor"
     private let phoneNumberKey = "phoneNumber"
     private let dragDropMenu = "dragDropMenu"
+    private let itemOneDropModel = "itemOneDropModel"
+    private let itemTwoDropModel = "itemTwoDropModel"
 }
+
+
+// enum String{
+//     case userDefaults
+//     case userInforKey
+//     case phoneNumberKey
+//     case dragDropMenu
+//     case itemDropModel
+//}
+
 
 // MARK: - Save object
 extension DataManager {
@@ -29,6 +41,15 @@ extension DataManager {
     
     func saveUser(data: [CheckPhoneNumberResult]) {
         saveObject(object: data, forKey: phoneNumberKey)
+    }
+    
+    
+    func saveItemOneDropModel(data: [ItemDropModel]) {
+        saveObject(object: data, forKey: itemOneDropModel)
+    }
+    
+    func saveItemTwoDropModel(data: [ItemDropModel]) {
+        saveObject(object: data, forKey: itemTwoDropModel)
     }
 }
 
@@ -45,6 +66,27 @@ extension DataManager {
     func getUserAPI() -> UserInforModel {
         return getObject(UserInforModel.self, with: userInforKey) ?? UserInforModel()
     }
+    
+    func getItemOneDropModel() -> [ItemDropModel]? {
+        return getObject([ItemDropModel].self, with: itemOneDropModel) ?? []
+    }
+    
+    func getItemTwoDropModel() -> [ItemDropModel]? {
+        return getObject([ItemDropModel].self, with: itemTwoDropModel) ?? []
+    }
+    
+}
+
+
+// Remove data
+extension DataManager {
+    func removeItemOneDropModel(){
+        userDefaults.removeObject(forKey: itemOneDropModel)
+    }
+    func removeItemTowDropModel(){
+        userDefaults.removeObject(forKey: itemTwoDropModel)
+    }
+    
 }
 
 // MARK: - Object Storage Functions

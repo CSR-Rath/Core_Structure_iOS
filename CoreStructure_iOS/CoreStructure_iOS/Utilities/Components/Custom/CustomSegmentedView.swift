@@ -8,11 +8,28 @@
 import Foundation
 import UIKit
 
+enum DesignUISegmentedView{
+    case home
+    case setting
+    case notification
+}
+
 class CustomSegmentedView: UIView {
 
     var buttons: [UIButton] = []
     private var selectorView: UIView!
-    var selectedSegmentIndex: Int = 0
+    
+    var selectedSegmentIndex: Int = 0{
+        didSet{
+            buttons.forEach({ btn in
+                if selectedSegmentIndex == btn.tag {
+                    btn.titleLabel?.fontBold(17)
+                }else{
+                    btn.titleLabel?.fontRegular(17)
+                }
+            })
+        }
+    }
 
     var segmentTitles: [String] = [] {
         didSet {
@@ -41,11 +58,13 @@ class CustomSegmentedView: UIView {
         buttons.forEach { $0.removeFromSuperview() }
         buttons.removeAll()
 
-        for title in segmentTitles {
+        for (index , title) in segmentTitles.enumerated() {
             let button = UIButton(type: .system)
             button.setTitle(title, for: .normal)
+            button.titleLabel?.fontRegular(16)
             button.addTarget(self, action: #selector(segmentTapped(_:)), for: .touchUpInside)
             button.translatesAutoresizingMaskIntoConstraints = false
+            button.tag = index
             buttons.append(button)
             addSubview(button)
         }
@@ -109,8 +128,9 @@ class Controller: UIViewController {
     }
 
     private func setupSegmentedView() {
-        segmentedView.segmentTitles = ["First", "Second", "Third"]
+        segmentedView.segmentTitles = ["First", "Second"]
         segmentedView.translatesAutoresizingMaskIntoConstraints = false
+        segmentedView.selectedSegmentIndex = 0
 
         view.addSubview(segmentedView)
 
@@ -120,7 +140,6 @@ class Controller: UIViewController {
             segmentedView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             segmentedView.heightAnchor.constraint(equalToConstant: 50)
         ])
-        
     }
 
     private func setupContentViews() {
@@ -137,7 +156,7 @@ class Controller: UIViewController {
         view.addSubview(thirdContentView)
 
         // Initial content view setup
-        showContentView(at: 0)
+
 
         NSLayoutConstraint.activate([
             firstContentView.topAnchor.constraint(equalTo: segmentedView.bottomAnchor),
@@ -166,13 +185,11 @@ class Controller: UIViewController {
         }
     }
 
-    @objc private func segmentChanged() {
-        showContentView(at: segmentedView.selectedSegmentIndex)
-    }
-
-    private func showContentView(at index: Int) {
+    @objc  private func segmentChanged(at index: UIButton) {
+        let index = index.tag
         firstContentView.isHidden = index != 0
         secondContentView.isHidden = index != 1
         thirdContentView.isHidden = index != 2
     }
 }
+

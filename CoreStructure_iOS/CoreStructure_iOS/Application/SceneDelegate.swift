@@ -19,13 +19,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
          window = UIWindow(windowScene: windowScene)
         
-        let controller: UIViewController =  Controller() //DisplayWebController()//SplashScreenVC()
+        let controller: UIViewController =  MultiSelectTableViewController() //DragDropViewController() //DisplayWebController()//SplashScreenVC()
         controller.view.backgroundColor = .gray
         let navigation = UINavigationController(rootViewController: controller)
         window?.rootViewController = navigation
         window?.makeKeyAndVisible()
     }
 }
+
+
 
 //MARK: - Handle change root controller
 extension SceneDelegate {
@@ -81,17 +83,17 @@ extension SceneDelegate{
 
 extension UIWindow{
     
-     func changeRootViewController(_ vc: UIViewController) {
-        let navigation = UINavigationController(rootViewController: vc)
-        self.rootViewController = navigation  // Set the root view controller without animation
-        self.makeKeyAndVisible() // Make the window key and visible
-    }
+    func changeRootViewController(_ vc: UIViewController) {
+    let navigation = UINavigationController(rootViewController: vc)
+    self.rootViewController = navigation  // Set the root view controller without animation
+    self.makeKeyAndVisible() // Make the window key and visible
+}
     
     private func saveSectionLogin(){
         //MARK: Check day for refresh token
-        let loginDate = Date()
-        let sevenDaysAfter = Calendar.current.date(byAdding: .day , value: 23, to: loginDate)!
-        let sevenMothAfter = Calendar.current.date(byAdding: .month , value: 1, to: loginDate)!
+//        let loginDate = Date()
+//        let sevenDaysAfter = Calendar.current.date(byAdding: .day , value: 23, to: loginDate)!
+//        let sevenMothAfter = Calendar.current.date(byAdding: .month , value: 1, to: loginDate)!
         
 //        if  UserDefaults.standard.object(forKey: AppConstants.logInFirst) == nil {
 //            UserDefaults.standard.set(sevenDaysAfter, forKey: AppConstants.changeDateDay)
