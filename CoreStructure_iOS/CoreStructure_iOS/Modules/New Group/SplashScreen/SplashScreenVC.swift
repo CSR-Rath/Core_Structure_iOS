@@ -63,12 +63,14 @@ class SplashScreenVC: BaseInteractionController {
         let vc = UIViewController()
         vc.view.backgroundColor = .white
         
+        SceneDelegate.shared.gotoTabBar()
+        
         if sender.tag == 0 {
-            btnCustomTabBar.startLoading()
-            self.navigationController?.pushViewController(vc, animated: true)
+//            btnCustomTabBar.startLoading()
+//            self.navigationController?.pushViewController(vc, animated: true)
         }else{
-            Loading.shared.showLoading()
-            btnCustomTabBar.stopLoading()
+//            Loading.shared.showLoading()
+//            btnCustomTabBar.stopLoading()
         }
     }
 }

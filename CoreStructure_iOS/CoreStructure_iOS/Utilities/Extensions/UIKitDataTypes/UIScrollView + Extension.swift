@@ -24,7 +24,6 @@ extension UIScrollView{ // including tableView collectionView
             self.alpha = 1
         }
     }
-
 }
 
 

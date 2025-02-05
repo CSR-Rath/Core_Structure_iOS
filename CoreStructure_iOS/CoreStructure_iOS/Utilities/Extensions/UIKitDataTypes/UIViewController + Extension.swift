@@ -105,7 +105,6 @@ extension UIViewController{
                                                                     weight: .regular),
                                   titleColor: UIColor = .white , backColor: UIColor = .mainBlueColor){
         
-
         // setup title font color
             let titleAttribute = [
                 NSAttributedString.Key.font: font,

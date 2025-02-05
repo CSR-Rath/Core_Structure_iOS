@@ -16,6 +16,11 @@ struct TitleIconModel{
 
 class CustomTabBarVC: UITabBarController {
     
+    private let firstVC = DemoFeatureVC()
+    private let secondVC = SecondViewController()
+    private let threeVC = ThreeViewController()
+    private let fourtVC = FourViewController()
+    
     private let dataList : [TitleIconModel] = [
         TitleIconModel(name: "VC", iconName: ""),
         TitleIconModel(name: "Package", iconName: ""),
@@ -25,16 +30,13 @@ class CustomTabBarVC: UITabBarController {
 
     var indexSelected: Int = 0{
         didSet{
-            
             print("indexSelected ==>\(indexSelected)")
-            
             // Update the title based on the selected index
             title = viewControllers?[indexSelected].title
             selectedIndex = indexSelected
             collactionView.reloadData()
         }
     }
-    
     
     lazy var collactionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -62,40 +64,26 @@ class CustomTabBarVC: UITabBarController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        firstVC.title =  "goodbye_message".localizeString()//"Demo Feature"
+        secondVC.title = "Demo 2"
+        threeVC.title = "Hello 3"
+        fourtVC.title = "Hello 4"
+        viewControllers = [firstVC, secondVC, threeVC, fourtVC]
+        title = viewControllers?[indexSelected].title?.localizeString()
     }
     
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-    
-        let firstVC = DemoFeatureVC()
-        firstVC.title =  "goodbye_message".localizeString()//"Demo Feature"
-        
-        let secondVC = SecondViewController()
-        secondVC.title = "Demo 2"
-        
-        let threeVC = ThreeViewController()
-        threeVC.title = "Hello 3"
-        
-        let fourtVC = FourViewController()
-        fourtVC.view.backgroundColor = .orange
-        fourtVC.title = "Hello 4"
-        
-        viewControllers = [firstVC, secondVC, threeVC, fourtVC]
-        
-       title = viewControllers?[indexSelected].title?.localizeString()
-        
         setupConstraintAndSetupController()
-        
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
-        //MARK: Setup items size collection view
-        if let layout = collactionView.collectionViewLayout as? UICollectionViewFlowLayout {
+        if let layout = collactionView.collectionViewLayout as? UICollectionViewFlowLayout { // handle cell items
             layout.minimumLineSpacing = 10
             layout.minimumInteritemSpacing = 0
             let itemWidth = (view.bounds.width-30) / 4
@@ -103,7 +91,6 @@ class CustomTabBarVC: UITabBarController {
             layout.itemSize = CGSize(width: itemWidth, height: itemHeight)
             layout.invalidateLayout()
         }
-        
     }
     
     //MARK: Handle Setup ViewController
@@ -118,18 +105,8 @@ class CustomTabBarVC: UITabBarController {
             collactionView.heightAnchor.constraint(equalToConstant: 85),
         
         ])
-        
-        print( "statusBarHeight ==> ", ConstantsHeight.statusBarHeight,
-               "\navigationBarHeight ==> " , ConstantsHeight.navigationBarHeight,
-               "\navailableHeight ==> ", ConstantsHeight.availableHeight,
-               "\nConstantsHeight.safeAreaTop ==> ", ConstantsHeight.safeAreaTop,
-               "\nConstantsHeight.safeAreaBottom ==> ", ConstantsHeight.safeAreaBottom
-        )
-        
     }
 }
-
-
 
 
 //MARK: Delegate and Datasource
@@ -143,26 +120,13 @@ extension CustomTabBarVC:  UICollectionViewDelegate, UICollectionViewDataSource 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomTabBarCell.identifier, for: indexPath) as! CustomTabBarCell
         
         cell.lblTitle.text = dataList[indexPath.item].name
+        cell.imgIcon.image = UIImage(systemName: "swift" )
         
         if indexSelected  == indexPath.item {
             configureSelectedCell(cell)
         } else {
             configureDeselectedCell(cell)
         }
-        
-        if indexPath.row == 0{
-            cell.imgIcon.image = UIImage(systemName: "swift" )
-        }else if indexPath.row == 1{
-            cell.imgIcon.image = UIImage(systemName: "swift" )
-        }else if indexPath.row == 2{
-            cell.imgIcon.image = UIImage(systemName: "swift" )
-        }else if indexPath.row == 3{
-            cell.imgIcon.image = UIImage(systemName: "swift" )
-        }else if indexPath.row == 4{
-            cell.imgIcon.image = UIImage(systemName: "swift" )
-        }
-        
-        //"\(indexPath.item+1).circle"
         
         return cell
     }
@@ -175,11 +139,9 @@ extension CustomTabBarVC:  UICollectionViewDelegate, UICollectionViewDataSource 
 //MARK: Handle Cell conditions
 
 private func configureSelectedCell(_ cell: CustomTabBarCell) {
-    
     cell.imgIcon.setImageColor(color: .white)
     cell.lblTitle.textColor = .white
     cell.lblTitle.fontBold(13)
-
     animateCellSelection(cell)
 }
 

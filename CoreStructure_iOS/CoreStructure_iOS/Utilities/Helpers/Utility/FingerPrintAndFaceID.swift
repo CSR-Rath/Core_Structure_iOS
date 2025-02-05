@@ -37,7 +37,6 @@ class BiometricAuthenticationManager {
                 }
             }
         } else {
-//            status(.no(error?.code ?? -1))
             status(.unavailable(error?.code ?? -1))
         }
     }

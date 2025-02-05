@@ -40,3 +40,20 @@ class TimerStartAndStop {
 }
 
 
+
+fileprivate func statusGreetingDay() {
+    
+    let hour   = (Calendar.current.component(.hour, from: Date()))
+    
+    switch hour {
+    case 0..<11 : 
+        print(NSLocalizedString("Morning", comment: "Morning"))
+    case 12..<18 : 
+        print(NSLocalizedString("Afternoon", comment: "Afternoon"))
+    case 19..<23 : 
+        print(NSLocalizedString("Evening", comment: "Evening"))
+        
+    default:
+        break
+    }
+}

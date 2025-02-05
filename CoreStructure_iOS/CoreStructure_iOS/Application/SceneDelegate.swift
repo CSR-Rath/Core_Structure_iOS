@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
          window = UIWindow(windowScene: windowScene)
         
-        let controller: UIViewController =  MultiSelectTableViewController() //DragDropViewController() //DisplayWebController()//SplashScreenVC()
+        let controller: UIViewController = SplashScreenVC()
         controller.view.backgroundColor = .gray
         let navigation = UINavigationController(rootViewController: controller)
         window?.rootViewController = navigation
@@ -44,7 +44,7 @@ extension SceneDelegate {
     
     func gotoTabBar(indexSelected: Int = 0){
         
-        let tabBarController = CustomTabBarVC() // Replace with your custom tab bar controller
+        let tabBarController = CustomTabBarVC()
         tabBarController.indexSelected = indexSelected
         
         // Get the current scene delegate

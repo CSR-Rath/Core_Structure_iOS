@@ -136,6 +136,7 @@
 		FA992F122CF8BE98007B2EB8 /* AlertInternetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2B108D2CB786EF0095CDB1 /* AlertInternetVC.swift */; };
 		FA992F132CF8BE98007B2EB8 /* Note + Read.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD0ABB42C992C0200608D7F /* Note + Read.swift */; };
 		FABB753A2D237C57009463BC /* AuthenticationServicesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABB75392D237C57009463BC /* AuthenticationServicesController.swift */; };
+		FAC407E02D437BDC009C9FF8 /* login.html in Resources */ = {isa = PBXBuildFile; fileRef = FAC407DF2D437BDB009C9FF8 /* login.html */; };
 		FAD38F2F2D14132200588DFA /* TransactionTypesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD38F2E2D14132200588DFA /* TransactionTypesEnum.swift */; };
 		FAF42EF02D1A47F50070AF49 /* DisplayWebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF42EEF2D1A47F50070AF49 /* DisplayWebController.swift */; };
 		FAFD6EA22D1BA817001CD0B3 /* ImageSlideshowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFD6EA12D1BA817001CD0B3 /* ImageSlideshowController.swift */; };
@@ -286,6 +287,7 @@
 		FAB5D6442C6CB0E900A31A6F /* CheckmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckmarkView.swift; sourceTree = "<group>"; };
 		FABB75392D237C57009463BC /* AuthenticationServicesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationServicesController.swift; sourceTree = "<group>"; };
 		FABB75402D237F0F009463BC /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
+		FAC407DF2D437BDB009C9FF8 /* login.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = login.html; sourceTree = "<group>"; };
 		FAD0ABB42C992C0200608D7F /* Note + Read.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note + Read.swift"; sourceTree = "<group>"; };
 		FAD38F2E2D14132200588DFA /* TransactionTypesEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTypesEnum.swift; sourceTree = "<group>"; };
 		FAE400DD2C7D8CC4001D031F /* UIImageView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView + Extension.swift"; sourceTree = "<group>"; };
@@ -707,6 +709,7 @@
 		FA7FF8D22CDC581300C824BD /* Supporting */ = {
 			isa = PBXGroup;
 			children = (
+				FAC407DF2D437BDB009C9FF8 /* login.html */,
 				FA8653FD2D1AAE1A00D87D6F /* Images */,
 				FA7FF8EA2CDC722B00C824BD /* Localizable.strings */,
 				FA8D7D782CDBC80200B45826 /* GoogleService-Info.plist */,
@@ -1198,6 +1201,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA992E992CF8B84E007B2EB8 /* GoogleService-Info.plist in Resources */,
+				FAC407E02D437BDC009C9FF8 /* login.html in Resources */,
 				FA7FF8E82CDC722B00C824BD /* Localizable.strings in Resources */,
 				FA8653FC2D1AAE0300D87D6F /* createDeepLinkApp.png in Resources */,
 				FA494BAA2C69EBD70086D346 /* LaunchScreen.storyboard in Resources */,

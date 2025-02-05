@@ -21,21 +21,20 @@ public typealias Parameters = [String: Any]
 //public typealias Complete = () -> Void
 public typealias HTTPHeaders = [String: String]
 
+private func getHeader() -> HTTPHeaders {
+      
+      let token = ""   //UserDefaults.standard.string(forKey: DefaultKeys.accessToken) ?? ""
+      
+      return [
+          "Authorization": "Bearer \(token)",
+          "Content-Type": "application/json",
+          "Authorize": "4ee0d884634c0b04360c5d26060eb0dac61209c0db21d84aa9b315f1599e9a41",
+          "Auth": "6213cbd30b40d782b27bcaf41f354fb8aa2353a9e59c66fba790febe9ab4cf44",
+          "lang": "en"
+      ]
+  }
 
 
-func getHeader() -> HTTPHeaders {
-    
-    let token = ""   //UserDefaults.standard.string(forKey: DefaultKeys.accessToken) ?? ""
-    
-    return [
-        "Authorization": "Bearer \(token)",
-        "Content-Type": "application/json",
-        "Authorize": "4ee0d884634c0b04360c5d26060eb0dac61209c0db21d84aa9b315f1599e9a41",
-        "Auth": "6213cbd30b40d782b27bcaf41f354fb8aa2353a9e59c66fba790febe9ab4cf44",
-        "lang": "en"
-    ]
-    
-}
 
 class ApiManager {
     
@@ -45,7 +44,7 @@ class ApiManager {
                                    method: HTTPMethod = .GET,
                                    param: Parameters? = nil,
                                    modelCodable: Encodable? = nil,
-                                   headers: HTTPHeaders? =  nil,
+                                   headers: HTTPHeaders? = getHeader(),
                                    query: String = "",
                                    res: @escaping (T) -> ()) {
         
@@ -102,6 +101,7 @@ class ApiManager {
                 self.handleError(error)
                 return
             }
+            
             // Handle HTTP response
             guard let httpResponse = response as? HTTPURLResponse else { return }
             
@@ -125,6 +125,7 @@ class ApiManager {
         }
         task.resume()
     }
+    
 }
 
 extension ApiManager{
@@ -144,39 +145,37 @@ extension ApiManager{
         }
     }
     
-}
-
-// MARK: - Check internet connection
-private func isConnectedToNetwork() -> Bool {
-    
-    var zeroAddress = sockaddr_in(sin_len: 0,
-                                  sin_family: 0,
-                                  sin_port: 0,
-                                  sin_addr: in_addr(s_addr: 0),
-                                  sin_zero: (0, 0, 0, 0, 0, 0, 0, 0))
-    
-    zeroAddress.sin_len = UInt8(MemoryLayout.size(ofValue: zeroAddress))
-    zeroAddress.sin_family = sa_family_t(AF_INET)
-    
-    let defaultRouteReachability = withUnsafePointer(to: &zeroAddress) {
-        $0.withMemoryRebound(to: sockaddr.self, capacity: 1) {zeroSockAddress in
-            SCNetworkReachabilityCreateWithAddress(nil, zeroSockAddress)
+    private func isConnectedToNetwork() -> Bool {
+        
+        var zeroAddress = sockaddr_in(sin_len: 0,
+                                      sin_family: 0,
+                                      sin_port: 0,
+                                      sin_addr: in_addr(s_addr: 0),
+                                      sin_zero: (0, 0, 0, 0, 0, 0, 0, 0))
+        
+        zeroAddress.sin_len = UInt8(MemoryLayout.size(ofValue: zeroAddress))
+        zeroAddress.sin_family = sa_family_t(AF_INET)
+        
+        let defaultRouteReachability = withUnsafePointer(to: &zeroAddress) {
+            $0.withMemoryRebound(to: sockaddr.self, capacity: 1) {zeroSockAddress in
+                SCNetworkReachabilityCreateWithAddress(nil, zeroSockAddress)
+            }
         }
+        
+        var flags: SCNetworkReachabilityFlags = SCNetworkReachabilityFlags(rawValue: 0)
+        if SCNetworkReachabilityGetFlags(defaultRouteReachability!, &flags) == false {
+            return false
+        }
+        
+        // Working for Cellular and WIFI
+        let isReachable = (flags.rawValue & UInt32(kSCNetworkFlagsReachable)) != 0
+        let needsConnection = (flags.rawValue & UInt32(kSCNetworkFlagsConnectionRequired)) != 0
+        let ret = (isReachable && !needsConnection)
+        
+        return ret
     }
     
-    var flags: SCNetworkReachabilityFlags = SCNetworkReachabilityFlags(rawValue: 0)
-    if SCNetworkReachabilityGetFlags(defaultRouteReachability!, &flags) == false {
-        return false
-    }
-    
-    // Working for Cellular and WIFI
-    let isReachable = (flags.rawValue & UInt32(kSCNetworkFlagsReachable)) != 0
-    let needsConnection = (flags.rawValue & UInt32(kSCNetworkFlagsConnectionRequired)) != 0
-    let ret = (isReachable && !needsConnection)
-    
-    return ret
 }
-
 
 
 func queryPageSize(page: Int, size: Int, query: String? = nil) -> String {
@@ -194,6 +193,7 @@ func queryPageSize(page: Int, size: Int, query: String? = nil) -> String {
 func A(){
     ApiManager.shared.apiConnection(url: .guests,
                                     query: queryPageSize(page: 0, size: 12)
+                                    
                                     
     ) { (res: User) in
         

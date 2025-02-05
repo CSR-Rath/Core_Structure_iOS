@@ -110,9 +110,6 @@ class CustomSegmentedView: UIView {
     }
 }
 
-
-
-
 class Controller: UIViewController {
     
     private let segmentedView = CustomSegmentedView()

@@ -13,7 +13,7 @@ import LocalAuthentication // For Get Biometrics Name
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         print(queryPageSize(page: 10, size: 100, query: "Hello"))
         
@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         configureNotification() // Push notification 2 local
         print ( " getBiometricsName()" , getBiometricsName()) // Get Biometrice name
         print("didFinishLaunchingWithOptions") //AIzaSyBApx6bA_YNHU8zL_XBrpSI10wol9EBVsA
-    
+        
         return true
     }
     
@@ -37,19 +37,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
 }
-
-//MARK: =================================== End AppDelegate ====================================
+// =================================== End AppDelegate ====================================
 
 
 extension AppDelegate{
     
-   private func getBiometricsType() -> LABiometryType {
+    private func getBiometricsType() -> LABiometryType {
         let context = LAContext()
         var error: NSError?
         guard context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) else { return .none }
         return context.biometryType
     }
-
+    
     private func getBiometricsName() -> String {
         switch getBiometricsType() {
         case .faceID:
@@ -67,13 +66,6 @@ extension AppDelegate{
 }
 
 
-
-
-
-
-
-
-
 // MARK: =============================== Start Handle Deep Link =================================
 extension AppDelegate{
     
@@ -84,8 +76,6 @@ extension AppDelegate{
     
     // it still working when comment all this code
     
-    
-    
     //MARK: -  Handle Deplink
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         
@@ -93,10 +83,10 @@ extension AppDelegate{
         
         let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
         if let scheme = urlComponents?.scheme{
-           
+            
             if (urlComponents?.host) != nil {
                 print("scheme \(scheme)")
-
+                
             }
         }
         return true
@@ -156,12 +146,10 @@ extension URL {
         }
     }
 }
-
-// MARK: =============================== End Handle Deep Link ===================================
+// =============================== End Handle Deep Link ===================================
 
 
 // MARK: =============================== Start Handle navigation contoller =======================
-
 extension AppDelegate{
     
     private func handleNavicationTitle(){
@@ -201,8 +189,7 @@ extension AppDelegate{
         
     }
 }
-
-// MARK: =============================== End Handle navigation contoller =========================
+// =============================== End Handle navigation contoller =========================
 
 
 
@@ -230,13 +217,13 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         let userInfo = notification.request.content.userInfo;  print("userInfo ==> \(userInfo)")
         
         completionHandler([.list, .banner, .sound])
-
+        
     }
     
     // didSelected notification
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         
-      
+        
         // Handle the notification response here
         let userInfo = response.notification.request.content.userInfo; print("userInfo: \(userInfo)")
         
@@ -258,7 +245,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     }
     
     
-   private func updateBadgeIncrease() { // handle badge notificaation on the app icon
+    private func updateBadgeIncrease() { // handle badge notificaation on the app icon
         
         DispatchQueue.main.async {  // Badge sayısını güncelle
             UIApplication.shared.applicationIconBadgeNumber += 1
@@ -266,8 +253,8 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     }
     
 }
+// =============================== End Setup Push Notification ==============================
 
-// MARK: =============================== End Setup Push Notification ==============================
 
 
 // MARK: =============================== Start Hanlde Realm Swift =================================
@@ -277,43 +264,23 @@ var realm: Realm!
 
 func handleConfigurationRealmSwift(){
     
-
     var config = Realm.Configuration(
-
-        // Set the new schema version. This must be greater than the previously used
-        // version (if you've never set a schema version before, the version is 0).
-
         schemaVersion: 0,
-
-        // Set the block which will be called automatically when opening a Realm with
-        // a schema version lower than the one set above
-
         migrationBlock: { migration, oldSchemaVersion in
-
-            // We haven’t migrated anything yet, so oldSchemaVersion == 0
-
-            if (oldSchemaVersion < 3) {
-                // Nothing to do!
-                // Realm will automatically detect new properties and removed properties
-                // And will update the schema on disk automatically
-            }
-    })
-
+            
+        })
+    
     Realm.Configuration.defaultConfiguration = config
     config = Realm.Configuration()
-//    config.deleteRealmIfMigrationNeeded = true
+    //    config.deleteRealmIfMigrationNeeded = true
     
-        let fileManager = FileManager.default
-        let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let realmURL = documentsDirectory.appendingPathComponent("default.realm")
+    let fileManager = FileManager.default
+    let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
+    let realmURL = documentsDirectory.appendingPathComponent("default.realm")
     
-        if fileManager.fileExists(atPath: realmURL.path) {
-            print("Realm file exists at: \(realmURL.path)")
-        } else {
-            print("Realm file does not exist.")
-        }
+    if fileManager.fileExists(atPath: realmURL.path) {
+        print("Realm file exists at: \(realmURL.path)")
+    } else {
+        print("Realm file does not exist.")
+    }
 }
-
-// MARK: =============================== End Hanlde Realm Swift ===================================
-
-

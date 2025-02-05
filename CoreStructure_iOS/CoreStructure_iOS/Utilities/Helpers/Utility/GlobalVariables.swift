@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-let  pageSize12: Int = 12
-let  pageSize30: Int = 30
-
+let size12: Int = 12
+let size30: Int = 30
+let screenDevice = UIScreen.main.bounds
 

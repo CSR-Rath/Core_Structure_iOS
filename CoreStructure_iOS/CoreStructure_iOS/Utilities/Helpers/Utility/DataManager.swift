@@ -19,14 +19,6 @@ class DataManager {
 }
 
 
-// enum String{
-//     case userDefaults
-//     case userInforKey
-//     case phoneNumberKey
-//     case dragDropMenu
-//     case itemDropModel
-//}
-
 
 // MARK: - Save object
 extension DataManager {
@@ -55,6 +47,7 @@ extension DataManager {
 
 // MARK: - Get object
 extension DataManager {
+    
     func getDragDropMenu() -> [MenuListModel]? {
         return getObject([MenuListModel].self, with: dragDropMenu) ?? []
     }
@@ -80,13 +73,14 @@ extension DataManager {
 
 // Remove data
 extension DataManager {
+    
     func removeItemOneDropModel(){
         userDefaults.removeObject(forKey: itemOneDropModel)
     }
+    
     func removeItemTowDropModel(){
         userDefaults.removeObject(forKey: itemTwoDropModel)
     }
-    
 }
 
 // MARK: - Object Storage Functions
