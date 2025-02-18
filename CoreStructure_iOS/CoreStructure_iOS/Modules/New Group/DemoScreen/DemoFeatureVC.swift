@@ -12,39 +12,20 @@ struct ListModel{
     let name: String
     let viewController: UIViewController?
 }
-//"goodbye_message".localizeString()
 
 class DemoFeatureVC: UIViewController {
     
     private var tableView: UITableView! = nil
     
-    
-    let items : [ListModel] = [
-        
-        ListModel(id: 1, name: "TableHandlerVC", viewController: TableHandlerVC()),
-        ListModel(id: 2, name: "PasscodeVC", viewController: PasscodeVC()),
-        ListModel(id: 3, name: "OTPVC", viewController: OTPVC()),
-        ListModel(id: 4, name: "BoardCollectionVC", viewController: BoardCollectionVC()),
-        ListModel(id: 5, name: "PanGestureTwoVC", viewController: PanGestureTwoVC()),
-        ListModel(id: 6, name: "CenteringCollectionViewCellVC", viewController: CenteringCellVC()),
-        ListModel(id: 7, name: "Cell Alert Error", viewController: nil),
-        ListModel(id: 8, name: "PanGestureVC", viewController: PanGestureVC()),
-        ListModel(id: 9, name: "GroupDateVC", viewController: GroupDateVC()),
-        ListModel(id: 10, name: "ExspandTableVC", viewController: ExspandTableVC()),
-        ListModel(id: 11, name: "DragDropCollectionVC", viewController: DragDropCollectionVC()),
-        ListModel(id: 12, name: "ButtonOntheKeyboradVC", viewController: ButtonOntheKeyboradVC()),
-        ListModel(id: 13, name: "HandleNavigationBarVC", viewController: HandleNavigationBarVC()),
-        ListModel(id: 14, name: "LocalNotificationVC", viewController: LocalNotificationVC()),
-        ListModel(id: 15, name: "PagViewControllerWithButtonVC", viewController: PagViewControllerWithButtonVC()),
-        ListModel(id: 16, name: "ViewController", viewController: PageViewController()),
-        ListModel(id: 17, name: "LocalizableContoller", viewController: LocalizableContoller()),
-        ListModel(id: 18, name: "SliderController", viewController: SliderController()),
-        ListModel(id: 19, name: "SectionedTableViewController", viewController: DragDropTableViewCellContoler()),
-        ListModel(id: 20, name: "SectionedTableViewController", viewController: ScannerController()),
-        ListModel(id: 21, name: "PreventionScreen", viewController: PreventionScreen()),
-        
-    ]
+    var currentPage: Int = 0
+    var totalList: Int = 0
 
+    var items : [ListModel] = []{
+        didSet{
+            tableView.reloadData()
+            tableView.endRefreshing()
+        }
+    }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .darkContent // or .default based on your needs
@@ -69,6 +50,7 @@ class DemoFeatureVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupConstraint()
+        pullRefresh()
     }
     
     private func setupConstraint(){
@@ -90,18 +72,41 @@ class DemoFeatureVC: UIViewController {
     
     @objc private func pullRefresh(){
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0) { [self] in
             
-            tableView.refreshControl?.endRefreshing()
-            
+            items =   [
+                
+                ListModel(id: 1, name: "TableHandlerVC", viewController: TableHandlerVC()),
+                ListModel(id: 2, name: "PasscodeVC", viewController: PasscodeVC()),
+                ListModel(id: 3, name: "OTPVC", viewController: OTPVC()),
+                ListModel(id: 4, name: "BoardCollectionVC", viewController: BoardCollectionVC()),
+                ListModel(id: 5, name: "PanGestureTwoVC", viewController: PanGestureTwoVC()),
+                ListModel(id: 6, name: "CenteringCollectionViewCellVC", viewController: CenteringCellVC()),
+                ListModel(id: 7, name: "Cell Alert Error", viewController: nil),
+                ListModel(id: 8, name: "PanGestureVC", viewController: PanGestureVC()),
+                ListModel(id: 9, name: "GroupDateVC", viewController: GroupDateVC()),
+                ListModel(id: 10, name: "ExspandTableVC", viewController: ExspandTableVC()),
+                ListModel(id: 11, name: "DragDropCollectionVC", viewController: DragDropCollectionVC()),
+                ListModel(id: 12, name: "ButtonOntheKeyboradVC", viewController: ButtonOntheKeyboradVC()),
+                ListModel(id: 13, name: "HandleNavigationBarVC", viewController: HandleNavigationBarVC()),
+                ListModel(id: 14, name: "LocalNotificationVC", viewController: LocalNotificationVC()),
+                ListModel(id: 15, name: "PagViewControllerWithButtonVC", viewController: PagViewControllerWithButtonVC()),
+                ListModel(id: 16, name: "ViewController", viewController: PageViewController()),
+                ListModel(id: 17, name: "LocalizableContoller", viewController: LocalizableContoller()),
+                ListModel(id: 18, name: "SliderController", viewController: SliderController()),
+                ListModel(id: 19, name: "SectionedTableViewController", viewController: DragDropTableViewCellContoler()),
+                ListModel(id: 20, name: "SectionedTableViewController", viewController: ScannerController()),
+                ListModel(id: 21, name: "PreventionScreen", viewController: PreventionScreen()),
+                ListModel(id: 22, name: "GenerateQRCodeVC", viewController: GenerateQRCodeVC()),
+            ]
         }
     }
-    
 }
 
 
 
 extension DemoFeatureVC: UITableViewDelegate, UITableViewDataSource{
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count
     }
@@ -112,84 +117,35 @@ extension DemoFeatureVC: UITableViewDelegate, UITableViewDataSource{
         return cell
     }
     
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let item =  items[indexPath.row]
         
-        
-        if item.id == 7  {
+        switch item.id{
+        case 7:
             AlertMessage.shared.alertError()
-        }else if item.id == 8 ||  item.id == 5 {
-            
-            let vc = item.viewController
-            vc?.modalPresentationStyle = .custom
-            vc?.transitioningDelegate = presentVC
-            
-            self.present(vc!, animated: true)
-            
-        }else{
-            
-            item.viewController?.leftBackButton()
+        case 5,8,22:
+            item.viewController!.transitioningDelegate = presentVC
+            item.viewController!.modalPresentationStyle = .custom
+            self.present(item.viewController!, animated: true)
+        default:
+            item.viewController?.leftBarButtonItem()
             self.navigationController?.pushViewController(item.viewController!, animated: true)
         }
     }
 
-}
-
-
-
-
-
-
-
-
-class SecondViewController: UIViewController {
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        let vc = UIViewController()
-        vc.view.backgroundColor = .green
-        self.navigationController?.pushViewController(vc, animated: true)
-        
+        if tableView.isPagination(indexPath: indexPath,
+                                    arrayOfData: items.count,
+                                    totalItems: totalList){
+            tableView.showLoadingSpinner()
+            currentPage += 1
+            fetchDataAPI()
+        }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .white
-        
-    }
-}
-
-
-class ThreeViewController: UIViewController {
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let vc = UIViewController()
-        vc.title = "Testing"
-        vc.view.backgroundColor = .green
-        self.navigationController?.pushViewController(vc, animated: true)
-        
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .white
-        
-    }
-}
-
-class FourViewController: UIViewController {
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let vc = UIViewController()
-        vc.view.backgroundColor = .green
-        self.navigationController?.pushViewController(vc, animated: false)
-        
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .white
+    func fetchDataAPI(){
+        tableView.hideLoadingSpinner()
     }
 }

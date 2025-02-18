@@ -46,7 +46,6 @@ class BaseUIButton: UIButton {
         super.init(frame: frame)
         setupButton()
         setupActivityIndicator()
-        print("Hello 1")
     }
     
     required init?(coder: NSCoder) {

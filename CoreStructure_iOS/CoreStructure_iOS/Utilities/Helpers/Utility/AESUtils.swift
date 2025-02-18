@@ -30,8 +30,8 @@ class AESUtils{
 
 extension String {
     
-   fileprivate func aesEncrypt(key: String, iv: String, options: Int = kCCOptionPKCS7Padding) -> String? {
-       
+    fileprivate func aesEncrypt(key: String, iv: String, options: Int = kCCOptionPKCS7Padding) -> String? {
+        
         if let keyData = key.data(using: String.Encoding.utf8),
            let data = self.data(using: String.Encoding.utf8),
            let cryptData    = NSMutableData(length: Int((data.count)) + kCCBlockSizeAES128) {
@@ -67,8 +67,8 @@ extension String {
         return nil
     }
     
-  fileprivate func aesDecrypt(key: String, iv: String, options: Int = kCCOptionPKCS7Padding) -> String? {
-      
+    fileprivate func aesDecrypt(key: String, iv: String, options: Int = kCCOptionPKCS7Padding) -> String? {
+        
         if let keyData = key.data(using: .utf8),
            let data = Data(base64Encoded: self),
            let cryptData = NSMutableData(length: Int(data.count) + kCCBlockSizeAES128) {

@@ -46,14 +46,14 @@ class ExspandTableVC: UIViewController {
 
     @objc private func tappedBtnMuntiple(){
         let vc = ExpandedMultipleSectionVC()
-        vc.leftBackButton()
+        vc.leftBarButtonItem()
         navigationController?.pushViewController(vc, animated: true)
         
     }
     
     @objc private func tappedBtnSingle(){
         let vc = ExspandSingleSectionVC()
-        vc.leftBackButton()
+        vc.leftBarButtonItem()
         navigationController?.pushViewController(vc, animated: true)
     }
     

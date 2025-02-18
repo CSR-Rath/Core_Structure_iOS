@@ -20,7 +20,6 @@ class BVM_VIP_VC: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .yellow
-        // Do any additional setup after loading the view.
     }
     
 }

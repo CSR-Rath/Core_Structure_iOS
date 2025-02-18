@@ -22,8 +22,8 @@ class UPCarouselFlowLayout: UICollectionViewFlowLayout {
         }
     }
     
-    var sideItemScale: CGFloat =  0.7 //0.6
-    var sideItemAlpha: CGFloat =  0.5 //0.6
+    var sideItemScale: CGFloat =  0.7 // 0.6
+    var sideItemAlpha: CGFloat =  0.5 // 0.6
     open var spacingMode = UPCarouselFlowLayoutSpacingMode.fixed(spacing: 25) //40
     
     fileprivate var state = LayoutState(size: CGSize.zero, direction: .horizontal)
@@ -124,4 +124,5 @@ class UPCarouselFlowLayout: UICollectionViewFlowLayout {
         
         return targetContentOffset
     }
+    
 }

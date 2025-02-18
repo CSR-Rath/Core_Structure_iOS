@@ -19,9 +19,7 @@ class PagViewControllerWithButtonVC: UIViewController, UIGestureRecognizerDelega
         
     }
     
- 
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -68,7 +66,11 @@ class PagViewControllerWithButtonVC: UIViewController, UIGestureRecognizerDelega
     }
     
     
-    private func setupPagviewAndButton(page: PageViewController,segment: SegmentedView, controllers: [UIViewController], titleButtons: [String],  indexSelected: Int){
+    private func setupPagviewAndButton(page: PageViewController,
+                                       segment: SegmentedView,
+                                       controllers: [UIViewController],
+                                       titleButtons: [String],
+                                       indexSelected: Int){
         
         page.controllers = controllers
         segment.items = titleButtons

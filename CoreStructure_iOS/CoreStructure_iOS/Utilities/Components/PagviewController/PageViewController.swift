@@ -35,15 +35,12 @@ class PageViewController: UIViewController {
         }
     }
     
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupPageController()
     }
 
-    
     private func setupPageController(){
         addChild(pageController)
         view.addSubview(pageController.view)
@@ -52,6 +49,7 @@ class PageViewController: UIViewController {
         pageController.view.backgroundColor = .white
         pageController.view.frame = view.bounds
     }
+    
 }
 
 
@@ -87,15 +85,6 @@ extension PageViewController: UIPageViewControllerDataSource, UIPageViewControll
         
         return controllers[nextIndex]
     }
-    
-//    func pageViewController(_ pageViewController: UIPageViewController,
-//                            willTransitionTo pendingViewControllers: [UIViewController]) {
-//        
-//        guard let pendingViewController = pendingViewControllers.first,
-//              let index = controllers.firstIndex(of: pendingViewController) else {
-//            return
-//        }
-//    }
     
     func pageViewController(_ pageViewController: UIPageViewController,
                             didFinishAnimating finished: Bool,

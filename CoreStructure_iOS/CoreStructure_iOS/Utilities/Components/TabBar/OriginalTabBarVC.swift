@@ -31,9 +31,9 @@ class OriginalTabBarVC: UITabBarController,UITabBarControllerDelegate {
     private func setupViewControllers() {
         // Create instances of view controllers
         let firstVC = DemoFeatureVC()
-        let secondVC = SecondViewController()
-        let threeVC = ThreeViewController()
-        let fourtVC = FourViewController()
+        let secondVC = UIViewController()
+        let threeVC = UIViewController()
+        let fourtVC = UIViewController()
         let five = UIViewController()
         
         
@@ -84,7 +84,6 @@ class OriginalTabBarVC: UITabBarController,UITabBarControllerDelegate {
           // Assign the appearance to the tab bar
           tabBar.backgroundColor = .mainBlueColor // Background color of the tab bar
           tabBar.standardAppearance = appearance
-//          tabBar.scrollEdgeAppearance = appearance // For scrollable content
 
        }
     

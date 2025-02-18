@@ -18,17 +18,15 @@ class HandleNavigationBarVC: UIViewController, UIGestureRecognizerDelegate {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        setupTitleNavigationBar()
+
         
         
     }
         
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupTitleNavigationBar(font:  UIFont.systemFont(ofSize: 30, weight: .regular),
-                                titleColor: .red,
-                                backColor: .orange
-        )
+
+        
     }
 
     
@@ -40,7 +38,7 @@ class HandleNavigationBarVC: UIViewController, UIGestureRecognizerDelegate {
         view.addSubview(tableView)
         
       
-        rightBarButton()
+        rightBarButtonItem()
 
         //Enable back swipe gesture
         navigationController?.interactivePopGestureRecognizer?.delegate = self

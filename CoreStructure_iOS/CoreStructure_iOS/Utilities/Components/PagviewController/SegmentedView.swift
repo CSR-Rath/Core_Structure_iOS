@@ -7,8 +7,6 @@
 
 import UIKit
 
-//
-
 class SegmentedView: UIView {
     private var isFirstTime = false
     
@@ -75,7 +73,6 @@ class SegmentedView: UIView {
 
     }
 }
-
 
 extension SegmentedView{
     

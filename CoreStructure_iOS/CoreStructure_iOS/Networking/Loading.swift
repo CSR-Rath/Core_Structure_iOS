@@ -43,7 +43,8 @@ class Loading : UIView {
     
     func showLoading(alpha: CGFloat = 0.5 ) {
         DispatchQueue.main.async { [self] in
-            guard let window = SceneDelegate.shared.sceneDelegate?.window else { return }
+            
+            guard let window = sceneDelegate?.window else { return }
             self.frame = window.bounds
             window.addSubview(self)
             loadingView.frame = window.bounds
@@ -59,5 +60,4 @@ class Loading : UIView {
             self.removeFromSuperview()
         }
     }
-    
 }

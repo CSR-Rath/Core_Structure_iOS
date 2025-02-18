@@ -8,7 +8,5 @@
 import Foundation
 import UIKit
 
-let size12: Int = 12
-let size30: Int = 30
 let screenDevice = UIScreen.main.bounds
 

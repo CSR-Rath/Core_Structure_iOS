@@ -7,6 +7,10 @@
 
 import UIKit
 
+
+
+
+
 //MARK: for animate show heide
 extension UIView{
     
@@ -108,10 +112,6 @@ extension UIView {
     }
     
     
-
-    
-    
-    
     @objc private func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: self.superview)
         
@@ -140,13 +140,7 @@ extension UIView {
                 self.transform = .identity //Reset position
             }
             
-            //            if translation.y > UIView.dropHeight {
-            //
-            //            } else {
-            //                UIView.animate(withDuration: 0.1) {
-            //                    self.transform = .identity //Reset position
-            //                }
-            //            }
+            
             
         default:
             
@@ -219,10 +213,6 @@ extension UIView {
                                          style: .plain, target: self,
                                          action: #selector(doneButtonTapped))
         
-        // Create a "Done" button
-        //        let cancelButton = UIBarButtonItem(title: "Cancel",
-        //                                         style: .plain, target: self,
-        //                                         action: #selector(cancelButtonTapped))
         
         // Add buttons to the toolbar
         toolbar.items = [flexibleSpace, doneButton]
@@ -241,13 +231,13 @@ extension UIView {
 // MARK: - UITapGestureRecognizer and UIPanGestureRecognizer
 
 class HandleTapPanGesture {
-
+    
     static let shared = HandleTapPanGesture()
     
     // Callback properties
-     var onTap: (() -> Void)?
-     var onPan: ((CGFloat) -> Void)?
-
+    var onTap: (() -> Void)?
+    var onPan: ((CGFloat) -> Void)?
+    
     
     private init() {} // Prevent external initialization
     
@@ -261,25 +251,25 @@ class HandleTapPanGesture {
     @objc func viewTappedHelper() {
         print("View was tapped! ==> Helper")
     }
-
+    
     func addTapGesture(to view: UIView) {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
         view.addGestureRecognizer(tapGesture)
         view.isUserInteractionEnabled = true // Ensure user interaction is enabled
     }
-
+    
     func addPanGesture(to view: UIView) {
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
         view.addGestureRecognizer(panGesture)
         view.isUserInteractionEnabled = true // Ensure user interaction is enabled
     }
-
+    
     @objc private func viewTapped(_ gesture: UITapGestureRecognizer) {
- 
+        
         onTap?()
         
     }
-
+    
     
     
     @objc private func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
@@ -292,7 +282,7 @@ class HandleTapPanGesture {
             if translation.y > 0 {
                 view?.transform = CGAffineTransform(translationX: 0, y: translation.y)
             }
-
+            
         case .ended:
             print("translation.y ===> \(translation.y)")
             
@@ -305,28 +295,73 @@ class HandleTapPanGesture {
                     view?.transform = .identity //Reset position
                 }
             }
-        
+            
         default:
             
             break
         }
     }
 }
-    
-    
+
+
 // MARK: - Mark makeSecure when screenShot or screenRecord
 extension UIView {
-
+    
     func makeSecure() {
-           let field = UITextField()
-           let view = UIView(frame: CGRect(x: 0, y: 0, width: field.frame.self.width, height: field.frame.self.height))
-           field.isSecureTextEntry = true
-           self.addSubview(field)
-           field.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-           field.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-           self.layer.superlayer?.addSublayer(field.layer)
-           field.layer.sublayers?.last?.addSublayer(self.layer)
-           field.leftView = view
-           field.leftViewMode = .always
-       }
+        let field = UITextField()
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: field.frame.self.width, height: field.frame.self.height))
+        field.isSecureTextEntry = true
+        self.addSubview(field)
+        field.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        field.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        self.layer.superlayer?.addSublayer(field.layer)
+        field.layer.sublayers?.last?.addSublayer(self.layer)
+        field.leftView = view
+        field.leftViewMode = .always
+    }
 }
+
+
+extension UIView{
+    
+    func viewContainingController() -> UIViewController? {
+        // for use push view controller in the UIView
+        var nextResponder: UIResponder? = self
+        
+        repeat {
+            nextResponder = nextResponder?.next
+            
+            if let viewController = nextResponder as? UIViewController {
+                return viewController
+            }
+            
+        } while nextResponder != nil
+        
+        return nil
+    }
+    
+    @objc func shareView(viewToShare: UIView) {
+        
+        // Prepare the activity view controller with the view to share
+        let activityViewController = UIActivityViewController(activityItems: [viewToShare],
+                                                              applicationActivities: nil)
+        
+        // For iPads, you need to specify the source view for the popover
+        if let popoverController = activityViewController.popoverPresentationController {
+            popoverController.sourceView = viewToShare
+            popoverController.sourceRect = CGRect(x: viewToShare.bounds.midX,
+                                                  y: viewToShare.bounds.midY,
+                                                  width: 0, height: 0)
+            popoverController.permittedArrowDirections = []
+        }
+        
+        // Present the activity view controller to share
+        viewContainingController()?.present(activityViewController, animated: true, completion: nil)
+    }
+    
+    func addSubviews(of views: UIView...) {
+        views.forEach { addSubview($0) }
+    }
+}
+
+

@@ -12,7 +12,7 @@ import UIKit
 struct ConstantsHeight{
     
 //    SceneDelegate().window?.windowScene?.statusBarManager?.statusBarFrame.height
-    private let window = SceneDelegate.shared.sceneDelegate?.window
+//    private let window = SceneDelegate.shared.sceneDelegate?.window
     static let screen = UIScreen.main.bounds
     static let navigationBarHeight: CGFloat = UINavigationController().navigationBar.frame.height
 //    static let statusBarHeight =   UIApplication.shared.windows.first?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0

@@ -17,11 +17,6 @@ extension UIImageView {
         self.tintColor = color
     }
     
-}
-
-
-extension UIImageView {
-    
     func loadingImage(urlString: String,
                       defaultImage: UIImage = .imgEmpty,
                       style: UIActivityIndicatorView.Style = .medium ) {
@@ -49,12 +44,14 @@ extension UIImageView {
         guard let url = URL(string: urlString) else {
             activityIndicator.stopAnimating()
             activityIndicator.removeFromSuperview()
+            self.image = defaultImage // Set default image on invalid URL
             return
         }
         
         // Fetch the image data
         URLSession.shared.dataTask(with: url) { data, response, error in
             DispatchQueue.main.async {
+                // Stop the activity indicator and remove it from the view
                 activityIndicator.stopAnimating()
                 activityIndicator.removeFromSuperview()
                 
@@ -74,3 +71,4 @@ extension UIImageView {
         }.resume()
     }
 }
+

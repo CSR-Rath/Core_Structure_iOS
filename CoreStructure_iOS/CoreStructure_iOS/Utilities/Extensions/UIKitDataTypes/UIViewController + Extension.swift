@@ -7,48 +7,137 @@
 
 import UIKit
 
+//MARK: Handle Navigationbar
+extension UIViewController{
+    
+    func leftBarButtonItem(action: Selector? = #selector(leftBarButtonItemAction),
+                           iconButton: UIImage? = UIImage(named: "icBackWhite"),
+                           tintColor: UIColor! = .white
+    ){
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: iconButton?.withRenderingMode(.alwaysOriginal).withTintColor(tintColor!),
+            style: .plain,
+            target: self,
+            action: action
+        )
+    }
+    
+    func rightBarButtonItem(action: Selector? = #selector(leftBarButtonItemAction),
+                            iconButton: UIImage? = UIImage(named: "icNextWhite")
+    ){
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: iconButton?.withRenderingMode(.alwaysOriginal),
+            style: .plain,
+            target: self,
+            action: action
+        )
+    }
+    
+    @objc private func leftBarButtonItemAction() {
+        
+        // Check if the current view controller is presented modally
+        if (self.navigationController?.presentingViewController) != nil {
+            print("dismiss"); self.dismiss(animated: true)
+        } else {
+            print("popViewController"); self.navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    func navigationBarAppearance(titleColor: UIColor = .white,
+                                 barColor: UIColor = .mainBlueColor){
+        
+        let setupFont: UIFont = UIFont.systemFont(ofSize: 16,weight: .bold)
+        
+        let appearance = UINavigationBarAppearance()
+        
+        appearance.titleTextAttributes = [
+            .foregroundColor: titleColor,
+            .font: setupFont
+        ]
+        
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = barColor
+        appearance.shadowColor = barColor
+        
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+    }
+}
 
-//MARK: For action
+//MARK: Action ViewController
+extension UIViewController{
+    
+    @objc func dismiss(animated: Bool = true){
+        self.dismiss(animated: animated)
+    }
+    
+    @objc func popViewController(animated: Bool = true){
+        self.navigationController?.popViewController(animated: animated)
+    }
+    
+    @objc func popToRootViewController(animated: Bool = true){
+        self.navigationController?.popToRootViewController(animated: animated)
+    }
+    
+    @objc func pushViewController(viewController: UIViewController){
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    @objc func popToViewController(viewController: UIViewController){
+        self.navigationController?.popToViewController(viewController, animated: true)
+    }
+}
+
+extension UIView {
+    
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        self.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        self.endEditing(true)
+    }
+}
+
+// MARK: EndEditing TextField When touch around else TextFields
+extension UIViewController {
+    
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+}
+
 extension UIViewController{
     
     
-    @objc private func ImageSharing(viewSharing: UIView) {
+    @objc func shareView(viewToShare: UIView) {
         
-        // Prepare the activity view controller
-        let activityViewController = UIActivityViewController(activityItems: [viewSharing],
+        // Prepare the activity view controller with the view to share
+        let activityViewController = UIActivityViewController(activityItems: [viewToShare],
                                                               applicationActivities: nil)
         
-        // For iPads, you must specify the source view
+        // For iPads, you need to specify the source view for the popover
         if let popoverController = activityViewController.popoverPresentationController {
-            popoverController.sourceView = viewSharing
-            popoverController.sourceRect = CGRect(x: viewSharing.bounds.midX,
-                                                  y: viewSharing.bounds.midY,
+            popoverController.sourceView = viewToShare
+            popoverController.sourceRect = CGRect(x: viewToShare.bounds.midX,
+                                                  y: viewToShare.bounds.midY,
                                                   width: 0, height: 0)
             popoverController.permittedArrowDirections = []
         }
         
-        // Present the activity view controller
+        // Present the activity view controller to share
         present(activityViewController, animated: true, completion: nil)
     }
     
-    @objc func touchDismiss(){
-        self.dismiss(animated: true) {
-        }
-    }
     
-    @objc func touchPopViewController(animated: Bool = true){
-        self.navigationController?.popViewController(animated: animated)
-    }
-    
-    @objc func touchPopToRootViewController(animated: Bool = true){
-        self.navigationController?.popToRootViewController(animated: animated)
-    }
-    
-    
-    
-    @objc func touchPopToViewController(){
-        self.navigationController?.popToViewController(self, animated: true)
-    }
     
     @objc func presentTransaction(){
         
@@ -60,93 +149,3 @@ extension UIViewController{
     }
 }
 
-
-//MARK: Handle NavigationBar
-extension UIViewController{
-    
-    func leftBackButton(action: Selector? = #selector(popVC),
-                       iconButton: UIImage? = UIImage(named: "icBackWhite"),
-                       tintColor: UIColor = .white
-    ){
-        navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: iconButton?.withRenderingMode(.alwaysOriginal).withTintColor(tintColor),
-            style: .plain,
-            target: self,
-            action: action
-        )
-    }
-    
-    func rightBarButton(action: Selector? = #selector(popVC),
-                        iconButton: UIImage? = UIImage(named: "icNextWhite")
-    ){
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: iconButton?.withRenderingMode(.alwaysOriginal),
-            style: .plain,
-            target: self,
-            action: action
-        )
-    }
-    
-    
-
-   @objc private func popVC(){
-       print("popVC ===> buttonBack")
-        self.navigationController?.popViewController(animated: true)
-    }
-  
-    
-}
-
-
-//MARK: Handle NavigationViewController
-extension UIViewController{
-    
-    func setupTitleNavigationBar( font: UIFont? = UIFont.systemFont(ofSize: 17,
-                                                                    weight: .regular),
-                                  titleColor: UIColor = .white , backColor: UIColor = .mainBlueColor){
-        
-        // setup title font color
-            let titleAttribute = [
-                NSAttributedString.Key.font: font,
-                                  NSAttributedString.Key.foregroundColor: titleColor,
-            ]
-
-            let appearance = UINavigationBarAppearance()
-            appearance.configureWithOpaqueBackground()
-            appearance.backgroundColor = backColor
-            appearance.shadowColor = backColor
-            appearance.titleTextAttributes = titleAttribute as [NSAttributedString.Key : Any]
-            navigationController?.navigationBar.standardAppearance = appearance
-            navigationController?.navigationBar.scrollEdgeAppearance = appearance
-    }
-}
-
-
-
-// MARK: EndEditing TextField When touch around else TextFields
-extension UIViewController {
-
-    func hideKeyboardWhenTappedAround() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
-    }
-
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
-    }
-}
-
-
-extension UIView {
-
-    func hideKeyboardWhenTappedAround() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        self.addGestureRecognizer(tap)
-    }
-
-    @objc func dismissKeyboard() {
-        self.endEditing(true)
-    }
-}

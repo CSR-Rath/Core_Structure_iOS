@@ -299,7 +299,6 @@ class ItemView : UIView{
         stack.axis = .horizontal
         stack.alignment = .center
         stack.distribution = .fill
-//        stack.layoutMargins = UIEdgeInsets(top: <#T##CGFloat#>, left: <#T##CGFloat#>, bottom: <#T##CGFloat#>, right: <#T##CGFloat#>)
         return stack
     }()
     

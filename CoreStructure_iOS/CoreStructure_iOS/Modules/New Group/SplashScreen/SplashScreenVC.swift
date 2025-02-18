@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SplashScreenVC: BaseInteractionController {
+class SplashScreenVC: UIViewController {
     
     lazy var btnCustomTabBar: BaseUIButton = {
         let btn = BaseUIButton()
@@ -44,8 +44,10 @@ class SplashScreenVC: BaseInteractionController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .orange
         setupConstraint()
+        navigationBarAppearance()
+        title = "Please choose"
     }
     
     private func setupConstraint() {
@@ -59,20 +61,25 @@ class SplashScreenVC: BaseInteractionController {
     }
     
     @objc private func didTappedButton(sender: UIButton) {
-        
-        let vc = UIViewController()
-        vc.view.backgroundColor = .white
-        
-        SceneDelegate.shared.gotoTabBar()
-        
-        if sender.tag == 0 {
-//            btnCustomTabBar.startLoading()
-//            self.navigationController?.pushViewController(vc, animated: true)
-        }else{
-//            Loading.shared.showLoading()
-//            btnCustomTabBar.stopLoading()
-        }
+
+        replaceNavigationController()
     }
+    
+    @objc func replaceNavigationController() {
+
+        let secondVC = CustomTabBarVC()// Create a new view controller (e.g., CustomTabBarVC)
+
+        // Wrap it in a new UINavigationController
+        let newNavController = UINavigationController(rootViewController: secondVC)
+        
+        // Access the current SceneDelegate and update the window's rootViewController
+        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+            sceneDelegate.window?.rootViewController = newNavController
+            sceneDelegate.window?.makeKeyAndVisible()
+        }
+        
+    }
+
 }
 
 class TestVC: BaseInteractionController {
@@ -81,3 +88,6 @@ class TestVC: BaseInteractionController {
         view.backgroundColor = .white
     }
 }
+
+
+

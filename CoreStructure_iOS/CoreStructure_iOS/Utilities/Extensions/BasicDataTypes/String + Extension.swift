@@ -110,4 +110,186 @@ extension String{
     
 }
 
+class GenerateQRCodeVC: UIViewController {
+    
+    let viewtest = viewTest()
+    override func loadView() {
+        super.loadView()
+        
+        view = viewtest
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .clear
+        viewtest.actionDismiss = {
+            self.dismiss()
+        }
+    }
+}
+
+
+
+extension UIView{
+    
+    func setupConstraintView(left: CGFloat = 0,
+                             right: CGFloat = 0,
+                             top: CGFloat = 0,
+                             bottom: CGFloat = 0){
+        
+        NSLayoutConstraint.activate([
+            self.leftAnchor.constraint(equalTo: leftAnchor,constant: left),
+            self.rightAnchor.constraint(equalTo: rightAnchor,constant: right),
+            self.topAnchor.constraint(equalTo: topAnchor,constant: top),
+            self.bottomAnchor.constraint(equalTo: bottomAnchor,constant: bottom),
+        
+        ])
+    }
+}
+
+
+class viewTest : UIView{
+    
+    var actionDismiss: (()->())?
+    
+    // MARK: - Properties
+    lazy var containerView: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 25
+        view.backgroundColor = .mainColor
+        view.clipsToBounds = true
+        return view
+    }()
+    
+    private let dimmedView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        return view
+    }()
+    
+    // Constants
+    private let defaultHeight: CGFloat = 405
+    private let dismissibleHeight: CGFloat = 200
+    private let maximumContainerHeight: CGFloat = UIScreen.main.bounds.height - 64
+    private var currentContainerHeight: CGFloat = 405
+    
+    // Dynamic constraints
+    private var containerViewHeightConstraint: NSLayoutConstraint?
+    private var containerViewBottomConstraint: NSLayoutConstraint?
+    
+    
+  
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupConstraints()
+        setupGestures()
+        animatePresentContainer()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Setup Methods
+    private func setupConstraints() {
+        addSubview(dimmedView)
+        addSubview(containerView)
+        
+        dimmedView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            dimmedView.topAnchor.constraint(equalTo: topAnchor),
+            dimmedView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            dimmedView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            dimmedView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            
+            containerView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            containerView.trailingAnchor.constraint(equalTo: trailingAnchor),
+        ])
+        
+        // Dynamic constraints2
+        containerViewHeightConstraint = containerView.heightAnchor.constraint(equalToConstant: defaultHeight)
+        containerViewBottomConstraint = containerView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: defaultHeight)
+        
+        containerViewHeightConstraint?.isActive = true
+        containerViewBottomConstraint?.isActive = true
+        
+    }
+    
+    private func setupGestures() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleCloseAction))
+        dimmedView.addGestureRecognizer(tapGesture)
+        
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(gesture:)))
+        panGesture.delaysTouchesBegan = false
+        panGesture.delaysTouchesEnded = false
+        self.addGestureRecognizer(panGesture)
+    }
+    
+    // MARK: - Actions
+    @objc private func handleCloseAction() {
+        animateDismissView()
+    }
+    
+    // MARK: - Gesture Handling
+    @objc private func handlePanGesture(gesture: UIPanGestureRecognizer) {
+        let translation = gesture.translation(in: self)
+        let newHeight = currentContainerHeight - translation.y
+        let isDraggingDown = translation.y > 0
+        
+        switch gesture.state {
+        case .changed:
+            if newHeight < maximumContainerHeight {
+                containerViewHeightConstraint?.constant = newHeight
+                self.layoutIfNeeded()
+            }
+        case .ended:
+            handlePanEnd(newHeight: newHeight, isDraggingDown: isDraggingDown)
+        default:
+            break
+        }
+    }
+    
+    private func handlePanEnd(newHeight: CGFloat, isDraggingDown: Bool) {
+        if newHeight < dismissibleHeight {
+            animateDismissView()
+        } else if newHeight < defaultHeight {
+            animateContainerHeight(defaultHeight)
+        } else if isDraggingDown {
+            animateContainerHeight(defaultHeight)
+        } else {
+            animateContainerHeight(maximumContainerHeight)
+        }
+    }
+    
+    // MARK: - Animations
+    private func animateContainerHeight(_ height: CGFloat) {
+        UIView.animate(withDuration: 0.2) {
+            self.containerViewHeightConstraint?.constant = height
+            self.layoutIfNeeded()
+        }
+        currentContainerHeight = height
+    }
+    
+    private func animatePresentContainer() {
+        UIView.animate(withDuration: 0.05) {
+            self.containerViewBottomConstraint?.constant = 0
+            self.layoutIfNeeded()
+        }
+    }
+    
+    @objc private func animateDismissView() {
+        UIView.animate(withDuration: 0.2) {
+            self.containerViewBottomConstraint?.constant = self.defaultHeight
+            self.layoutIfNeeded()
+        } completion: { _ in
+            self.actionDismiss?()
+        }
+    }
+}
+
+
+
+
 

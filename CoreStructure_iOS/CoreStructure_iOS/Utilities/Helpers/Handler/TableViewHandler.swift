@@ -39,7 +39,7 @@ class TableViewHandler<CELL: UITableViewCell, T>: NSObject, UITableViewDataSourc
         if sections.count > 0 {
             tableView.restore()
         }else{
-            tableView.setEmptyView()
+            tableView.setEmptyListView()
         }
         
         return sections[section].count
@@ -77,9 +77,6 @@ class TableViewHandler<CELL: UITableViewCell, T>: NSObject, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        
-//        UITableView.automaticDimension
-        
         
         return headerHeightForSection(section)  // Get height from closure
     }

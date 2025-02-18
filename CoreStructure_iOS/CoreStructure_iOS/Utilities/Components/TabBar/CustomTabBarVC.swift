@@ -17,9 +17,9 @@ struct TitleIconModel{
 class CustomTabBarVC: UITabBarController {
     
     private let firstVC = DemoFeatureVC()
-    private let secondVC = SecondViewController()
-    private let threeVC = ThreeViewController()
-    private let fourtVC = FourViewController()
+    private let secondVC = UIViewController()
+    private let threeVC = UIViewController()
+    private let fourtVC = UIViewController()
     
     private let dataList : [TitleIconModel] = [
         TitleIconModel(name: "VC", iconName: ""),
@@ -71,9 +71,7 @@ class CustomTabBarVC: UITabBarController {
         viewControllers = [firstVC, secondVC, threeVC, fourtVC]
         title = viewControllers?[indexSelected].title?.localizeString()
     }
-    
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white

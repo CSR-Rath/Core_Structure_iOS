@@ -14,6 +14,16 @@ extension UIButton{
         self.addTarget(target, action: action, for: .touchUpInside)
     }
     
+    func spacingButton(top: CGFloat = 0,
+                       left: CGFloat = 0,
+                       bottom: CGFloat = 0,
+                       right: CGFloat = 0){
+
+        self.contentEdgeInsets = UIEdgeInsets(top: top,
+                                              left: left,
+                                              bottom: bottom,
+                                              right: right)
+    }
 }
 
 

@@ -13,34 +13,26 @@ import LocalAuthentication // For Get Biometrics Name
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        print(queryPageSize(page: 10, size: 100, query: "Hello"))
-        
-        setLanguage(langCode: .english) // default language en
-        handleConfigurationRealmSwift() // Realm Swift
-        handleNavicationTitle() // Title navigation bar
-        configureNotification() // Push notification 2 local
-        print ( " getBiometricsName()" , getBiometricsName()) // Get Biometrice name
-        print("didFinishLaunchingWithOptions") //AIzaSyBApx6bA_YNHU8zL_XBrpSI10wol9EBVsA
+        setLanguage(langCode: .english) // english default
+        handleConfigurationRealmSwift() // realmSwift
+        configureNotification() // notivication
         
         return true
     }
     
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        print("configurationForConnecting")
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
     
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
         print("didDiscardSceneSessions")
     }
-    
 }
-// =================================== End AppDelegate ====================================
 
-
-extension AppDelegate{
+// MARK: - Biometrics Handling
+extension AppDelegate {
     
     private func getBiometricsType() -> LABiometryType {
         let context = LAContext()
@@ -52,186 +44,54 @@ extension AppDelegate{
     private func getBiometricsName() -> String {
         switch getBiometricsType() {
         case .faceID:
-            print("FaceID"); return "FaceID"
+            return "FaceID"
         case .touchID:
-            print("TouchID"); return "TouchID"
+            return "TouchID"
         case .none:
-            print("Biometrics Unavailable"); return "Biometrics Unavailable"
+            return "Biometrics Unavailable"
         case .opticID:
-            print("Biometrics opticID"); return "Biometrics opticID"
+            return "Biometrics opticID"
         @unknown default:
-            print("Biometrics Unavailable"); return "Biometrics Unavailable"
+            return "Biometrics Unavailable"
         }
     }
 }
 
 
-// MARK: =============================== Start Handle Deep Link =================================
-extension AppDelegate{
-    
-    // Step create deep link
-    /// 1 - click project --> target --> info -->  URL Type  -->  URL  scheme  --> set url for open it (Example: testingApp) (when open use  ====> testingApp://)
-    /// 2 - next add func below
-    ///
-    
-    // it still working when comment all this code
-    
-    //MARK: -  Handle Deplink
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        
-        print("UIApplication.OpenURLOptionsKey")
-        
-        let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
-        if let scheme = urlComponents?.scheme{
-            
-            if (urlComponents?.host) != nil {
-                print("scheme \(scheme)")
-                
-            }
-        }
-        return true
-    }
-    
-    
-    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-        
-        guard let url = userActivity.webpageURL else { //    myapp://path/to/content?id=123
-            return false
-        }
-        
-        // Handle the URL similar to the URL scheme
-        let path = url.path
-        if path == "/path/to/content" {
-            if let id = url.queryParameters?["id"] {
-                navigateToContent(withId: id)
-            }
-        }
-        
-        return true
-    }
-    
-    private func navigateToContent(withId id: String) {
-        
-        print("navigateToContent(withId id: String)")
-        
-    }
-    
-    // MARK: - Handle when call from another App use Deep Link (Open this app)
-    //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    //
-    //        if let url =  URL(string: "myapp://") {
-    //
-    //            DispatchQueue.main.async {
-    //                UIApplication.shared.open(url, options: [:]) { success in
-    //                    print("Deep Link \(success)")
-    //                    if !success {
-    //                        UIApplication.shared.open(url, options: [:]) { success in
-    //                            print("Deep Link to AppStore \(success)")
-    //                        }
-    //                    }
-    //                }
-    //            }
-    //        }
-    //    }
-    
-}
-
-// Extension to parse query parameters
-extension URL {
-    var queryParameters: [String: String]? {
-        guard let components = URLComponents(url: self, resolvingAgainstBaseURL: false),
-              let queryItems = components.queryItems else { return nil }
-        return queryItems.reduce(into: [String: String]()) { dict, item in
-            dict[item.name] = item.value
-        }
-    }
-}
-// =============================== End Handle Deep Link ===================================
-
-
-// MARK: =============================== Start Handle navigation contoller =======================
-extension AppDelegate{
-    
-    private func handleNavicationTitle(){
-        let font = UIFont.systemFont(ofSize: 18, weight: .medium)
-        
-        let titleAttribute = [
-            NSAttributedString.Key.font: font,
-            NSAttributedString.Key.foregroundColor: UIColor.white
-            
-        ]
-        
-        UINavigationBarAppearance().titleTextAttributes = titleAttribute as [NSAttributedString.Key : Any]
-        
-    }
-    
-    private func setupTitleNavigationBar(font: UIFont? = UIFont.systemFont(ofSize: 17, weight: .regular),
-                                         titleColor: UIColor = .white){
-        
-        let titleAttribute = [
-            NSAttributedString.Key.font: font,
-            NSAttributedString.Key.foregroundColor: titleColor
-        ]
-        
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.shadowColor = .mainBlueColor
-        
-        appearance.backgroundColor = .mainBlueColor
-        appearance.titleTextAttributes = titleAttribute as [NSAttributedString.Key : Any]
-        
-        
-        UINavigationBar.appearance().standardAppearance = appearance
-        UINavigationBar.appearance().scrollEdgeAppearance = appearance
-        UINavigationBar.appearance().tintColor = .white
-        
-        UINavigationBar.appearance().backItem?.title = ""
-        
-    }
-}
-// =============================== End Handle navigation contoller =========================
-
-
-
-// MARK: =============================== Start Setup Push Notification ============================
+// MARK: - Push Notification Setup
 extension AppDelegate: UNUserNotificationCenterDelegate {
     
-    // Request notification
-    private func configureNotification(){
-        // Request user authorization for notifications
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
-            granted ? print("User granted authorization") :  print("User denied authorization")
+    private func configureNotification() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+            granted ? print("User granted authorization") : print("User denied authorization")
         }
-        // Set the delegate for UNUserNotificationCenter
         UNUserNotificationCenter.current().delegate = self
     }
     
-    
-    // Will loading notification
+    // when alert notivigation
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         Loading.shared.hideLoading()
+        updateBadgeIncrease()
         
-        updateBadgeIncrease() // call increase badge notivication
+        let userInfo = notification.request.content.userInfo
+        print("Notification User Info:", userInfo)
         
-        // Handle the notification
-        let userInfo = notification.request.content.userInfo;  print("userInfo ==> \(userInfo)")
-        
-        completionHandler([.list, .banner, .sound])
-        
+        if #available(iOS 14.0, *) {
+            completionHandler([.list, .banner, .sound])
+        } else {
+            completionHandler([.alert, .sound, .badge])
+        }
     }
     
-    // didSelected notification
+    // click on nitivigation
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         
+        let userInfo = response.notification.request.content.userInfo
+        print("Notification Response User Info:", userInfo)
         
-        // Handle the notification response here
-        let userInfo = response.notification.request.content.userInfo; print("userInfo: \(userInfo)")
-        
-        guard let window = SceneDelegate.shared.sceneDelegate?.window,
-              let navigationController = window.rootViewController as? UINavigationController  else{
-            
+        guard let sceneDelegate = sceneDelegate,
+              let navigationController = sceneDelegate.window?.rootViewController as? UINavigationController else {
             print("Error: Unable to access window or root view controller.")
-            
             completionHandler()
             return
         }
@@ -240,47 +100,38 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         targetViewController.view.backgroundColor = .red
         navigationController.pushViewController(targetViewController, animated: false)
         
-        completionHandler() // Call the completion handler when you're done processing the notification
-        
+        completionHandler()
     }
     
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        print("Received remote notification in foreground")
+    }
     
-    private func updateBadgeIncrease() { // handle badge notificaation on the app icon
-        
-        DispatchQueue.main.async {  // Badge sayısını güncelle
+    private func updateBadgeIncrease() {
+        DispatchQueue.main.async {
             UIApplication.shared.applicationIconBadgeNumber += 1
         }
     }
-    
 }
-// =============================== End Setup Push Notification ==============================
 
-
-
-// MARK: =============================== Start Hanlde Realm Swift =================================
-
+// MARK: - Realm Configuration
 var config: Realm.Configuration!
 var realm: Realm!
 
-func handleConfigurationRealmSwift(){
-    
-    var config = Realm.Configuration(
-        schemaVersion: 0,
-        migrationBlock: { migration, oldSchemaVersion in
-            
-        })
-    
-    Realm.Configuration.defaultConfiguration = config
-    config = Realm.Configuration()
-    //    config.deleteRealmIfMigrationNeeded = true
-    
+func handleConfigurationRealmSwift() {
     let fileManager = FileManager.default
     let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
     let realmURL = documentsDirectory.appendingPathComponent("default.realm")
     
     if fileManager.fileExists(atPath: realmURL.path) {
-        print("Realm file exists at: \(realmURL.path)")
+        print("Realm file exists at:", realmURL.path)
     } else {
         print("Realm file does not exist.")
     }
+    
+    config = Realm.Configuration(schemaVersion: 0, migrationBlock: { _, _ in })
+    Realm.Configuration.defaultConfiguration = config
 }
+
+
+
