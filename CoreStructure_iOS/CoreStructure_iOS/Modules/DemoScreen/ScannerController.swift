@@ -412,7 +412,6 @@ extension ScannerController{
     
 }
 
-
 //MARK: - Upload QRCode
 extension ScannerController: UIImagePickerControllerDelegate,UINavigationControllerDelegate{
     

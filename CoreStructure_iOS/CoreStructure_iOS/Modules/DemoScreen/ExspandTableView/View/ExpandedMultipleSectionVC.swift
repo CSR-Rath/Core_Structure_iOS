@@ -26,6 +26,11 @@ class ExpandedMultipleSectionVC: UIViewController {
         view.backgroundColor = .orange
         tableView.delegate = self
         tableView.dataSource = self
+        
+//        if #available(iOS 15.0, *) {
+//            tableView.sectionHeaderTopPadding = 0
+//        }
+        
         setupUI()
     }
     
@@ -57,7 +62,7 @@ extension ExpandedMultipleSectionVC: UITableViewDelegate, UITableViewDataSource 
         } else {
             return 0
         }
-
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -113,31 +118,57 @@ extension ExpandedMultipleSectionVC: UITableViewDelegate, UITableViewDataSource 
         }
         
         
-        //MARK: Single section expended
-//        if expandedSectionIndex == section {
-//            arrowImageView.image = UIImage(systemName: "chevron.up")
-//        }else{
-//            arrowImageView.image = UIImage(systemName: "chevron.down")
-//        }
-        
-        
         return headerView
     }
     
-    //MARK: Multiple section expended
-        @objc func didTapHeader(_ sender: UITapGestureRecognizer) {
-            guard let section = sender.view?.tag else { return }
-
-            if let index = expandedSectionIndices.firstIndex(of: section) {
-                expandedSectionIndices.remove(at: index)
-            } else {
-                expandedSectionIndices.append(section)
-            }
-
-            tableView.reloadData()
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        
+        if expandedSectionIndices.contains(section) {
+            let footer = UIView()
+            footer.backgroundColor = .cyan
+            // Customize the footer content here if needed
+            return footer
+        }else{
+            return nil
+        }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if expandedSectionIndices.contains(section) {
+            return 50
+        }else{
+            return 0
         }
     
-
+    }
+    
+    //MARK: Multiple section expended
+    @objc func didTapHeader(_ sender: UITapGestureRecognizer) {
+        guard let section = sender.view?.tag else { return }
+      
+        if let index = expandedSectionIndices.firstIndex(of: section) {
+            expandedSectionIndices.remove(at: index)
+        } else {
+            expandedSectionIndices.append(section)
+        }
+        
+        tableView.reloadData()
+        
+        // =======animate====
+          // Toggle the expanded state of the section
+//          if let index = expandedSectionIndices.firstIndex(of: section) {
+//              // Collapse the section
+//              expandedSectionIndices.remove(at: index)
+//              let indexSet = IndexSet(integer: section)
+//              tableView.reloadSections(indexSet, with: .automatic)
+//          } else {
+//              // Expand the section
+//              expandedSectionIndices.append(section)
+//              let indexSet = IndexSet(integer: section)
+//              tableView.reloadSections(indexSet, with: .automatic)
+//          }
+    }
 }
 
 

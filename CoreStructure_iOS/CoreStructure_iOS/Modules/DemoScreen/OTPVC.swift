@@ -54,15 +54,12 @@ class OTPVC: UIViewController, UIGestureRecognizerDelegate {
         // Get entered Passcode
         codeTxt.didReceiveCode = { [self] code in
             print( "Testing", code)
-            
-            
+        
             for index in 0..<code.count{
                 codeTxt.digitLabels[index].layer.borderColor = UIColor.green.cgColor
                 codeTxt.digitLine[index].backgroundColor = UIColor.green
                 
             }
-            
-            
         }
         
         // Clear textfield
