@@ -18,12 +18,12 @@ class ScannerController: UIViewController, UIGestureRecognizerDelegate  {
     private var metadataOutput: AVCaptureMetadataOutput!
     private var positionScan: CGRect!
     
-   let  image = UIImageView()
+    let  image = UIImageView()
     
     // Take a photo
     private var photoOutput: AVCapturePhotoOutput!
     
-
+    
     // Configuration frame
     private let widthScan: CGFloat = 300
     private let heightScan: CGFloat = 350
@@ -31,7 +31,7 @@ class ScannerController: UIViewController, UIGestureRecognizerDelegate  {
     private let screen = UIScreen.main.bounds
     
     
-   private let scannerLine = UIView()
+    private let scannerLine = UIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,8 +56,14 @@ class ScannerController: UIViewController, UIGestureRecognizerDelegate  {
         else{
             checkCameraAuthorization()
         }
-
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    
+       
+    }
+    
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
@@ -68,7 +74,6 @@ class ScannerController: UIViewController, UIGestureRecognizerDelegate  {
                 stopScanAnimate()
             }
         }
-        
     }
     
     //MARK: Handle receive string
@@ -77,13 +82,12 @@ class ScannerController: UIViewController, UIGestureRecognizerDelegate  {
         
         // Handle the scanned code, e.g., navigate to another view controller
     }
-    
+
 }
 
 
 // MARK: - AVCapturePhotoCaptureDelegate
 extension ScannerController: AVCapturePhotoCaptureDelegate {
-        
     
     @objc private func capturePhoto() {
         let settings = AVCapturePhotoSettings()
@@ -97,14 +101,17 @@ extension ScannerController: AVCapturePhotoCaptureDelegate {
         }
         
         guard let imageData = photo.fileDataRepresentation() else { return }
-        if let image = UIImage(data: imageData) {
-            // Handle the captured image (e.g., save or display it)
-            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil) // Save to photo library
-            print("Photo captured and saved.")
-
-           let img =  cropToPreviewLayer(from: image, toSizeOf: positionScan)
+        if let imgFullScreen = UIImage(data: imageData) {
             
-            self.image.image = img
+            if let image =  cropToPreviewLayer(from: imgFullScreen, toSizeOf: positionScan){
+                
+                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)// Save to photo library
+                print("Photo captured and saved.")
+                
+                self.image.image = image
+            }else{
+                print("Image is nil")
+            }
         }
     }
     
@@ -116,7 +123,7 @@ extension ScannerController: AVCapturePhotoCaptureDelegate {
         
         let width = CGFloat(cgImage.width)
         let height = CGFloat(cgImage.height)
-
+        
         
         let cropRect = CGRect(x: ((outputRect?.origin.x ?? 0) * width),
                               y: ((outputRect?.origin.y ?? 0) * height),
@@ -138,7 +145,7 @@ extension ScannerController: AVCapturePhotoCaptureDelegate {
 extension ScannerController:  AVCaptureMetadataOutputObjectsDelegate {
     
     private func setupCGRect(){
-
+        
         positionScan = CGRect(x: (screen.width-widthScan)/2,
                               y: ((screen.height-heightScan)/2)-100,
                               width: widthScan,
@@ -161,29 +168,29 @@ extension ScannerController:  AVCaptureMetadataOutputObjectsDelegate {
                 }
             }
         case .denied, .restricted:
-            DispatchQueue.main.async {
+          
                 self.showPermissionDeniedAlert()
-            }
+           
         @unknown default:
             break
         }
-        
     }
     
     private func showPermissionDeniedAlert() {
-        let alert = UIAlertController(title: "Camera Access Denied",
-                                      message: "Please enable camera access in Settings to use the scanner.",
-                                      preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        alert.addAction(UIAlertAction(title: "Settings", style: .default) { _ in
-            if let url = URL(string: UIApplication.openSettingsURLString) {
-                UIApplication.shared.open(url)
-            }
-        })
-        present(alert, animated: true)
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "Camera Access Denied",
+                                          message: "Please enable camera access in Settings to use the scanner.",
+                                          preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            alert.addAction(UIAlertAction(title: "Settings", style: .default) { _ in
+                if let url = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(url)
+                }
+            })
+            self.present(alert, animated: true)
+        }
     }
-    
-    
+
     private func setupScanner() {
         // Initialize the capture session
         captureSession = AVCaptureSession()
@@ -208,7 +215,7 @@ extension ScannerController:  AVCaptureMetadataOutputObjectsDelegate {
         }
         
         // Create and configure the metadata output for QR code scanning
-         metadataOutput = AVCaptureMetadataOutput()
+        metadataOutput = AVCaptureMetadataOutput()
         
         if (captureSession.canAddOutput(metadataOutput)) {
             captureSession.addOutput(metadataOutput)
@@ -227,21 +234,15 @@ extension ScannerController:  AVCaptureMetadataOutputObjectsDelegate {
         } else {
             return // Handle the case where photo output cannot be added
         }
-
+        
         // Create the preview layer to show the camera input on the screen
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         previewLayer.frame = view.layer.bounds
         previewLayer.videoGravity = .resizeAspectFill
         view.layer.addSublayer(previewLayer) // Add the preview layer to the view
         
-        // Create an overlay for the scanner
-        let overlay = createOverlay(position: positionScan)
-        view.addSubview(overlay) // Add the overlay to the view
         
         print("positionScan == > \(positionScan!)")
-        
-        scannerLine.backgroundColor = .orange
-        view.addSubview(scannerLine)
         
         // Start the capture session in a background thread to avoid blocking the main thread
         DispatchQueue.global(qos: .background).async { [self] in
@@ -253,8 +254,14 @@ extension ScannerController:  AVCaptureMetadataOutputObjectsDelegate {
         
         // Set the rectangle of interest for QR code detection
         metadataOutput.rectOfInterest = previewLayer.metadataOutputRectConverted(fromLayerRect: positionScan)
+        
+        // Create an overlay for the scanner
+        let overlay = createOverlay(position: positionScan)
+        view.addSubview(overlay) // Add the overlay to the view
+        
+        scannerLine.backgroundColor = .orange
+        view.addSubview(scannerLine)
     }
-    
     
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         if let metadataObject = metadataObjects.first {
@@ -263,37 +270,35 @@ extension ScannerController:  AVCaptureMetadataOutputObjectsDelegate {
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
             
             found(code: stringValue)
-            
+        
         }
     }
-    
 }
 
 // MARK: Setup frame and animate line
 extension ScannerController{
     
-    @objc func startScanAnimate() {
+     private func startScanAnimate() {
         DispatchQueue.main.async { [self] in
             scannerLine.isHidden = false
             scannerLine.frame = CGRect(x: (screen.width-lineWidth)/2, y: positionScan.minY + 10  , width: lineWidth, height: 5)
             // withDuration : for animate for display
             // delay: for animate start first
-            UIView.animate(withDuration: 2,
+            UIView.animate(withDuration: 1,
                            delay: 0.5,
                            options: [.curveLinear, .repeat, .autoreverse],
                            animations: { [self] in
                 scannerLine.frame = CGRect(x: (screen.width-lineWidth)/2, y: positionScan.maxY - 10  , width: lineWidth, height: 5)
             }, completion: nil)
         }
-
     }
     
-    func stopScanAnimate() {
+    private func stopScanAnimate() {
         self.scannerLine.isHidden = true
         self.scannerLine.layer.removeAllAnimations()
     }
     
-   private func createOverlay(position: CGRect) -> UIView {
+    private func createOverlay(position: CGRect) -> UIView {
         
         let overlayView = UIView(frame: view.bounds)
         overlayView.backgroundColor = .mainBlueColor.withAlphaComponent(0.9)
@@ -318,7 +323,7 @@ extension ScannerController{
         
         overlayView.layer.mask = maskLayer
         overlayView.clipsToBounds = true
-
+        
         let btn = UIButton()
         btn.frame = CGRect(x: 100, y: 550, width: 200, height: 50)
         btn.setTitle("Switch Camera", for: .normal)
@@ -332,32 +337,31 @@ extension ScannerController{
         btnFlash.setTitleColor(.white, for: .normal)
         btnFlash.addTarget(self, action: #selector(toggleFlash), for: .touchUpInside)
         overlayView.addSubview(btnFlash)
-       
-       let btnTakePhoto = UIButton()
-       btnTakePhoto.frame = CGRect(x: 100, y: 650, width: 200, height: 50)
-       btnTakePhoto.setTitle("Take a Photo", for: .normal)
-       btnTakePhoto.setTitleColor(.white, for: .normal)
-       btnTakePhoto.addTarget(self, action: #selector(capturePhoto), for: .touchUpInside)
-       overlayView.addSubview(btnTakePhoto)
-       
-       image.contentMode = .scaleAspectFill
-       image.layer.cornerRadius = 10
-       image.backgroundColor = .red
-       image.frame = CGRect(x: 200, y: 720, width: 150, height: 150)
-       overlayView.addSubview(image)
-       
-       
-       let btnUploadQR = UIButton()
-       btnUploadQR.setTitle("Upload QR", for: .normal)
-       btnUploadQR.setTitleColor(.white, for: .normal)
-       btnUploadQR.frame = CGRect(x: 200, y: 670, width: 150, height: 150)
-       btnUploadQR.addTarget(self, action: #selector(uploadQR), for: .touchUpInside)
-       overlayView.addSubview(btnUploadQR)
-      
+        
+        let btnTakePhoto = UIButton()
+        btnTakePhoto.frame = CGRect(x: 100, y: 650, width: 200, height: 50)
+        btnTakePhoto.setTitle("Take a Photo", for: .normal)
+        btnTakePhoto.setTitleColor(.white, for: .normal)
+        btnTakePhoto.addTarget(self, action: #selector(capturePhoto), for: .touchUpInside)
+        overlayView.addSubview(btnTakePhoto)
+        
+        image.contentMode = .scaleAspectFill
+        image.layer.cornerRadius = 10
+        image.backgroundColor = .red
+        image.frame = CGRect(x: 200, y: 720, width: 150, height: 150)
+        overlayView.addSubview(image)
+        
+        let btnUploadQR = UIButton()
+        btnUploadQR.setTitle("Upload QR", for: .normal)
+        btnUploadQR.setTitleColor(.white, for: .normal)
+        btnUploadQR.frame = CGRect(x: 200, y: 670, width: 150, height: 150)
+        btnUploadQR.addTarget(self, action: #selector(uploadQR), for: .touchUpInside)
+        overlayView.addSubview(btnUploadQR)
+        
         return overlayView
     }
     
-    @objc func toggleFlash() {
+    @objc private func toggleFlash() {
         guard let device = currentDevice else { return }
         
         if device.hasTorch {
@@ -376,7 +380,7 @@ extension ScannerController{
         }
     }
     
-    @objc  func toggleCamera() {
+    @objc private func toggleCamera() {
         guard let currentInput = currentInput else { return }
         
         // Determine the new camera position
@@ -405,6 +409,7 @@ extension ScannerController{
         
         captureSession.commitConfiguration()
     }
+    
 }
 
 
@@ -421,22 +426,15 @@ extension ScannerController: UIImagePickerControllerDelegate,UINavigationControl
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let selectedImage = info[.originalImage] as? UIImage else { return }
         dismiss(animated: true, completion: {
-            self.handleSelectedImage(selectedImage)
+           print("Image selected for QR code processing.")
+            self.found(code: selectedImage.imageToString())
         })
     }
-
+    
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
-    
-    private func handleSelectedImage(_ image: UIImage) {
-        // Here you can implement QR code detection
-        print("Image selected for QR code processing.")
-        // You can use CIDetector or any other method to scan the QR code
-        
-        found(code: image.imageToString() ?? "")
-    }
-    
+
 }
 
 

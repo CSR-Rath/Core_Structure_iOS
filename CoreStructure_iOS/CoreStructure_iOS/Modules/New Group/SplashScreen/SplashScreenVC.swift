@@ -46,7 +46,7 @@ class SplashScreenVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .orange
         setupConstraint()
-        navigationBarAppearance()
+        navigationBarAppearance(titleColor: nil, barColor: nil)
         title = "Please choose"
     }
     
@@ -62,24 +62,10 @@ class SplashScreenVC: UIViewController {
     
     @objc private func didTappedButton(sender: UIButton) {
 
-        replaceNavigationController()
+        rootViewController(newController: CustomTabBarVC())
+
     }
     
-    @objc func replaceNavigationController() {
-
-        let secondVC = CustomTabBarVC()// Create a new view controller (e.g., CustomTabBarVC)
-
-        // Wrap it in a new UINavigationController
-        let newNavController = UINavigationController(rootViewController: secondVC)
-        
-        // Access the current SceneDelegate and update the window's rootViewController
-        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-            sceneDelegate.window?.rootViewController = newNavController
-            sceneDelegate.window?.makeKeyAndVisible()
-        }
-        
-    }
-
 }
 
 class TestVC: BaseInteractionController {

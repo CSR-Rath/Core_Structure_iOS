@@ -43,21 +43,21 @@ extension UIViewController{
         }
     }
     
-    func navigationBarAppearance(titleColor: UIColor = .white,
-                                 barColor: UIColor = .mainBlueColor){
+    func navigationBarAppearance(titleColor: UIColor?,
+                                 barColor: UIColor?){
         
         let setupFont: UIFont = UIFont.systemFont(ofSize: 16,weight: .bold)
         
         let appearance = UINavigationBarAppearance()
         
         appearance.titleTextAttributes = [
-            .foregroundColor: titleColor,
+            .foregroundColor: titleColor ?? .white,
             .font: setupFont
         ]
         
         appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = barColor
-        appearance.shadowColor = barColor
+        appearance.backgroundColor = barColor ?? .mainBlueColor
+        appearance.shadowColor = barColor ?? .mainBlueColor
         
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
@@ -67,24 +67,40 @@ extension UIViewController{
 //MARK: Action ViewController
 extension UIViewController{
     
-    @objc func dismiss(animated: Bool = true){
-        self.dismiss(animated: animated)
+    @objc func dismissViewController(animated: Bool = true){
+        navigationController?.dismiss(animated: animated)
     }
     
     @objc func popViewController(animated: Bool = true){
-        self.navigationController?.popViewController(animated: animated)
+        navigationController?.popViewController(animated: animated)
     }
     
     @objc func popToRootViewController(animated: Bool = true){
-        self.navigationController?.popToRootViewController(animated: animated)
+        navigationController?.popToRootViewController(animated: animated)
     }
     
     @objc func pushViewController(viewController: UIViewController){
-        self.navigationController?.pushViewController(viewController, animated: true)
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
     @objc func popToViewController(viewController: UIViewController){
-        self.navigationController?.popToViewController(viewController, animated: true)
+        navigationController?.popToViewController(viewController, animated: true)
+    }
+    
+    @objc func rootViewController(newController: UIViewController) {
+        // Wrap the new view controller in a UINavigationController
+        let newNavController = UINavigationController(rootViewController: newController)
+        
+        // Get the SceneDelegate
+        guard let window = sceneDelegate?.window else { return }
+        
+        // Perform the transition with an animation
+        UIView.transition(with: window,
+                          duration: 0.2,
+                          options: .transitionCrossDissolve,
+                          animations: {
+            window.rootViewController = newNavController
+        })
     }
 }
 
@@ -148,4 +164,6 @@ extension UIViewController{
         }
     }
 }
+
+
 

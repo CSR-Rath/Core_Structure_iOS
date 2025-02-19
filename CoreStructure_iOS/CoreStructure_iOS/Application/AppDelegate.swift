@@ -10,6 +10,9 @@ import UserNotifications //import UserNotifications 1 local
 import RealmSwift //For DB locale data
 import LocalAuthentication // For Get Biometrics Name
 
+var config: Realm.Configuration!
+var realm: Realm!
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -56,7 +59,6 @@ extension AppDelegate {
         }
     }
 }
-
 
 // MARK: - Push Notification Setup
 extension AppDelegate: UNUserNotificationCenterDelegate {
@@ -114,24 +116,20 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     }
 }
 
-// MARK: - Realm Configuration
-var config: Realm.Configuration!
-var realm: Realm!
-
-func handleConfigurationRealmSwift() {
-    let fileManager = FileManager.default
-    let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
-    let realmURL = documentsDirectory.appendingPathComponent("default.realm")
-    
-    if fileManager.fileExists(atPath: realmURL.path) {
-        print("Realm file exists at:", realmURL.path)
-    } else {
-        print("Realm file does not exist.")
+//MARK: -  RealmSwift
+extension AppDelegate{
+  private func handleConfigurationRealmSwift() {
+        let fileManager = FileManager.default
+        let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let realmURL = documentsDirectory.appendingPathComponent("default.realm")
+        
+        if fileManager.fileExists(atPath: realmURL.path) {
+            print("Realm file exists at:", realmURL.path)
+        } else {
+            print("Realm file does not exist.")
+        }
+        
+        config = Realm.Configuration(schemaVersion: 0, migrationBlock: { _, _ in })
+        Realm.Configuration.defaultConfiguration = config
     }
-    
-    config = Realm.Configuration(schemaVersion: 0, migrationBlock: { _, _ in })
-    Realm.Configuration.defaultConfiguration = config
 }
-
-
-

@@ -99,6 +99,7 @@ class DemoFeatureVC: UIViewController {
                 ListModel(id: 21, name: "PreventionScreen", viewController: PreventionScreen()),
                 ListModel(id: 22, name: "GenerateQRCodeVC", viewController: GenerateQRCodeVC()),
             ]
+            
         }
     }
 }
@@ -125,8 +126,8 @@ extension DemoFeatureVC: UITableViewDelegate, UITableViewDataSource{
         case 7:
             AlertMessage.shared.alertError()
         case 5,8,22:
-            item.viewController!.transitioningDelegate = presentVC
             item.viewController!.modalPresentationStyle = .custom
+            item.viewController!.transitioningDelegate = presentVC
             self.present(item.viewController!, animated: true)
         default:
             item.viewController?.leftBarButtonItem()

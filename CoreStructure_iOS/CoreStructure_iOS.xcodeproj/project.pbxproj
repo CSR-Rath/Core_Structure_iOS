@@ -99,12 +99,10 @@
 		FA992EEC2CF8BE98007B2EB8 /* UIColor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2B10872CB785690095CDB1 /* UIColor + Extension.swift */; };
 		FA992EED2CF8BE98007B2EB8 /* UIImage + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA87CD992C79A08100349364 /* UIImage + Extension.swift */; };
 		FA992EEE2CF8BE98007B2EB8 /* UIDevice + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA36BAEA2C7EBD8A005A49C5 /* UIDevice + Extension.swift */; };
-		FA992EEF2CF8BE98007B2EB8 /* UITableView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA87CD862C799FFB00349364 /* UITableView + Extension.swift */; };
 		FA992EF02CF8BE98007B2EB8 /* UIImageView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE400DD2C7D8CC4001D031F /* UIImageView + Extension.swift */; };
 		FA992EF12CF8BE98007B2EB8 /* UserDefaults + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2B10912CB78C000095CDB1 /* UserDefaults + Extension.swift */; };
 		FA992EF22CF8BE98007B2EB8 /* UITableViewCell + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA87CD8B2C79A01A00349364 /* UITableViewCell + Extension.swift */; };
 		FA992EF32CF8BE98007B2EB8 /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4775BC2C7C2F9C002DC134 /* UIViewController + Extension.swift */; };
-		FA992EF42CF8BE98007B2EB8 /* UICollectionView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA87CD882C79A00900349364 /* UICollectionView + Extension.swift */; };
 		FA992EF52CF8BE98007B2EB8 /* UICollectionViewCell + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA87CD8D2C79A02700349364 /* UICollectionViewCell + Extension.swift */; };
 		FA992EF62CF8BE98007B2EB8 /* UITextField + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2B10992CB8BF200095CDB1 /* UITextField + Extension.swift */; };
 		FA992EF72CF8BE98007B2EB8 /* UIButton + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2B10A02CB8E0D80095CDB1 /* UIButton + Extension.swift */; };
@@ -145,7 +143,6 @@
 		FADDCC8B2D62D4FF00120D69 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADDCC8A2D62D4FF00120D69 /* Model.swift */; };
 		FAF42EF02D1A47F50070AF49 /* DisplayWebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF42EEF2D1A47F50070AF49 /* DisplayWebController.swift */; };
 		FAFD6EA22D1BA817001CD0B3 /* ImageSlideshowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFD6EA12D1BA817001CD0B3 /* ImageSlideshowController.swift */; };
-		FAFEFD5D2D5AF73E0034A0F1 /* UINavigationItem + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFEFD5C2D5AF73E0034A0F1 /* UINavigationItem + Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -259,8 +256,6 @@
 		FA8653FB2D1AAE0300D87D6F /* createDeepLinkApp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = createDeepLinkApp.png; sourceTree = "<group>"; };
 		FA87CD772C799DB900349364 /* PageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageVC.swift; sourceTree = "<group>"; };
 		FA87CD792C799EB200349364 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
-		FA87CD862C799FFB00349364 /* UITableView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView + Extension.swift"; sourceTree = "<group>"; };
-		FA87CD882C79A00900349364 /* UICollectionView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView + Extension.swift"; sourceTree = "<group>"; };
 		FA87CD8B2C79A01A00349364 /* UITableViewCell + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell + Extension.swift"; sourceTree = "<group>"; };
 		FA87CD8D2C79A02700349364 /* UICollectionViewCell + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell + Extension.swift"; sourceTree = "<group>"; };
 		FA87CD992C79A08100349364 /* UIImage + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + Extension.swift"; sourceTree = "<group>"; };
@@ -314,7 +309,6 @@
 		FAFCDC572CCF9D7700BACEC5 /* MenuDragDropCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuDragDropCell.swift; sourceTree = "<group>"; };
 		FAFCDC582CCF9D7700BACEC5 /* DragDropCollectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DragDropCollectionVC.swift; sourceTree = "<group>"; };
 		FAFD6EA12D1BA817001CD0B3 /* ImageSlideshowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSlideshowController.swift; sourceTree = "<group>"; };
-		FAFEFD5C2D5AF73E0034A0F1 /* UINavigationItem + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationItem + Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -526,10 +520,8 @@
 				FA87CD992C79A08100349364 /* UIImage + Extension.swift */,
 				FA36BAEA2C7EBD8A005A49C5 /* UIDevice + Extension.swift */,
 				FAE400DD2C7D8CC4001D031F /* UIImageView + Extension.swift */,
-				FA87CD862C799FFB00349364 /* UITableView + Extension.swift */,
 				FA87CD8B2C79A01A00349364 /* UITableViewCell + Extension.swift */,
 				FA4775BC2C7C2F9C002DC134 /* UIViewController + Extension.swift */,
-				FA87CD882C79A00900349364 /* UICollectionView + Extension.swift */,
 				FA87CD8D2C79A02700349364 /* UICollectionViewCell + Extension.swift */,
 				FA2B10992CB8BF200095CDB1 /* UITextField + Extension.swift */,
 				FA2B10A02CB8E0D80095CDB1 /* UIButton + Extension.swift */,
@@ -538,7 +530,6 @@
 				FAAA11862CDFC01F00EA15E3 /* NotificationName + Extension.swift */,
 				FA1627642CED78A500418ECD /* CALayer + Extension.swift */,
 				FA5680302D59A9D20084359D /* CGFloat + Extension.swift */,
-				FAFEFD5C2D5AF73E0034A0F1 /* UINavigationItem + Extension.swift */,
 			);
 			path = UIKitDataTypes;
 			sourceTree = "<group>";
@@ -1412,7 +1403,6 @@
 				FA992EC82CF8BE98007B2EB8 /* HomeVM.swift in Sources */,
 				FA992EC92CF8BE98007B2EB8 /* Board.swift in Sources */,
 				FA992ECA2CF8BE98007B2EB8 /* BoardCollectionVC.swift in Sources */,
-				FAFEFD5D2D5AF73E0034A0F1 /* UINavigationItem + Extension.swift in Sources */,
 				FA992ECB2CF8BE98007B2EB8 /* BoardTableViewCell.swift in Sources */,
 				FA992ECC2CF8BE98007B2EB8 /* BoardCollectionViewCell.swift in Sources */,
 				FA992ECD2CF8BE98007B2EB8 /* CenteringCellVC.swift in Sources */,
@@ -1455,13 +1445,11 @@
 				FAC504832D5DCC6600DBC271 /* CustomSearchBar.swift in Sources */,
 				FA2123142D5EFF840001AAE6 /* BaseUIButtonIcon.swift in Sources */,
 				FA992EEE2CF8BE98007B2EB8 /* UIDevice + Extension.swift in Sources */,
-				FA992EEF2CF8BE98007B2EB8 /* UITableView + Extension.swift in Sources */,
 				FA992EF02CF8BE98007B2EB8 /* UIImageView + Extension.swift in Sources */,
 				FA88F1712CF9BD0000B37C73 /* DashedLineView.swift in Sources */,
 				FA992EF12CF8BE98007B2EB8 /* UserDefaults + Extension.swift in Sources */,
 				FA992EF22CF8BE98007B2EB8 /* UITableViewCell + Extension.swift in Sources */,
 				FA992EF32CF8BE98007B2EB8 /* UIViewController + Extension.swift in Sources */,
-				FA992EF42CF8BE98007B2EB8 /* UICollectionView + Extension.swift in Sources */,
 				FA992EF52CF8BE98007B2EB8 /* UICollectionViewCell + Extension.swift in Sources */,
 				FA992EF62CF8BE98007B2EB8 /* UITextField + Extension.swift in Sources */,
 				FA992EF72CF8BE98007B2EB8 /* UIButton + Extension.swift in Sources */,

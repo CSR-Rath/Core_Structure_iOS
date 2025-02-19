@@ -17,7 +17,7 @@ func setLanguage(langCode: LanguageEnum) {
 
 extension String {
     
-    func getLangauge()->String{
+    func getLangauge() -> String{
         return UserDefaults.standard.string(forKey: KeyUser.language) ?? "en"
     }
     
@@ -90,15 +90,11 @@ extension String{ // HTML to string
 //MARK: ==================== End handle webview ====================
 
 enum DateFormat: String {
-    
     case time = "h:mm a"  /// Time format (e.g., 5:30 PM)
-   
     case short = "dd-MM-yyyy"  /// Short date format (e.g., 31/12/2023)
     case shortSlash = "dd/MM/yyyy"  /// Short date format (e.g., 31/12/2023)
- 
     case medium = "dd-MMMM-yyyy"   /// Medium date format (e.g., 31-December-2023)
     case mediumSlash = "dd/MMMM/yyyy"   /// Medium date format (e.g., 31-December-2023)
-
     case long = "EEEE, dd MMMM yyyy"  /// Long date format (e.g., Sunday, 31 December 2023)
     case full = "EEEE, dd MMMM yyyy h:mm a"  /// Full date and time format (e.g., Sunday, 31 December 2023 5:30 PM)
 }
@@ -106,16 +102,17 @@ enum DateFormat: String {
 
 //Localizable
 extension String{
+   
     static let  confirmlLocalizable  = "confirm".localizeString()
     
 }
 
 class GenerateQRCodeVC: UIViewController {
     
-    let viewtest = viewTest()
+    let viewtest = TermAndConditionRoyaltyView()
+    
     override func loadView() {
         super.loadView()
-        
         view = viewtest
     }
 
@@ -123,32 +120,13 @@ class GenerateQRCodeVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .clear
         viewtest.actionDismiss = {
-            self.dismiss()
+            self.dismiss(animated: true)   
         }
     }
 }
 
 
-
-extension UIView{
-    
-    func setupConstraintView(left: CGFloat = 0,
-                             right: CGFloat = 0,
-                             top: CGFloat = 0,
-                             bottom: CGFloat = 0){
-        
-        NSLayoutConstraint.activate([
-            self.leftAnchor.constraint(equalTo: leftAnchor,constant: left),
-            self.rightAnchor.constraint(equalTo: rightAnchor,constant: right),
-            self.topAnchor.constraint(equalTo: topAnchor,constant: top),
-            self.bottomAnchor.constraint(equalTo: bottomAnchor,constant: bottom),
-        
-        ])
-    }
-}
-
-
-class viewTest : UIView{
+class TermAndConditionRoyaltyView: UIView {
     
     var actionDismiss: (()->())?
     
@@ -168,17 +146,45 @@ class viewTest : UIView{
     }()
     
     // Constants
-    private let defaultHeight: CGFloat = 405
-    private let dismissibleHeight: CGFloat = 200
+    private let defaultHeight: CGFloat = 600
+    private let dismissibleHeight: CGFloat = 600/2
     private let maximumContainerHeight: CGFloat = UIScreen.main.bounds.height - 64
-    private var currentContainerHeight: CGFloat = 405
+    private var currentContainerHeight: CGFloat = 600
     
     // Dynamic constraints
     private var containerViewHeightConstraint: NSLayoutConstraint?
     private var containerViewBottomConstraint: NSLayoutConstraint?
     
     
-  
+    lazy var viewLineTop: UIView = {
+        let view  = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .white
+        return view
+    }()
+    
+    lazy var lblName: UILabel = {
+        let lbl  = UILabel()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        lbl.text = "terms_and_conditions"
+        lbl.textColor = .white
+        lbl.fontBold(16)
+        return lbl
+    }()
+    
+    
+    lazy var descriptionLbl: UITextView = {
+        let textView = UITextView()
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.textColor = .white
+        textView.backgroundColor = .clear//.mainColor
+        textView.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
+        textView.isEditable = false
+        textView.showsVerticalScrollIndicator = false
+        textView.isScrollEnabled = false
+        return textView
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupConstraints()
@@ -208,12 +214,31 @@ class viewTest : UIView{
             containerView.trailingAnchor.constraint(equalTo: trailingAnchor),
         ])
         
-        // Dynamic constraints2
+        // Dynamic constraints
         containerViewHeightConstraint = containerView.heightAnchor.constraint(equalToConstant: defaultHeight)
         containerViewBottomConstraint = containerView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: defaultHeight)
         
         containerViewHeightConstraint?.isActive = true
         containerViewBottomConstraint?.isActive = true
+        
+        containerView.addSubviews(of: viewLineTop, lblName, descriptionLbl)
+        
+        NSLayoutConstraint.activate([
+            
+            viewLineTop.heightAnchor.constraint(equalToConstant: 2),
+            viewLineTop.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            viewLineTop.topAnchor.constraint(equalTo: containerView.topAnchor,constant: 13),
+            viewLineTop.widthAnchor.constraint(equalToConstant: 85),
+            
+            lblName.centerXAnchor.constraint(equalTo: containerView .centerXAnchor),
+            lblName.topAnchor.constraint(equalTo: viewLineTop.bottomAnchor,constant: 24),
+            
+            descriptionLbl.leftAnchor.constraint(equalTo: containerView.leftAnchor,constant: 25),
+            descriptionLbl.rightAnchor.constraint(equalTo: containerView.rightAnchor,constant: 25),
+            descriptionLbl.topAnchor.constraint(equalTo: containerView.topAnchor,constant: 50),
+            descriptionLbl.bottomAnchor.constraint(equalTo: containerView.bottomAnchor,constant: 0),
+            
+        ])
         
     }
     
@@ -287,8 +312,8 @@ class viewTest : UIView{
             self.actionDismiss?()
         }
     }
+    
 }
-
 
 
 

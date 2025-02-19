@@ -34,9 +34,9 @@ extension UIImage {
     }
     
     
-    func imageToString() -> String? {
+    func imageToString() -> String {
         guard let image = CIImage(image: self) else {
-            return nil
+            return "==> Empty Stirng"
         }
         let detector = CIDetector(ofType: CIDetectorTypeQRCode,
                                   context: nil,

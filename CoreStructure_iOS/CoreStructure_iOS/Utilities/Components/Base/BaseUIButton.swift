@@ -88,7 +88,7 @@ class BaseUIButton: UIButton {
             self.alpha = alpha
             self.transform = CGAffineTransform(scaleX: scale, y: scale)
         }) { _ in
-            self.isUserInteractionEnabled = scale == 1.0
+//            self.isUserInteractionEnabled = scale == 1.0
         }
     }
     

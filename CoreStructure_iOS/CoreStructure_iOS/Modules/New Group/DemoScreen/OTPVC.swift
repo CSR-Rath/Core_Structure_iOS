@@ -48,11 +48,21 @@ class OTPVC: UIViewController, UIGestureRecognizerDelegate {
 
         btnClear.setTitle("clear", for: .normal)
         btnClear.addTarget(self, action: #selector(clear), for: .touchUpInside)
+ 
         
-        
+       
         // Get entered Passcode
-        codeTxt.didReceiveCode = { code in
+        codeTxt.didReceiveCode = { [self] code in
             print( "Testing", code)
+            
+            
+            for index in 0..<code.count{
+                codeTxt.digitLabels[index].layer.borderColor = UIColor.green.cgColor
+                codeTxt.digitLine[index].backgroundColor = UIColor.green
+                
+            }
+            
+            
         }
         
         // Clear textfield

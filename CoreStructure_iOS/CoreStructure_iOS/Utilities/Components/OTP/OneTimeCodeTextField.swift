@@ -10,6 +10,7 @@ import UIKit
 public class OneTimeCodeTextField: UITextField {
     // MARK: UI Components
     public var digitLabels = [UILabel]()
+    public var digitLine = [UIView]()
 //    public var digitLabels = [UIStackView]()
     
     // MARK: Delegates
@@ -140,13 +141,11 @@ extension OneTimeCodeTextField{
             if i < code.count {
                 let index = code.index(code.startIndex, offsetBy: i)
                 currentLabel.text = String(code[index]).uppercased()
-                
                 currentLabel.layer.borderColor = UIColor.orange.cgColor
                 
             } else {
                 
                 currentLabel.layer.borderColor = codeBorderColor?.cgColor
-            
                 currentLabel.text?.removeAll()
             }
         }
@@ -196,6 +195,7 @@ extension OneTimeCodeTextField{
             }
             
             digitLabels.append(slotLabel)
+            digitLine.append(slotLine)
         }
         
         return stackView
