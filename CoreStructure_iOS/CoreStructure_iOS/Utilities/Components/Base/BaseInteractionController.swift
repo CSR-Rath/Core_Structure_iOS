@@ -45,7 +45,7 @@ class BaseInteractionController: UIViewController, UIGestureRecognizerDelegate {
         let subview = view.hitTest(location, with: nil)
         
         // Check if the tapped view is a button or not
-        if let button = subview as? UIButton {
+        if subview is UIButton {
             print("Type UIButton")
         }else{
             print("subview ==> \(subview!)")

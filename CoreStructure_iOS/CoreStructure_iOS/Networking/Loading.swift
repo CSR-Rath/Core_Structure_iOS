@@ -15,7 +15,7 @@ class Loading : UIView {
     private let loadingView: UIActivityIndicatorView = {
         let loading = UIActivityIndicatorView()
         loading.color = .white //.mainBlueColor
-        loading.style = .large//.medium
+        loading.style = .large //.medium
         loading.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         return loading
     }()
@@ -44,7 +44,7 @@ class Loading : UIView {
     func showLoading(alpha: CGFloat = 0.5 ) {
         DispatchQueue.main.async { [self] in
             
-            guard let window = sceneDelegate?.window else { return }
+            guard let window = windowDelegate else { return }
             self.frame = window.bounds
             window.addSubview(self)
             loadingView.frame = window.bounds

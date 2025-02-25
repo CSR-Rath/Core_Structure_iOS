@@ -92,7 +92,7 @@ extension UIViewController{
         let newNavController = UINavigationController(rootViewController: newController)
         
         // Get the SceneDelegate
-        guard let window = sceneDelegate?.window else { return }
+        guard let window = windowDelegate else { return }
         
         // Perform the transition with an animation
         UIView.transition(with: window,
@@ -102,6 +102,7 @@ extension UIViewController{
             window.rootViewController = newNavController
         })
     }
+
 }
 
 extension UIView {
@@ -132,7 +133,6 @@ extension UIViewController {
 }
 
 extension UIViewController{
-    
     
     @objc func shareView(viewToShare: UIView) {
         

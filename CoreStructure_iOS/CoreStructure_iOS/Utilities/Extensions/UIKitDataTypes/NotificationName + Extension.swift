@@ -22,8 +22,7 @@ class Test : UIViewController{
         
         // Post a notification when data is updated
         NotificationCenter.default.post(name: .didUpdateData, object: nil, userInfo: ["newData": "Updated Data"])
-        
-
+    
     }
     
     

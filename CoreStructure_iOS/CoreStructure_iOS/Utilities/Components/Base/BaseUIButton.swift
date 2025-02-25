@@ -30,9 +30,8 @@ class BaseUIButton: UIButton {
     var buttonHeight: CGFloat = 50{
         didSet{
             layer.cornerRadius = buttonHeight/2
-            nsContraint.isActive = false
             nsContraint.constant = buttonHeight
-            nsContraint.isActive = true
+            layoutIfNeeded()
         }
     }
     
@@ -117,9 +116,14 @@ class BaseUIButton: UIButton {
         isUserInteractionEnabled = true
         activityIndicator.stopAnimating()
         setTitle(titleButton, for: .normal) // Restore the title
+        
+        
+        
     }
     
     deinit {
         print("MainButton deinitialized")
     }
 }
+
+

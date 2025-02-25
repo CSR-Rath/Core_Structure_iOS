@@ -7,19 +7,18 @@
 
 import UIKit
 import UserNotifications //import UserNotifications 1 local
-import RealmSwift //For DB locale data
 import LocalAuthentication // For Get Biometrics Name
+import Firebase
 
-var config: Realm.Configuration!
-var realm: Realm!
+// Firebase Messaging need have account developer for
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         setLanguage(langCode: .english) // english default
-        handleConfigurationRealmSwift() // realmSwift
         configureNotification() // notivication
         
         return true
@@ -64,6 +63,8 @@ extension AppDelegate {
 extension AppDelegate: UNUserNotificationCenterDelegate {
     
     private func configureNotification() {
+        FirebaseApp.configure() // need cell for using  firebase
+        
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
             granted ? print("User granted authorization") : print("User denied authorization")
         }
@@ -97,18 +98,14 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             completionHandler()
             return
         }
-        
+
         let targetViewController = UIViewController()
         targetViewController.view.backgroundColor = .red
         navigationController.pushViewController(targetViewController, animated: false)
-        
+
         completionHandler()
     }
-    
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        print("Received remote notification in foreground")
-    }
-    
+
     private func updateBadgeIncrease() {
         DispatchQueue.main.async {
             UIApplication.shared.applicationIconBadgeNumber += 1
@@ -116,20 +113,5 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     }
 }
 
-//MARK: -  RealmSwift
-extension AppDelegate{
-  private func handleConfigurationRealmSwift() {
-        let fileManager = FileManager.default
-        let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let realmURL = documentsDirectory.appendingPathComponent("default.realm")
-        
-        if fileManager.fileExists(atPath: realmURL.path) {
-            print("Realm file exists at:", realmURL.path)
-        } else {
-            print("Realm file does not exist.")
-        }
-        
-        config = Realm.Configuration(schemaVersion: 0, migrationBlock: { _, _ in })
-        Realm.Configuration.defaultConfiguration = config
-    }
-}
+// MARK: - Video from youtube(How to push notificatin cloud Messaging) https://www.youtube.com/watch?v=WmKRWoqdC_Y
+// Apple Developer ==> certificated ==> identifi ==> Key ==> create key set key name ==> end nable tick push notification service ==> click continue ==> click rigister ==> clicl download ==> and then ==> firebase cloud  messaging ==> scroll ==> click upload APNs Key (get from Apple developer at pleace download key by cody keyID and teamId)  and then upload APNs auth key did download from Apple developer

@@ -7,6 +7,7 @@
 
 import UIKit
 import SystemConfiguration
+//import RealmSwift
 
 enum HTTPMethod: String {
     case POST = "POST"
@@ -106,7 +107,11 @@ class ApiManager {
                     let newHeader = ["Authorization": "Bearer \("new token")"]
                     
                     // call self again
-                    self.apiConnection(url: url, method: method, param: param, headers: newHeader, res: res)
+                    self.apiConnection(url: url,
+                                       method: method,
+                                       param: param,
+                                       headers: newHeader,
+                                       res: res)
                 }
                 
             default:
@@ -149,13 +154,14 @@ private func getHeader() -> HTTPHeaders {
 }
 
 func A(){
-    ApiManager.shared.apiConnection(url: .guests,
-                                    query: query(page: 0)
-                                    
-                                    
-    ) { (res: User) in
-        
-    }
+    
+//    ApiManager.shared.apiConnection(url: .guests,
+//                                    query: query(page: 0)
+//                                    
+//                                    
+//    ) { (res: User) in
+//        
+//    }
     
 }
 

@@ -89,6 +89,7 @@ extension UIScrollView {
             collectionView.reloadData() // Hide the footer
         }
     }
+    
 }
 
 

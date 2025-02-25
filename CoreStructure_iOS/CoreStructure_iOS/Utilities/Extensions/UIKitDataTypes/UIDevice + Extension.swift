@@ -25,7 +25,6 @@ extension UIDevice {
     
     static func vibrateOnWrongPassword() {
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
-        print("Vibrated")
     }
     
     static func generateButtonFeedback(style: UIImpactFeedbackGenerator.FeedbackStyle = .medium){

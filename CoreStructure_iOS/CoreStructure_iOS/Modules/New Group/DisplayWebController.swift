@@ -135,63 +135,63 @@ class DisplayWebController: UIViewController, WKNavigationDelegate {
 
 
 
-class LoginViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHandler {
-
-    var webView: WKWebView!
-
-    // Simulated database of users
-    let validUsers = [
-        "admin": "123456",
-        "user": "password"
-    ]
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        let contentController = WKUserContentController()
-        contentController.add(self, name: "loginHandler") // Register the message handler
-
-        let config = WKWebViewConfiguration()
-        config.userContentController = contentController
-
-        webView = WKWebView(frame: self.view.frame, configuration: config)
-        self.view.addSubview(webView)
-
-        if let htmlPath = Bundle.main.path(forResource: "login", ofType: "html") {
-            let url = URL(fileURLWithPath: htmlPath)
-            webView.loadFileURL(url, allowingReadAccessTo: url)
-        }
-    }
-
-    // Handle messages from JavaScript
-    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        
-        print("message ==> \(message)")
-        
-        if message.name == "loginHandler", let credentials = message.body as? [String: String] {
-            let username = credentials["username"] ?? ""
-            let password = credentials["password"] ?? ""
-
-            print("username ==> \(username)")
-            print("password ==> \(password)")
-            print("validUsers[username]" , validUsers[username])
-            
-            // Validate username and password
-            if let validPassword = validUsers[username], validPassword == password {
-                showAlert(title: "Success", message: "Login successful!")
-            } else {
-                showAlert(title: "Error", message: "Invalid username or password.")
-            }
-        }
-    }
-
-    // Helper method to display alerts
-    func showAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        self.present(alert, animated: true)
-    }
-}
+//class LoginViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHandler {
+//
+//    var webView: WKWebView!
+//
+//    // Simulated database of users
+//    let validUsers = [
+//        "admin": "123456",
+//        "user": "password"
+//    ]
+//
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//
+//        let contentController = WKUserContentController()
+//        contentController.add(self, name: "loginHandler") // Register the message handler
+//
+//        let config = WKWebViewConfiguration()
+//        config.userContentController = contentController
+//
+//        webView = WKWebView(frame: self.view.frame, configuration: config)
+//        self.view.addSubview(webView)
+//
+//        if let htmlPath = Bundle.main.path(forResource: "login", ofType: "html") {
+//            let url = URL(fileURLWithPath: htmlPath)
+//            webView.loadFileURL(url, allowingReadAccessTo: url)
+//        }
+//    }
+//
+//    // Handle messages from JavaScript
+//    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+//        
+//        print("message ==> \(message)")
+//        
+//        if message.name == "loginHandler", let credentials = message.body as? [String: String] {
+//            let username = credentials["username"] ?? ""
+//            let password = credentials["password"] ?? ""
+//
+//            print("username ==> \(username)")
+//            print("password ==> \(password)")
+//            print("validUsers[username]" , validUsers[username] ?? "")
+//            
+//            // Validate username and password
+//            if let validPassword = validUsers[username], validPassword == password {
+//                showAlert(title: "Success", message: "Login successful!")
+//            } else {
+//                showAlert(title: "Error", message: "Invalid username or password.")
+//            }
+//        }
+//    }
+//
+//    // Helper method to display alerts
+//    func showAlert(title: String, message: String) {
+//        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+//        alert.addAction(UIAlertAction(title: "OK", style: .default))
+//        self.present(alert, animated: true)
+//    }
+//}
 
 
 

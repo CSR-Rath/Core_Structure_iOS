@@ -213,7 +213,6 @@ extension UIView {
                                          style: .plain, target: self,
                                          action: #selector(doneButtonTapped))
         
-        
         // Add buttons to the toolbar
         toolbar.items = [flexibleSpace, doneButton]
         return toolbar
