@@ -39,60 +39,6 @@ extension UIScrollView{
 
 
 
-
-// MARK: - Pagination Fetch Data include TableView, CollectionView
-extension UIScrollView {
-    
-    func showLoadingSpinner(with title: String = "Fetching data...") {
-        let spinner = UIActivityIndicatorView(style: .medium)
-        spinner.startAnimating()
-        spinner.color = .gray // Adapt to dark mode
-        
-        let titleLabel = UILabel()
-        titleLabel.text = title
-        titleLabel.font = UIFont.systemFont(ofSize: 12, weight: .bold)
-        titleLabel.textColor = .gray
-        titleLabel.textAlignment = .center
-        titleLabel.numberOfLines = 0
-        
-        let stackView = UIStackView(arrangedSubviews: [spinner, titleLabel])
-        stackView.axis = .vertical
-        stackView.spacing = 8
-        stackView.alignment = .center
-        
-        let containerView = UIView()
-        containerView.addSubview(stackView)
-        
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            stackView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            stackView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor)
-        ])
-        
-        containerView.frame = CGRect(x: 0, y: 0, width: self.bounds.width, height: 60)
-        
-        if let tableView = self as? UITableView {
-            tableView.tableFooterView = containerView
-        } else if let collectionView = self as? UICollectionView {
-            let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout
-            layout?.footerReferenceSize = CGSize(width: collectionView.bounds.width, height: 60)
-            collectionView.reloadData() // Ensure the footer is displayed
-        }
-    }
-    
-    func hideLoadingSpinner() {
-        if let tableView = self as? UITableView {
-            tableView.tableFooterView = nil
-        } else if let collectionView = self as? UICollectionView {
-            let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout
-            layout?.footerReferenceSize = .zero
-            collectionView.reloadData() // Hide the footer
-        }
-    }
-    
-}
-
-
 // MARK: - Handle Empty list for UITableView & UICollectionView
 extension UIScrollView {
     
@@ -175,15 +121,73 @@ extension UIScrollView{
          if let tableView = self as? UITableView {
              let lastSection = tableView.numberOfSections - 1
              let lastRow = tableView.numberOfRows(inSection: lastSection) - 1
-             return indexPath.section == lastSection && indexPath.row == lastRow
+             
+             print("indexPath.row ==>  \(indexPath.row)")
+             print("lastRow ==>  \(lastRow)")
+             
+             if (indexPath.section == lastSection && indexPath.row == lastRow){
+                 isShowLoadingSpinner()
+                 return true
+             }
          }
          
          if let collectionView = self as? UICollectionView {
              let lastSection = collectionView.numberOfSections - 1
              let lastItem = collectionView.numberOfItems(inSection: lastSection) - 1
-             return indexPath.section == lastSection && indexPath.row == lastItem
+             
+             if  (indexPath.section == lastSection && indexPath.row == lastItem) {
+                 isShowLoadingSpinner()
+                 return true
+             }
          }
-         
-         return false
+        return false
      }
+    
+    
+  private func isShowLoadingSpinner(with title: String = "Fetching data...") {
+        let spinner = UIActivityIndicatorView(style: .medium)
+        spinner.startAnimating()
+        spinner.color = .red // Adapt to dark mode
+        
+        let titleLabel = UILabel()
+        titleLabel.text = title
+        titleLabel.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+        titleLabel.textColor = .gray
+        titleLabel.textAlignment = .center
+        titleLabel.numberOfLines = 0
+        
+        let stackView = UIStackView(arrangedSubviews: [spinner, titleLabel])
+        stackView.axis = .vertical
+        stackView.spacing = 8
+        stackView.alignment = .center
+        
+        let containerView = UIView()
+        containerView.addSubview(stackView)
+        
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            stackView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            stackView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor)
+        ])
+        
+        containerView.frame = CGRect(x: 0, y: 0, width: self.bounds.width, height: 60)
+        
+        if let tableView = self as? UITableView {
+            tableView.tableFooterView = containerView
+        } else if let collectionView = self as? UICollectionView {
+            let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout
+            layout?.footerReferenceSize = CGSize(width: collectionView.bounds.width, height: 60)
+            collectionView.reloadData() // Ensure the footer is displayed
+        }
+    }
+    
+    func isHideLoadingSpinner() {
+        if let tableView = self as? UITableView {
+            tableView.tableFooterView = nil
+        } else if let collectionView = self as? UICollectionView {
+            let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout
+            layout?.footerReferenceSize = .zero
+            collectionView.reloadData() // Hide the footer
+        }
+    }
 }

@@ -26,8 +26,13 @@ class ButtonOntheKeyboradVC: UIViewController, UIGestureRecognizerDelegate {
         let btn = BaseUIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setTitle("Done", for: .normal)
+        btn.addTarget(self, action: #selector(didTappedDone), for: .touchUpInside)
         return btn
     }()
+    
+    @objc func didTappedDone(){
+        btnButton.shareScreenshotView()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,6 +74,7 @@ class ButtonOntheKeyboradVC: UIViewController, UIGestureRecognizerDelegate {
         UIView.actionKeyboardWillShow = { [self] height in
             
             nsButton.constant = -height
+            
         }
         
         UIView.actionKeyboardWillHide = { [self] in

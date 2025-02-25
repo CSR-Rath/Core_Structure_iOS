@@ -5,13 +5,12 @@ target 'CoreStructure_iOS' do
   use_frameworks!
 
 
- 	#pod 'RealmSwift', '~>10'
+ 	
   pod 'Firebase/Auth' # Auth create account, log in log out
   pod 'Firebase/Firestore'  # Add this line for Firestore store data in bd
-  pod 'Firebase/Messaging' # push message from fire base
+#  pod 'Firebase/Messaging' # push message from fire base
+#  pod 'GoogleSignIn'
 
-
-
-  pod 'GoogleSignIn'
+#  pod 'RealmSwift', '~>10'
 
 end

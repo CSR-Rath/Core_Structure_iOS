@@ -19,7 +19,7 @@ class DemoFeatureVC: UIViewController {
     
     var currentPage: Int = 0
     var totalList: Int = 0
-
+    
     var items : [ListModel] = []{
         didSet{
             tableView.reloadData()
@@ -27,9 +27,9 @@ class DemoFeatureVC: UIViewController {
         }
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .darkContent // or .default based on your needs
-    }
+    //    override var preferredStatusBarStyle: UIStatusBarStyle {
+    //        return .darkContent // or .default based on your needs
+    //    }
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,16 +39,17 @@ class DemoFeatureVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-  }
+    }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
- }
+    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        navigationBarAppearance(titleColor: nil, barColor: nil)
         setupConstraint()
         pullRefresh()
     }
@@ -96,6 +97,7 @@ class DemoFeatureVC: UIViewController {
                 ListModel(id: 22, name: "GenerateQRCodeVC", viewController: GenerateQRCodeVC()),
             ]
         }
+        
     }
 }
 
@@ -129,17 +131,15 @@ extension DemoFeatureVC: UITableViewDelegate, UITableViewDataSource{
             self.navigationController?.pushViewController(item.viewController!, animated: true)
         }
     }
-
+    
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        if tableView.isPagination(indexPath: indexPath,  arrayOfData: items.count, totalItems: totalList){
-            tableView.showLoadingSpinner()
+        
+        if tableView.isPagination(indexPath: indexPath,  arrayOfData: items.count, totalItems: 100){
+            print("isPagination")
             currentPage += 1
-            fetchDataAPI()
+            
         }
-    }
-    
-    func fetchDataAPI(){
-        tableView.hideLoadingSpinner()
+        
     }
 }

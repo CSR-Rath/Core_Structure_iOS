@@ -44,7 +44,10 @@ class Loading : UIView {
     func showLoading(alpha: CGFloat = 0.5 ) {
         DispatchQueue.main.async { [self] in
             
-            guard let window = windowDelegate else { return }
+            guard let window = sceneDelegate else {
+                print("Window nil")
+                return
+            }
             self.frame = window.bounds
             window.addSubview(self)
             loadingView.frame = window.bounds

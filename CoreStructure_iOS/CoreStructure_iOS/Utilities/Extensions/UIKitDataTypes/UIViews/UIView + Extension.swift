@@ -9,31 +9,81 @@ import UIKit
 
 
 
-
-
-//MARK: for animate show heide
+// MARK: Action change screen view contoller
 extension UIView{
     
-    func animateShow(duration: TimeInterval = 0.5) {
-        self.isHidden = false // Make the view visible
-        UIView.animate(withDuration: duration, animations: {
-            self.alpha = 1 // Fade in
-        })
+    func viewContainingController() -> UIViewController? {
+        // for use push view controller in the UIView
+        var nextResponder: UIResponder? = self
+        
+        repeat {
+            nextResponder = nextResponder?.next
+            
+            if let viewController = nextResponder as? UIViewController {
+                return viewController
+            }
+            
+        } while nextResponder != nil
+        
+        return nil
+    }
+
+    
+    @objc func dismissViewController(animated: Bool = true){
+        viewContainingController()?.navigationController?.dismiss(animated: animated)
     }
     
-    func animateHide(duration: TimeInterval = 0.5) {
-        UIView.animate(withDuration: duration, animations: {
-            self.alpha = 0 // Fade out
-        }) { completed in
-            self.isHidden = true // Hide the view after the animation
-        }
+    @objc func popViewController(animated: Bool = true){
+        viewContainingController()?.navigationController?.popViewController(animated: animated)
     }
+    
+    @objc func popToRootViewController(animated: Bool = true){
+        viewContainingController()?.navigationController?.popToRootViewController(animated: animated)
+    }
+    
+    @objc func pushViewController(viewController: UIViewController){
+        viewContainingController()?.navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    @objc func popToViewController(viewController: UIViewController){
+        viewContainingController()?.navigationController?.popToViewController(viewController, animated: true)
+    }
+    
+    func shareScreenshotView(title: String = "Default Title") {
+        let renderer = UIGraphicsImageRenderer(size: self.bounds.size)
+        
+        let image = renderer.image { ctx in
+            self.drawHierarchy(in: self.bounds, afterScreenUpdates: true)
+        }
+        
+        // Include the title and image as items to share
+        let items: [Any] = [title, image] // Add title and image to the share sheet
+        
+        guard let viewController = viewContainingController() else {
+            print("Error: No view controller found")
+            return
+        }
+        
+        let activityViewController = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        
+        // iPad-specific handling
+        if let popoverController = activityViewController.popoverPresentationController {
+            popoverController.sourceView = self
+            popoverController.sourceRect = self.bounds
+            popoverController.permittedArrowDirections = [.up, .down]
+        }
+        
+        viewController.present(activityViewController, animated: true)
+    }
+
 }
+
+
+
 
 extension UIView{
     
     func isHasSafeAreaInsets() -> Bool {
-        // Check if the top inset is greater than zero
         return self.safeAreaInsets.top > 0
     }
     
@@ -48,27 +98,18 @@ extension UIView{
     
 }
 
-//MARK: Handle addGestureRecognizer have param UIView
+
 extension UIView{
     
-    func addGestureRecognizer(target: Any, action: Selector) {
+    func addGestureView(target: Any, action: Selector? = #selector(viewTapped) ) {
         let tapGesture = UITapGestureRecognizer(target: target, action: action)
         self.addGestureRecognizer(tapGesture)
         self.isUserInteractionEnabled = true // Ensure user interaction is enabled
     }
     
-    
-    func tapGestureRecognizer(){
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
-        addGestureRecognizer(tapGesture)
-        isUserInteractionEnabled = true
-    }
-    
     @objc func viewTapped() {
         print("View was tapped! ==> Helper")
     }
-    
-    
 }
 
 //MARK: Handle cornerRadius
@@ -94,70 +135,70 @@ extension UIView{
 
 
 //MARK: Handle UITapGestureRecognizer and UIPanGestureRecognizer
-extension UIView {
-    
-    static var didTapGesture:(()->())?
-    static var dropHeight: CGFloat = 200 // Dismiss view contoller
-    
-    // Adds a tap gesture recognizer to dismiss the view
-    func addTapGesture(target: Any,action: Selector ) {
-        let tapGesture = UITapGestureRecognizer(target: target, action: action)
-        self.addGestureRecognizer(tapGesture)
-    }
-    
-    // Adds a pan gesture recognizer to a specified control view
-    func addPanGesture() {
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture))
-        self.addGestureRecognizer(panGesture)
-    }
-    
-    
-    @objc private func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
-        let translation = gesture.translation(in: self.superview)
-        
-        switch gesture.state {
-        case .changed:
-            // Move the view with the gesture
-            if translation.y > 0 {
-                self.transform = CGAffineTransform(translationX: 0, y: translation.y)
-            }
-            
-        case .ended:
-            print("translation.y ===> \(translation.y)")
-            
-            // Dismiss the view if the swipe is downward
-            
-            if translation.y > UIView.dropHeight {
-                
-            } else {
-                UIView.animate(withDuration: 0.1) {
-                    self.transform = .identity //Reset position
-                }
-            }
-            
-            
-            UIView.animate(withDuration: 0.1) {
-                self.transform = .identity //Reset position
-            }
-            
-            
-            
-        default:
-            
-            break
-        }
-    }
-    
-    @objc private func cancelDismiss() {
-        // Dismissal logic
-        
-        UIView.animate(withDuration: 0.1) {
-            self.transform = .identity
-        }
-        
-        
-    }
-}
+//extension UIView {
+//    
+//    static var didTapGesture:(()->())?
+//    static var dropHeight: CGFloat = 200 // Dismiss view contoller
+//    
+//    // Adds a tap gesture recognizer to dismiss the view
+//    func addTapGesture(target: Any,action: Selector ) {
+//        let tapGesture = UITapGestureRecognizer(target: target, action: action)
+//        self.addGestureRecognizer(tapGesture)
+//    }
+//    
+//    // Adds a pan gesture recognizer to a specified control view
+//    func addPanGesture() {
+//        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture))
+//        self.addGestureRecognizer(panGesture)
+//    }
+//    
+//    
+//    @objc private func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
+//        let translation = gesture.translation(in: self.superview)
+//        
+//        switch gesture.state {
+//        case .changed:
+//            // Move the view with the gesture
+//            if translation.y > 0 {
+//                self.transform = CGAffineTransform(translationX: 0, y: translation.y)
+//            }
+//            
+//        case .ended:
+//            print("translation.y ===> \(translation.y)")
+//            
+//            // Dismiss the view if the swipe is downward
+//            
+//            if translation.y > UIView.dropHeight {
+//                
+//            } else {
+//                UIView.animate(withDuration: 0.1) {
+//                    self.transform = .identity //Reset position
+//                }
+//            }
+//            
+//            
+//            UIView.animate(withDuration: 0.1) {
+//                self.transform = .identity //Reset position
+//            }
+//            
+//            
+//            
+//        default:
+//            
+//            break
+//        }
+//    }
+//    
+//    @objc private func cancelDismiss() {
+//        // Dismissal logic
+//        
+//        UIView.animate(withDuration: 0.1) {
+//            self.transform = .identity
+//        }
+//        
+//        
+//    }
+//}
 
 
 
@@ -227,84 +268,13 @@ extension UIView {
 
 
 
-// MARK: - UITapGestureRecognizer and UIPanGestureRecognizer
-
-class HandleTapPanGesture {
-    
-    static let shared = HandleTapPanGesture()
-    
-    // Callback properties
-    var onTap: (() -> Void)?
-    var onPan: ((CGFloat) -> Void)?
-    
-    
-    private init() {} // Prevent external initialization
-    
-    
-    func tapGestureHelper(to view: UIView){
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTappedHelper))
-        view.addGestureRecognizer(tapGesture)
-        view.isUserInteractionEnabled = true
-    }
-    
-    @objc func viewTappedHelper() {
-        print("View was tapped! ==> Helper")
-    }
-    
-    func addTapGesture(to view: UIView) {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
-        view.addGestureRecognizer(tapGesture)
-        view.isUserInteractionEnabled = true // Ensure user interaction is enabled
-    }
-    
-    func addPanGesture(to view: UIView) {
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
-        view.addGestureRecognizer(panGesture)
-        view.isUserInteractionEnabled = true // Ensure user interaction is enabled
-    }
-    
-    @objc private func viewTapped(_ gesture: UITapGestureRecognizer) {
-        
-        onTap?()
-        
-    }
-    
-    
-    
-    @objc private func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
-        let view = gesture.view
-        let translation = gesture.translation(in: gesture.view?.superview)
-        
-        switch gesture.state {
-        case .changed: // break
-            // Move the view with the gesture
-            if translation.y > 0 {
-                view?.transform = CGAffineTransform(translationX: 0, y: translation.y)
-            }
-            
-        case .ended:
-            print("translation.y ===> \(translation.y)")
-            
-            // Dismiss the view if the swipe is downward
-            
-            if translation.y > UIView.dropHeight {
-                onTap?()
-            } else {
-                UIView.animate(withDuration: 0.1) {
-                    view?.transform = .identity //Reset position
-                }
-            }
-            
-        default:
-            
-            break
-        }
-    }
-}
-
 
 // MARK: - Mark makeSecure when screenShot or screenRecord
 extension UIView {
+    
+    func addSubviews(of views: UIView...) {
+        views.forEach { addSubview($0) }
+    }
     
     func makeSecure() {
         let field = UITextField()
@@ -321,46 +291,26 @@ extension UIView {
 }
 
 
-extension UIView{
+//MARK: for animate show hide with scaling
+extension UIView {
     
-    func viewContainingController() -> UIViewController? {
-        // for use push view controller in the UIView
-        var nextResponder: UIResponder? = self
+    func isAnimateShow(duration: TimeInterval = 0.5) {
+        self.isHidden = false // Make the view visible
+        self.transform = CGAffineTransform(scaleX: 0.5, y: 0.5) // Start with small scale
         
-        repeat {
-            nextResponder = nextResponder?.next
-            
-            if let viewController = nextResponder as? UIViewController {
-                return viewController
-            }
-            
-        } while nextResponder != nil
-        
-        return nil
+        UIView.animate(withDuration: duration, animations: {
+            self.alpha = 1 // Fade in
+            self.transform = CGAffineTransform.identity // Reset scale to original size
+        })
     }
     
-    @objc func shareView(viewToShare: UIView) {
-        
-        // Prepare the activity view controller with the view to share
-        let activityViewController = UIActivityViewController(activityItems: [viewToShare],
-                                                              applicationActivities: nil)
-        
-        // For iPads, you need to specify the source view for the popover
-        if let popoverController = activityViewController.popoverPresentationController {
-            popoverController.sourceView = viewToShare
-            popoverController.sourceRect = CGRect(x: viewToShare.bounds.midX,
-                                                  y: viewToShare.bounds.midY,
-                                                  width: 0, height: 0)
-            popoverController.permittedArrowDirections = []
+    func isAnimateHide(duration: TimeInterval = 0.5) {
+        UIView.animate(withDuration: duration, animations: {
+            self.alpha = 0 // Fade out
+            self.transform = CGAffineTransform(scaleX: 0.5, y: 0.5) // Scale down while fading out
+        }) { completed in
+            self.isHidden = true // Hide the view after the animation
+            self.transform = CGAffineTransform.identity // Reset the scale after hide
         }
-        
-        // Present the activity view controller to share
-        viewContainingController()?.present(activityViewController, animated: true, completion: nil)
-    }
-    
-    func addSubviews(of views: UIView...) {
-        views.forEach { addSubview($0) }
     }
 }
-
-

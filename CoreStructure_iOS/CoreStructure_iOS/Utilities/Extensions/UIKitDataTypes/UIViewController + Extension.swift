@@ -64,7 +64,7 @@ extension UIViewController{
     }
 }
 
-//MARK: Action ViewController
+// MARK: Action change screen view contoller
 extension UIViewController{
     
     @objc func dismissViewController(animated: Bool = true){
@@ -85,22 +85,6 @@ extension UIViewController{
     
     @objc func popToViewController(viewController: UIViewController){
         navigationController?.popToViewController(viewController, animated: true)
-    }
-    
-    @objc func rootViewController(newController: UIViewController) {
-        // Wrap the new view controller in a UINavigationController
-        let newNavController = UINavigationController(rootViewController: newController)
-        
-        // Get the SceneDelegate
-        guard let window = windowDelegate else { return }
-        
-        // Perform the transition with an animation
-        UIView.transition(with: window,
-                          duration: 0.2,
-                          options: .transitionCrossDissolve,
-                          animations: {
-            window.rootViewController = newNavController
-        })
     }
 
 }

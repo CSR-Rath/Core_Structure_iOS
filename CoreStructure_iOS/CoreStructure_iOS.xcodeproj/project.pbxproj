@@ -75,7 +75,6 @@
 		FA992EDE2CF8BE98007B2EB8 /* ContentSizedTableAndCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA849AE42CCB2B5300A34B89 /* ContentSizedTableAndCollectionView.swift */; };
 		FA992EDF2CF8BE98007B2EB8 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA88FD392CCCE23500FD115B /* AppConstants.swift */; };
 		FA992EE02CF8BE98007B2EB8 /* ConstantsHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8E80DD2CCCED600091EDF1 /* ConstantsHeight.swift */; };
-		FA992EE12CF8BE98007B2EB8 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0664282CD2184800694A9B /* Language.swift */; };
 		FA992EE22CF8BE98007B2EB8 /* SetupLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7FF8D82CDC655300C824BD /* SetupLanguage.swift */; };
 		FA992EE32CF8BE98007B2EB8 /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA612AAB2C787A23001E4365 /* Enum.swift */; };
 		FA992EE42CF8BE98007B2EB8 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA87CD792C799EB200349364 /* Models.swift */; };
@@ -124,6 +123,7 @@
 		FA992F112CF8BE98007B2EB8 /* AlertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2B108A2CB786EF0095CDB1 /* AlertMessage.swift */; };
 		FA992F122CF8BE98007B2EB8 /* AlertInternetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2B108D2CB786EF0095CDB1 /* AlertInternetVC.swift */; };
 		FA992F132CF8BE98007B2EB8 /* Note + Read.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD0ABB42C992C0200608D7F /* Note + Read.swift */; };
+		FA9DD5D42D6DBB4C003ED865 /* GlobalFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9DD5D32D6DBB4C003ED865 /* GlobalFunction.swift */; };
 		FAAD14572D68677000C13166 /* CreateDBFeribaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAD14562D68677000C13166 /* CreateDBFeribaseViewController.swift */; };
 		FAC407E02D437BDC009C9FF8 /* login.html in Resources */ = {isa = PBXBuildFile; fileRef = FAC407DF2D437BDB009C9FF8 /* login.html */; };
 		FAC504832D5DCC6600DBC271 /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC504822D5DCC6600DBC271 /* CustomSearchBar.swift */; };
@@ -166,7 +166,6 @@
 		FA05E7A32D683CD800E36CEA /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		FA05E7A52D68401B00E36CEA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FA0664252CD1EA7C00694A9B /* ButtonOntheKeyboradVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonOntheKeyboradVC.swift; sourceTree = "<group>"; };
-		FA0664282CD2184800694A9B /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		FA068B0A2C954E50006A5A58 /* OTPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPVC.swift; sourceTree = "<group>"; };
 		FA068B102C97EA31006A5A58 /* OneTimeCodeTextFieldExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OneTimeCodeTextFieldExtension.swift; sourceTree = "<group>"; };
 		FA068B112C97EA31006A5A58 /* OneTimeCodeTextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OneTimeCodeTextFieldDelegate.swift; sourceTree = "<group>"; };
@@ -258,6 +257,7 @@
 		FA97E6842C9AD1A7003C0966 /* CustomTabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarVC.swift; sourceTree = "<group>"; };
 		FA9AE4792CDB212700A07C50 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		FA9C00102CCC10A800F277E3 /* SelfSizingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSizingViewController.swift; sourceTree = "<group>"; };
+		FA9DD5D32D6DBB4C003ED865 /* GlobalFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFunction.swift; sourceTree = "<group>"; };
 		FA9FEC2A2CC76342008D421D /* TimerStartAndStop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerStartAndStop.swift; sourceTree = "<group>"; };
 		FAA16D3C2CDDA0B7004D1B97 /* MainTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTextField.swift; sourceTree = "<group>"; };
 		FAA16D3E2CDDAF82004D1B97 /* SSPaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSPaddingLabel.swift; sourceTree = "<group>"; };
@@ -462,8 +462,8 @@
 				FA849AE42CCB2B5300A34B89 /* ContentSizedTableAndCollectionView.swift */,
 				FA88FD392CCCE23500FD115B /* AppConstants.swift */,
 				FA8E80DD2CCCED600091EDF1 /* ConstantsHeight.swift */,
-				FA0664282CD2184800694A9B /* Language.swift */,
 				FA7FF8D82CDC655300C824BD /* SetupLanguage.swift */,
+				FA9DD5D32D6DBB4C003ED865 /* GlobalFunction.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -1119,7 +1119,6 @@
 				FAD38F2F2D14132200588DFA /* TransactionTypesEnum.swift in Sources */,
 				FA992EDF2CF8BE98007B2EB8 /* AppConstants.swift in Sources */,
 				FA992EE02CF8BE98007B2EB8 /* ConstantsHeight.swift in Sources */,
-				FA992EE12CF8BE98007B2EB8 /* Language.swift in Sources */,
 				FA992EE22CF8BE98007B2EB8 /* SetupLanguage.swift in Sources */,
 				FA992EE32CF8BE98007B2EB8 /* Enum.swift in Sources */,
 				FA992EE42CF8BE98007B2EB8 /* Models.swift in Sources */,
@@ -1144,6 +1143,7 @@
 				FA992EF32CF8BE98007B2EB8 /* UIViewController + Extension.swift in Sources */,
 				FA992EF52CF8BE98007B2EB8 /* UICollectionViewCell + Extension.swift in Sources */,
 				FA992EF62CF8BE98007B2EB8 /* UITextField + Extension.swift in Sources */,
+				FA9DD5D42D6DBB4C003ED865 /* GlobalFunction.swift in Sources */,
 				FA992EF72CF8BE98007B2EB8 /* UIButton + Extension.swift in Sources */,
 				FA5680312D59A9D20084359D /* CGFloat + Extension.swift in Sources */,
 				FA992EF82CF8BE98007B2EB8 /* UIScrollView + Extension.swift in Sources */,

@@ -95,7 +95,8 @@ class AlertMessage{
             
             Loading.shared.hideLoading()
             
-            guard let window = windowDelegate else{
+            guard let window = sceneDelegate else{
+                print("Window nil")
                 return
             }
     

@@ -44,7 +44,7 @@ class SplashScreenVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .orange
+        view.backgroundColor = .view
         setupConstraint()
         navigationBarAppearance(titleColor: nil, barColor: nil)
         title = "Please choose"

@@ -15,7 +15,7 @@ class LocalizableContoller: UIViewController {
     lazy var btnSwitchLang: BaseUIButton = {
         let btn = BaseUIButton()
         btn.setTitle("Switch", for: .normal)
-        btn.addTapGesture(target: self, action: #selector(didSwitch))
+        btn.addTarget(self, action:  #selector(didSwitch), for: .touchUpInside)
         return btn
     }()
     

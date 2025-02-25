@@ -122,6 +122,7 @@ class BaseUIButton: UIButton {
     }
     
     deinit {
+        stopLoading()
         print("MainButton deinitialized")
     }
 }

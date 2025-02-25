@@ -8,8 +8,6 @@
 import Foundation
 import UIKit
 
-
-
 class SideMenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let tableView = UITableView()

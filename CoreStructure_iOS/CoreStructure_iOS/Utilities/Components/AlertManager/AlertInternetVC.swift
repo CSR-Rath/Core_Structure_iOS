@@ -69,8 +69,8 @@ class AlertInternetVC: UIViewController {
     }
     
     private func setupView() {
-        contentView.animateShow(duration: 0.3)
-        closeButton.animateShow(duration: 0.3)
+//        contentView.isSnimateShow(duration: 0.3)
+//        closeButton.animateShow(duration: 0.3)
         
         view.backgroundColor = .black.withAlphaComponent(0.3)
         view.addSubview(contentView)

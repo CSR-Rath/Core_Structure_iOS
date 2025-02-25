@@ -92,8 +92,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         let userInfo = response.notification.request.content.userInfo
         print("Notification Response User Info:", userInfo)
         
-        guard let sceneDelegate = sceneDelegate,
-              let navigationController = sceneDelegate.window?.rootViewController as? UINavigationController else {
+        guard let navigationController = sceneDelegate.rootViewController as? UINavigationController else {
             print("Error: Unable to access window or root view controller.")
             completionHandler()
             return
