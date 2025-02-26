@@ -15,9 +15,12 @@ struct ListModel{
 
 class DemoFeatureVC: UIViewController, UIGestureRecognizerDelegate {
     
-    private var tableView: UITableView! = nil
+     var tableView: UITableView! = nil
     private var previousOffsetY: CGFloat = 0
     private var isScrollingDown : Bool = false
+
+    var didScrollView: ((_ offsetY: CGFloat, _ isScrollingDown: Bool)->())?
+    var didEndScrollView: ((_ offsetY: CGFloat, _ isScrollingDown: Bool)->())?
     
     var currentPage: Int = 0
     var totalList: Int = 0
@@ -244,7 +247,6 @@ extension DemoFeatureVC: UITableViewDelegate, UITableViewDataSource{
             item.viewController?.navigationController?.interactivePopGestureRecognizer?.delegate = self
             self.navigationController?.pushViewController(item.viewController!, animated: true)
         }
-        
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -259,8 +261,17 @@ extension DemoFeatureVC: UITableViewDelegate, UITableViewDataSource{
         let currentOffsetY = scrollView.contentOffset.y
         isScrollingDown = currentOffsetY > previousOffsetY
         previousOffsetY = currentOffsetY
+        // ------
+        didScrollView?(currentOffsetY, isScrollingDown)
     }
-
+    
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let currentOffsetY = scrollView.contentOffset.y
+        didEndScrollView?(currentOffsetY, isScrollingDown)
+        
+    }
+    
     
    @objc func didTappedButton(){
        let vc = GenerateQRCodeVC()

@@ -27,6 +27,8 @@ class CustomTabBarVC: UITabBarController {
         TitleIconModel(name: "Padding", iconName: ""),
         TitleIconModel(name: "Find", iconName: ""),
     ]
+    
+    private var lastContentOffset: CGFloat = 0
 
     var indexSelected: Int = 0{
         didSet{
@@ -50,27 +52,63 @@ class CustomTabBarVC: UITabBarController {
         return collection
     }()
     
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false // disable
+        self.tabBar.isHidden = true
     }
+    
+
+    
+    
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true // enable
     }
     
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        firstVC.title =  "goodbye_message".localizeString()//"Demo Feature"
-        secondVC.title = "Demo 2"
-        threeVC.title = "Hello 3"
-        fourtVC.title = "Hello 4"
+
         viewControllers = [firstVC, secondVC, threeVC, fourtVC]
         title = viewControllers?[indexSelected].title?.localizeString()
+        
+        firstVC.didScrollView = { offsetY, isScrollDown in
+            self.updateCollectionViewPosition(offsetY: offsetY)
+        }
+        
     }
+    
+    
+
+    private func updateCollectionViewPosition(offsetY: CGFloat) {
+        //MARK: - animation TabBar like ACLEDA TabBar
+        let hideThreshold: CGFloat = 50  // Adjust when the collection view should start hiding
+        let maxOffset: CGFloat = 85      // Height of the collection view
+        let contentHeight = firstVC.tableView.contentSize.height
+        let scrollViewHeight = firstVC.tableView.frame.height
+        let contentOffsetY = firstVC.tableView.contentOffset.y
+        
+        // Check if the scroll view is at the bottom (end) to prevent scrolling behavior
+        let atBottom = contentHeight - scrollViewHeight - contentOffsetY <= 0
+        
+        if offsetY > lastContentOffset, offsetY > hideThreshold, !atBottom {
+            // Scroll down -> Hide collection view (if not at bottom)
+            UIView.animate(withDuration: 0.2) {
+                self.collactionView.transform = CGAffineTransform(translationX: 0, y: maxOffset)
+            }
+        } else if offsetY < lastContentOffset, !atBottom {
+            // Scroll up -> Show collection view (if not at bottom)
+            UIView.animate(withDuration: 0.2) {
+                self.collactionView.transform = .identity
+            }
+        }
+        
+        lastContentOffset = offsetY
+    }
+    
+
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -104,6 +142,31 @@ class CustomTabBarVC: UITabBarController {
         
         ])
     }
+    
+    private func clearAppearanceTabBar(){
+        // MARK: - Because using  custom tabbar
+        let appearance = UITabBarAppearance()
+        appearance.configureWithTransparentBackground() // Makes it clear
+        appearance.backgroundColor = UIColor.clear // Ensure no color is applied
+        
+        tabBar.standardAppearance = appearance
+        if #available(iOS 15.0, *) {
+            tabBar.scrollEdgeAppearance = appearance
+        }
+        
+        // Customize tab bar item title appearance
+         let attributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor.clear,
+         ]
+         
+         appearance.stackedLayoutAppearance.normal.titleTextAttributes = attributes
+         appearance.stackedLayoutAppearance.selected.titleTextAttributes = attributes
+         
+
+        tabBar.backgroundImage = UIImage()
+        tabBar.shadowImage = UIImage()
+    }
+    
 }
 
 
@@ -130,7 +193,9 @@ extension CustomTabBarVC:  UICollectionViewDelegate, UICollectionViewDataSource 
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        indexSelected = indexPath.item
+        if indexSelected != indexPath.item{
+            indexSelected = indexPath.item
+        }
     }
 }
 
