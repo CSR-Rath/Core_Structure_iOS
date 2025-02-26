@@ -7,9 +7,9 @@
 
 import UIKit
 
-
 var sceneDelegate: UIWindow!
 var barAppearanHeight: CGFloat!
+var bottomSafeAreaInsetsHeight: CGFloat!
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -29,11 +29,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window!.rootViewController = navigation
         window!.makeKeyAndVisible()
         
-        // configuretion height
+        // MARK: - configuretion height
         sceneDelegate = window!
+        bottomSafeAreaInsetsHeight = window?.safeAreaInsets.bottom
         barAppearanHeight = navigation.navigationBar.frame.height + (window?.safeAreaInsets.top ?? 0)
         
-        print("barAppearanHeight ==> \(barAppearanHeight ?? 0)")
+        print("SafeAreaInsets bottom ==> \(bottomSafeAreaInsetsHeight ?? 0)")
+        print("AppearanHeight ==> \(barAppearanHeight ?? 0)")
     }
 }
 

@@ -139,31 +139,62 @@ extension UIView{
 
 
 //MARK: Create
+//extension UIView {
+//    
+//    func createToolbar(title: String = "Done") -> UIToolbar {
+//        let toolbar = UIToolbar()
+//        toolbar.sizeToFit()
+//        
+//        // Create a flexible space to push the buttons to the right
+//        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+//        
+//        // Create a "Done" button
+//        let doneButton = UIBarButtonItem(title: title,
+//                                         style: .plain, target: self,
+//                                         action: #selector(doneButtonTapped))
+//        // Add buttons to the toolbar
+//        toolbar.items = [flexibleSpace, doneButton]
+//        return toolbar
+//    }
+//    
+//    @objc func doneButtonTapped() {
+//        // Dismiss keyboard
+//        self.endEditing(true)
+//    }
+//    
+//}
+
+import UIKit
+
 extension UIView {
+
     
-    func createToolbar() -> UIToolbar {
+    func addTooBar(title: String = "Done", target: Any? = nil, action: Selector? = #selector(doneButtonTapped)) -> UIView {
+        //textField.inputAccessoryView = view.addTooBar()
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         
-        // Create a flexible space to push the buttons to the right
-        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        
-        // Create a "Done" button
-        let doneButton = UIBarButtonItem(title: "Done",
-                                         style: .plain, target: self,
-                                         action: #selector(doneButtonTapped))
-        
-        // Add buttons to the toolbar
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
+                                            target: nil,
+                                            action: nil)
+
+        let doneButton = UIBarButtonItem(title: title,
+                                         style: .plain,
+                                         target: target ?? self,
+                                         action: action)
+    
         toolbar.items = [flexibleSpace, doneButton]
+        
         return toolbar
     }
     
     @objc func doneButtonTapped() {
-        // Dismiss keyboard
+        // Default action: dismiss keyboard
         self.endEditing(true)
     }
     
 }
+
 
 
 

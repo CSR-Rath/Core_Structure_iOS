@@ -12,7 +12,7 @@ let keyboardHandler = KeyboardHandler()
 class KeyboardHandler {
     
     var onKeyboardWillShow: ((_ keyboardHeight: CGFloat) -> Void)?
-    var onKeyboardWillHide: (() -> Void)?
+    var onKeyboardWillHide: ((_ bottomSafeAreaInsetsHeight: CGFloat) -> Void)?
     
     init() {
         setupKeyboardObservers()
@@ -42,6 +42,6 @@ class KeyboardHandler {
     }
     
     @objc private func keyboardWillHide(notification: NSNotification) {
-        onKeyboardWillHide?();   print("Keyboard will hide")
+        onKeyboardWillHide?(bottomSafeAreaInsetsHeight); print("Keyboard will hide")
     }
 }

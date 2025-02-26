@@ -291,7 +291,7 @@ extension FloatingLabelTextField{
         
         //==========//====== Hendle self
         setPadding(left: 12, right: 12)
-        addToolBar()
+//        addToolBar()
         heightAnchor.constraint(equalToConstant: 70).isActive = true
         //==========//======
         

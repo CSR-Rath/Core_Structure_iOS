@@ -11,14 +11,14 @@ import UIKit
 class ButtonOntheKeyboradVC: UIViewController, UIGestureRecognizerDelegate {
     
     private  var nsButton = NSLayoutConstraint()
-  
+    
     lazy var textField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.placeholder = "Please Enter"
         textField.borderStyle = .roundedRect
         textField.keyboardType = .numberPad
-        textField.addToolBar()
+        textField.inputAccessoryView = view.addTooBar()
         return textField
     }()
     
@@ -44,6 +44,7 @@ class ButtonOntheKeyboradVC: UIViewController, UIGestureRecognizerDelegate {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupConstraint()
+        keyboradHandleer()
     }
     
     private func keyboradHandleer(){
@@ -58,7 +59,7 @@ class ButtonOntheKeyboradVC: UIViewController, UIGestureRecognizerDelegate {
             })
         }
         
-        keyboardHandler.onKeyboardWillHide = {
+        keyboardHandler.onKeyboardWillHide = { _ in
             self.nsButton.constant = -30
             self.view.layoutIfNeeded()
         }
