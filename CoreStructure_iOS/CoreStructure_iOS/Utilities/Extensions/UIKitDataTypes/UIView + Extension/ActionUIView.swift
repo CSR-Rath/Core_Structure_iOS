@@ -1,0 +1,87 @@
+//
+//  ActionUIView.swift
+//  CoreStructure_iOS
+//
+//  Created by Rath! on 26/2/25.
+//
+
+import Foundation
+import UIKit
+
+extension UIView{
+    
+    func viewContainingController() -> UIViewController? {
+        // for use push view controller in the UIView
+        var nextResponder: UIResponder? = self
+        
+        repeat {
+            nextResponder = nextResponder?.next
+            
+            if let viewController = nextResponder as? UIViewController {
+                return viewController
+            }
+            
+        } while nextResponder != nil
+        
+        return nil
+    }
+    
+    @objc func dismissViewController(animated: Bool = true){
+        viewContainingController()?.navigationController?.dismiss(animated: animated)
+    }
+    
+    @objc func popViewController(animated: Bool = true){
+        viewContainingController()?.navigationController?.popViewController(animated: animated)
+    }
+    
+    @objc func popToRootViewController(animated: Bool = true){
+        viewContainingController()?.navigationController?.popToRootViewController(animated: animated)
+    }
+    
+    @objc func pushViewController(viewController: UIViewController){
+        viewContainingController()?.navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    @objc func popToViewController(viewController: UIViewController){
+        viewContainingController()?.navigationController?.popToViewController(viewController, animated: true)
+    }
+    
+    func shareScreenshotView(title: String = "") {
+        let renderer = UIGraphicsImageRenderer(size: self.bounds.size)
+        
+        let image = renderer.image { ctx in
+            self.drawHierarchy(in: self.bounds, afterScreenUpdates: true)
+        }
+        
+        // Include the title and image as items to share
+        let items: [Any] = [title, image] // Add title and image to the share sheet
+        
+        guard let viewController = viewContainingController() else {
+            print("Error: No view controller found")
+            return
+        }
+        
+        let activityViewController = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        
+        // iPad-specific handling
+        if let popoverController = activityViewController.popoverPresentationController {
+            popoverController.sourceView = self
+            popoverController.sourceRect = self.bounds
+            popoverController.permittedArrowDirections = [.up, .down]
+        }
+        
+        viewController.present(activityViewController, animated: true)
+    }
+    
+    
+    func addGestureView(target: Any, action: Selector? = #selector(viewTapped) ) {
+        let tapGesture = UITapGestureRecognizer(target: target, action: action)
+        self.addGestureRecognizer(tapGesture)
+        self.isUserInteractionEnabled = true // Ensure user interaction is enabled
+    }
+    
+    @objc func viewTapped() {
+        print("View was tapped!")
+    }
+
+}

@@ -7,9 +7,16 @@
 
 import UIKit
 
+// MARK: - Global variable
 var sceneDelegate: UIWindow!
 var barAppearanHeight: CGFloat!
 var bottomSafeAreaInsetsHeight: CGFloat!
+let screen = UIScreen.main.bounds
+let igorneSafeAeaTop: CGRect = CGRect(x: 0,
+                                      y: Int(barAppearanHeight),
+                                      width: Int(screen.width),
+                                      height: Int(screen.height-barAppearanHeight))
+
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -24,7 +31,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     private func rootViewController(){
      
-        let controller: UIViewController = ButtonOntheKeyboradVC()
+        let controller: UIViewController =  CustomTabBarVC()//ButtonOntheKeyboradVC()
         let navigation = UINavigationController(rootViewController: controller)
         window!.rootViewController = navigation
         window!.makeKeyAndVisible()
@@ -33,10 +40,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         sceneDelegate = window!
         bottomSafeAreaInsetsHeight = window?.safeAreaInsets.bottom
         barAppearanHeight = navigation.navigationBar.frame.height + (window?.safeAreaInsets.top ?? 0)
-        
-        print("SafeAreaInsets bottom ==> \(bottomSafeAreaInsetsHeight ?? 0)")
-        print("AppearanHeight ==> \(barAppearanHeight ?? 0)")
     }
+    
 }
 
 extension SceneDelegate{

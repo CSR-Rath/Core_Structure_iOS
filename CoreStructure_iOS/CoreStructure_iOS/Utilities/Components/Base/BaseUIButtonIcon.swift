@@ -14,7 +14,7 @@ class BaseUIButtonIcon: BaseUIButtonAnimation{
     
     var isLeftIcon: Bool = false{
         didSet{
-            haldeStack()
+            handlerStack()
         }
     }
     
@@ -86,7 +86,7 @@ class BaseUIButtonIcon: BaseUIButtonAnimation{
     }
     
     private func setupUI(){
-        haldeStack()
+        handlerStack()
         addSubview(stackContainer)
         
         iconHeightConstraint = imgIcon.widthAnchor.constraint(equalToConstant: iconHeight)
@@ -102,7 +102,7 @@ class BaseUIButtonIcon: BaseUIButtonAnimation{
     }
     
     
-  private func haldeStack(){
+  private func handlerStack(){
         stackContainer.arrangedSubviews.forEach { $0.removeFromSuperview() }
         
         if isLeftIcon{

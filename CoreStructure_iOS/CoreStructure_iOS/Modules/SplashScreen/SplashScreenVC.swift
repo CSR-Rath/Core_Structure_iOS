@@ -62,7 +62,7 @@ class SplashScreenVC: UIViewController {
     
     @objc private func didTappedButton(sender: UIButton) {
 
-        rootViewController(newController: CustomTabBarVC())
+        GlobalFunction.rootViewController(newController: CustomTabBarVC())
 
     }
     

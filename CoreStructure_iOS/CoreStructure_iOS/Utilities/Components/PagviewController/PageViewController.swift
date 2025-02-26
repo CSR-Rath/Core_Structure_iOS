@@ -12,9 +12,10 @@ class PageViewController: UIViewController {
     var didChangeIndex: ((_ index: Int)->())?
     var willChangeIndex: ((_ index: Int)->())?
     var controllers = [UIViewController]()
-    
-    
-    private var pageController =  UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal,options: nil)
+
+    private var pageController =  UIPageViewController(transitionStyle: .scroll,
+                                                       navigationOrientation: .horizontal,
+                                                       options: nil)
     
     private var index: Int = 0
     var currentPage: Int = 0{

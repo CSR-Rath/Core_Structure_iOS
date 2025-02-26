@@ -1,9 +1,7 @@
 import UIKit
 
 class PreventionScreen: UIViewController {
-    
-    let viewScreen = UIView()
-    
+
     lazy var viewContainer: BlurredBackgroundView = {
         let view = BlurredBackgroundView()
         view.backgroundColor = .orange
@@ -17,14 +15,9 @@ class PreventionScreen: UIViewController {
         return view
     }()
     
-    lazy var viewRecording: BlurredBackgroundView = {
-        let view = BlurredBackgroundView()
-        view.backgroundColor = .blue
-        return view
-    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Prevent Screen"
         setupUI()
     }
     
@@ -41,6 +34,7 @@ class PreventionScreen: UIViewController {
             alertView.centerYAnchor.constraint(equalTo: viewContainer.centerYAnchor)
         ])
         
+        let viewScreen = UIView()
         viewScreen.backgroundColor = .green
         viewScreen.frame = view.bounds
         view.addSubview(viewScreen)

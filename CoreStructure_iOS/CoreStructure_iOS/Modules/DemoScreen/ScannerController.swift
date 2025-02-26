@@ -45,6 +45,12 @@ class ScannerController: UIViewController, UIGestureRecognizerDelegate  {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+  
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    
         if let captureSession =  captureSession{
             if captureSession.isRunning == false {
                 DispatchQueue.global(qos: .background).async {
@@ -56,12 +62,7 @@ class ScannerController: UIViewController, UIGestureRecognizerDelegate  {
         else{
             checkCameraAuthorization()
         }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    
-       
+        
     }
     
     
@@ -437,3 +438,16 @@ extension ScannerController: UIImagePickerControllerDelegate,UINavigationControl
 }
 
 
+
+
+class viewCon : UIViewController{
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .white
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        pushViewController(viewController: ScannerController())
+    }
+}

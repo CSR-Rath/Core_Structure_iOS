@@ -1,8 +1,8 @@
 //
-//  ContentSized.swift
+//  ContentSizedCollectionView.swift
 //  CoreStructure_iOS
 //
-//  Created by Rath! on 25/10/24.
+//  Created by Rath! on 26/2/25.
 //
 
 import Foundation
@@ -22,16 +22,3 @@ class ContentSizedCollectionView: UICollectionView {
     }
 }
 
-
-class ContentSizedTableView: UITableView {
-    override var contentSize: CGSize {
-        didSet {
-            invalidateIntrinsicContentSize()
-        }
-    }
-
-    override var intrinsicContentSize: CGSize {
-        layoutIfNeeded()
-        return CGSize(width: UIView.noIntrinsicMetric, height: contentSize.height)
-    }
-}

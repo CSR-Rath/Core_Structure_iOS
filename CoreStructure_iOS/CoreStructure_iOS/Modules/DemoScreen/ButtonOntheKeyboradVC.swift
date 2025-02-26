@@ -8,7 +8,7 @@
 import UIKit
 
 
-class ButtonOntheKeyboradVC: UIViewController, UIGestureRecognizerDelegate {
+class ButtonOntheKeyboradVC: BaseInteractionController/*, UIGestureRecognizerDelegate*/ {
     
     private  var nsButton = NSLayoutConstraint()
     
@@ -18,7 +18,7 @@ class ButtonOntheKeyboradVC: UIViewController, UIGestureRecognizerDelegate {
         textField.placeholder = "Please Enter"
         textField.borderStyle = .roundedRect
         textField.keyboardType = .numberPad
-        textField.inputAccessoryView = view.addTooBar()
+        textField.inputAccessoryView = view.createTooBar()
         return textField
     }()
     
@@ -69,7 +69,7 @@ class ButtonOntheKeyboradVC: UIViewController, UIGestureRecognizerDelegate {
     
     private func setupConstraint(){
         
-        view.setupBarAppearanceView(color: .orange)
+        view.createBarAppearanceView(color: .orange)
         view.addSubview(textField)
         view.addSubview(btnButton)
         

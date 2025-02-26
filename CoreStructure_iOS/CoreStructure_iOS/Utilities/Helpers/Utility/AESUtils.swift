@@ -25,7 +25,6 @@ class AESUtils{
         let result = value.aesDecrypt(key: key256, iv: iv)
         return result ?? ""
     }
-    
 }
 
 extension String {

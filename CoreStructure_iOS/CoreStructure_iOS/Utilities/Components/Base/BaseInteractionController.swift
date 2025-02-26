@@ -7,8 +7,9 @@
 
 import UIKit
 
-fileprivate var timer: Timer?
-fileprivate var duration: Int?
+private var timer: Timer?
+private var duration: Int = 0
+private var maximumDuration: Int = 100 // secords
 
 class BaseInteractionController: UIViewController, UIGestureRecognizerDelegate {
     
@@ -16,8 +17,8 @@ class BaseInteractionController: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tapGesture()
         startTimer()
+        tapGestureScreen()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -30,7 +31,7 @@ class BaseInteractionController: UIViewController, UIGestureRecognizerDelegate {
         duration = 0
     }
     
-    private func tapGesture(){
+    private func tapGestureScreen(){
         // Tap gesture recognizer for the view
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewDidTap(_:)))
         tapRecognizer.delegate = self
@@ -57,16 +58,21 @@ class BaseInteractionController: UIViewController, UIGestureRecognizerDelegate {
     private func startTimer() {
         duration = 0
         timer?.invalidate()
-        timer = Timer.scheduledTimer(timeInterval: TimeInterval(increase), target: self, selector: #selector(timerFired), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: TimeInterval(increase), 
+                                     target: self,
+                                     selector: #selector(timerFired),
+                                     userInfo: nil,
+                                     repeats: true)
     }
     
     @objc private func timerFired() {
-        duration! += increase
-        print("Timer ==> \(duration!)")
+        duration += increase
+        print("Timer ==> \(duration)")
         
-        if duration == 30{
-            Loading.shared.hideLoading()
-//            AlertMessage.shared.alertError()
+        if duration == maximumDuration{
+        
+            print("Timer is stopped.")
+
         }
     }
     
@@ -92,7 +98,6 @@ class BaseInteractionController: UIViewController, UIGestureRecognizerDelegate {
          super.viewDidLoad()
          Do something
      }
- 
  }
  
  */

@@ -22,6 +22,7 @@ class CustomTableViewCell: UITableViewCell {
     }
     
     private func setupViews() {
+        titleLabel.textColor = .black
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(titleLabel)
         

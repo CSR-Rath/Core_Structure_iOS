@@ -70,7 +70,7 @@ extension AppDelegate {
 extension AppDelegate: UNUserNotificationCenterDelegate {
     
     private func configureNotification() {
-        FirebaseApp.configure() // need cell for using  firebase
+//        FirebaseApp.configure() // need cell for using  firebase
         
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
             granted ? print("User granted authorization") : print("User denied authorization")

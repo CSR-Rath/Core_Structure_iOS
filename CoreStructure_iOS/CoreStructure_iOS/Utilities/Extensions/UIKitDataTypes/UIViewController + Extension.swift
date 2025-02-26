@@ -12,7 +12,7 @@ extension UIViewController{
     
     func leftBarButtonItem(action: Selector? = #selector(leftBarButtonItemAction),
                            iconButton: UIImage? = UIImage(named: "icBackWhite"),
-                           tintColor: UIColor! = .white
+                           tintColor: UIColor! = .black
     ){
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: iconButton?.withRenderingMode(.alwaysOriginal).withTintColor(tintColor!),
@@ -118,8 +118,6 @@ extension UIViewController{
         // Present the activity view controller to share
         present(activityViewController, animated: true, completion: nil)
     }
-    
-    
     
     @objc func presentTransaction(){
         

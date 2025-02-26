@@ -13,6 +13,8 @@ struct TansationDate: Codable {
     var desc: String?
 }
 
+
+
 class GroupDateVC: UIViewController, UIGestureRecognizerDelegate {
     
     private var models: [TansationDate] = [
@@ -53,6 +55,16 @@ class GroupDateVC: UIViewController, UIGestureRecognizerDelegate {
         return tableView
     }()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+//        navigationBarAppearance(titleColor: nil, barColor: .white)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+//        navigationBarAppearance(titleColor: nil, barColor: .clear)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -66,7 +78,7 @@ class GroupDateVC: UIViewController, UIGestureRecognizerDelegate {
     
     private func setupUI() {
         view.addSubview(tableView)
-        tableView.frame  = view.bounds
+        tableView.frame  = igorneSafeAeaTop
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "EventCell")

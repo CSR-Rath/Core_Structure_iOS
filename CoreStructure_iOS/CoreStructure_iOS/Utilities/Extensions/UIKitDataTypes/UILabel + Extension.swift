@@ -19,4 +19,9 @@ extension UILabel {
         self.sizeToFit()
     }
     
+    func calculateLabelWidth() -> CGFloat {
+        self.sizeToFit()
+        return self.frame.width
+    }
+    
 }
