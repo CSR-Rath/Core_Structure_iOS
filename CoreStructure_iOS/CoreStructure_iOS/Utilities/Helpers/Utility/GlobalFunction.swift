@@ -10,6 +10,7 @@ import UIKit
 func rootViewController(newController: UIViewController) {
     // Wrap the new view controller in a UINavigationController
     let newNavController = UINavigationController(rootViewController: newController)
+    newNavController.interactivePopGestureRecognizer?.isEnabled = false
     
     // Get the SceneDelegate
     guard let window = sceneDelegate else {

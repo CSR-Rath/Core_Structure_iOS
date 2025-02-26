@@ -13,7 +13,7 @@ struct ListModel{
     let viewController: UIViewController?
 }
 
-class DemoFeatureVC: UIViewController {
+class DemoFeatureVC: UIViewController, UIGestureRecognizerDelegate {
     
     private var tableView: UITableView! = nil
     
@@ -27,47 +27,61 @@ class DemoFeatureVC: UIViewController {
         }
     }
     
-    //    override var preferredStatusBarStyle: UIStatusBarStyle {
-    //        return .darkContent // or .default based on your needs
-    //    }
-    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .white
+        
+        setupConstraint()
+        pullRefresh()
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+       
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false // disable swipe
+        navigationBarAppearance(titleColor: .clear, barColor: .clear)
+        print("viewDidAppear")
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
     }
     
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .white
-        navigationBarAppearance(titleColor: nil, barColor: nil)
-        setupConstraint()
-        pullRefresh()
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        print("viewDidDisappear")
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true // enable swipe
     }
     
     private func setupConstraint(){
-        tableView = UITableView(frame: view.bounds, style: .plain)
+        view.setupBarAppearanceView(color: .red)
+        
+        tableView =  UITableView()
         tableView.rowHeight = 60
-        view.addSubview(tableView)
         tableView.backgroundColor = .clear
         tableView.dataSource = self
         tableView.delegate = self
         if #available(iOS 15.0, *) {
             tableView.sectionHeaderTopPadding = 0
         }
-        
         tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.addRefreshControl(target: self, action: #selector(pullRefresh))
         
+        view.addSubview(tableView)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+        
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
+        
+        ])
     }
     
     @objc private func pullRefresh(){
@@ -97,8 +111,8 @@ class DemoFeatureVC: UIViewController {
                 ListModel(id: 22, name: "GenerateQRCodeVC", viewController: GenerateQRCodeVC()),
             ]
         }
-        
     }
+    
 }
 
 
@@ -128,18 +142,16 @@ extension DemoFeatureVC: UITableViewDelegate, UITableViewDataSource{
             self.present(item.viewController!, animated: true)
         default:
             item.viewController?.leftBarButtonItem()
+            item.viewController?.navigationController?.interactivePopGestureRecognizer?.delegate = self
             self.navigationController?.pushViewController(item.viewController!, animated: true)
         }
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        
         if tableView.isPagination(indexPath: indexPath,  arrayOfData: items.count, totalItems: 100){
             print("isPagination")
             currentPage += 1
-            
         }
-        
     }
 }

@@ -125,6 +125,7 @@
 		FA992F132CF8BE98007B2EB8 /* Note + Read.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD0ABB42C992C0200608D7F /* Note + Read.swift */; };
 		FA9DD5D42D6DBB4C003ED865 /* GlobalFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9DD5D32D6DBB4C003ED865 /* GlobalFunction.swift */; };
 		FAAD14572D68677000C13166 /* CreateDBFeribaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAD14562D68677000C13166 /* CreateDBFeribaseViewController.swift */; };
+		FABB3A372D6EA2AC0007656A /* KeyboardHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABB3A362D6EA2AC0007656A /* KeyboardHandler.swift */; };
 		FAC407E02D437BDC009C9FF8 /* login.html in Resources */ = {isa = PBXBuildFile; fileRef = FAC407DF2D437BDB009C9FF8 /* login.html */; };
 		FAC504832D5DCC6600DBC271 /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC504822D5DCC6600DBC271 /* CustomSearchBar.swift */; };
 		FAD38F2F2D14132200588DFA /* TransactionTypesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD38F2E2D14132200588DFA /* TransactionTypesEnum.swift */; };
@@ -267,6 +268,7 @@
 		FAAD14562D68677000C13166 /* CreateDBFeribaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDBFeribaseViewController.swift; sourceTree = "<group>"; };
 		FAB5D6402C6C3DA600A31A6F /* TitleWithValueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleWithValueTableViewCell.swift; sourceTree = "<group>"; };
 		FAB5D6442C6CB0E900A31A6F /* CheckmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckmarkView.swift; sourceTree = "<group>"; };
+		FABB3A362D6EA2AC0007656A /* KeyboardHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandler.swift; sourceTree = "<group>"; };
 		FAC407DF2D437BDB009C9FF8 /* login.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = login.html; sourceTree = "<group>"; };
 		FAC504822D5DCC6600DBC271 /* CustomSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchBar.swift; sourceTree = "<group>"; };
 		FAD0ABB42C992C0200608D7F /* Note + Read.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note + Read.swift"; sourceTree = "<group>"; };
@@ -464,6 +466,7 @@
 				FA8E80DD2CCCED600091EDF1 /* ConstantsHeight.swift */,
 				FA7FF8D82CDC655300C824BD /* SetupLanguage.swift */,
 				FA9DD5D32D6DBB4C003ED865 /* GlobalFunction.swift */,
+				FABB3A362D6EA2AC0007656A /* KeyboardHandler.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -1100,6 +1103,7 @@
 				FA992ECB2CF8BE98007B2EB8 /* BoardTableViewCell.swift in Sources */,
 				FA992ECC2CF8BE98007B2EB8 /* BoardCollectionViewCell.swift in Sources */,
 				FA992ECD2CF8BE98007B2EB8 /* CenteringCellVC.swift in Sources */,
+				FABB3A372D6EA2AC0007656A /* KeyboardHandler.swift in Sources */,
 				FA992ECE2CF8BE98007B2EB8 /* CardCell.swift in Sources */,
 				FA992ECF2CF8BE98007B2EB8 /* PreventionVC.swift in Sources */,
 				FA992ED22CF8BE98007B2EB8 /* TableViewHandler.swift in Sources */,
@@ -1294,6 +1298,7 @@
 				INFOPLIST_FILE = CoreStructure_iOS/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Testing;
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires access to the camera to allow you to take photos and record videos.";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "This app uses Face ID for secure authentication.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app requires access to your photo library to save captured images.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -1401,6 +1406,7 @@
 				INFOPLIST_FILE = CoreStructure_iOS/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Testing;
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires access to the camera to allow you to take photos and record videos.";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "This app uses Face ID for secure authentication.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app requires access to your photo library to save captured images.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -1508,6 +1514,7 @@
 				INFOPLIST_FILE = CoreStructure_iOS/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Testing;
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires access to the camera to allow you to take photos and record videos.";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "This app uses Face ID for secure authentication.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app requires access to your photo library to save captured images.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;

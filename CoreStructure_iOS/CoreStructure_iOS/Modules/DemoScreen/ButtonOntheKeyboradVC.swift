@@ -10,8 +10,8 @@ import UIKit
 
 class ButtonOntheKeyboradVC: UIViewController, UIGestureRecognizerDelegate {
     
-    var nsButton = NSLayoutConstraint()
-    
+    private  var nsButton = NSLayoutConstraint()
+  
     lazy var textField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -33,25 +33,42 @@ class ButtonOntheKeyboradVC: UIViewController, UIGestureRecognizerDelegate {
     @objc func didTappedDone(){
         btnButton.shareScreenshotView()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationBarAppearance(titleColor: .clear, barColor: .clear)
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
-        view.setupKeyboardObservers()
         setupConstraint()
-        
-        self.hideKeyboardWhenTappedAround()
-        //Enable back swipe gesture
-        navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
     
-    deinit{
-        NotificationCenter.default.removeObserver(self)
+    private func keyboradHandleer(){
+        
+        keyboardHandler.onKeyboardWillShow = { keyboardHeight in
+            // add animation
+            UIView.animate(withDuration: 0.5, delay: 0.25, // Use a non-zero duration
+                           options: .curveEaseIn,
+                           animations: {
+                self.nsButton.constant = keyboardHeight
+                self.view.layoutIfNeeded()
+            })
+        }
+        
+        keyboardHandler.onKeyboardWillHide = {
+            self.nsButton.constant = -30
+            self.view.layoutIfNeeded()
+        }
+        
+        view.addGestureView(target: self, action: #selector(dismissKeyboard))
     }
     
     private func setupConstraint(){
         
+        view.setupBarAppearanceView(color: .orange)
         view.addSubview(textField)
         view.addSubview(btnButton)
         
@@ -70,16 +87,5 @@ class ButtonOntheKeyboradVC: UIViewController, UIGestureRecognizerDelegate {
 
         nsButton = btnButton.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: -30)
         nsButton.isActive = true
-      
-        UIView.actionKeyboardWillShow = { [self] height in
-            
-            nsButton.constant = -height
-            
-        }
-        
-        UIView.actionKeyboardWillHide = { [self] in
-
-            nsButton.constant = -30
-        }
     }
 }

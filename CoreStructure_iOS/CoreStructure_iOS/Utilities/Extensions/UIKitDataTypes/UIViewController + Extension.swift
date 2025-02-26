@@ -89,29 +89,11 @@ extension UIViewController{
 
 }
 
-extension UIView {
-    
-    func hideKeyboardWhenTappedAround() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        self.addGestureRecognizer(tap)
-    }
-    
-    @objc func dismissKeyboard() {
-        self.endEditing(true)
-    }
-}
 
 // MARK: EndEditing TextField When touch around else TextFields
 extension UIViewController {
-    
-    func hideKeyboardWhenTappedAround() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
-    }
-    
-    @objc func dismissKeyboard() {
+
+    @objc func dismissKeyboard() { //resingtextfield
         view.endEditing(true)
     }
 }

@@ -87,7 +87,12 @@ extension UIView{
         return self.safeAreaInsets.top > 0
     }
     
-    //MARK: calculate text label width
+    func setupBarAppearanceView(color: UIColor){
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: barAppearanHeight))
+        view.backgroundColor = color
+        self.addSubview(view)
+    }
+    
     func calculateLabelWidth(text: String, font: UIFont) -> CGFloat {
         let label = UILabel()
         label.text = text
@@ -95,7 +100,6 @@ extension UIView{
         label.sizeToFit()
         return label.frame.width
     }
-    
 }
 
 
@@ -121,7 +125,6 @@ extension UIView{
         case bottomLeft
     }
     
-    //multiple corners using CACornerMask
     func roundCorners(corners:[RoundCornersAt], radius: CGFloat) {
         self.layer.cornerRadius = radius
         self.layer.maskedCorners = [
@@ -133,110 +136,6 @@ extension UIView{
     }
 }
 
-
-//MARK: Handle UITapGestureRecognizer and UIPanGestureRecognizer
-//extension UIView {
-//    
-//    static var didTapGesture:(()->())?
-//    static var dropHeight: CGFloat = 200 // Dismiss view contoller
-//    
-//    // Adds a tap gesture recognizer to dismiss the view
-//    func addTapGesture(target: Any,action: Selector ) {
-//        let tapGesture = UITapGestureRecognizer(target: target, action: action)
-//        self.addGestureRecognizer(tapGesture)
-//    }
-//    
-//    // Adds a pan gesture recognizer to a specified control view
-//    func addPanGesture() {
-//        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture))
-//        self.addGestureRecognizer(panGesture)
-//    }
-//    
-//    
-//    @objc private func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
-//        let translation = gesture.translation(in: self.superview)
-//        
-//        switch gesture.state {
-//        case .changed:
-//            // Move the view with the gesture
-//            if translation.y > 0 {
-//                self.transform = CGAffineTransform(translationX: 0, y: translation.y)
-//            }
-//            
-//        case .ended:
-//            print("translation.y ===> \(translation.y)")
-//            
-//            // Dismiss the view if the swipe is downward
-//            
-//            if translation.y > UIView.dropHeight {
-//                
-//            } else {
-//                UIView.animate(withDuration: 0.1) {
-//                    self.transform = .identity //Reset position
-//                }
-//            }
-//            
-//            
-//            UIView.animate(withDuration: 0.1) {
-//                self.transform = .identity //Reset position
-//            }
-//            
-//            
-//            
-//        default:
-//            
-//            break
-//        }
-//    }
-//    
-//    @objc private func cancelDismiss() {
-//        // Dismissal logic
-//        
-//        UIView.animate(withDuration: 0.1) {
-//            self.transform = .identity
-//        }
-//        
-//        
-//    }
-//}
-
-
-
-//MARK: Keyborad on button
-extension UIView{
-    //    deinit {
-    //        NotificationCenter.default.removeObserver(self)
-    //    }
-    
-    static var actionKeyboardWillShow: ((_ keyboardHeight: CGFloat)->())?
-    static var actionKeyboardWillHide: (()->())?
-    
-    func setupKeyboardObservers() {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(keyboardWillShow),
-                                               name: UIResponder.keyboardWillShowNotification,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(keyboardWillHide),
-                                               name: UIResponder.keyboardWillHideNotification,
-                                               object: nil)
-    }
-    
-    @objc private func keyboardWillShow(notification: NSNotification) {
-        if let userInfo = notification.userInfo,
-           let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let  keyboardHeight = keyboardFrame.cgRectValue.height + 20
-            
-            print("keyboardHeight ==> ",keyboardHeight)
-            
-            UIView.actionKeyboardWillShow?(keyboardHeight)
-        }
-    }
-    
-    @objc private func keyboardWillHide(notification: NSNotification) {
-        UIView.actionKeyboardWillHide?()
-    }
-}
 
 
 //MARK: Create
@@ -314,3 +213,10 @@ extension UIView {
         }
     }
 }
+
+
+
+
+
+
+

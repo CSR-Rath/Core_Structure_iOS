@@ -14,7 +14,7 @@ class OTPVC: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        navigationBarAppearance(titleColor: .mainBlueColor, barColor: .clear)
         //Enable back swipe gesture
         navigationController?.interactivePopGestureRecognizer?.delegate = self
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
@@ -23,8 +23,9 @@ class OTPVC: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
+        title = "OTP"
         codeTxt = OneTimeCodeTextField()
+        
         
         view.addSubview(codeTxt)
         codeTxt.translatesAutoresizingMaskIntoConstraints = false

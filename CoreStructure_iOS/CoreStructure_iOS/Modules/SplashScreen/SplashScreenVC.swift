@@ -36,17 +36,17 @@ class SplashScreenVC: UIViewController {
         stack.alignment = .fill
         return stack
     }()
+
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.barStyle = .default
+
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .view
+        view.backgroundColor = .white
         setupConstraint()
-        navigationBarAppearance(titleColor: nil, barColor: nil)
         title = "Please choose"
     }
     

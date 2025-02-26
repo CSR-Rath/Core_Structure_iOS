@@ -12,6 +12,8 @@ import Firebase
 
 // Firebase Messaging need have account developer for
 
+
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -20,6 +22,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         setLanguage(langCode: .english) // english default
         configureNotification() // notivication
+        
+       
+//        if let navBarHeight = navigationController?.navigationBar.frame.height {
+//            print("Navigation Bar Height: \(navBarHeight)")
+//        }
         
         return true
     }

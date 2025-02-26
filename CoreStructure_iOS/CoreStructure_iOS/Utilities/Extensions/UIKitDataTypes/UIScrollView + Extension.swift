@@ -122,9 +122,6 @@ extension UIScrollView{
              let lastSection = tableView.numberOfSections - 1
              let lastRow = tableView.numberOfRows(inSection: lastSection) - 1
              
-             print("indexPath.row ==>  \(indexPath.row)")
-             print("lastRow ==>  \(lastRow)")
-             
              if (indexPath.section == lastSection && indexPath.row == lastRow){
                  isShowLoadingSpinner()
                  return true
@@ -143,12 +140,13 @@ extension UIScrollView{
         return false
      }
     
-    
-  private func isShowLoadingSpinner(with title: String = "Fetching data...") {
+    private func isShowLoadingSpinner(with title: String = "Fetching.") {
+        // Create spinner and start animating
         let spinner = UIActivityIndicatorView(style: .medium)
         spinner.startAnimating()
         spinner.color = .red // Adapt to dark mode
         
+        // Create title label for dynamic dots
         let titleLabel = UILabel()
         titleLabel.text = title
         titleLabel.font = UIFont.systemFont(ofSize: 12, weight: .bold)
@@ -156,22 +154,28 @@ extension UIScrollView{
         titleLabel.textAlignment = .center
         titleLabel.numberOfLines = 0
         
+        // Stack view for spinner and label
         let stackView = UIStackView(arrangedSubviews: [spinner, titleLabel])
         stackView.axis = .vertical
         stackView.spacing = 8
         stackView.alignment = .center
-        
+        stackView.layoutMargins = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+        stackView.isLayoutMarginsRelativeArrangement = true
+        // Container view to hold the stack view
         let containerView = UIView()
         containerView.addSubview(stackView)
         
+        // Layout constraints for stack view
         stackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             stackView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor)
         ])
         
+        // Set container view size
         containerView.frame = CGRect(x: 0, y: 0, width: self.bounds.width, height: 60)
         
+        // Update footer view based on the type of view (tableView or collectionView)
         if let tableView = self as? UITableView {
             tableView.tableFooterView = containerView
         } else if let collectionView = self as? UICollectionView {
@@ -179,7 +183,24 @@ extension UIScrollView{
             layout?.footerReferenceSize = CGSize(width: collectionView.bounds.width, height: 60)
             collectionView.reloadData() // Ensure the footer is displayed
         }
+        
+        // Animate the loading dash with a sequence of dots
+        var dotCount = 1
+        Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { timer in
+            let dotString = String(repeating: ".", count: dotCount)
+            titleLabel.text = title + "\(dotString)"
+            
+            // Update dot count
+            dotCount = (dotCount % 3) + 1
+            
+            // Stop animation when the data is ready
+            // Example: Stop after 10 seconds (replace this condition as needed)
+            if dotCount > 10 {
+                timer.invalidate()
+            }
+        }
     }
+
     
     func isHideLoadingSpinner() {
         if let tableView = self as? UITableView {

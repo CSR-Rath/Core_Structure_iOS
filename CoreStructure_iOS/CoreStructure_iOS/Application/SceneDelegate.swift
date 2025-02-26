@@ -9,6 +9,7 @@ import UIKit
 
 
 var sceneDelegate: UIWindow!
+var barAppearanHeight: CGFloat!
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -18,18 +19,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        sceneDelegate = window!
         self.rootViewController()
-        
     }
     
     private func rootViewController(){
      
-        let controller: UIViewController = SplashScreenVC()
+        let controller: UIViewController = ButtonOntheKeyboradVC()
         let navigation = UINavigationController(rootViewController: controller)
         window!.rootViewController = navigation
         window!.makeKeyAndVisible()
         
+        // configuretion height
+        sceneDelegate = window!
+        barAppearanHeight = navigation.navigationBar.frame.height + (window?.safeAreaInsets.top ?? 0)
+        
+        print("barAppearanHeight ==> \(barAppearanHeight ?? 0)")
     }
 }
 
