@@ -21,6 +21,7 @@ class DragDropCollectionVC: UIViewController, UICollectionViewDataSource, UIColl
     static let  cell = "MenuListDragDropCell"
     var didSelectItemsCell : ((_ : MenuListModel)->())?
     var collectionView : UICollectionView!
+    private var isDraggingItem: Bool = false
     
     var  dataList : [MenuListModel] = [] {
         didSet{
@@ -33,8 +34,11 @@ class DragDropCollectionVC: UIViewController, UICollectionViewDataSource, UIColl
         view.backgroundColor = .lightGray
         setupCollectionView()
         loadDataList()
-        
+        setupLongPressGestureRecognizer()
     }
+    
+    
+
     
     //MARK: Set default date and fetching data
     func loadDataList() {
@@ -107,7 +111,7 @@ extension DragDropCollectionVC{
         
         print("itemsForBeginning")
         
-        
+        isDraggingItem = true
         UIDevice.generateButtonFeedback()
         
         let titleImageModel = dataList[indexPath.item]
@@ -148,26 +152,61 @@ extension DragDropCollectionVC{
                 }, completion: { finished in
                     coordinator.drop(item.dragItem, toItemAt: destinationIndexPath)
                 })
-            } else {
-                let placeholderContext = coordinator.drop(item.dragItem, to: UICollectionViewDropPlaceholder(insertionIndexPath: destinationIndexPath, reuseIdentifier: "CellIdentifier"))
-                
-                item.dragItem.itemProvider.loadObject(ofClass: NSString.self, completionHandler: { (object, error) in
-                    if let draggedItem = object as? NSString {
-                        DispatchQueue.main.async {
-                            placeholderContext.commitInsertion(dataSourceUpdates: { insertionIndexPath in
-                                let titleImageModel = MenuListModel(imageName: "", title: draggedItem as String, id: 1)
-                                self.dataList.insert(titleImageModel, at: insertionIndexPath.item)
-                                collectionView.insertItems(at: [insertionIndexPath])
-                            })
-                        }
-                    }
-                })
             }
         }
         
         
         DataManager.shared.saveDragDropMenu(data: dataList)
         UIDevice.generateButtonFeedback()
+    }
+
+    
+    func collectionView(_ collectionView: UICollectionView, dragSessionDidEnd session: UIDragSession) {
+          print("Drag session ended")  // Check if this is being called
+          isDraggingItem = false
+      }
+
+      // This method catches when drag session is canceled
+      func collectionView(_ collectionView: UICollectionView, dragSessionWasCancelled session: UIDragSession) {
+          print("Drag session was cancelled")  // Check if this is being called
+
+      }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        if !isDraggingItem{
+            let vc = UIViewController()
+            vc.view.backgroundColor = .white
+            pushViewController(viewController: vc )
+    
+        }
+        
+    }
+}
+
+extension DragDropCollectionVC{ // Prevents unmoved drag
+    
+    // MARK: - Setup Long Press Gesture Recognizer
+    private func setupLongPressGestureRecognizer() {
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture(_:)))
+        collectionView.addGestureRecognizer(longPressGesture)
+    }
+    
+    @objc private func handleLongPressGesture(_ gesture: UILongPressGestureRecognizer) {
+        let location = gesture.location(in: collectionView)
+        guard collectionView.indexPathForItem(at: location) != nil else { return }
+        
+        switch gesture.state {
+        case .began:
+            
+            break
+            
+        case .ended, .cancelled:
+            isDraggingItem = false
+            
+        default:
+            break
+        }
     }
 }
 
