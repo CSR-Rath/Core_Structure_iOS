@@ -10,7 +10,6 @@ target 'CoreStructure_iOS' do
   pod 'Firebase/Firestore'  # Add this line for Firestore store data in bd
 #  pod 'Firebase/Messaging' # push message from fire base
 #  pod 'GoogleSignIn'
-
 #  pod 'RealmSwift', '~>10'
 
 end

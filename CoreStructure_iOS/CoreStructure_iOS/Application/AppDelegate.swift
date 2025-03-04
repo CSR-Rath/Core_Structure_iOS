@@ -20,13 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        setLanguage(langCode: .english) // english default
+        setLanguage(langCode: .ar) // english default
         configureNotification() // notivication
-        
-       
-//        if let navBarHeight = navigationController?.navigationBar.frame.height {
-//            print("Navigation Bar Height: \(navBarHeight)")
-//        }
         
         return true
     }
@@ -81,7 +76,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     // when alert notivigation
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         Loading.shared.hideLoading()
-        updateBadgeIncrease()
+        updateBadgeIncreaseIconApp()
         
         let userInfo = notification.request.content.userInfo
         print("Notification User Info:", userInfo)
@@ -112,7 +107,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         completionHandler()
     }
 
-    private func updateBadgeIncrease() {
+    private func updateBadgeIncreaseIconApp() {
         DispatchQueue.main.async {
             UIApplication.shared.applicationIconBadgeNumber += 1
         }

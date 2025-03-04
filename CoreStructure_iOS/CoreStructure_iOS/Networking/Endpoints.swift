@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 enum Endpoint: String {
     case test = "test"
     case wallet = "wallet"

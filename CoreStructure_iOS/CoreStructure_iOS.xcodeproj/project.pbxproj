@@ -15,6 +15,7 @@
 		FA494BA72C69EBD70086D346 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA494BA62C69EBD70086D346 /* Assets.xcassets */; };
 		FA494BAA2C69EBD70086D346 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA494BA82C69EBD70086D346 /* LaunchScreen.storyboard */; };
 		FA5680312D59A9D20084359D /* CGFloat + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5680302D59A9D20084359D /* CGFloat + Extension.swift */; };
+		FA6311B92D6FF9FE00A2F9FF /* SwipeTableViewHeaderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6311B82D6FF9FD00A2F9FF /* SwipeTableViewHeaderVC.swift */; };
 		FA70E73C2D264FC300A5EAE8 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70E73B2D264FC300A5EAE8 /* BaseViewController.swift */; };
 		FA70E73E2D264FD400A5EAE8 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70E73D2D264FD400A5EAE8 /* BaseView.swift */; };
 		FA7FF8E82CDC722B00C824BD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FA7FF8EA2CDC722B00C824BD /* Localizable.strings */; };
@@ -127,6 +128,7 @@
 		FABB3A3A2D6EBE520007656A /* ContentSizedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABB3A392D6EBE520007656A /* ContentSizedTableView.swift */; };
 		FABB3A3C2D6EBE600007656A /* ContentSizedCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABB3A3B2D6EBE600007656A /* ContentSizedCollectionView.swift */; };
 		FAC407E02D437BDC009C9FF8 /* login.html in Resources */ = {isa = PBXBuildFile; fileRef = FAC407DF2D437BDB009C9FF8 /* login.html */; };
+		FAC4CA2A2D7070B30078146E /* AddVucherVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC4CA292D7070B30078146E /* AddVucherVC.swift */; };
 		FAC504832D5DCC6600DBC271 /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC504822D5DCC6600DBC271 /* CustomSearchBar.swift */; };
 		FAD38F2F2D14132200588DFA /* TransactionTypesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD38F2E2D14132200588DFA /* TransactionTypesEnum.swift */; };
 		FADDCC872D62D4D900120D69 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADDCC862D62D4D900120D69 /* ViewModel.swift */; };
@@ -212,6 +214,7 @@
 		FA5680302D59A9D20084359D /* CGFloat + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat + Extension.swift"; sourceTree = "<group>"; };
 		FA5C30FE2CF5CD45002ABA39 /* ScannerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerController.swift; sourceTree = "<group>"; };
 		FA612AAB2C787A23001E4365 /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
+		FA6311B82D6FF9FD00A2F9FF /* SwipeTableViewHeaderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTableViewHeaderVC.swift; sourceTree = "<group>"; };
 		FA6D52D52C9A748F00710D93 /* PreventionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreventionVC.swift; sourceTree = "<group>"; };
 		FA70E73B2D264FC300A5EAE8 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		FA70E73D2D264FD400A5EAE8 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
@@ -270,6 +273,7 @@
 		FABB3A392D6EBE520007656A /* ContentSizedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentSizedTableView.swift; sourceTree = "<group>"; };
 		FABB3A3B2D6EBE600007656A /* ContentSizedCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentSizedCollectionView.swift; sourceTree = "<group>"; };
 		FAC407DF2D437BDB009C9FF8 /* login.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = login.html; sourceTree = "<group>"; };
+		FAC4CA292D7070B30078146E /* AddVucherVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddVucherVC.swift; sourceTree = "<group>"; };
 		FAC504822D5DCC6600DBC271 /* CustomSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchBar.swift; sourceTree = "<group>"; };
 		FAD0ABB42C992C0200608D7F /* Note + Read.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note + Read.swift"; sourceTree = "<group>"; };
 		FAD38F2E2D14132200588DFA /* TransactionTypesEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTypesEnum.swift; sourceTree = "<group>"; };
@@ -396,6 +400,8 @@
 				FA7FF8DA2CDC662E00C824BD /* LocalizableContoller.swift */,
 				FA88C16B2CDE7E1A00E006D0 /* DragDropTableViewCellContoler.swift */,
 				FA8534822D37AD90006A3688 /* DragDropViewController.swift */,
+				FA6311B82D6FF9FD00A2F9FF /* SwipeTableViewHeaderVC.swift */,
+				FAC4CA292D7070B30078146E /* AddVucherVC.swift */,
 			);
 			path = DemoScreen;
 			sourceTree = "<group>";
@@ -1076,6 +1082,7 @@
 				FA992EB32CF8BE98007B2EB8 /* ButtonOntheKeyboradVC.swift in Sources */,
 				FA992EB52CF8BE98007B2EB8 /* HandleNavigationBarVC.swift in Sources */,
 				FA992EB62CF8BE98007B2EB8 /* PagViewControllerWithButtonVC.swift in Sources */,
+				FAC4CA2A2D7070B30078146E /* AddVucherVC.swift in Sources */,
 				FA992EB72CF8BE98007B2EB8 /* OTPVC.swift in Sources */,
 				FA992EB82CF8BE98007B2EB8 /* HtmlVC.swift in Sources */,
 				FA992EBA2CF8BE98007B2EB8 /* ScannerController.swift in Sources */,
@@ -1097,6 +1104,7 @@
 				FAB041E62D6EEF80002737F8 /* ConditionUIView.swift in Sources */,
 				FA992ECA2CF8BE98007B2EB8 /* BoardCollectionVC.swift in Sources */,
 				FA992ECB2CF8BE98007B2EB8 /* BoardTableViewCell.swift in Sources */,
+				FA6311B92D6FF9FE00A2F9FF /* SwipeTableViewHeaderVC.swift in Sources */,
 				FA992ECC2CF8BE98007B2EB8 /* BoardCollectionViewCell.swift in Sources */,
 				FA992ECD2CF8BE98007B2EB8 /* CenteringCellVC.swift in Sources */,
 				FABB3A372D6EA2AC0007656A /* KeyboardHandler.swift in Sources */,

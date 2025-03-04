@@ -31,7 +31,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     private func rootViewController(){
      
-        let controller: UIViewController =  CustomTabBarVC()//ButtonOntheKeyboradVC()
+        let controller: UIViewController = DragDropCollectionVC()
         let navigation = UINavigationController(rootViewController: controller)
         window!.rootViewController = navigation
         window!.makeKeyAndVisible()
@@ -67,7 +67,3 @@ extension SceneDelegate{
     }
     
 }
-
-
-
-// SwiftUI is have func (onAppear and onDisappear) = (viewWillAppear or viewDidAppear) and (viewWillDisappear or viewDidDisappear or viewDidload)

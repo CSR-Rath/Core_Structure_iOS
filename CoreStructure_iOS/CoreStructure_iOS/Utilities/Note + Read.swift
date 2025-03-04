@@ -11,3 +11,7 @@
  
  */
 
+
+
+
+// SwiftUI is have func (onAppear and onDisappear) = (viewWillAppear or viewDidAppear) and (viewWillDisappear or viewDidDisappear or viewDidload)

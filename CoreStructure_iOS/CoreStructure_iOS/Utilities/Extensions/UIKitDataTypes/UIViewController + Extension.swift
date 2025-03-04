@@ -68,11 +68,11 @@ extension UIViewController{
 extension UIViewController{
     
     @objc func dismissViewController(animated: Bool = true){
-        navigationController?.dismiss(animated: animated)
+        self.dismiss(animated: animated)
     }
     
     @objc func popViewController(animated: Bool = true){
-        navigationController?.popViewController(animated: animated)
+        self.popViewController(animated: animated)
     }
     
     @objc func popToRootViewController(animated: Bool = true){

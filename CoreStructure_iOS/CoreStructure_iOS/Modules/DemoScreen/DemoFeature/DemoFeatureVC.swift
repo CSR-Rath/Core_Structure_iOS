@@ -40,6 +40,7 @@ class DemoFeatureVC: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        title = "Demo"
         setupConstraint()
         pullRefresh()
     }
@@ -112,6 +113,7 @@ class DemoFeatureVC: UIViewController, UIGestureRecognizerDelegate {
                 ListModel(id: 4, name: "BoardCollectionVC", viewController: BoardCollectionVC()),
                 ListModel(id: 6, name: "CenteringCollectionViewCellVC", viewController: CenteringCellVC()),
                 ListModel(id: 7, name: "Cell Alert Error", viewController: nil),
+                
                 ListModel(id: 9, name: "GroupDateVC", viewController: GroupDateVC()),
                 ListModel(id: 10, name: "ExspandTableVC", viewController: ExspandTableVC()),
                 ListModel(id: 11, name: "DragDropCollectionVC", viewController: DragDropCollectionVC()),
@@ -127,86 +129,6 @@ class DemoFeatureVC: UIViewController, UIGestureRecognizerDelegate {
                 ListModel(id: 21, name: "PreventionScreen", viewController: PreventionScreen()),
                 ListModel(id: 22, name: "GenerateQRCodeVC", viewController: GenerateQRCodeVC()),
                 
-                ListModel(id: 2, name: "PasscodeVC", viewController: PasscodeVC()),
-                ListModel(id: 3, name: "OTPVC", viewController: OTPVC()),
-                ListModel(id: 4, name: "BoardCollectionVC", viewController: BoardCollectionVC()),
-                ListModel(id: 6, name: "CenteringCollectionViewCellVC", viewController: CenteringCellVC()),
-                ListModel(id: 7, name: "Cell Alert Error", viewController: nil),
-                ListModel(id: 9, name: "GroupDateVC", viewController: GroupDateVC()),
-                ListModel(id: 10, name: "ExspandTableVC", viewController: ExspandTableVC()),
-                ListModel(id: 11, name: "DragDropCollectionVC", viewController: DragDropCollectionVC()),
-                ListModel(id: 12, name: "ButtonOntheKeyboradVC", viewController: ButtonOntheKeyboradVC()),
-                ListModel(id: 13, name: "HandleNavigationBarVC", viewController: HandleNavigationBarVC()),
-                ListModel(id: 14, name: "LocalNotificationVC", viewController: LocalNotificationVC()),
-                ListModel(id: 15, name: "PagViewControllerWithButtonVC", viewController: PagViewControllerWithButtonVC()),
-                ListModel(id: 16, name: "ViewController", viewController: PageViewController()),
-                ListModel(id: 17, name: "LocalizableContoller", viewController: LocalizableContoller()),
-                ListModel(id: 18, name: "SliderController", viewController: SliderController()),
-                ListModel(id: 19, name: "SectionedTableViewController", viewController: DragDropTableViewCellContoler()),
-                ListModel(id: 20, name: "ScannerController", viewController: ScannerController()),
-                ListModel(id: 21, name: "PreventionScreen", viewController: PreventionScreen()),
-                ListModel(id: 22, name: "GenerateQRCodeVC", viewController: GenerateQRCodeVC()),
-                
-                
-                ListModel(id: 2, name: "PasscodeVC", viewController: PasscodeVC()),
-                ListModel(id: 3, name: "OTPVC", viewController: OTPVC()),
-                ListModel(id: 4, name: "BoardCollectionVC", viewController: BoardCollectionVC()),
-                ListModel(id: 6, name: "CenteringCollectionViewCellVC", viewController: CenteringCellVC()),
-                ListModel(id: 7, name: "Cell Alert Error", viewController: nil),
-                ListModel(id: 9, name: "GroupDateVC", viewController: GroupDateVC()),
-                ListModel(id: 10, name: "ExspandTableVC", viewController: ExspandTableVC()),
-                ListModel(id: 11, name: "DragDropCollectionVC", viewController: DragDropCollectionVC()),
-                ListModel(id: 12, name: "ButtonOntheKeyboradVC", viewController: ButtonOntheKeyboradVC()),
-                ListModel(id: 13, name: "HandleNavigationBarVC", viewController: HandleNavigationBarVC()),
-                ListModel(id: 14, name: "LocalNotificationVC", viewController: LocalNotificationVC()),
-                ListModel(id: 15, name: "PagViewControllerWithButtonVC", viewController: PagViewControllerWithButtonVC()),
-                ListModel(id: 16, name: "ViewController", viewController: PageViewController()),
-                ListModel(id: 17, name: "LocalizableContoller", viewController: LocalizableContoller()),
-                ListModel(id: 18, name: "SliderController", viewController: SliderController()),
-                ListModel(id: 19, name: "SectionedTableViewController", viewController: DragDropTableViewCellContoler()),
-                ListModel(id: 20, name: "ScannerController", viewController: ScannerController()),
-                ListModel(id: 21, name: "PreventionScreen", viewController: PreventionScreen()),
-                ListModel(id: 22, name: "GenerateQRCodeVC", viewController: GenerateQRCodeVC()),
-                
-                ListModel(id: 2, name: "PasscodeVC", viewController: PasscodeVC()),
-                ListModel(id: 3, name: "OTPVC", viewController: OTPVC()),
-                ListModel(id: 4, name: "BoardCollectionVC", viewController: BoardCollectionVC()),
-                ListModel(id: 6, name: "CenteringCollectionViewCellVC", viewController: CenteringCellVC()),
-                ListModel(id: 7, name: "Cell Alert Error", viewController: nil),
-                ListModel(id: 9, name: "GroupDateVC", viewController: GroupDateVC()),
-                ListModel(id: 10, name: "ExspandTableVC", viewController: ExspandTableVC()),
-                ListModel(id: 11, name: "DragDropCollectionVC", viewController: DragDropCollectionVC()),
-                ListModel(id: 12, name: "ButtonOntheKeyboradVC", viewController: ButtonOntheKeyboradVC()),
-                ListModel(id: 13, name: "HandleNavigationBarVC", viewController: HandleNavigationBarVC()),
-                ListModel(id: 14, name: "LocalNotificationVC", viewController: LocalNotificationVC()),
-                ListModel(id: 15, name: "PagViewControllerWithButtonVC", viewController: PagViewControllerWithButtonVC()),
-                ListModel(id: 16, name: "ViewController", viewController: PageViewController()),
-                ListModel(id: 17, name: "LocalizableContoller", viewController: LocalizableContoller()),
-                ListModel(id: 18, name: "SliderController", viewController: SliderController()),
-                ListModel(id: 19, name: "SectionedTableViewController", viewController: DragDropTableViewCellContoler()),
-                ListModel(id: 20, name: "ScannerController", viewController: ScannerController()),
-                ListModel(id: 21, name: "PreventionScreen", viewController: PreventionScreen()),
-                ListModel(id: 22, name: "GenerateQRCodeVC", viewController: GenerateQRCodeVC()),
-                
-                ListModel(id: 2, name: "PasscodeVC", viewController: PasscodeVC()),
-                ListModel(id: 3, name: "OTPVC", viewController: OTPVC()),
-                ListModel(id: 4, name: "BoardCollectionVC", viewController: BoardCollectionVC()),
-                ListModel(id: 6, name: "CenteringCollectionViewCellVC", viewController: CenteringCellVC()),
-                ListModel(id: 7, name: "Cell Alert Error", viewController: nil),
-                ListModel(id: 9, name: "GroupDateVC", viewController: GroupDateVC()),
-                ListModel(id: 10, name: "ExspandTableVC", viewController: ExspandTableVC()),
-                ListModel(id: 11, name: "DragDropCollectionVC", viewController: DragDropCollectionVC()),
-                ListModel(id: 12, name: "ButtonOntheKeyboradVC", viewController: ButtonOntheKeyboradVC()),
-                ListModel(id: 13, name: "HandleNavigationBarVC", viewController: HandleNavigationBarVC()),
-                ListModel(id: 14, name: "LocalNotificationVC", viewController: LocalNotificationVC()),
-                ListModel(id: 15, name: "PagViewControllerWithButtonVC", viewController: PagViewControllerWithButtonVC()),
-                ListModel(id: 16, name: "ViewController", viewController: PageViewController()),
-                ListModel(id: 17, name: "LocalizableContoller", viewController: LocalizableContoller()),
-                ListModel(id: 18, name: "SliderController", viewController: SliderController()),
-                ListModel(id: 19, name: "SectionedTableViewController", viewController: DragDropTableViewCellContoler()),
-                ListModel(id: 20, name: "ScannerController", viewController: ScannerController()),
-                ListModel(id: 21, name: "PreventionScreen", viewController: PreventionScreen()),
-                ListModel(id: 22, name: "GenerateQRCodeVC", viewController: GenerateQRCodeVC()),
             ]
         }
     }
@@ -247,6 +169,8 @@ extension DemoFeatureVC: UITableViewDelegate, UITableViewDataSource{
             item.viewController?.navigationController?.interactivePopGestureRecognizer?.delegate = self
             self.navigationController?.pushViewController(item.viewController!, animated: true)
         }
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

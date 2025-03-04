@@ -16,10 +16,10 @@ enum MenuTitle: String{
     case none = "none"
 }
 
-class DragDropCollectionVC :UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDragDelegate, UICollectionViewDropDelegate {
+class DragDropCollectionVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDragDelegate, UICollectionViewDropDelegate {
     
     static let  cell = "MenuListDragDropCell"
-            var didSelectItemsCell : ((_ : MenuListModel)->())?
+    var didSelectItemsCell : ((_ : MenuListModel)->())?
     var collectionView : UICollectionView!
     
     var  dataList : [MenuListModel] = [] {
@@ -28,20 +28,13 @@ class DragDropCollectionVC :UIViewController, UICollectionViewDataSource, UIColl
         }
     }
     
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-            super.touchesEnded(touches, with: event)
-            
-            print("Touch ended")
-        }
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .lightGray
         setupCollectionView()
         loadDataList()
+        
     }
-
     
     //MARK: Set default date and fetching data
     func loadDataList() {
@@ -92,7 +85,6 @@ extension DragDropCollectionVC{
         view.addSubview(collectionView)
         
         collectionView.frame = view.bounds
- 
     }
     
     // MARK: - UICollectionViewDataSource
@@ -104,20 +96,19 @@ extension DragDropCollectionVC{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CellIdentifier", for: indexPath) as! MenuDragDropCell
         let titleImageModel = dataList[indexPath.item]
-        cell.imgIcone.image =  UIImage(named: titleImageModel.imageName)
+        cell.imgIcon.image =  UIImage(named: titleImageModel.imageName)
         cell.titleLabel.text = titleImageModel.title
-     
+        
         return cell
     }
     
-    // MARK: - UICollectionViewDragDelegate
     
     func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        //        UIDevice.vibrate()
         
-        let generator = UIImpactFeedbackGenerator(style: .light) // You can change the style to .medium or .heavy
-        generator.prepare()
-        generator.impactOccurred()
+        print("itemsForBeginning")
+        
+        
+        UIDevice.generateButtonFeedback()
         
         let titleImageModel = dataList[indexPath.item]
         let itemProvider = NSItemProvider(object: titleImageModel.title as NSString)
@@ -129,15 +120,19 @@ extension DragDropCollectionVC{
     // MARK: - UICollectionViewDropDelegate
     
     func collectionView(_ collectionView: UICollectionView, canHandle session: UIDropSession) -> Bool {
+        
         return session.canLoadObjects(ofClass: NSString.self)
     }
     
     func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
+        
         let isLocalDrag = session.localDragSession != nil
         return UICollectionViewDropProposal(operation: isLocalDrag ? .move : .copy, intent: .insertAtDestinationIndexPath)
     }
     
     func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
+        print("performDropWith")
+        
         guard let destinationIndexPath = coordinator.destinationIndexPath else {
             return
         }
@@ -172,20 +167,7 @@ extension DragDropCollectionVC{
         
         
         DataManager.shared.saveDragDropMenu(data: dataList)
-        let generator = UIImpactFeedbackGenerator(style: .light)
-        generator.prepare()
-        generator.impactOccurred()
-    }
-    
-    
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        print(indexPath.row)
-        
-        let selectedItem = dataList[indexPath.item]
-        print("selectedItem: \(selectedItem)")
-        
+        UIDevice.generateButtonFeedback()
     }
 }
 

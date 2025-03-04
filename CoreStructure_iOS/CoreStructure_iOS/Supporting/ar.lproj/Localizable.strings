@@ -1,0 +1,84 @@
+/* 
+  Localizable.strings
+  CoreStructure_iOS
+
+  Created by Rath! on 7/11/24.
+  
+*/
+
+
+
+"welcome_message" = "Welcome to our app!";
+"goodbye_message" = "Goodbye!";
+"error_message" = "An error has occurred. Please try again.";
+
+
+"promotions" = "PROMOTIONS";
+"explore_services" = "EXPLORE SERVICES";
+"bvm_vip" = "BVM VIP";
+"product_payment" = "PRODUCT PAYMENT";
+"select_your_account" = "Select your account";
+"browse_all_stores" = "BROWSE\nALL STORES";
+"how_to_earn_points" = "HOW TO EARN POINTS";
+"point_history" = "POINT HISTORY";
+"bronze" = "BRONZE";
+"silver" = "SILVER";
+"gold" = "GOLD";
+"platinum" = "PLATINUM";
+"how_bvm_vip_works" = "HOW BVM VIP WORKS";
+"you_earn_points_when_refueling_at_bvm_station_using_anupheap." = "You earn points when refueling at BVM Station using ANUPHEAP.";
+"use_your_points_to_redeem_wide_ranges_of_exciting_prizes_at_anupheap's_partner_shops." = "Use your points to redeem wide ranges of exciting prize at ANUPHEAP's partner shops.";
+"terms_and_conditions_applied._please_read_the_detailed_terms_and_conditions." = "Terms and conditions applied. Please read the detailed Terms and Conditions.";
+"membership_and_benefits" = "MEMBERSHIP & BENEFITS";
+"terms_and_conditions" = "TERMS & CONDITIONS";
+"unlocked_spending_reaches" = "Unlocked when\nspending reaches:";
+"benefits" = "BENEFITS";
+
+// transaction history
+"point_history" = "POINT HISTORY";
+"speed_car_wash" = "SPEED CAR WASH";
+"brown_coffee" = "BROWN COFFEE";
+"kon_tob_svai_bravat" = "KON TOB SVAI BRAVAT";
+"earned" = "EARNED";
+"spent" = "SPENT";
+"expired" = "EXPIRED";
+"point_earned" = "POINT EARNED";
+"point_spent" = "POINT SPENT";
+"point_expired" = "POINT EXPIRED";
+
+
+
+"promotions" = "ការផ្តល់ជូន";
+"explore_services" = "ស្វែងរកសេវាកម្ម";
+"bvm_vip" = "BVM VIP";
+"product_payment" = "ការទូទាត់ផលិតផល";
+"select_your_account" = "ជ្រើសរើសគណនីរបស់អ្នក";
+"browse_all_stores" = "រកមើល\nហាងទាំងអស់";
+"how_to_earn_points" = "របៀបទទួលបានពិន្ទុ";
+
+
+"point_history" = "ប្រវត្តិពិន្ទុ";
+"bronze" = "សំរិទ្ធ";
+"silver" = "ប្រាក់";
+"gold" = "មាស";
+"platinum" = "ប្លាទីនឹម";
+"how_bvm_vip_works" = "របៀបប្រើ BVM VIP";
+"you_earn_points_when_refueling_at_bvm_station_using_anupheap." = "អ្នកទទួលបានពិន្ទុនៅពេលចាក់ប្រេងនៅស្ថានីយប្រេងឥន្ធនៈ ប៊ីវីអឹម តាមរយៈ អានុភាព  ។";
+"use_your_points_to_redeem_wide_ranges_of_exciting_prizes_at_anupheap's_partner_shops." = "ប្រើពិន្ទុរបស់អ្នកដើម្បីប្តូរយករង្វាន់ជាច្រើននៅហាងដៃគូរបស់ អានុភាព ។";
+"terms_and_conditions_applied._please_read_the_detailed_terms_and_conditions." = "លក្ខខណ្ឌផ្សេងៗត្រូវបានអនុវត្ត។ សូមអានលក្ខខណ្ឌលម្អិត។";
+"membership_and_benefits" = "សមាជិកភាព និង អត្ថប្រយោជន";
+"terms_and_conditions" = "លក្ខខណ្ឌ";
+="unlocked_spending_reaches" = "ទទួលបាននៅពេលn\ការចំណាយដល់កំណត់៖";
+"benefits" = "អត្ថប្រយោជន៍";
+
+// transaction history
+"point_history" = "ប្រវត្តិពិន្ទុ";
+"speed_car_wash" = "SPEED CAR WASH"; // not yet
+"brown_coffee" = "BROWN COFFEE"; // not yet
+"kon_tob_svai_bravat" = "KON TOB SVAI BRAVAT"; // not yet
+"earned" = "ទទួលបាន";
+"spent" = "ចំណាយ";
+"expired" = "ផុតកំណត់";
+"point_earned" = "ពិន្ទុទទួលបាន";
+"point_spent" = "ពិន្ទុដែលបានចំណាយ";
+"point_expired" = "ពិន្ទុផុតកំណត់";

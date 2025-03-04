@@ -13,25 +13,15 @@ class MenuDragDropCell: UICollectionViewCell {
     var nsWidth = NSLayoutConstraint()
     var nsHeight = NSLayoutConstraint()
     
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("touchesEnded")
-    }
-    
     var sizeImage:CGFloat = 64{
         didSet{
 
-            nsHeight.isActive = false
-            nsWidth.isActive = false
-            nsHeight = imgIcone.heightAnchor.constraint(equalToConstant: sizeImage)
-            nsWidth =   imgIcone.widthAnchor.constraint(equalToConstant: sizeImage)
-            nsHeight.isActive = true
-            nsWidth.isActive = true
+            updateImageSizeConstraints()
         }
     }
     
     
-    let imgIcone: UIImageView = {
+    let imgIcon: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         return imageView
@@ -44,6 +34,7 @@ class MenuDragDropCell: UICollectionViewCell {
         return label
     }()
     
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -52,40 +43,57 @@ class MenuDragDropCell: UICollectionViewCell {
         contentView.layer.cornerRadius = 10
         backgroundColor = .clear
         layer.cornerRadius = 10
-        
-//        UIView.animate(withDuration: 1.0, delay: 0.0, options: [.autoreverse, .repeat], animations: {
-//            self.imgIcone.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
-//        }, completion: nil)
     }
+    
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
 
     }
     
+    var tapAction: (() -> Void)?
+    @objc private func handleTap() {
+           // Call the tapAction if it exists
+        print("handleTap")
+           tapAction?()
+       }
+    
+    
     private func setupViews() {
         // Add and configure subviews
-        contentView.addSubview(imgIcone)
+        contentView.addSubview(imgIcon)
         contentView.addSubview(titleLabel)
         
         // Configure constraints
-        imgIcone.translatesAutoresizingMaskIntoConstraints = false
+        imgIcon.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
         
-        nsHeight = imgIcone.heightAnchor.constraint(equalToConstant: sizeImage)
-        nsWidth =   imgIcone.widthAnchor.constraint(equalToConstant: sizeImage)
+        nsHeight = imgIcon.heightAnchor.constraint(equalToConstant: sizeImage)
+        nsWidth =   imgIcon.widthAnchor.constraint(equalToConstant: sizeImage)
         
         nsHeight.isActive = true
         nsWidth.isActive = true
         
         NSLayoutConstraint.activate([
-            imgIcone.centerXAnchor.constraint(equalTo: centerXAnchor),
-            imgIcone.centerYAnchor.constraint(equalTo: centerYAnchor,constant: -8),
+            imgIcon.centerXAnchor.constraint(equalTo: centerXAnchor),
+            imgIcon.centerYAnchor.constraint(equalTo: centerYAnchor,constant: -8),
             
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,constant: -8)
         ])
     }
+    
+    private func updateImageSizeConstraints() {
+            // Deactivate old constraints before updating
+            nsHeight.isActive = false
+            nsWidth.isActive = false
+            
+            nsHeight = imgIcon.heightAnchor.constraint(equalToConstant: sizeImage)
+            nsWidth = imgIcon.widthAnchor.constraint(equalToConstant: sizeImage)
+            
+            nsHeight.isActive = true
+            nsWidth.isActive = true
+        }
 }

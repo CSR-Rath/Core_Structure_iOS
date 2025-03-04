@@ -20,15 +20,16 @@ class CustomTabBarVC: UITabBarController {
     private let secondVC = UIViewController()
     private let threeVC = UIViewController()
     private let fourtVC = UIViewController()
+    private let fiveVC = UIViewController()
+    private var lastContentOffset: CGFloat = 0
     
     private let dataList : [TitleIconModel] = [
         TitleIconModel(name: "VC", iconName: ""),
         TitleIconModel(name: "Package", iconName: ""),
+        TitleIconModel(name: "", iconName: ""),
         TitleIconModel(name: "Padding", iconName: ""),
         TitleIconModel(name: "Find", iconName: ""),
     ]
-    
-    private var lastContentOffset: CGFloat = 0
 
     var indexSelected: Int = 0{
         didSet{
@@ -45,7 +46,7 @@ class CustomTabBarVC: UITabBarController {
         layout.scrollDirection = .horizontal
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collection.translatesAutoresizingMaskIntoConstraints = false
-        collection.backgroundColor = .mainBlueColor
+        collection.backgroundColor = .clear
         collection.delegate = self
         collection.dataSource = self
         collection.register(CustomTabBarCell.self, forCellWithReuseIdentifier: CustomTabBarCell.identifier)
@@ -56,12 +57,9 @@ class CustomTabBarVC: UITabBarController {
         super.viewDidAppear(animated)
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false // disable
         self.tabBar.isHidden = true
+        self.addShape()  // Call to add the custom shape
     }
-    
 
-    
-    
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true // enable
@@ -70,17 +68,14 @@ class CustomTabBarVC: UITabBarController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        viewControllers = [firstVC, secondVC, threeVC, fourtVC]
+        viewControllers = [firstVC, secondVC, threeVC, fourtVC, fiveVC]
         title = viewControllers?[indexSelected].title?.localizeString()
         
         firstVC.didScrollView = { offsetY, isScrollDown in
             self.updateCollectionViewPosition(offsetY: offsetY)
         }
-        
     }
     
-    
-
     private func updateCollectionViewPosition(offsetY: CGFloat) {
         //MARK: - animation TabBar like ACLEDA TabBar
         let hideThreshold: CGFloat = 50  // Adjust when the collection view should start hiding
@@ -107,9 +102,6 @@ class CustomTabBarVC: UITabBarController {
         lastContentOffset = offsetY
     }
     
-
-
-
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -118,18 +110,22 @@ class CustomTabBarVC: UITabBarController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-
+       
         if let layout = collactionView.collectionViewLayout as? UICollectionViewFlowLayout { // handle cell items
-            layout.minimumLineSpacing = 10
-            layout.minimumInteritemSpacing = 0
-            let itemWidth = (view.bounds.width-30) / 4
+
+            let spac: CGFloat = 10
+            let spacing = CGFloat(dataList.count-1) * spac
+            let itemWidth = (view.bounds.width-spacing) / CGFloat(dataList.count)
             let itemHeight = collactionView.frame.height
+            
+            layout.minimumLineSpacing = spac
+            layout.minimumInteritemSpacing = 0
             layout.itemSize = CGSize(width: itemWidth, height: itemHeight)
             layout.invalidateLayout()
         }
+   
     }
     
-    //MARK: Handle Setup ViewController
     private func setupConstraintAndSetupController(){
     
         view.addSubview(collactionView)
@@ -143,32 +139,73 @@ class CustomTabBarVC: UITabBarController {
         ])
     }
     
-    private func clearAppearanceTabBar(){
-        // MARK: - Because using  custom tabbar
-        let appearance = UITabBarAppearance()
-        appearance.configureWithTransparentBackground() // Makes it clear
-        appearance.backgroundColor = UIColor.clear // Ensure no color is applied
-        
-        tabBar.standardAppearance = appearance
-        if #available(iOS 15.0, *) {
-            tabBar.scrollEdgeAppearance = appearance
-        }
-        
-        // Customize tab bar item title appearance
-         let attributes: [NSAttributedString.Key: Any] = [
-            .foregroundColor: UIColor.clear,
-         ]
-         
-         appearance.stackedLayoutAppearance.normal.titleTextAttributes = attributes
-         appearance.stackedLayoutAppearance.selected.titleTextAttributes = attributes
-         
-
-        tabBar.backgroundImage = UIImage()
-        tabBar.shadowImage = UIImage()
-    }
-    
 }
 
+// MARK: - addShape Collection
+extension CustomTabBarVC{
+    
+    private func addShape() {
+
+        let shapeLayerTab = CAShapeLayer()
+        shapeLayerTab.path = createPath()
+        shapeLayerTab.fillColor = UIColor.mainBlueColor.cgColor
+        shapeLayerTab.lineWidth = 1.0
+        
+        //The below 4 lines are for shadow above the bar. you can skip them if you do not want a shadow
+        shapeLayerTab.shadowOffset = CGSize(width: 0, height: 3)
+        shapeLayerTab.shadowRadius = 10
+        shapeLayerTab.shadowColor = UIColor.clear.cgColor
+        shapeLayerTab.shadowOpacity = 0.3
+        collactionView.layer.insertSublayer(shapeLayerTab, at: 0)
+    }
+    
+    private func createPath() -> CGPath {
+        // Define constants to control the size and appearance of the shape
+        let height: CGFloat = 50  // Height for the bottom curve
+        let heightTwo: CGFloat = 50  // Width size at the top (defines the "trough")
+        
+        let topZise: CGFloat = 35  // Controls the sharpness of the curve at the top
+        let bottomSize: CGFloat = 50  // Controls the size of the bottom curve
+        let cornerTop: CGFloat = 1.2  // A factor to adjust the sharpness of the top corners
+        
+        // Create a UIBezierPath to define the custom shape
+        let path = UIBezierPath()
+        
+        // Center of the collection view (for centering the shape horizontally)
+        let centerWidth = collactionView.frame.width / 2
+        
+        // Move the path starting point to the top-left corner of the collection view
+        path.move(to: CGPoint(x: 0, y: 0))
+        
+        // Add a line from the starting point to a point on the left side of the "trough"
+        path.addLine(to: CGPoint(x: (centerWidth - heightTwo * cornerTop), y: 0))
+        
+        // Add the first curve from the left side of the trough to the center
+        path.addCurve(to: CGPoint(x: centerWidth, y: height),
+                      controlPoint1: CGPoint(x: (centerWidth - topZise), y: 0),
+                      controlPoint2: CGPoint(x: centerWidth - bottomSize, y: height))
+        
+        // Add the second curve from the center to the right side of the trough
+        path.addCurve(to: CGPoint(x: (centerWidth + heightTwo * cornerTop), y: 0),
+                      controlPoint1: CGPoint(x: centerWidth + bottomSize, y: height),
+                      controlPoint2: CGPoint(x: (centerWidth + topZise), y: 0))
+        
+        // Add a line to the top-right corner of the collection view
+        path.addLine(to: CGPoint(x: collactionView.frame.width, y: 0))
+        
+        // Add a line to the bottom-right corner of the collection view
+        path.addLine(to: CGPoint(x: collactionView.frame.width, y: collactionView.frame.height))
+        
+        // Add a line to the bottom-left corner of the collection view
+        path.addLine(to: CGPoint(x: 0, y: collactionView.frame.height))
+        
+        // Close the path to complete the shape
+        path.close()
+        
+        // Return the created CGPath
+        return path.cgPath
+    }
+}
 
 //MARK: Delegate and Datasource
 extension CustomTabBarVC:  UICollectionViewDelegate, UICollectionViewDataSource {
@@ -181,7 +218,10 @@ extension CustomTabBarVC:  UICollectionViewDelegate, UICollectionViewDataSource 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomTabBarCell.identifier, for: indexPath) as! CustomTabBarCell
         
         cell.lblTitle.text = dataList[indexPath.item].name
-        cell.imgIcon.image = UIImage(systemName: "swift" )
+        
+        if indexPath.item != 2{
+            cell.imgIcon.image = UIImage(systemName: "swift" )
+        }
         
         if indexSelected  == indexPath.item {
             configureSelectedCell(cell)
@@ -193,7 +233,7 @@ extension CustomTabBarVC:  UICollectionViewDelegate, UICollectionViewDataSource 
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexSelected != indexPath.item{
+        if indexSelected != indexPath.item && indexPath.item != 2 {
             indexSelected = indexPath.item
         }
     }
