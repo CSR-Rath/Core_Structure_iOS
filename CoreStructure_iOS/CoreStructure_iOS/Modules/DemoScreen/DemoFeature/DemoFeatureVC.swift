@@ -47,6 +47,7 @@ class DemoFeatureVC: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.leftBarButtonItem(action: nil, iconButton: nil, tintColor: .red)
        
     }
     
@@ -113,7 +114,7 @@ class DemoFeatureVC: UIViewController, UIGestureRecognizerDelegate {
                 ListModel(id: 4, name: "BoardCollectionVC", viewController: BoardCollectionVC()),
                 ListModel(id: 6, name: "CenteringCollectionViewCellVC", viewController: CenteringCellVC()),
                 ListModel(id: 7, name: "Cell Alert Error", viewController: nil),
-                
+
                 ListModel(id: 9, name: "GroupDateVC", viewController: GroupDateVC()),
                 ListModel(id: 10, name: "ExspandTableVC", viewController: ExspandTableVC()),
                 ListModel(id: 11, name: "DragDropCollectionVC", viewController: DragDropCollectionVC()),

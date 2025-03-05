@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class ContentSizedCollectionView: UICollectionView {
+class ContentSizedCollectionView: UICollectionView { // working with vertical 
 
     override func layoutSubviews() {
         super.layoutSubviews()

@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        setLanguage(langCode: .ar) // english default
+        setLanguage(langCode: .english) // english default
         configureNotification() // notivication
         
         return true

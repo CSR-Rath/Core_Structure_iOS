@@ -8,5 +8,5 @@
 import Foundation
 import UIKit
 
-let screenDevice = UIScreen.main.bounds
+
 

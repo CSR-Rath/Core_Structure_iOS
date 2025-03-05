@@ -1,0 +1,523 @@
+//
+//  DragDropViewController.swift
+//  CoreStructure_iOS
+//
+//  Created by Rath! on 15/1/25.
+//
+
+import UIKit
+import UniformTypeIdentifiers
+
+struct ItemDropModel: Codable{
+    var id: Int
+    var name: String
+    var iconName: String
+    var description: String
+}
+
+struct ItemModel {
+    let id: Int
+    let name: String
+   
+}
+
+
+class HomeABAViewController: UIViewController{
+    
+    private var scrollView = UIScrollView()
+    private let spacing: CGFloat = 10
+    private let radius: CGFloat = 15
+    private var isDragging: Bool = false
+    
+    lazy var viewCard: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = radius
+        view.backgroundColor = .systemGray6
+        return view
+    }()
+    
+    lazy var collectionView1: ContentSizedCollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.minimumLineSpacing = spacing
+        layout.minimumInteritemSpacing = 0
+        layout.sectionInset = UIEdgeInsets(top: spacing,
+                                           left: spacing,
+                                           bottom: spacing,
+                                           right: spacing)
+        
+        let collectionView = ContentSizedCollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .systemGray6
+        collectionView.isScrollEnabled = false
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
+        collectionView.dragDelegate = self
+        collectionView.dropDelegate = self
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.dragInteractionEnabled = true
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.roundCorners(corners: [.topLeft, .topRight], radius: radius)
+        
+        return collectionView
+    }()
+    
+    lazy var viewLine: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.cornerRadius = spacing
+        view.backgroundColor = .lightGray
+        return view
+    }()
+    
+    lazy var collectionView2: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 10
+        layout.sectionInset = UIEdgeInsets(top: spacing+1,
+                                           left: spacing,
+                                           bottom: spacing,
+                                           right: spacing)
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.isScrollEnabled = true
+        collectionView.backgroundColor = .systemGray6
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
+        collectionView.dragDelegate = self
+        collectionView.dropDelegate = self
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.dragInteractionEnabled = true
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.roundCorners(corners: [.bottomLeft, .bottomRight], radius: radius)
+        return collectionView
+    }()
+    
+    
+    lazy var tableView: ContentSizedTableView = {
+        let tableView = ContentSizedTableView()
+        tableView.showsVerticalScrollIndicator = false
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+
+        tableView.rowHeight = 60
+        tableView.backgroundColor = .orange
+        tableView.isScrollEnabled = false
+        tableView.dataSource = self
+        tableView.dragDelegate = self
+        tableView.dropDelegate = self
+        tableView.dragInteractionEnabled = true
+        return tableView
+    }()
+    
+    
+    lazy var stackContainer: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [
+            viewCard,
+            collectionView1,
+            collectionView2,
+            tableView,
+        ])
+        stack.layoutMargins = UIEdgeInsets(top: .mainLeft,
+                                           left: .mainLeft,
+                                           bottom: .mainLeft,
+                                           right: .mainLeft)
+        stack.isLayoutMarginsRelativeArrangement = true
+        stack.axis = .vertical
+        stack.spacing = 15
+        stack.alignment = .fill
+        stack.distribution = .fill
+        stack.setCustomSpacing(0, after: collectionView1)
+        return stack
+    }()
+    
+    
+    private var data1: [ItemDropModel] = []{
+        didSet{
+            DataManager.shared.saveItemOneDropModel(data: data1)
+            print("Change data1")
+            collectionView1.reloadData()
+        }
+    }
+    
+    private var data2: [ItemDropModel] = []{
+        didSet{
+            DataManager.shared.saveItemTwoDropModel(data: data2)
+            print("Change data2")
+            collectionView2.reloadData()
+        }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .white
+        setupData()
+        seupConstaints()
+        setupLongPressGestureRecognizers()
+    }
+    
+    
+    
+    private func seupConstaints(){
+        
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        stackContainer.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.backgroundColor = .white
+        view.addSubview(scrollView)
+        scrollView.addSubview(stackContainer)
+       
+        
+        // MARK: - Main container
+        NSLayoutConstraint.activate([
+            
+            scrollView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            scrollView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1),
+            scrollView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1),
+            
+            stackContainer.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            stackContainer.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 1),
+            stackContainer.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            stackContainer.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            
+        ])
+        
+        // MARK: - Items in Scrollview
+        scrollView.addSubview(viewLine)
+        
+        NSLayoutConstraint.activate([
+            viewCard.heightAnchor.constraint(equalToConstant: 200),
+            collectionView2.heightAnchor.constraint(equalToConstant: 60),
+            
+            viewLine.heightAnchor.constraint(equalToConstant: 1),
+            viewLine.bottomAnchor.constraint(equalTo: collectionView2.topAnchor),
+            viewLine.leftAnchor.constraint(equalTo: collectionView2.leftAnchor, constant: .mainLeft),
+            viewLine.rightAnchor.constraint(equalTo: collectionView2.rightAnchor, constant: .mainRight),
+            
+        ])
+        
+    }
+    
+    
+    
+    private func setupData() {
+        // Handle data
+
+        let getData1 = DataManager.shared.getItemOneDropModel()
+        let getData2 = DataManager.shared.getItemTwoDropModel()
+
+        if let data1Items = getData1, let data2Items = getData2, data1Items.count > 0, data2Items.count > 0 {
+            data1 = data1Items
+            data2 = data2Items
+        } else {
+            data1 = [
+                ItemDropModel(id: 1, name: "Item 1", iconName: "icon1", description: "Description for Item 1"),
+                ItemDropModel(id: 2, name: "Item 2", iconName: "icon2", description: "Description for Item 2"),
+                ItemDropModel(id: 3, name: "Item 3", iconName: "icon3", description: "Description for Item 3"),
+                ItemDropModel(id: 4, name: "Item 4", iconName: "icon1", description: "Description for Item 4"),
+                ItemDropModel(id: 5, name: "Item 5", iconName: "icon2", description: "Description for Item 5"),
+                ItemDropModel(id: 6, name: "Item 6", iconName: "icon3", description: "Description for Item 6"),
+                ItemDropModel(id: 7, name: "Item A", iconName: "iconA", description: "Description for Item A"),
+                ItemDropModel(id: 8, name: "Item B", iconName: "iconB", description: "Description for Item B"),
+                ItemDropModel(id: 9, name: "Item C", iconName: "iconC", description: "Description for Item C"),
+            ]
+            
+            data2 = [
+                ItemDropModel(id: 10, name: "Item D", iconName: "iconA", description: "Description for Item D"),
+                ItemDropModel(id: 11, name: "Item E", iconName: "iconB", description: "Description for Item E"),
+                ItemDropModel(id: 12, name: "Item F", iconName: "iconC", description: "Description for Item F"),
+                ItemDropModel(id: 13, name: "Item G", iconName: "iconA", description: "Description for Item G"),
+                ItemDropModel(id: 14, name: "Item H", iconName: "iconB", description: "Description for Item H"),
+                ItemDropModel(id: 15, name: "Item I", iconName: "iconC", description: "Description for Item I"),
+            ]
+        
+        }
+    }
+    
+    
+    var data = [
+        [
+            "Item 2-1",
+            "Item 2-2",
+            "Item 2-3",
+            "Item 2-4",
+            "Item 2-5",
+            "Item 2-6",
+            "Item 2-7",
+            "Item 2-8",
+        ]
+        
+    ]
+
+}
+
+
+
+
+
+extension HomeABAViewController { // Prevents unmoved drag
+    
+    // MARK: - Setup Long Press Gesture Recognizers
+    private func setupLongPressGestureRecognizers() {
+        // Adding gesture recognizer for collectionView1
+        let longPressGesture1 = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture(_:)))
+        collectionView1.addGestureRecognizer(longPressGesture1)
+        
+        // Adding gesture recognizer for collectionView2
+        let longPressGesture2 = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture(_:)))
+        collectionView2.addGestureRecognizer(longPressGesture2)
+    }
+    
+    // MARK: - Handle Long Press Gesture
+    @objc private func handleLongPressGesture(_ gesture: UILongPressGestureRecognizer) {
+        let location: CGPoint
+        var collectionView: UICollectionView
+        
+        if gesture.view == collectionView1 {
+            collectionView = collectionView1
+            location = gesture.location(in: collectionView1)
+        } else if gesture.view == collectionView2 {
+            collectionView = collectionView2
+            location = gesture.location(in: collectionView2)
+        } else {
+            return
+        }
+        
+        guard collectionView.indexPathForItem(at: location) != nil else { return }
+        
+        switch gesture.state {
+        case .began:
+            // Handle the beginning of the long press, e.g., start a drag
+            print("Long press began")
+            isDragging = true
+            
+        case .ended, .cancelled:
+            // Handle the end or cancellation of the gesture, e.g., end a drag
+            isDragging = false
+            print("Long press ended or cancelled")
+            
+        default:
+            break
+        }
+    }
+}
+
+
+//MARK: - UITableView
+
+extension HomeABAViewController: UITableViewDataSource,
+                                  UITableViewDelegate,
+                                  UITableViewDragDelegate,
+                                  UITableViewDropDelegate{
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return data.count
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return data[section].count
+    }
+
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        cell.backgroundColor = .clear
+        cell.textLabel?.text = data[indexPath.section][indexPath.row]
+        return cell
+    }
+ 
+
+
+    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        print("itemsForBeginning")
+        
+        let item = data[indexPath.section][indexPath.row]
+        let itemProvider = NSItemProvider(object: item as NSString)
+        let dragItem = UIDragItem(itemProvider: itemProvider)
+        dragItem.localObject = item
+
+        return [dragItem]
+    }
+
+    func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
+        print("performDropWith called")
+        
+      
+
+        guard let destinationIndexPath = coordinator.destinationIndexPath else {
+            print("No destination index path.")
+            return
+        }
+
+        if let sourceIndexPath = coordinator.items.first?.sourceIndexPath {
+
+            coordinator.session.loadObjects(ofClass: NSString.self) { items in
+                guard items is [String] else { return }
+
+                tableView.performBatchUpdates({
+                    let movedItem = self.data[sourceIndexPath.section].remove(at: sourceIndexPath.row)
+                    self.data[destinationIndexPath.section].insert(movedItem, at: destinationIndexPath.row)
+                    tableView.moveRow(at: sourceIndexPath, to: destinationIndexPath)
+                }, completion: { _ in
+                    coordinator.drop(coordinator.items.first!.dragItem, toRowAt: destinationIndexPath)
+                })
+            }
+        } else {
+            print("No source index path.")
+        }
+    }
+
+
+    func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
+
+
+        return UITableViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
+    }
+
+}
+
+
+
+
+//MARK: - UICollectionView
+extension HomeABAViewController: UICollectionViewDataSource,
+                                  UICollectionViewDelegate,
+                                  UICollectionViewDelegateFlowLayout,
+                                  UICollectionViewDragDelegate,
+                                  UICollectionViewDropDelegate{
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return collectionView == collectionView1 ? data1.count : data2.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
+        cell.backgroundColor = .systemBlue
+        cell.layer.cornerRadius = 15
+        
+        
+        let item: ItemDropModel
+        if collectionView == collectionView1 {
+            item = data1[indexPath.row]
+        } else {
+            item = data2[indexPath.row]
+        }
+        
+        // Add label to display item name
+        let label = UILabel(frame: cell.bounds)
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        label.textColor = .white
+        label.text = item.name
+        
+        // Remove previous subviews to avoid duplication
+        cell.contentView.subviews.forEach { $0.removeFromSuperview() }
+        cell.contentView.addSubview(label)
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let item: ItemDropModel
+        if collectionView == collectionView1 {
+            item = data1[indexPath.row]
+        } else {
+            item = data2[indexPath.row]
+        }
+        
+        print("item ==>", item)
+    }
+    
+    //UICollectionViewDelegateFlowLayout
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        if collectionView == collectionView1{
+            
+            let size : CGFloat = (collectionView1.frame.width - (spacing * 2) - (2 * spacing))/3
+            return CGSize(width: size, height: size*0.9)
+            
+        }else{
+            
+            let label = UILabel()
+            label.fontBold(16)
+            label.text = data2[indexPath.item].name
+            let with = label.calculateLabelWidth() + 20
+            
+            return CGSize(width: with, height: 39)
+        }
+        
+    }
+
+    // UICollectionViewDragDelegate
+    func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        
+        isDragging = true
+        
+        UIDevice.generateButtonFeedback(style: .medium)
+        
+        // Get the ItemDropModel
+        let item = collectionView == collectionView1 ? data1[indexPath.row] : data2[indexPath.row]
+        
+        // Use the `name` property as the NSItemProvider object
+        let itemProvider = NSItemProvider(object: item.name as NSString)
+        
+        // Attach the full `ItemDropModel` as the local object for drag-and-drop operations
+        let dragItem = UIDragItem(itemProvider: itemProvider)
+        dragItem.localObject = (collectionView, indexPath)
+        
+        return [dragItem]
+    }
+    
+    // UICollectionViewDropDelegate
+    func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
+        print("performDropWith")
+        isDragging = false
+        
+        guard let item = coordinator.items.first else { return }
+        guard let (sourceCollectionView, sourceIndexPath) = item.dragItem.localObject as? (UICollectionView, IndexPath) else { return }
+        
+        let destinationIndexPath = coordinator.destinationIndexPath ?? IndexPath(row: 0, section: 0)
+        
+        // Ensure source and destination indices are valid
+        if sourceCollectionView == collectionView1 {
+            guard sourceIndexPath.row >= 0 && sourceIndexPath.row < data1.count else { return }
+        } else if sourceCollectionView == collectionView2 {
+            guard sourceIndexPath.row >= 0 && sourceIndexPath.row < data2.count else { return }
+        }
+        
+        if collectionView == collectionView1 {
+            guard destinationIndexPath.row >= 0 && destinationIndexPath.row <= data1.count else { return }
+        } else if collectionView == collectionView2 {
+            guard destinationIndexPath.row >= 0 && destinationIndexPath.row <= data2.count else { return }
+        }
+        
+        // Swap Logic
+        if sourceCollectionView == collectionView && collectionView == collectionView1 {
+            data1.swapAt(sourceIndexPath.row, destinationIndexPath.row)
+        } else if sourceCollectionView == collectionView && collectionView == collectionView2 {
+            data2.swapAt(sourceIndexPath.row, destinationIndexPath.row)
+        } else if sourceCollectionView == collectionView1 && collectionView == collectionView2 {
+            let temp = data1[sourceIndexPath.row]
+            data1[sourceIndexPath.row] = data2[destinationIndexPath.row]
+            data2[destinationIndexPath.row] = temp
+        } else if sourceCollectionView == collectionView2 && collectionView == collectionView1 {
+            let temp = data2[sourceIndexPath.row]
+            data2[sourceIndexPath.row] = data1[destinationIndexPath.row]
+            data1[destinationIndexPath.row] = temp
+        }
+        
+        sourceCollectionView.reloadItems(at: [sourceIndexPath])
+        collectionView.reloadItems(at: [destinationIndexPath])
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
+        print("dropSessionDidUpdate")
+        return UICollectionViewDropProposal(operation: .move,
+                                            intent: .insertAtDestinationIndexPath)
+    }
+    
+}
+
+
+

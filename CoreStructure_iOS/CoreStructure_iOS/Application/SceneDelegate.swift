@@ -31,7 +31,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     private func rootViewController(){
      
-        let controller: UIViewController = DragDropCollectionVC()
+        let controller: UIViewController = HomeABAViewController()
         let navigation = UINavigationController(rootViewController: controller)
         window!.rootViewController = navigation
         window!.makeKeyAndVisible()
@@ -67,3 +67,4 @@ extension SceneDelegate{
     }
     
 }
+
