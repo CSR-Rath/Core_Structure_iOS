@@ -12,7 +12,7 @@ class SplashScreenVC: UIViewController {
     lazy var btnCustomTabBar: BaseUIButton = {
         let btn = BaseUIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.titleButton = "Custom"
+        btn.setTitle("Custom", for: .normal) 
         btn.addTarget(self, action: #selector(didTappedButton), for: .touchUpInside)
         btn.tag = 0
         return btn

@@ -15,7 +15,7 @@ struct ListModel{
 
 class DemoFeatureVC: UIViewController, UIGestureRecognizerDelegate {
     
-     var tableView: UITableView! = nil
+    var tableView: UITableView! = nil
     private var previousOffsetY: CGFloat = 0
     private var isScrollingDown : Bool = false
 
@@ -40,22 +40,25 @@ class DemoFeatureVC: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        title = "Demo"
         setupConstraint()
         pullRefresh()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.leftBarButtonItem(action: nil, iconButton: nil, tintColor: .red)
-       
+
     }
+
+    @objc func rightButtonTapped() {
+        print("Right button tapped")
+    }
+
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false // disable swipe
-        navigationBarAppearance(titleColor: .mainBlueColor, barColor: .clear)
-        print("viewDidAppear")
+//        navigationBarAppearance(titleColor: .mainBlueColor, barColor: .cyan)
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -94,13 +97,13 @@ class DemoFeatureVC: UIViewController, UIGestureRecognizerDelegate {
         ])
         
         
-        let button = BaseUIButton(frame: CGRect(x: (screen.width-200)/2,
-                                            y: (screen.height-100)/2,
+        let button = BaseUIButton(frame: CGRect(x: 0,
+                                            y: 10,
                                             width: 200,
-                                            height: 100))
+                                            height: 200))
         button.backgroundColor = .orange
         button.addTarget(self, action: #selector(didTappedButton), for: .touchUpInside)
-//        view.addSubview(button)
+        view.addSubview(button)
     }
     
     @objc private func pullRefresh(){
@@ -114,7 +117,7 @@ class DemoFeatureVC: UIViewController, UIGestureRecognizerDelegate {
                 ListModel(id: 4, name: "BoardCollectionVC", viewController: BoardCollectionVC()),
                 ListModel(id: 6, name: "CenteringCollectionViewCellVC", viewController: CenteringCellVC()),
                 ListModel(id: 7, name: "Cell Alert Error", viewController: nil),
-
+                
                 ListModel(id: 9, name: "GroupDateVC", viewController: GroupDateVC()),
                 ListModel(id: 10, name: "ExspandTableVC", viewController: ExspandTableVC()),
                 ListModel(id: 11, name: "DragDropCollectionVC", viewController: DragDropCollectionVC()),
@@ -129,7 +132,10 @@ class DemoFeatureVC: UIViewController, UIGestureRecognizerDelegate {
                 ListModel(id: 20, name: "ScannerController", viewController: ScannerController()),
                 ListModel(id: 21, name: "PreventionScreen", viewController: PreventionScreen()),
                 ListModel(id: 22, name: "GenerateQRCodeVC", viewController: GenerateQRCodeVC()),
-                
+                ListModel(id: 23, name: "HomeABAViewController", viewController: HomeABAViewController()),
+                ListModel(id: 24, name: "TestingButtonVC", viewController: TestingButtonVC()),
+                ListModel(id: 25, name: "PhoneNumberTextFieldVC", viewController: PhoneNumberTextFieldVC()),
+    
             ]
         }
     }
@@ -196,7 +202,6 @@ extension DemoFeatureVC: UITableViewDelegate, UITableViewDataSource{
         didEndScrollView?(currentOffsetY, isScrollingDown)
         
     }
-    
     
    @objc func didTappedButton(){
        let vc = GenerateQRCodeVC()

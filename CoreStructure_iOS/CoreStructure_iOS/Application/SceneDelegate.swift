@@ -8,7 +8,7 @@
 import UIKit
 
 // MARK: - Global variable
-var sceneDelegate: UIWindow!
+var windowSceneDelegate: UIWindow!
 var barAppearanHeight: CGFloat!
 var bottomSafeAreaInsetsHeight: CGFloat!
 let screen = UIScreen.main.bounds
@@ -26,45 +26,49 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        self.rootViewController()
+        rootViewController()
+        
     }
     
     private func rootViewController(){
-     
-        let controller: UIViewController = HomeABAViewController()
+        
+        let controller: UIViewController = TextViewController()
         let navigation = UINavigationController(rootViewController: controller)
         window!.rootViewController = navigation
         window!.makeKeyAndVisible()
         
         // MARK: - configuretion height
-        sceneDelegate = window!
+        windowSceneDelegate = window!
         bottomSafeAreaInsetsHeight = window?.safeAreaInsets.bottom
         barAppearanHeight = navigation.navigationBar.frame.height + (window?.safeAreaInsets.top ?? 0)
     }
     
 }
 
-extension SceneDelegate{
+extension SceneDelegate {
     
-    func sceneDidDisconnect(_ scene: UIScene) {
-        print("sceneDidDisconnect")
+    func sceneWillEnterForeground(_ scene: UIScene) {
+        print("sceneWillEnterForeground") // App is coming to the foreground but not yet active.
     }
     
     func sceneDidBecomeActive(_ scene: UIScene) {
-        print("sceneDidBecomeActive")
+        print("sceneDidBecomeActive") // App is now active and interactive.
     }
     
     func sceneWillResignActive(_ scene: UIScene) {
-        print("sceneWillResignActive")
-    }
-    
-    func sceneWillEnterForeground(_ scene: UIScene) {
-        print("sceneWillEnterForeground")
+        print("sceneWillResignActive") // App is about to move from active to inactive (e.g., user pressed Home button).
     }
     
     func sceneDidEnterBackground(_ scene: UIScene) {
-        print("sceneDidEnterBackground")
+        print("sceneDidEnterBackground") // App is now in the background but not terminated.
+    }
+    
+    func sceneDidDisconnect(_ scene: UIScene) {
+        print("sceneDidDisconnect") // Scene is removed (e.g., app is fully closed or scene is discarded).
     }
     
 }
+
+
+
 

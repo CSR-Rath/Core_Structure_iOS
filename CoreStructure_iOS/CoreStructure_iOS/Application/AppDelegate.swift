@@ -12,6 +12,17 @@ import Firebase
 
 // Firebase Messaging need have account developer for
 
+//class AppDelegate: UIResponder, UIApplicationDelegate {
+//    var window: UIWindow?
+//
+//    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+//
+//        
+//        return true
+//    }
+//}
+
+
 
 
 @main
@@ -22,16 +33,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         setLanguage(langCode: .english) // english default
         configureNotification() // notivication
+        print("didFinishLaunchingWithOptions")
+        
+        if #available(iOS 13.0, *) {
+            print("ScenDelegate app lifecycle ")
+        }else{
+            print("AppDelegate app lifecycle")
+        }
         
         return true
     }
     
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+        print("configurationForConnecting")
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
     
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-        print("didDiscardSceneSessions")
+        print("didDiscardSceneSessions") // working when kill app or close app
     }
 }
 
@@ -94,16 +113,36 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         let userInfo = response.notification.request.content.userInfo
         print("Notification Response User Info:", userInfo)
         
-        guard let navigationController = sceneDelegate.rootViewController as? UINavigationController else {
-            print("Error: Unable to access window or root view controller.")
+        guard let navigationController = windowSceneDelegate.rootViewController as? UINavigationController else {
+            print("NavigationController is nil.")
             completionHandler()
             return
         }
-
+        
+        guard let window = windowSceneDelegate else{
+            print("Window is nil")
+            completionHandler()
+            return
+        }
+        
+        
         let targetViewController = UIViewController()
-        targetViewController.view.backgroundColor = .red
-        navigationController.pushViewController(targetViewController, animated: false)
+        targetViewController.leftBarButtonItem()
+        targetViewController.view.backgroundColor = .orange
+        
+        
+        if UIApplication.shared.applicationIconBadgeNumber % 2 == 0 {
+            
+            print("Controller is Present.")
+            window.rootViewController?.present(targetViewController, animated: true)
+            
+        }else{
+            
+            print("Controller is Push.")
+            navigationController.pushViewController(targetViewController, animated: true)
 
+        }
+        
         completionHandler()
     }
 

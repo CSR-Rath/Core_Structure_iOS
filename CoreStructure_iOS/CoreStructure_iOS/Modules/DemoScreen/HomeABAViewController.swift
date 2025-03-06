@@ -82,6 +82,7 @@ class HomeABAViewController: UIViewController{
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.roundCorners(corners: [.topLeft, .topRight], radius: radius)
         
+        collectionView.clipsToBounds = true
         return collectionView
     }()
     

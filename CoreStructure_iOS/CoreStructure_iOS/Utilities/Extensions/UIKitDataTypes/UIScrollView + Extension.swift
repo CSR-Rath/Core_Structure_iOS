@@ -16,24 +16,28 @@ extension UIScrollView{
         refreshControl.tintColor = .systemBlue // Customize the color
         refreshControl.addTarget(target, action: action, for: .valueChanged)
         
-        if let tableView = self as? UITableView {
-            tableView.refreshControl = refreshControl
-        } else if let collectionView = self as? UICollectionView {
-            collectionView.refreshControl = refreshControl
-        }else{
-            self.refreshControl = refreshControl
-        }
+//        if let tableView = self as? UITableView {
+//            tableView.refreshControl = refreshControl
+//        } else if let collectionView = self as? UICollectionView {
+//            collectionView.refreshControl = refreshControl
+//        }else{
+//            self.refreshControl = refreshControl
+//        }
+        
+        self.refreshControl = refreshControl
         
     }
     
     func endRefreshing() {
-        if let tableView = self as? UITableView {
-            tableView.refreshControl?.endRefreshing()
-        } else if let collectionView = self as? UICollectionView {
-            collectionView.refreshControl?.endRefreshing()
-        } else{
-            self.refreshControl?.endRefreshing()
-        }
+//        if let tableView = self as? UITableView {
+//            tableView.refreshControl?.endRefreshing()
+//        } else if let collectionView = self as? UICollectionView {
+//            collectionView.refreshControl?.endRefreshing()
+//        } else{
+//            self.refreshControl?.endRefreshing()
+//        }
+        
+        self.refreshControl?.endRefreshing()
     }
 }
 

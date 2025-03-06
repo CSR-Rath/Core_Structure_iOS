@@ -5,25 +5,20 @@
 //  Created by Rath! on 28/10/24.
 //
 
-import Foundation
 import UIKit
-
 
 class BaseUIButton: UIButton {
     
     private var activityIndicator: UIActivityIndicatorView!
     private let animationDuration: TimeInterval = 0.05
     private var nsContraint = NSLayoutConstraint()
+    private var titleButton: String = ""
+    
+    var actionUIButton: (()->())?
     
     var isActionButton: Bool = true {
         didSet {
             setupButton()
-        }
-    }
-    
-    var titleButton: String = "" {
-        didSet {
-            setTitle(titleButton, for: .normal)
         }
     }
     
@@ -52,26 +47,28 @@ class BaseUIButton: UIButton {
     }
     
     private func setupButton() {
-        titleLabel?.font = UIFont.systemFont(ofSize: 17) // Consider dynamic type
-        layer.cornerRadius = buttonHeight/2
-        layer.borderWidth = 1
+        self.titleLabel?.font = UIFont.systemFont(ofSize: 17) // Consider dynamic type
+        self.layer.cornerRadius = buttonHeight/2
+        self.layer.borderWidth = 1
+        self.setTitleColor(.white, for: .normal)
         
         nsContraint = heightAnchor.constraint(equalToConstant: buttonHeight)
         nsContraint.isActive = true
         
         if isActionButton {
-            isUserInteractionEnabled = true
-            layer.borderColor = UIColor.clear.cgColor
-            backgroundColor = .mainBlueColor
-            alpha = 1
+            self.isUserInteractionEnabled = true
+            self.layer.borderColor = UIColor.clear.cgColor
+            self.backgroundColor = .mainBlueColor
+            self.alpha = 1
         } else {
-            isUserInteractionEnabled = false
-            layer.borderColor = UIColor.white.cgColor
-            alpha = 0.5
+            self.isUserInteractionEnabled = false
+            self.layer.borderColor = UIColor.white.cgColor
+            self.alpha = 0.5
         }
         
-        addTarget(self, action: #selector(buttonPressed), for: .touchDown)
-        addTarget(self, action: #selector(buttonReleased), for: [.touchUpInside, .touchUpOutside, .touchCancel])
+        self.addTarget(self, action: #selector(buttonPressed), for: .touchDown)
+        self.addTarget(self, action: #selector(buttonReleased), for: [.touchUpInside, .touchUpOutside, .touchCancel])
+        self.addTarget(self, action: #selector(didTappedButton), for: .touchUpInside)
     }
     
     @objc private func buttonPressed() {
@@ -79,16 +76,20 @@ class BaseUIButton: UIButton {
     }
     
     @objc private func buttonReleased() {
+        print("buttonReleased")
         animateButton(scale: 1.0, alpha: 1)
+    }
+    
+    @objc private func didTappedButton() {
+        actionUIButton?()
+       print("didTappedButton")
     }
     
     private func animateButton(scale: CGFloat, alpha: CGFloat) {
         UIView.animate(withDuration: animationDuration, animations: {
             self.alpha = alpha
             self.transform = CGAffineTransform(scaleX: scale, y: scale)
-        }) { _ in
-//            self.isUserInteractionEnabled = scale == 1.0
-        }
+        })
     }
     
     private func setupActivityIndicator() {
@@ -106,16 +107,16 @@ class BaseUIButton: UIButton {
     
     // Start loading
     func startLoading() {
-        isUserInteractionEnabled = false
-        activityIndicator.startAnimating()
-        setTitle("", for: .normal) // Optionally hide the title
+        self.isUserInteractionEnabled = false
+        self.activityIndicator.startAnimating()
+        self.setTitleColor(.clear, for: .normal)
     }
     
     // Stop loading
-    func stopLoading() {
-        isUserInteractionEnabled = true
-        activityIndicator.stopAnimating()
-        setTitle(titleButton, for: .normal) // Restore the title
+    func stopLoading(){
+        self.isUserInteractionEnabled = true
+        self.activityIndicator.stopAnimating()
+        self.setTitleColor(.white, for: .normal)
     }
     
     deinit {

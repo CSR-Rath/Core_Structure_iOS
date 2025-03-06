@@ -13,7 +13,6 @@ struct TitleIconModel{
     let iconName: String
 }
 
-
 class CustomTabBarVC: UITabBarController {
     
     private let firstVC = DemoFeatureVC()
@@ -22,7 +21,6 @@ class CustomTabBarVC: UITabBarController {
     private let fourtVC = UIViewController()
     private let fiveVC = UIViewController()
     private var lastContentOffset: CGFloat = 0
-    
     private let dataList : [TitleIconModel] = [
         TitleIconModel(name: "VC", iconName: ""),
         TitleIconModel(name: "Package", iconName: ""),
@@ -30,14 +28,16 @@ class CustomTabBarVC: UITabBarController {
         TitleIconModel(name: "Padding", iconName: ""),
         TitleIconModel(name: "Find", iconName: ""),
     ]
+    
+    private let titleList: [String] = ["Demo Feature", "News", "Google Maps","More"]
 
-    var indexSelected: Int = 0{
+    private var indexSelected: Int = 0{
+        
         didSet{
-            print("indexSelected ==>\(indexSelected)")
-            // Update the title based on the selected index
-            title = viewControllers?[indexSelected].title
+            title = titleList[indexSelected]
             selectedIndex = indexSelected
             collactionView.reloadData()
+            validationButtonRight()
         }
     }
     
@@ -53,6 +53,26 @@ class CustomTabBarVC: UITabBarController {
         return collection
     }()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        title = titleList[indexSelected]
+        view.backgroundColor = .white
+        setupConstraintAndSetupController()
+        validationButtonRight()
+        viewControllers = [firstVC, secondVC, threeVC, fourtVC, fiveVC]
+        
+        
+        firstVC.didScrollView = { offsetY, isScrollDown in
+            self.updateCollectionViewPosition(offsetY: offsetY)
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false // disable
@@ -65,15 +85,64 @@ class CustomTabBarVC: UITabBarController {
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true // enable
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        viewControllers = [firstVC, secondVC, threeVC, fourtVC, fiveVC]
-        title = viewControllers?[indexSelected].title?.localizeString()
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         
-        firstVC.didScrollView = { offsetY, isScrollDown in
-            self.updateCollectionViewPosition(offsetY: offsetY)
+    }
+ 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+       
+        if let layout = collactionView.collectionViewLayout as? UICollectionViewFlowLayout { // handle cell items
+
+            let spac: CGFloat = 10
+            let spacing = CGFloat(dataList.count-1) * spac
+            let itemWidth = (view.bounds.width-spacing) / CGFloat(dataList.count)
+            let itemHeight = collactionView.frame.height
+            
+            layout.minimumLineSpacing = spac
+            layout.minimumInteritemSpacing = 0
+            layout.itemSize = CGSize(width: itemWidth, height: itemHeight)
+            layout.invalidateLayout()
         }
+    }
+    
+    @objc private func rightButtonTapped() {
+        print("Right button tapped FaceID")
+    }
+    
+}
+
+extension CustomTabBarVC{
+    
+    private func validationButtonRight(){
+        
+        let rightButton = UIBarButtonItem(image: .icFaceID,
+                                          style: .plain,
+                                          target: self,
+                                          action: #selector(rightButtonTapped))
+        navigationItem.rightBarButtonItem = rightButton
+        
+        if #available(iOS 16.0, *) {
+            navigationItem.rightBarButtonItem?.isHidden = indexSelected == 0 ? false : true
+        } else {
+            if indexSelected != 0{
+                navigationItem.rightBarButtonItem = nil
+            }
+        }
+    }
+    
+    private func setupConstraintAndSetupController(){
+    
+        view.addSubview(collactionView)
+        NSLayoutConstraint.activate([
+        
+            collactionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            collactionView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            collactionView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            collactionView.heightAnchor.constraint(equalToConstant: 85),
+        
+        ])
     }
     
     private func updateCollectionViewPosition(offsetY: CGFloat) {
@@ -102,44 +171,9 @@ class CustomTabBarVC: UITabBarController {
         lastContentOffset = offsetY
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .white
-        setupConstraintAndSetupController()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-       
-        if let layout = collactionView.collectionViewLayout as? UICollectionViewFlowLayout { // handle cell items
-
-            let spac: CGFloat = 10
-            let spacing = CGFloat(dataList.count-1) * spac
-            let itemWidth = (view.bounds.width-spacing) / CGFloat(dataList.count)
-            let itemHeight = collactionView.frame.height
-            
-            layout.minimumLineSpacing = spac
-            layout.minimumInteritemSpacing = 0
-            layout.itemSize = CGSize(width: itemWidth, height: itemHeight)
-            layout.invalidateLayout()
-        }
-   
-    }
-    
-    private func setupConstraintAndSetupController(){
-    
-        view.addSubview(collactionView)
-        NSLayoutConstraint.activate([
-        
-            collactionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            collactionView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            collactionView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            collactionView.heightAnchor.constraint(equalToConstant: 85),
-        
-        ])
-    }
-    
 }
+
+
 
 // MARK: - addShape Collection
 extension CustomTabBarVC{

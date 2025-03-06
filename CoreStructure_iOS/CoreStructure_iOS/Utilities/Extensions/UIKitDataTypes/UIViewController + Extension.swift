@@ -23,10 +23,10 @@ extension UIViewController{
     }
     
     func rightBarButtonItem(action: Selector? = #selector(leftBarButtonItemAction),
-                            iconButton: UIImage? = UIImage(named: "icNextWhite")
+                            iconButton: UIImage? =  UIImage(named: "icNextWhite")
     ){
         navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: iconButton?.withRenderingMode(.alwaysOriginal),
+            image: iconButton?.withRenderingMode(.alwaysOriginal).withTintColor(.black),
             style: .plain,
             target: self,
             action: action
@@ -128,6 +128,10 @@ extension UIViewController{
         }
     }
 }
+
+
+
+
 
 
 

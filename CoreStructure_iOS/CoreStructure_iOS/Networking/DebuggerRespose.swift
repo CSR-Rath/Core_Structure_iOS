@@ -93,8 +93,8 @@ class DebuggerRespose {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alert.addAction(action)
-        guard let window = sceneDelegate else {
-            print("Window nil")
+        guard let window = windowSceneDelegate else {
+            print("Window is nil")
             return
         }
         window.rootViewController?.present(alert, animated: true)
