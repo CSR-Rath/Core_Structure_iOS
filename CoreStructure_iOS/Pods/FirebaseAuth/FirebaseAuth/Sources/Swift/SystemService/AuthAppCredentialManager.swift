@@ -33,7 +33,7 @@
 
     init(withKeychain keychain: AuthKeychainServices) {
       keychainServices = keychain
-      if let encodedData = try? keychain.dataListTable(forKey: kKeychainDataKey),
+      if let encodedData = try? keychain.data(forKey: kKeychainDataKey),
          let unarchiver = try? NSKeyedUnarchiver(forReadingFrom: encodedData) {
         if let credential = unarchiver.decodeObject(of: AuthAppCredential.self,
                                                     forKey: kFullCredentialKey) {

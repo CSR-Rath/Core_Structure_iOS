@@ -577,7 +577,7 @@ import Foundation
             name: "firebaseError",
             from: queryItems
           ) {
-            if let errorData = firebaseError.dataListTable(using: .utf8) {
+            if let errorData = firebaseError.data(using: .utf8) {
               var errorDict: [AnyHashable: Any]?
               do {
                 errorDict = try JSONSerialization.jsonObject(with: errorData) as? [AnyHashable: Any]

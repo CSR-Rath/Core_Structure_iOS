@@ -116,9 +116,6 @@ class BaseUIButton: UIButton {
         isUserInteractionEnabled = true
         activityIndicator.stopAnimating()
         setTitle(titleButton, for: .normal) // Restore the title
-        
-        
-        
     }
     
     deinit {

@@ -123,17 +123,17 @@
     /// - Returns: Whether or the notification has been handled.
     func canHandle(notification: [AnyHashable: Any]) -> Bool {
       var stringDictionary: [String: Any]?
-      let dataListTable = notification[kNotificationDataKey]
-      if let jsonString = dataListTable as? String {
+      let data = notification[kNotificationDataKey]
+      if let jsonString = data as? String {
         // Deserialize in case the data is a JSON string.
-        guard let jsonData = jsonString.dataListTable(using: .utf8),
+        guard let jsonData = jsonString.data(using: .utf8),
               let dictionary = try? JSONSerialization.jsonObject(with: jsonData) as? [String: Any]
         else {
           return false
         }
         stringDictionary = dictionary
       }
-      guard let dictionary = stringDictionary ?? dataListTable as? [String: Any] else {
+      guard let dictionary = stringDictionary ?? data as? [String: Any] else {
         return false
       }
       if dictionary[kNotificationProberKey] != nil {

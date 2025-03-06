@@ -17,21 +17,21 @@
 
   /// A data structure for an APNs token.
   class AuthAPNSToken {
-    let dataListTable: Data
+    let data: Data
     let type: AuthAPNSTokenType
 
     /// Initializes the instance.
     /// - Parameter data: The APNs token data.
     /// - Parameter type: The APNs token type.
     /// - Returns: The initialized instance.
-    init(withData dataListTable: Data, type: AuthAPNSTokenType) {
-      self.dataListTable = dataListTable
+    init(withData data: Data, type: AuthAPNSTokenType) {
+      self.data = data
       self.type = type
     }
 
     /// The uppercase hexadecimal string form of the APNs token data.
     lazy var string: String = {
-      let byteArray = [UInt8](dataListTable)
+      let byteArray = [UInt8](data)
       var s = ""
       for byte in byteArray {
         s.append(String(format: "%02X", byte))
