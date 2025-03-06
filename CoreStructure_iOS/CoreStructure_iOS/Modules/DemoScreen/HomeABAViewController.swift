@@ -16,17 +16,42 @@ struct ItemDragDropModel: Codable{
     var description: String
 }
 
-
-
-
 class HomeABAViewController: UIViewController{
     
     let text = UILabel()
     
-    private var scrollView = UIScrollView()
+   
+    private var isDragging: Bool = false
     private let spacing: CGFloat = 10
     private let radius: CGFloat = 15
-    private var isDragging: Bool = false
+
+    private var data1: [ItemDragDropModel] = []{
+        didSet{
+            DataManager.shared.saveItemOneDropModel(data: data1)
+            print("Change data1")
+            collectionView1.reloadData()
+        }
+    }
+    
+    private var data2: [ItemDragDropModel] = []{
+        didSet{
+            DataManager.shared.saveItemTwoDropModel(data: data2)
+            print("Change data2")
+            collectionView2.reloadData()
+        }
+    }
+    
+    private var dataListTable = [
+        [ "Item 2-1", "Item 2-2", "Item 2-3", "Item 2-4", "Item 2-5", "Item 2-6", "Item 2-7", "Item 2-8", "Item 2-9", "Item 2-10"]
+    ]
+    
+    
+   private let scrollView: UIScrollView = {
+        let scroll = UIScrollView()
+        scroll.translatesAutoresizingMaskIntoConstraints = false
+        scroll.backgroundColor = .white
+        return scroll
+    }()
     
     lazy var viewCard: UIView = {
         let view = UIView()
@@ -46,9 +71,9 @@ class HomeABAViewController: UIViewController{
                                            right: spacing)
         
         let collectionView = ContentSizedCollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
         collectionView.backgroundColor = .systemGray6
         collectionView.isScrollEnabled = false
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
         collectionView.dragDelegate = self
         collectionView.dropDelegate = self
         collectionView.dataSource = self
@@ -73,15 +98,15 @@ class HomeABAViewController: UIViewController{
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 10
-        layout.sectionInset = UIEdgeInsets(top: spacing+1,
+        layout.sectionInset = UIEdgeInsets(top: spacing,
                                            left: spacing,
                                            bottom: spacing,
                                            right: spacing)
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.isScrollEnabled = true
-        collectionView.backgroundColor = .systemGray6
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
+        collectionView.backgroundColor = .systemGray6
+        collectionView.isScrollEnabled = true
         collectionView.dragDelegate = self
         collectionView.dropDelegate = self
         collectionView.dataSource = self
@@ -112,6 +137,7 @@ class HomeABAViewController: UIViewController{
             collectionView2,
             tableView,
         ])
+        stack.translatesAutoresizingMaskIntoConstraints = false
         stack.layoutMargins = UIEdgeInsets(top: .mainLeft,
                                            left: .mainLeft,
                                            bottom: .mainLeft,
@@ -125,56 +151,23 @@ class HomeABAViewController: UIViewController{
         return stack
     }()
     
-    
-    private var data1: [ItemDragDropModel] = []{
-        didSet{
-            DataManager.shared.saveItemOneDropModel(data: data1)
-            print("Change data1")
-            collectionView1.reloadData()
-        }
-    }
-    
-    private var data2: [ItemDragDropModel] = []{
-        didSet{
-            DataManager.shared.saveItemTwoDropModel(data: data2)
-            print("Change data2")
-            collectionView2.reloadData()
-        }
-    }
-    
-    private var dataListTable = [
-        [
-            "Item 2-1",
-            "Item 2-2",
-            "Item 2-3",
-            "Item 2-4",
-            "Item 2-5",
-            "Item 2-6",
-            "Item 2-7",
-            "Item 2-8",
-            "Item 2-9",
-            "Item 2-10",
-        ]
-    ]
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupData()
-        seupConstaints()
+        seupConstraints()
         setupLongPressGestureRecognizers()
         
     }
+
+}
+
+extension HomeABAViewController{
     
-    
-    private func seupConstaints(){
+    private func seupConstraints(){
         
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        stackContainer.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.backgroundColor = .white
         view.addSubview(scrollView)
         scrollView.addSubview(stackContainer)
-        
         
         // MARK: - Main container
         NSLayoutConstraint.activate([
@@ -192,11 +185,13 @@ class HomeABAViewController: UIViewController{
         ])
         
         // MARK: - Items in Scrollview
-        scrollView.addSubview(viewLine)
+        
         
         text.translatesAutoresizingMaskIntoConstraints = false
         text.text = "..."
         text.backgroundColor = .red
+        
+        scrollView.addSubview(viewLine)
         viewCard.addSubview(text)
         
         NSLayoutConstraint.activate([
@@ -204,7 +199,7 @@ class HomeABAViewController: UIViewController{
             collectionView2.heightAnchor.constraint(equalToConstant: 60),
             
             viewLine.heightAnchor.constraint(equalToConstant: 1),
-            viewLine.bottomAnchor.constraint(equalTo: collectionView2.topAnchor),
+            viewLine.centerYAnchor.constraint(equalTo: collectionView2.topAnchor),
             viewLine.leftAnchor.constraint(equalTo: collectionView2.leftAnchor, constant: .mainLeft),
             viewLine.rightAnchor.constraint(equalTo: collectionView2.rightAnchor, constant: .mainRight),
             
@@ -213,7 +208,6 @@ class HomeABAViewController: UIViewController{
             
         ])
     }
-    
     
     private func setupData() {
 
@@ -261,8 +255,8 @@ class HomeABAViewController: UIViewController{
         tableView.dragDelegate = status ? self : nil
         tableView.dropDelegate = status ? self : nil
     }
-    
 }
+
 
 
 extension HomeABAViewController { // Prevents unmoved drag
@@ -305,7 +299,6 @@ extension HomeABAViewController { // Prevents unmoved drag
             break
         }
     }
-    
 }
 
 
@@ -334,7 +327,6 @@ extension HomeABAViewController:  UITableViewDataSource,
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
-
 
     func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
         
@@ -379,7 +371,6 @@ extension HomeABAViewController:  UITableViewDataSource,
         }
     }
 
-
     func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
         return UITableViewDropProposal(operation: .move,
                                        intent: .insertAtDestinationIndexPath)
@@ -409,7 +400,6 @@ extension HomeABAViewController:  UICollectionViewDataSource,
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
         cell.backgroundColor = .systemBlue
         cell.layer.cornerRadius = 15
-        
         
         let item: ItemDragDropModel
         if collectionView == collectionView1 {
