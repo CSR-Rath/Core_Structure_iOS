@@ -103,7 +103,7 @@
         if setToken.type == AuthAPNSTokenType.unknown {
           let detectedTokenType = isProductionApp() ? AuthAPNSTokenType.prod : AuthAPNSTokenType
             .sandbox
-          newToken = AuthAPNSToken(withData: setToken.data, type: detectedTokenType)
+          newToken = AuthAPNSToken(withData: setToken.dataListTable, type: detectedTokenType)
         }
         tokenStore = newToken
         callback(.success(newToken))
@@ -171,12 +171,12 @@
         let scanner = Scanner(string: embeddedProfile)
         if scanner.scanUpToString("<plist") != nil {
           guard let plistContents = scanner.scanUpToString("</plist>")?.appending("</plist>"),
-                let data = plistContents.data(using: .utf8) else {
+                let dataListTable = plistContents.dataListTable(using: .utf8) else {
             return defaultAppTypeProd
           }
 
           do {
-            let plistData = try PropertyListSerialization.propertyList(from: data, format: nil)
+            let plistData = try PropertyListSerialization.propertyList(from: dataListTable, format: nil)
             guard let plistMap = plistData as? [String: Any] else {
               AuthLog.logInfo(code: "I-AUT000008",
                               message: "Error while converting assumed plist to dictionary.")

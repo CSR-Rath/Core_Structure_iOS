@@ -36,11 +36,11 @@ extension DataManager {
     }
     
     
-    func saveItemOneDropModel(data: [ItemDropModel]) {
+    func saveItemOneDropModel(data: [ItemDragDropModel]) {
         saveObject(object: data, forKey: itemOneDropModel)
     }
     
-    func saveItemTwoDropModel(data: [ItemDropModel]) {
+    func saveItemTwoDropModel(data: [ItemDragDropModel]) {
         saveObject(object: data, forKey: itemTwoDropModel)
     }
 }
@@ -60,12 +60,12 @@ extension DataManager {
         return getObject(UserInforModel.self, with: userInforKey) ?? UserInforModel()
     }
     
-    func getItemOneDropModel() -> [ItemDropModel]? {
-        return getObject([ItemDropModel].self, with: itemOneDropModel) ?? []
+    func getItemOneDropModel() -> [ItemDragDropModel]? {
+        return getObject([ItemDragDropModel].self, with: itemOneDropModel) ?? []
     }
     
-    func getItemTwoDropModel() -> [ItemDropModel]? {
-        return getObject([ItemDropModel].self, with: itemTwoDropModel) ?? []
+    func getItemTwoDropModel() -> [ItemDragDropModel]? {
+        return getObject([ItemDragDropModel].self, with: itemTwoDropModel) ?? []
     }
     
 }

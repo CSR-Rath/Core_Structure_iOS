@@ -8,21 +8,19 @@
 import UIKit
 import UniformTypeIdentifiers
 
-struct ItemDropModel: Codable{
+struct ItemDragDropModel: Codable{
     var id: Int
     var name: String
     var iconName: String
     var description: String
 }
 
-struct ItemModel {
-    let id: Int
-    let name: String
-   
-}
+
 
 
 class HomeABAViewController: UIViewController{
+    
+    let text = UILabel()
     
     private var scrollView = UIScrollView()
     private let spacing: CGFloat = 10
@@ -93,13 +91,10 @@ class HomeABAViewController: UIViewController{
         return collectionView
     }()
     
-    
     lazy var tableView: ContentSizedTableView = {
         let tableView = ContentSizedTableView()
         tableView.showsVerticalScrollIndicator = false
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-
-        tableView.rowHeight = 60
         tableView.backgroundColor = .orange
         tableView.isScrollEnabled = false
         tableView.dataSource = self
@@ -108,7 +103,6 @@ class HomeABAViewController: UIViewController{
         tableView.dragInteractionEnabled = true
         return tableView
     }()
-    
     
     lazy var stackContainer: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
@@ -131,7 +125,7 @@ class HomeABAViewController: UIViewController{
     }()
     
     
-    private var data1: [ItemDropModel] = []{
+    private var data1: [ItemDragDropModel] = []{
         didSet{
             DataManager.shared.saveItemOneDropModel(data: data1)
             print("Change data1")
@@ -139,13 +133,26 @@ class HomeABAViewController: UIViewController{
         }
     }
     
-    private var data2: [ItemDropModel] = []{
+    private var data2: [ItemDragDropModel] = []{
         didSet{
             DataManager.shared.saveItemTwoDropModel(data: data2)
             print("Change data2")
             collectionView2.reloadData()
         }
     }
+    
+    private var dataListTable = [
+        [
+            "Item 2-1",
+            "Item 2-2",
+            "Item 2-3",
+            "Item 2-4",
+            "Item 2-5",
+            "Item 2-6",
+            "Item 2-7",
+            "Item 2-8",
+        ]
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -164,7 +171,7 @@ class HomeABAViewController: UIViewController{
         scrollView.backgroundColor = .white
         view.addSubview(scrollView)
         scrollView.addSubview(stackContainer)
-       
+        
         
         // MARK: - Main container
         NSLayoutConstraint.activate([
@@ -184,6 +191,11 @@ class HomeABAViewController: UIViewController{
         // MARK: - Items in Scrollview
         scrollView.addSubview(viewLine)
         
+        text.translatesAutoresizingMaskIntoConstraints = false
+        text.text = "..."
+        text.backgroundColor = .red
+        viewCard.addSubview(text)
+        
         NSLayoutConstraint.activate([
             viewCard.heightAnchor.constraint(equalToConstant: 200),
             collectionView2.heightAnchor.constraint(equalToConstant: 60),
@@ -193,106 +205,96 @@ class HomeABAViewController: UIViewController{
             viewLine.leftAnchor.constraint(equalTo: collectionView2.leftAnchor, constant: .mainLeft),
             viewLine.rightAnchor.constraint(equalTo: collectionView2.rightAnchor, constant: .mainRight),
             
+            text.centerYAnchor.constraint(equalTo: viewCard.centerYAnchor),
+            text.centerXAnchor.constraint(equalTo: viewCard.centerXAnchor),
+            
         ])
-        
     }
     
     
-    
     private func setupData() {
-        // Handle data
 
         let getData1 = DataManager.shared.getItemOneDropModel()
         let getData2 = DataManager.shared.getItemTwoDropModel()
-
+        
         if let data1Items = getData1, let data2Items = getData2, data1Items.count > 0, data2Items.count > 0 {
             data1 = data1Items
             data2 = data2Items
         } else {
             data1 = [
-                ItemDropModel(id: 1, name: "Item 1", iconName: "icon1", description: "Description for Item 1"),
-                ItemDropModel(id: 2, name: "Item 2", iconName: "icon2", description: "Description for Item 2"),
-                ItemDropModel(id: 3, name: "Item 3", iconName: "icon3", description: "Description for Item 3"),
-                ItemDropModel(id: 4, name: "Item 4", iconName: "icon1", description: "Description for Item 4"),
-                ItemDropModel(id: 5, name: "Item 5", iconName: "icon2", description: "Description for Item 5"),
-                ItemDropModel(id: 6, name: "Item 6", iconName: "icon3", description: "Description for Item 6"),
-                ItemDropModel(id: 7, name: "Item A", iconName: "iconA", description: "Description for Item A"),
-                ItemDropModel(id: 8, name: "Item B", iconName: "iconB", description: "Description for Item B"),
-                ItemDropModel(id: 9, name: "Item C", iconName: "iconC", description: "Description for Item C"),
+                ItemDragDropModel(id: 1, name: "Item 1", iconName: "icon1", description: "Description for Item 1"),
+                ItemDragDropModel(id: 2, name: "Item 2", iconName: "icon2", description: "Description for Item 2"),
+                ItemDragDropModel(id: 3, name: "Item 3", iconName: "icon3", description: "Description for Item 3"),
+                ItemDragDropModel(id: 4, name: "Item 4", iconName: "icon1", description: "Description for Item 4"),
+                ItemDragDropModel(id: 5, name: "Item 5", iconName: "icon2", description: "Description for Item 5"),
+                ItemDragDropModel(id: 6, name: "Item 6", iconName: "icon3", description: "Description for Item 6"),
+                ItemDragDropModel(id: 7, name: "Item A", iconName: "iconA", description: "Description for Item A"),
+                ItemDragDropModel(id: 8, name: "Item B", iconName: "iconB", description: "Description for Item B"),
+                ItemDragDropModel(id: 9, name: "Item C", iconName: "iconC", description: "Description for Item C"),
             ]
             
             data2 = [
-                ItemDropModel(id: 10, name: "Item D", iconName: "iconA", description: "Description for Item D"),
-                ItemDropModel(id: 11, name: "Item E", iconName: "iconB", description: "Description for Item E"),
-                ItemDropModel(id: 12, name: "Item F", iconName: "iconC", description: "Description for Item F"),
-                ItemDropModel(id: 13, name: "Item G", iconName: "iconA", description: "Description for Item G"),
-                ItemDropModel(id: 14, name: "Item H", iconName: "iconB", description: "Description for Item H"),
-                ItemDropModel(id: 15, name: "Item I", iconName: "iconC", description: "Description for Item I"),
+                ItemDragDropModel(id: 10, name: "Item D", iconName: "iconA", description: "Description for Item D"),
+                ItemDragDropModel(id: 11, name: "Item E", iconName: "iconB", description: "Description for Item E"),
+                ItemDragDropModel(id: 12, name: "Item F", iconName: "iconC", description: "Description for Item F"),
+                ItemDragDropModel(id: 13, name: "Item G", iconName: "iconA", description: "Description for Item G"),
+                ItemDragDropModel(id: 14, name: "Item H", iconName: "iconB", description: "Description for Item H"),
+                ItemDragDropModel(id: 15, name: "Item I", iconName: "iconC", description: "Description for Item I"),
             ]
-        
+            
         }
     }
     
-    
-    var data = [
-        [
-            "Item 2-1",
-            "Item 2-2",
-            "Item 2-3",
-            "Item 2-4",
-            "Item 2-5",
-            "Item 2-6",
-            "Item 2-7",
-            "Item 2-8",
-        ]
+    private func dragDropCollection(status: Bool){
+        collectionView1.dragDelegate = status ? self : nil
+        collectionView1.dropDelegate = status ? self : nil
         
-    ]
-
+        collectionView2.dragDelegate = status ? self : nil
+        collectionView2.dropDelegate = status ? self : nil
+    }
+    
+    private func dragDropTableView(status: Bool){
+        tableView.dragDelegate = status ? self : nil
+        tableView.dropDelegate = status ? self : nil
+    }
+    
 }
-
-
-
 
 
 extension HomeABAViewController { // Prevents unmoved drag
     
     // MARK: - Setup Long Press Gesture Recognizers
     private func setupLongPressGestureRecognizers() {
-        // Adding gesture recognizer for collectionView1
+        /*
+         need call it again in dragSessionDidEnd,
+         if you isn't call again it have small issue in case longPressGesture func it working,
+         but itemsForBeginning isn't working,
+         we using longPressGesture because prevent when dragging have another action
+        */
+        
         let longPressGesture1 = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture(_:)))
         collectionView1.addGestureRecognizer(longPressGesture1)
         
-        // Adding gesture recognizer for collectionView2
         let longPressGesture2 = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture(_:)))
         collectionView2.addGestureRecognizer(longPressGesture2)
+        
+        let longPressGesture3 = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture(_:)))
+        tableView.addGestureRecognizer(longPressGesture3)
     }
-    
+
     // MARK: - Handle Long Press Gesture
     @objc private func handleLongPressGesture(_ gesture: UILongPressGestureRecognizer) {
-        let location: CGPoint
-        var collectionView: UICollectionView
-        
-        if gesture.view == collectionView1 {
-            collectionView = collectionView1
-            location = gesture.location(in: collectionView1)
-        } else if gesture.view == collectionView2 {
-            collectionView = collectionView2
-            location = gesture.location(in: collectionView2)
-        } else {
-            return
-        }
-        
-        guard collectionView.indexPathForItem(at: location) != nil else { return }
-        
+
         switch gesture.state {
         case .began:
             // Handle the beginning of the long press, e.g., start a drag
             print("Long press began")
-            isDragging = true
             
         case .ended, .cancelled:
             // Handle the end or cancellation of the gesture, e.g., end a drag
             isDragging = false
+            dragDropTableView(status: true)
+            dragDropCollection(status: true)
             print("Long press ended or cancelled")
             
         default:
@@ -303,34 +305,39 @@ extension HomeABAViewController { // Prevents unmoved drag
 
 
 //MARK: - UITableView
-
-extension HomeABAViewController: UITableViewDataSource,
+extension HomeABAViewController:  UITableViewDataSource,
                                   UITableViewDelegate,
                                   UITableViewDragDelegate,
                                   UITableViewDropDelegate{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return data.count
+        return dataListTable.count
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data[section].count
+        return dataListTable[section].count
     }
-
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.backgroundColor = .clear
-        cell.textLabel?.text = data[indexPath.section][indexPath.row]
+        cell.selectionStyle = .none
+        cell.textLabel?.text = dataListTable[indexPath.section][indexPath.row]
         return cell
     }
  
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
 
 
     func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        print("itemsForBeginning")
         
-        let item = data[indexPath.section][indexPath.row]
+        isDragging = true
+        dragDropCollection(status: false)
+        print("itemsForBeginning tableView")
+        
+        let item = dataListTable[indexPath.section][indexPath.row]
         let itemProvider = NSItemProvider(object: item as NSString)
         let dragItem = UIDragItem(itemProvider: itemProvider)
         dragItem.localObject = item
@@ -339,8 +346,11 @@ extension HomeABAViewController: UITableViewDataSource,
     }
 
     func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
-        print("performDropWith called")
+
         
+        isDragging = false
+        dragDropCollection(status: true)
+        print(" performDropWith tableView")
       
 
         guard let destinationIndexPath = coordinator.destinationIndexPath else {
@@ -354,8 +364,8 @@ extension HomeABAViewController: UITableViewDataSource,
                 guard items is [String] else { return }
 
                 tableView.performBatchUpdates({
-                    let movedItem = self.data[sourceIndexPath.section].remove(at: sourceIndexPath.row)
-                    self.data[destinationIndexPath.section].insert(movedItem, at: destinationIndexPath.row)
+                    let movedItem = self.dataListTable[sourceIndexPath.section].remove(at: sourceIndexPath.row)
+                    self.dataListTable[destinationIndexPath.section].insert(movedItem, at: destinationIndexPath.row)
                     tableView.moveRow(at: sourceIndexPath, to: destinationIndexPath)
                 }, completion: { _ in
                     coordinator.drop(coordinator.items.first!.dragItem, toRowAt: destinationIndexPath)
@@ -368,18 +378,22 @@ extension HomeABAViewController: UITableViewDataSource,
 
 
     func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
-
-
-        return UITableViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
+        return UITableViewDropProposal(operation: .move,
+                                       intent: .insertAtDestinationIndexPath)
     }
-
+    
+    func tableView(_ tableView: UITableView, dragSessionDidEnd: UIDragSession) {
+        print("dragSessionDidEnd tableView")
+        UIDevice.generateButtonFeedback(style: .medium)
+        setupLongPressGestureRecognizers()
+    }
 }
 
 
 
 
 //MARK: - UICollectionView
-extension HomeABAViewController: UICollectionViewDataSource,
+extension HomeABAViewController:  UICollectionViewDataSource,
                                   UICollectionViewDelegate,
                                   UICollectionViewDelegateFlowLayout,
                                   UICollectionViewDragDelegate,
@@ -396,7 +410,7 @@ extension HomeABAViewController: UICollectionViewDataSource,
         cell.layer.cornerRadius = 15
         
         
-        let item: ItemDropModel
+        let item: ItemDragDropModel
         if collectionView == collectionView1 {
             item = data1[indexPath.row]
         } else {
@@ -418,14 +432,9 @@ extension HomeABAViewController: UICollectionViewDataSource,
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let item: ItemDropModel
-        if collectionView == collectionView1 {
-            item = data1[indexPath.row]
-        } else {
-            item = data2[indexPath.row]
-        }
+
+        print("didSelectItemAt")
         
-        print("item ==>", item)
     }
     
     //UICollectionViewDelegateFlowLayout
@@ -436,7 +445,8 @@ extension HomeABAViewController: UICollectionViewDataSource,
             let size : CGFloat = (collectionView1.frame.width - (spacing * 2) - (2 * spacing))/3
             return CGSize(width: size, height: size*0.9)
             
-        }else{
+        }
+        else{
             
             let label = UILabel()
             label.fontBold(16)
@@ -452,16 +462,13 @@ extension HomeABAViewController: UICollectionViewDataSource,
     func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
         
         isDragging = true
-        
+        dragDropTableView(status: false)
         UIDevice.generateButtonFeedback(style: .medium)
         
         // Get the ItemDropModel
         let item = collectionView == collectionView1 ? data1[indexPath.row] : data2[indexPath.row]
         
-        // Use the `name` property as the NSItemProvider object
         let itemProvider = NSItemProvider(object: item.name as NSString)
-        
-        // Attach the full `ItemDropModel` as the local object for drag-and-drop operations
         let dragItem = UIDragItem(itemProvider: itemProvider)
         dragItem.localObject = (collectionView, indexPath)
         
@@ -470,8 +477,11 @@ extension HomeABAViewController: UICollectionViewDataSource,
     
     // UICollectionViewDropDelegate
     func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
-        print("performDropWith")
+        
+        print("performDropWith collectionView")
         isDragging = false
+        dragDropTableView(status: true)
+       
         
         guard let item = coordinator.items.first else { return }
         guard let (sourceCollectionView, sourceIndexPath) = item.dragItem.localObject as? (UICollectionView, IndexPath) else { return }
@@ -512,9 +522,14 @@ extension HomeABAViewController: UICollectionViewDataSource,
     }
     
     func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
-        print("dropSessionDidUpdate")
-        return UICollectionViewDropProposal(operation: .move,
-                                            intent: .insertAtDestinationIndexPath)
+
+        return UICollectionViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, dragSessionDidEnd session: UIDragSession) {
+        print("dragSessionDidEnd collectionView ")
+        UIDevice.generateButtonFeedback(style: .medium)
+        setupLongPressGestureRecognizers()
     }
     
 }
