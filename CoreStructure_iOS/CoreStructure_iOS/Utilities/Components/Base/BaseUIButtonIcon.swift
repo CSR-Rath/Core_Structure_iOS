@@ -12,19 +12,23 @@ class BaseUIButtonIcon: BaseUIButtonAnimation{
     
     var actionButton: (()->())?
     
-    var isLeftIcon: Bool = false{
-        didSet{
-            handlerStack()
+    func setupButton(isLeftIcon: Bool?, spacing: CGFloat?, iconHeight: CGFloat?){
+        
+        if let status = isLeftIcon{
+            handlerStack(isLeftIcon: status)
         }
-    }
-    
-    var iconHeight: CGFloat = 20{
-        didSet{
-            
-            iconHeightConstraint.constant = iconHeight
+       
+        if let spac = spacing{
+            stackContainer.spacing = spac
+        }
+        
+        if let height = iconHeight{
+            iconHeightConstraint.constant = height
             layoutIfNeeded()
         }
+
     }
+
 
     private var iconHeightConstraint = NSLayoutConstraint()
     
@@ -74,10 +78,9 @@ class BaseUIButtonIcon: BaseUIButtonAnimation{
     func uiEdgeInsets(top: CGFloat = 0,
                       left: CGFloat = 0,
                       bottom: CGFloat = 0,
-                      right: CGFloat = 5,
-                      spacing: CGFloat = 5){
+                      right: CGFloat = 0
+            ){
         
-        stackContainer.spacing = spacing
         stackContainer.layoutMargins = UIEdgeInsets(top: top,
                                                     left: left,
                                                     bottom: bottom,
@@ -89,7 +92,7 @@ class BaseUIButtonIcon: BaseUIButtonAnimation{
         handlerStack()
         addSubview(stackContainer)
         
-        iconHeightConstraint = imgIcon.widthAnchor.constraint(equalToConstant: iconHeight)
+        iconHeightConstraint = imgIcon.widthAnchor.constraint(equalToConstant: 20)
         iconHeightConstraint.isActive = true
         
         NSLayoutConstraint.activate([
@@ -98,11 +101,12 @@ class BaseUIButtonIcon: BaseUIButtonAnimation{
             stackContainer.rightAnchor.constraint(equalTo: rightAnchor),
             stackContainer.bottomAnchor.constraint(equalTo: bottomAnchor),
             stackContainer.topAnchor.constraint(equalTo: topAnchor),
+            
         ])
     }
     
     
-  private func handlerStack(){
+    private func handlerStack(isLeftIcon: Bool = false){
         stackContainer.arrangedSubviews.forEach { $0.removeFromSuperview() }
         
         if isLeftIcon{
@@ -117,45 +121,45 @@ class BaseUIButtonIcon: BaseUIButtonAnimation{
 
 
 class BaseUIButtonAnimation: UIButton {
-    
-    private let animationDuration: TimeInterval = 0.05
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupButton()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func setupButton() {
-        addTarget(self, action: #selector(buttonPressed), for: .touchDown)
-        addTarget(self, action: #selector(buttonReleased), for: [.touchUpInside, .touchUpOutside, .touchCancel])
-    }
-    
-    @objc private func buttonPressed() {
-        print("Button Pressed") // Print response when button is pressed
-        animateButton(scale: 0.95, alpha: 0.5)
-    }
-    
-    @objc private func buttonReleased() {
-        print("Button Released") // Print response when button is released
-        animateButton(scale: 1.0, alpha: 1)
-    }
-    
-    private func animateButton(scale: CGFloat, alpha: CGFloat) {
-        UIView.animate(withDuration: animationDuration, animations: {
-            self.alpha = alpha
-            self.transform = CGAffineTransform(scaleX: scale, y: scale)
-        })
-    }
-    
-    deinit {
-        print("MainButton deinitialized")
-    }
+
+private let animationDuration: TimeInterval = 0.05
+
+override func layoutSubviews() {
+    super.layoutSubviews()
+}
+
+override init(frame: CGRect) {
+    super.init(frame: frame)
+    setupButton()
+}
+
+required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+}
+
+private func setupButton() {
+    addTarget(self, action: #selector(buttonPressed), for: .touchDown)
+    addTarget(self, action: #selector(buttonReleased), for: [.touchUpInside, .touchUpOutside, .touchCancel])
+}
+
+@objc private func buttonPressed() {
+    print("Button Pressed") // Print response when button is pressed
+    animateButton(scale: 0.95, alpha: 0.5)
+}
+
+@objc private func buttonReleased() {
+    print("Button Released") // Print response when button is released
+    animateButton(scale: 1.0, alpha: 1)
+}
+
+private func animateButton(scale: CGFloat, alpha: CGFloat) {
+    UIView.animate(withDuration: animationDuration, animations: {
+        self.alpha = alpha
+        self.transform = CGAffineTransform(scaleX: scale, y: scale)
+    })
+}
+
+deinit {
+    print("MainButton deinitialized")
+}
 }
