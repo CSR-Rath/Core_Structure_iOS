@@ -9,7 +9,7 @@ import UIKit
 import SystemConfiguration
 //import RealmSwift
 
-enum HTTPMethod: String {
+enum HTTPMethodEnum: String {
     case POST = "POST"
     case GET = "GET"
     case PUT = "PUT"
@@ -25,119 +25,116 @@ class ApiManager {
     
     static let shared = ApiManager()
     
-    func apiConnection<T: Codable>(url: Endpoint,
-                                   method: HTTPMethod = .GET,
-                                   param: Parameters? = nil,
-                                   modelCodable: Encodable? = nil,
-                                   headers: HTTPHeaders? = getHeader(),
-                                   query: String = "",
-                                   res: @escaping (T) -> ()) {
-        
-        if !isConnectedToNetwork(){
-            AlertMessage.shared.alertError(status: .internet)
-            return
-        }
-        
-        let stringUrl = URL(string: AppConfiguration.shared.apiBaseURL + url.rawValue + query)!
-        var request = URLRequest(url: stringUrl)
-        request.timeoutInterval = 60 // Set timeout duration
-        request.httpMethod = method.rawValue
-        
-        print("stringUrl ===> \(stringUrl)")
-        
-        // Set Content-Type header
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        
-        if let finalHeaders = headers {
-            // Add additional headers
-            for (headerField, headerValue) in finalHeaders {
-                request.setValue(headerValue, forHTTPHeaderField: headerField)
-            }
-        }
-        
-        do {
-            // Add parameters
-            if let modelCodable = modelCodable {
-                
-                request.httpBody = try JSONEncoder().encode(modelCodable) // Encodable to date
-                print("modelCodable ==> \(modelCodable)")
-                
-            } else if let param = param {
-                
-                request.httpBody = try JSONSerialization.data(withJSONObject: param, options: []) // json to data
-                print("param ==> \(param)")
-                
-            }
-        }
-        catch {
-            print("Error setting HTTP body: \(error.localizedDescription)")
-            return
-        }
-        
-        // Send the request
-        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+    func apiConnection<T: Codable>(
+        url: EndpointEnum,
+        method: HTTPMethodEnum = .GET,
+        param: Parameters? = nil,
+        modelCodable: Encodable? = nil,
+        headers: HTTPHeaders? = getHeader(),
+        query: String = "",
+        res: @escaping (T) -> ()) {
             
-            // Handle error
-            if let error = error as NSError? {
-                handleError(error)
+            
+            /// check internet connection befor call api to server
+            if !isConnectedToNetwork(){
+                AlertMessage.shared.alertError(status: .internet)
                 return
             }
             
-            // Handle HTTP response
-            guard let httpResponse = response as? HTTPURLResponse else { return }
-            
-            print("HTTP Code==> \(httpResponse.statusCode)")
-            
-            switch httpResponse.statusCode {
-            case 200..<300:
-                
-                DebuggerRespose.shared.debuggerResult(urlRequest: request, data: data, error: false)
-                
-                DebuggerRespose.shared.validateModel(model: T.self, data: data) { objectData in
-                    res(objectData)
-                    print("validateModel ==> Success")
-                }
-                
-            case 401:
-                
-                // func refresh token
-                refreshToken { // daka
-                    
-                    let newHeader = ["Authorization": "Bearer \("new token")"]
-                    
-                    // call self again
-                    self.apiConnection(url: url,
-                                       method: method,
-                                       param: param,
-                                       headers: newHeader,
-                                       res: res)
-                }
-                
-            default:
-                
-                AlertMessage.shared.alertError(message: "\(httpResponse.statusCode)", status: .none)
-                
+            /// check string url
+            guard let stringUrl = URL(string: AppConfiguration.shared.apiBaseURL + url.rawValue + query) else {
+                print("Invalid URL")
+                return
             }
+            
+            var request = URLRequest(url: stringUrl)
+            request.timeoutInterval = 60 /// set  duration timeout
+            request.httpMethod = method.rawValue
+            
+            print("stringUrl ===> \(stringUrl)")
+            
+            /// Set Content-Type header
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            
+            if let finalHeaders = headers {
+                // Add additional headers
+                for (headerField, headerValue) in finalHeaders {
+                    request.setValue(headerValue, forHTTPHeaderField: headerField)
+                }
+            }
+            else{
+                print("===> headers is nil.")
+            }
+            
+            do {
+                // Add parameters
+                if let modelCodable = modelCodable {
+                    
+                    request.httpBody = try JSONEncoder().encode(modelCodable) // Encodable to date
+                    print("modelCodable ==> \(modelCodable)")
+                    
+                }
+                else if let param = param {
+                    
+                    request.httpBody = try JSONSerialization.data(withJSONObject: param, options: []) // json to data
+                    print("param ==> \(param)")
+                    
+                }else{
+                    print("==> Note: param and modelCodable are nil.")
+                }
+            }
+            catch {
+                print("Error setting HTTP body: \(error.localizedDescription)")
+                return
+            }
+            
+            /// Send the request
+            let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+                
+                /// Handle error
+                if let error = error as NSError? {
+                    handleError(error)
+                    return
+                }
+                
+                guard let httpResponse = response as? HTTPURLResponse else { return }
+                
+                print("HTTP Code==> \(httpResponse.statusCode)")
+                
+                switch httpResponse.statusCode {
+                case 200..<300:
+                    
+                    DebuggerRespose.shared.debuggerResult(urlRequest: request, data: data, error: false)
+                    
+                    DebuggerRespose.shared.validateModel(model: T.self, data: data) { objectData in
+                        res(objectData)
+                        print("validateModel ==> Success")
+                    }
+                    
+                case 401:
+                    
+                    /// func refresh token
+                    refreshToken { // daka
+                        
+                        let newHeader = ["Authorization": "Bearer \("new token")"]
+                        
+                        /// call self again
+                        self.apiConnection(url: url,
+                                           method: method,
+                                           param: param,
+                                           headers: newHeader,
+                                           res: res)
+                    }
+                    
+                default:
+                    
+                    AlertMessage.shared.alertError(message: "\(httpResponse.statusCode)", status: .none)
+                    
+                }
+            }
+            task.resume()
         }
-        task.resume()
-    }
-}
-
-func query(page: Int, size: Int = 12, query: String? = nil) -> String {
-    var components: [String] = [
-        "page=\(page)",
-        "size=\(size)"
-    ]
-    
-    // Prevent issues with spaces or special characters in the query
-    if let query = query?.trimmingCharacters(in: .whitespacesAndNewlines),
-       !query.isEmpty,
-       let encodedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
-        components.append("query=\(encodedQuery)")
-    }
-    
-    return "?\(components.joined(separator: "&"))"
 }
 
 private func getHeader() -> HTTPHeaders {
@@ -151,18 +148,6 @@ private func getHeader() -> HTTPHeaders {
         "Auth": "6213cbd30b40d782b27bcaf41f354fb8aa2353a9e59c66fba790febe9ab4cf44",
         "lang": "en"
     ]
-}
-
-func A(){
-    
-//    ApiManager.shared.apiConnection(url: .guests,
-//                                    query: query(page: 0)
-//                                    
-//                                    
-//    ) { (res: User) in
-//        
-//    }
-    
 }
 
 private func handleError(_ error: NSError) {
@@ -213,5 +198,48 @@ private func isConnectedToNetwork() -> Bool {
 
 private func refreshToken(success: @escaping () -> Void) {
     
+}
+
+func query(page: Int,
+           size: Int = 12,
+           query: String? = nil,
+           startDate: String? = nil,
+           endDate: String? = nil,
+           another: String? = nil
+) -> String {
     
+    var components: [String] = [
+        "page=\(page)",
+        "size=\(size)"
+    ]
+    
+    // Prevent issues with spaces or special characters in the query
+    if let query = query?.trimmingCharacters(in: .whitespacesAndNewlines),
+       !query.isEmpty,
+       let encodedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+        components.append("query=\(encodedQuery)")
+    }
+    
+    // Prevent issues with spaces or special characters in the query
+    if let startDate = startDate?.trimmingCharacters(in: .whitespacesAndNewlines),
+       !startDate.isEmpty,
+       let encodedQuery = startDate.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+        components.append("startDate=\(encodedQuery)")
+    }
+    
+    // Prevent issues with spaces or special characters in the query
+    if let endDate = endDate?.trimmingCharacters(in: .whitespacesAndNewlines),
+       !endDate.isEmpty,
+       let encodedQuery = endDate.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+        components.append("endDate=\(encodedQuery)")
+    }
+    
+    // Prevent issues with spaces or special characters in the query
+    if let another = another?.trimmingCharacters(in: .whitespacesAndNewlines),
+       !another.isEmpty,
+       let encodedQuery = another.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+        components.append("another=\(encodedQuery)")
+    }
+    
+    return "?\(components.joined(separator: "&"))"
 }

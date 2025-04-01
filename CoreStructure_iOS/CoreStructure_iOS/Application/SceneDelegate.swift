@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 // MARK: - Global variable
 var windowSceneDelegate: UIWindow!
 var barAppearanHeight: CGFloat!
@@ -26,13 +27,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
+        networkMonitoring()
         rootViewController()
+        
+        let amount : Double = 10.67
+        
+        print("KHR ==\(amount.toCurrencyAsKHR)")
+        print("USD ==\(amount.toCurrencyAsUSD)")
         
     }
     
     private func rootViewController(){
         
-        let controller: UIViewController = TextViewController()
+        let controller: UIViewController = DemoFeatureVC()
         let navigation = UINavigationController(rootViewController: controller)
         window!.rootViewController = navigation
         window!.makeKeyAndVisible()
@@ -43,12 +50,39 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         barAppearanHeight = navigation.navigationBar.frame.height + (window?.safeAreaInsets.top ?? 0)
     }
     
+    private func networkMonitoring(){
+        NetworkMonitor.shared.onStatusChange = { isConnected in
+            
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                  let rootVC = windowScene.windows.first?.rootViewController else { return }
+            
+            let alertNetwork = AlertNetwork()
+            alertNetwork.transitioningDelegate = presentVC
+            alertNetwork.modalPresentationStyle = .custom
+            
+            if isConnected {
+                print("✅ Internet connected")
+                
+                if let presentedAlert = rootVC.presentedViewController {
+                    presentedAlert.dismiss(animated: true)
+                }
+                
+            } else {
+                print("❌ Internet disconnected")
+                
+                if rootVC.presentedViewController == nil {
+                    rootVC.present(alertNetwork, animated: true)
+                }
+            }
+        }
+    }
 }
+
 
 extension SceneDelegate {
     
     func sceneWillEnterForeground(_ scene: UIScene) {
-        print("sceneWillEnterForeground") // App is coming to the foreground but not yet active.
+        print("sceneWillEnterForeground") // App is coming to the foreground but not yet active. (From background)
     }
     
     func sceneDidBecomeActive(_ scene: UIScene) {
@@ -68,7 +102,3 @@ extension SceneDelegate {
     }
     
 }
-
-
-
-

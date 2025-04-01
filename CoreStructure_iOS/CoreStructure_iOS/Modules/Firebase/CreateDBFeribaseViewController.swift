@@ -18,50 +18,6 @@ class CreateDBFeribaseViewController: UIViewController {
 }
 
 
-import Network
-
-class NetworkMonitor {
-    static let shared = NetworkMonitor() // Singleton instance
-    
-    private let monitor = NWPathMonitor()
-    private let queue = DispatchQueue.global(qos: .background)
-    
-    var isConnected: Bool = false
-    var connectionType: NWInterface.InterfaceType = .other
-    
-    private init() {
-        startMonitoring()
-    }
-    
-    func startMonitoring() {
-        monitor.pathUpdateHandler = { path in
-            self.isConnected = path.status == .satisfied
-            self.getConnectionType(path)
-            
-            DispatchQueue.main.async {
-                print("Network status: \(self.isConnected ? "Connected" : "Disconnected")")
-                print("Connection type: \(self.connectionType)")
-            }
-        }
-        monitor.start(queue: queue)
-    }
-    
-    func stopMonitoring() {
-        monitor.cancel()
-    }
-    
-    private func getConnectionType(_ path: NWPath) {
-        if path.usesInterfaceType(.wifi) {
-            connectionType = .wifi
-        } else if path.usesInterfaceType(.cellular) {
-            connectionType = .cellular
-        } else if path.usesInterfaceType(.wiredEthernet) {
-            connectionType = .wiredEthernet
-        } else {
-            connectionType = .other
-        }
-    }
-}
 
 import UIKit
 
@@ -100,25 +56,25 @@ class ViewController: UIViewController {
     @objc private func checkNetworkStatus() {
         print("Button tapped") // Debugging
         
-        let isConnected = NetworkMonitor.shared.isConnected
-        let connectionType = NetworkMonitor.shared.connectionType
+//        let isConnected = NetworkMonitor.shared.isConnected
+//        let connectionType = NetworkMonitor.shared.connectionType
         
-        var message = isConnected ? "Connected" : "No Internet Connection"
+//        var message = isConnected ? "Connected" : "No Internet Connection"
+//        
+//        if isConnected {
+//            switch connectionType {
+//            case .wifi:
+//                message = "Connected via Wi-Fi"
+//            case .cellular:
+//                message = "Connected via Cellular"
+//            case .wiredEthernet:
+//                message = "Connected via Ethernet"
+//            default:
+//                message = "Unknown Network Connection"
+//            }
+//        }
         
-        if isConnected {
-            switch connectionType {
-            case .wifi:
-                message = "Connected via Wi-Fi"
-            case .cellular:
-                message = "Connected via Cellular"
-            case .wiredEthernet:
-                message = "Connected via Ethernet"
-            default:
-                message = "Unknown Network Connection"
-            }
-        }
-        
-        print("message : \(message)")
+//        print("message : \(message)")
         
     }
     

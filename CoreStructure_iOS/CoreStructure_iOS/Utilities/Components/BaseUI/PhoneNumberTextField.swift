@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PhoneNumberTextField: UITextField {
+class PhoneNumberTextField: UITextField, UITextFieldDelegate {
     
     var textDidChange: ((_ : String) -> ())?
     var isComplete: ((_ : Bool) -> ())?
@@ -31,11 +31,9 @@ class PhoneNumberTextField: UITextField {
         self.keyboardType = .numberPad
         self.tintColor = .orange
         self.delegate = self  // Ensure delegate is set to self
+        self.setPadding(left: 15, right: 15)
     }
     
-}
-
-extension PhoneNumberTextField: UITextFieldDelegate {
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
         print("textFieldDidChangeSelection \(String(describing: textField.text))")
@@ -117,6 +115,8 @@ class PhoneNumberTextFieldVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupPhoneNumberTextField()
+//        leftBarButtonItemAnimation()
+        leftBarButtonItem()
     }
     
     func setupPhoneNumberTextField() {
@@ -129,6 +129,8 @@ class PhoneNumberTextFieldVC: UIViewController {
         phoneNumberTextField.delegate = phoneNumberTextField // Make sure the delegate is set to PhoneNumberTextField
         view.addSubview(phoneNumberTextField)
         
+
+        
         // Set constraints for the phone number text field
         NSLayoutConstraint.activate([
             phoneNumberTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -140,5 +142,6 @@ class PhoneNumberTextFieldVC: UIViewController {
         // Optionally, you can make the text field first responder to test the input
         phoneNumberTextField.becomeFirstResponder()
     }
+    
     
 }

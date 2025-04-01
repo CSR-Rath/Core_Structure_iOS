@@ -56,27 +56,16 @@ class LocalNotificationVC: UIViewController, UIGestureRecognizerDelegate {
         Loading.shared.showLoading()
     }
     
-    //       func scheduleLocalNotification(body: String = "") {
-    //           let content = UNMutableNotificationContent()
-    //           content.title = "ទទួលប្រាក់ពី XXX XXX"
-    //           content.body = "500.00$ ទទួលបានក្នុងគណនី XXX XXX XXX"
-    //           content.sound = UNNotificationSound.default
-    //
-    ////           ["newData": "Updated Data"])
-    //
-    //           let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false) // 60 seconds for testing
-    //
-    //           let request = UNNotificationRequest(identifier: "scheduledNotification", content: content, trigger: trigger)
-    //
-    //           UNUserNotificationCenter.current().add(request) { error in
-    //               if let error = error {
-    //                   print("Error scheduling notification: \(error.localizedDescription)")
-    //               } else {
-    //                   print("Notification background scheduled successfully.")
-    //               }
-    //           }
-    //
-    //       }
+//    @objc func sendNotification() {
+//        let message = "Hello, Mr. Rath!"
+//        NotificationCenter.default.post(
+//            name: .newMessageNotification,
+//            object: nil,
+//            userInfo: ["message": message]
+//        )
+//        print("✅ Notification Sent!")
+//    }
+    
     
     func scheduleLocalNotification(body: String = "") {
         let content = UNMutableNotificationContent()
@@ -96,8 +85,6 @@ class LocalNotificationVC: UIViewController, UIGestureRecognizerDelegate {
             }
         }
     }
-    
-    
 }
 
 

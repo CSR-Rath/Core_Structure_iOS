@@ -7,26 +7,56 @@
 
 import UIKit
 
+
+
+
+
+enum IconButtonBar {
+    case back
+    case close
+
+    var image: UIImage? {
+        switch self {
+        case .back:
+            return UIImage(named: "back_icon")
+        case .close:
+            return UIImage(named: "close_icon")
+        }
+    }
+}
+
+
+
+
+
 //MARK: Handle Navigationbar
 extension UIViewController{
     
-    func leftBarButtonItem(action: Selector? = #selector(leftBarButtonItemAction),
-                           iconButton: UIImage? = UIImage(named: "icBackWhite"),
-                           tintColor: UIColor! = .black
-    ){
+    func leftBarButtonItem(iconButton: IconButtonBar = .back) {
+        guard let icon = iconButton.image?.withRenderingMode(.alwaysOriginal) else {
+            print("Icon bar invalid")
+            return
+        }
+
         navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: iconButton?.withRenderingMode(.alwaysOriginal).withTintColor(tintColor!),
+            image: icon,
             style: .plain,
             target: self,
-            action: action
+            action: #selector(leftBarButtonItemAction)
         )
     }
+
     
     func rightBarButtonItem(action: Selector? = #selector(leftBarButtonItemAction),
-                            iconButton: UIImage? =  UIImage(named: "icNextWhite")
-    ){
+                            iconButton: IconButtonBar = .close){
+        
+        guard let icon = iconButton.image?.withRenderingMode(.alwaysOriginal) else {
+            print("Icon bar invalid")
+            return
+        }
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: iconButton?.withRenderingMode(.alwaysOriginal).withTintColor(.black),
+            image: icon,
             style: .plain,
             target: self,
             action: action
@@ -34,13 +64,14 @@ extension UIViewController{
     }
     
     @objc private func leftBarButtonItemAction() {
-        
-        // Check if the current view controller is presented modally
+    
         if (self.navigationController?.presentingViewController) != nil {
-            print("dismiss"); self.dismiss(animated: true)
+            self.dismiss(animated: true)
         } else {
-            print("popViewController"); self.navigationController?.popViewController(animated: true)
+            self.navigationController?.popViewController(animated: true)
         }
+        
+        print("Action ==> back button")
     }
     
     func navigationBarAppearance(titleColor: UIColor?,
@@ -57,8 +88,12 @@ extension UIViewController{
         
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = barColor ?? .mainBlueColor
-        appearance.shadowColor = barColor ?? .mainBlueColor
-        
+        appearance.shadowColor = .red// barColor ?? .mainBlueColor // line appearenc bar
+
+        // Apply to all navigation bars
+//           UINavigationBar.appearance().standardAppearance = appearance
+//           UINavigationBar.appearance().scrollEdgeAppearance = appearance // For scrollable views
+//        
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
     }
@@ -67,34 +102,34 @@ extension UIViewController{
 // MARK: Action change screen view contoller
 extension UIViewController{
     
-    @objc func dismissViewController(animated: Bool = true){
+    @objc func dismissVC(animated: Bool = true){
         self.dismiss(animated: animated)
     }
     
-    @objc func popViewController(animated: Bool = true){
-        self.popViewController(animated: animated)
+    @objc func popVC(animated: Bool = true){
+        self.navigationController?.popViewController(animated: animated)
     }
     
-    @objc func popToRootViewController(animated: Bool = true){
-        navigationController?.popToRootViewController(animated: animated)
+    @objc func popToRootVC(animated: Bool = true){
+        self.navigationController?.popToRootViewController(animated: animated)
     }
     
-    @objc func pushViewController(viewController: UIViewController){
-        navigationController?.pushViewController(viewController, animated: true)
+    @objc func pushVC(to viewController: UIViewController, animated: Bool = true){
+        self.navigationController?.pushViewController(viewController, animated: animated)
     }
     
-    @objc func popToViewController(viewController: UIViewController){
-        navigationController?.popToViewController(viewController, animated: true)
+    @objc func popToVC(to viewController: UIViewController, animated: Bool = true){
+        self.navigationController?.popToViewController(viewController, animated: animated)
     }
 
 }
 
 
 // MARK: EndEditing TextField When touch around else TextFields
-extension UIViewController {
+extension UIView {
 
     @objc func dismissKeyboard() { //resingtextfield
-        view.endEditing(true)
+        self.endEditing(true)
     }
 }
 

@@ -31,3 +31,24 @@ class HomeVM{
         }
     }
 }
+
+
+class ManagerViewModel{
+    
+    var page: Int = 0
+    var size: Int = 12
+    var data: [String] = []
+    
+    func managerViewModel(){
+        ApiManager.shared.apiConnection(url: .guests) { [self] (res: Response) in
+            
+            if page == 0{
+                data = res.list
+            }else{
+                data += res.list
+            }
+            
+        }
+    }
+    
+}

@@ -178,3 +178,9 @@ class LoginViewController: UIViewController {
         return button
     }
 }
+
+/// animate repeate
+//        UIView.animate(withDuration: 1.5, delay: 0.3, options: [.autoreverse, .repeat], animations: {
+//            self.imgLogo.image = UIImage(named: "success")
+//            self.imgLogo.frame.origin.y -= 20
+//        })

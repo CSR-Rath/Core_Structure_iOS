@@ -9,7 +9,7 @@ import UIKit
 import ReplayKit
 
 
-enum PasscodeAction{
+enum PasscodeActionEnum{
     case payment
     case verifyPasscode
     case changePasscode
@@ -29,19 +29,41 @@ class PasscodeVC: UIViewController, UIGestureRecognizerDelegate {
     private var stackCircle: UIStackView! = nil
     private var btnForGot = UIButton()
     
-    var isPasscodeAction : PasscodeAction = .none
+    var isPasscodeAction : PasscodeActionEnum = .none
     private var captureWarningView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupUIView()
+        addBlurScreenWhenUseBio()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         navigationController?.interactivePopGestureRecognizer?.delegate = self // enable swap
+    }
+    
+   private var blurEffectView: UIVisualEffectView?
+
+    @objc func addBlurScreenWhenUseBio() {
+        // Handle the screenshot event
+        // You can show an alert, disable certain functionality, or take any other appropriate action
+        // Create a blur effect
+        let blurEffect = UIBlurEffect(style: .dark)
+        blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView?.frame = view.bounds
+        blurEffectView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
+        // Add the blur effect view above the view hierarchy
+        view.addSubview(blurEffectView!)
+        
+    }
+
+    func removeBlurEffect() {
+        blurEffectView?.removeFromSuperview()
+        blurEffectView = nil
     }
     
 }
@@ -54,7 +76,7 @@ extension  PasscodeVC {
         if passcod == "999999"{
             print("True")
         }else{
-            UIDevice.vibrateOnWrongPassword()
+            UIDevice.shared.vibrateOnWrongPassword()
         }
         
         if isPasscodeAction == .changePasscode{
@@ -114,7 +136,7 @@ extension PasscodeVC{
     
     @objc private func buttonTappedKeyborad(_ sender: UIButton) {
         
-        UIDevice.generateButtonFeedback()
+        UIDevice.shared.generateButtonFeedback()
         
         let text = items[sender.tag]
         print("text  ==> \(text)")
@@ -231,7 +253,7 @@ extension PasscodeVC{
         
         for index in 0...11 {
             
-            let button = BaseUIButton(type: .system)   //UIButton(type: .system)
+            let button = BaseUIButton(type: .system)  
             button.backgroundColor = .clear
             button.setTitleColor(.orange, for: .normal)
             button.setTitle(items[index], for: .normal)

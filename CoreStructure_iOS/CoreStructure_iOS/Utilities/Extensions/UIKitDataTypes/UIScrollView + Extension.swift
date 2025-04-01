@@ -5,8 +5,21 @@
 //  Created by Rath! on 24/10/24.
 //
 
-import Foundation
 import UIKit
+
+enum IconEmptyList {
+    case back
+    case close
+
+    var image: UIImage? {
+        switch self {
+        case .back:
+            return UIImage(named: "back_icon")
+        case .close:
+            return UIImage(named: "close_icon")
+        }
+    }
+}
 
 // MARK: - For pull refresh include Scrollview, TableView, CollectionView
 extension UIScrollView{
@@ -15,28 +28,11 @@ extension UIScrollView{
         let refreshControl = UIRefreshControl()
         refreshControl.tintColor = .systemBlue // Customize the color
         refreshControl.addTarget(target, action: action, for: .valueChanged)
-        
-//        if let tableView = self as? UITableView {
-//            tableView.refreshControl = refreshControl
-//        } else if let collectionView = self as? UICollectionView {
-//            collectionView.refreshControl = refreshControl
-//        }else{
-//            self.refreshControl = refreshControl
-//        }
-        
         self.refreshControl = refreshControl
         
     }
     
     func endRefreshing() {
-//        if let tableView = self as? UITableView {
-//            tableView.refreshControl?.endRefreshing()
-//        } else if let collectionView = self as? UICollectionView {
-//            collectionView.refreshControl?.endRefreshing()
-//        } else{
-//            self.refreshControl?.endRefreshing()
-//        }
-        
         self.refreshControl?.endRefreshing()
     }
 }
@@ -47,7 +43,7 @@ extension UIScrollView{
 extension UIScrollView {
     
     func setEmptyListView(title: String? = nil,
-                          messageImage: UIImage? = nil
+                          icon: IconEmptyList = .back
     ) {
         let emptyView = UIView(frame: CGRect(x: 0,
                                              y: 0,
@@ -56,7 +52,7 @@ extension UIScrollView {
         
         // ImageView
         let messageImageView = UIImageView()
-        messageImageView.image = messageImage ?? .imgEmptyList
+        messageImageView.image = icon.image
         messageImageView.contentMode = .scaleAspectFit
         messageImageView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -117,32 +113,54 @@ extension UIScrollView {
 }
 
 
+
+
+
 extension UIScrollView{
     
-    func isPagination(indexPath: IndexPath, arrayOfData: Int, totalItems: Int) -> Bool {
-         guard arrayOfData < totalItems else { return false } // No need to paginate if all items are loaded
-         
-         if let tableView = self as? UITableView {
-             let lastSection = tableView.numberOfSections - 1
-             let lastRow = tableView.numberOfRows(inSection: lastSection) - 1
-             
-             if (indexPath.section == lastSection && indexPath.row == lastRow){
-                 isShowLoadingSpinner()
-                 return true
-             }
-         }
-         
-         if let collectionView = self as? UICollectionView {
-             let lastSection = collectionView.numberOfSections - 1
-             let lastItem = collectionView.numberOfItems(inSection: lastSection) - 1
-             
-             if  (indexPath.section == lastSection && indexPath.row == lastItem) {
-                 isShowLoadingSpinner()
-                 return true
-             }
-         }
+//    func isPagination(indexPath: IndexPath, arrayOfData: Int, totalItems: Int) -> Bool {
+//         guard arrayOfData < totalItems else { return false } // No need to paginate if all items are loaded
+//         
+//         if let tableView = self as? UITableView {
+//             let lastSection = tableView.numberOfSections - 1
+//             let lastRow = tableView.numberOfRows(inSection: lastSection) - 1
+//             
+//             if (indexPath.section == lastSection && indexPath.row == lastRow){
+//                 isShowLoadingSpinner()
+//                 return true
+//             }
+//         }
+//         
+//         if let collectionView = self as? UICollectionView {
+//             let lastSection = collectionView.numberOfSections - 1
+//             let lastItem = collectionView.numberOfItems(inSection: lastSection) - 1
+//             
+//             if  (indexPath.section == lastSection && indexPath.row == lastItem) {
+//                 isShowLoadingSpinner()
+//                 return true
+//             }
+//         }
+//        return false
+//     }
+  
+    func isPagination(indexPath: IndexPath, arrayCount: Int, totalItems: Int) -> Bool {
+        // No need to paginate if all items are already loaded
+        guard arrayCount < totalItems else { return false }
+        
+        // Determine the last section and last row/item
+        let lastSection = (self as? UITableView)?.numberOfSections ?? (self as? UICollectionView)?.numberOfSections ?? 0
+        let lastRowOrItem = (self as? UITableView)?.numberOfRows(inSection: lastSection - 1) ??
+                            (self as? UICollectionView)?.numberOfItems(inSection: lastSection - 1) ?? 0
+        
+        // If we reached the last section and last row/item, show the spinner and paginate
+        if indexPath.section == lastSection - 1, indexPath.row == lastRowOrItem - 1 {
+            isShowLoadingSpinner()
+            return true
+        }
+        
         return false
-     }
+    }
+
     
     private func isShowLoadingSpinner(with title: String = "Fetching.") {
         // Create spinner and start animating

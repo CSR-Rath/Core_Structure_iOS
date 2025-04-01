@@ -7,8 +7,7 @@
 
 import Foundation
 
-struct TitleValueModel{
-    let title: String
-    let value: String
+struct MainModel{
+    let name: String
+    let detail: String
 }
-

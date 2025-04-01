@@ -121,8 +121,8 @@ class HomeABAViewController: UIViewController{
     lazy var tableView: ContentSizedTableView = {
         let tableView = ContentSizedTableView()
         tableView.showsVerticalScrollIndicator = false
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.backgroundColor = .orange
+        tableView.register(TableCell.self, forCellReuseIdentifier: "cell")
+        tableView.backgroundColor = .clear
         tableView.isScrollEnabled = false
         tableView.dataSource = self
         tableView.dragDelegate = self
@@ -189,8 +189,9 @@ extension HomeABAViewController{
         
         
         text.translatesAutoresizingMaskIntoConstraints = false
-        text.text = "..."
-        text.backgroundColor = .red
+        text.text = "UI ABA"
+        text.fontBold(25, color: .black)
+        //        text.backgroundColor = .red
         
         scrollView.addSubview(viewLine)
         viewCard.addSubview(text)
@@ -211,7 +212,7 @@ extension HomeABAViewController{
     }
     
     private func setupData() {
-
+        
         let getData1 = DataManager.shared.getItemOneDropModel()
         let getData2 = DataManager.shared.getItemTwoDropModel()
         
@@ -302,89 +303,6 @@ extension HomeABAViewController { // Prevents unmoved drag
     }
 }
 
-
-//MARK: - UITableView
-extension HomeABAViewController:  UITableViewDataSource,
-                                  UITableViewDelegate,
-                                  UITableViewDragDelegate,
-                                  UITableViewDropDelegate{
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return dataListTable.count
-    }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataListTable[section].count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.backgroundColor = .clear
-        cell.selectionStyle = .none
-        cell.textLabel?.text = dataListTable[indexPath.section][indexPath.row]
-        return cell
-    }
- 
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
-    }
-
-    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        
-        isDragging = true
-        dragDropCollection(status: false)
-        print("itemsForBeginning tableView")
-        
-        let item = dataListTable[indexPath.section][indexPath.row]
-        let itemProvider = NSItemProvider(object: item as NSString)
-        let dragItem = UIDragItem(itemProvider: itemProvider)
-        dragItem.localObject = item
-
-        return [dragItem]
-    }
-
-    func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
-        
-        isDragging = false
-        dragDropCollection(status: true)
-        print(" performDropWith tableView")
-      
-        guard let destinationIndexPath = coordinator.destinationIndexPath else {
-            print("No destination index path.")
-            return
-        }
-
-        if let sourceIndexPath = coordinator.items.first?.sourceIndexPath {
-
-            coordinator.session.loadObjects(ofClass: NSString.self) { items in
-                guard items is [String] else { return }
-
-                tableView.performBatchUpdates({
-                    let movedItem = self.dataListTable[sourceIndexPath.section].remove(at: sourceIndexPath.row)
-                    self.dataListTable[destinationIndexPath.section].insert(movedItem, at: destinationIndexPath.row)
-                    tableView.moveRow(at: sourceIndexPath, to: destinationIndexPath)
-                }, completion: { _ in
-                    coordinator.drop(coordinator.items.first!.dragItem, toRowAt: destinationIndexPath)
-                })
-            }
-        } else {
-            print("No source index path.")
-        }
-    }
-
-    func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
-        return UITableViewDropProposal(operation: .move,
-                                       intent: .insertAtDestinationIndexPath)
-    }
-    
-    func tableView(_ tableView: UITableView, dragSessionDidEnd: UIDragSession) {
-        print("dragSessionDidEnd tableView")
-        UIDevice.generateButtonFeedback(style: .medium)
-        setupLongPressGestureRecognizers()
-    }
-}
-
-
 //MARK: - UICollectionView
 extension HomeABAViewController:  UICollectionViewDataSource,
                                   UICollectionViewDelegate,
@@ -443,7 +361,7 @@ extension HomeABAViewController:  UICollectionViewDataSource,
             let label = UILabel()
             label.fontBold(16)
             label.text = data2[indexPath.item].name
-            let with = label.calculateLabelWidth() + 20
+            let with = label.getFittedWidth() + 20.0
             
             return CGSize(width: with, height: 39)
         }
@@ -455,7 +373,7 @@ extension HomeABAViewController:  UICollectionViewDataSource,
         
         isDragging = true
         dragDropTableView(status: false)
-        UIDevice.generateButtonFeedback(style: .medium)
+        UIDevice.shared.generateButtonFeedback(style: .medium)
         
         // Get the ItemDropModel
         let item = collectionView == collectionView1 ? data1[indexPath.row] : data2[indexPath.row]
@@ -520,11 +438,132 @@ extension HomeABAViewController:  UICollectionViewDataSource,
     
     func collectionView(_ collectionView: UICollectionView, dragSessionDidEnd session: UIDragSession) {
         print("dragSessionDidEnd collectionView ")
-        UIDevice.generateButtonFeedback(style: .medium)
+        UIDevice.shared.generateButtonFeedback(style: .medium)
         setupLongPressGestureRecognizers()
     }
     
 }
 
+//MARK: - UITableView
+extension HomeABAViewController:  UITableViewDataSource,
+                                  UITableViewDelegate,
+                                  UITableViewDragDelegate,
+                                  UITableViewDropDelegate{
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return dataListTable.count
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dataListTable[section].count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableCell
+        cell.backgroundColor = .clear
+        cell.selectionStyle = .none
+        cell.textLabel?.text = dataListTable[indexPath.section][indexPath.row]
+        return cell
+    }
+ 
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+
+    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        
+        isDragging = true
+        dragDropCollection(status: false)
+        print("itemsForBeginning tableView")
+        
+        let item = dataListTable[indexPath.section][indexPath.row]
+        let itemProvider = NSItemProvider(object: item as NSString)
+        let dragItem = UIDragItem(itemProvider: itemProvider)
+        dragItem.localObject = item
+
+        return [dragItem]
+    }
+
+    func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
+        
+        isDragging = false
+        dragDropCollection(status: true)
+        print(" performDropWith tableView")
+      
+        guard let destinationIndexPath = coordinator.destinationIndexPath else {
+            print("No destination index path.")
+            return
+        }
+
+        if let sourceIndexPath = coordinator.items.first?.sourceIndexPath {
+
+            coordinator.session.loadObjects(ofClass: NSString.self) { items in
+                guard items is [String] else { return }
+
+                tableView.performBatchUpdates({
+                    let movedItem = self.dataListTable[sourceIndexPath.section].remove(at: sourceIndexPath.row)
+                    self.dataListTable[destinationIndexPath.section].insert(movedItem, at: destinationIndexPath.row)
+                    tableView.moveRow(at: sourceIndexPath, to: destinationIndexPath)
+                }, completion: { _ in
+                    coordinator.drop(coordinator.items.first!.dragItem, toRowAt: destinationIndexPath)
+                })
+            }
+        } else {
+            print("No source index path.")
+        }
+    }
+
+    func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
+        return UITableViewDropProposal(operation: .move,
+                                       intent: .insertAtDestinationIndexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, dragSessionDidEnd: UIDragSession) {
+        print("dragSessionDidEnd tableView")
+        UIDevice.shared.generateButtonFeedback(style: .medium)
+        setupLongPressGestureRecognizers()
+    }
+    
+
+}
 
 
+
+
+class TableCell: UITableViewCell{
+    
+    lazy var viewBg: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemGray6
+        view.layer.cornerRadius = 15
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.selectionStyle = .none
+        self.backgroundColor = .clear
+        self.contentView.backgroundColor = .clear
+        self.contentView.alpha = 0
+        setupUI()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupUI(){
+        addSubviews(of: viewBg)
+        
+        NSLayoutConstraint.activate([
+        
+            viewBg.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1),
+            viewBg.centerXAnchor.constraint(equalTo: centerXAnchor),
+            viewBg.topAnchor.constraint(equalTo: topAnchor),
+            viewBg.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
+            viewBg.heightAnchor.constraint(equalToConstant: 120),
+        
+        ])
+    }
+}

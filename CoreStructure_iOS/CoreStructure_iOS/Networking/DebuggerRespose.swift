@@ -71,6 +71,7 @@ class DebuggerRespose {
                                    response: @escaping (T) -> Void) {
         do {
             if let newData = data {
+                // Attempt to decode the JSON data into an object of type T
                 let json = try JSONDecoder().decode(T.self, from: newData) // date to codable
                 response(json)
             }

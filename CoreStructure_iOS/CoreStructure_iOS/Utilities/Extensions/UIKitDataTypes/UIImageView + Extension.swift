@@ -8,6 +8,12 @@
 import Foundation
 import UIKit
 
+enum imageLoadingTypeEnum: String{
+    case imageEmpty = "imgEmpty"
+    case imageEmptyList = "imgEmptyList"
+    case imageUser = "imgUserLoading"
+}
+
 
 extension UIImageView {
     
@@ -17,8 +23,9 @@ extension UIImageView {
         self.tintColor = color
     }
     
+    // loadingImage = use loading SDWebImage 
     func loadingImage(urlString: String,
-                      defaultImage: UIImage = .imgEmpty,
+                      defaultImage: imageLoadingTypeEnum = .imageEmpty,
                       style: UIActivityIndicatorView.Style = .medium ) {
         // Create and configure the activity indicator
         let activityIndicator = UIActivityIndicatorView(style: style)
@@ -37,14 +44,16 @@ extension UIImageView {
         // Start animating the activity indicator
         activityIndicator.startAnimating()
         
+        let gotImage = UIImage(named: defaultImage.rawValue)
+        
         // Set the default image while loading
-        self.image = defaultImage
+        self.image = gotImage
         
         // Ensure the URL is valid
         guard let url = URL(string: urlString) else {
             activityIndicator.stopAnimating()
             activityIndicator.removeFromSuperview()
-            self.image = defaultImage // Set default image on invalid URL
+            self.image = gotImage // Set default image on invalid URL
             return
         }
         
@@ -57,7 +66,7 @@ extension UIImageView {
                 
                 if let error = error {
                     print("Error loading image: \(error)")
-                    self.image = defaultImage // Set default image on error
+                    self.image = gotImage // Set default image on error
                     return
                 }
                 
@@ -65,7 +74,7 @@ extension UIImageView {
                 if let imageData = data, let image = UIImage(data: imageData) {
                     self.image = image // Set the loaded image
                 } else {
-                    self.image = defaultImage // Set default image if data is invalid
+                    self.image = gotImage // Set default image if data is invalid
                 }
             }
         }.resume()

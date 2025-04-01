@@ -18,12 +18,20 @@ extension UIButton{
                        left: CGFloat = 0,
                        bottom: CGFloat = 0,
                        right: CGFloat = 0){
-
+        
         self.contentEdgeInsets = UIEdgeInsets(top: top,
                                               left: left,
                                               bottom: bottom,
                                               right: right)
     }
+    
+    
+    func setImageTintColor(_ color: UIColor) {
+        let tintedImage = self.imageView?.image?.withRenderingMode(.alwaysTemplate)
+        self.setImage(tintedImage, for: .normal)
+        self.tintColor = color
+    }
+    
 }
 
 

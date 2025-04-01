@@ -205,18 +205,18 @@ extension FloatingLabelTextField{
         switch icon{
         case .iconDdate:
             
-            iconRightImg.image = .icNextWhite
+//            iconRightImg.image = .icNextWhite
             setPadding(left: 12, right: 40)
             
         case .iconCircle:
             
-            iconRightImg.image = .icNextWhite
+//            iconRightImg.image = .icNextWhite
             setPadding(left: 12, right: 40)
             
         case .iconDropDown:
             
             setPadding(left: 12, right: 40)
-            iconRightImg.image = .icNextWhite
+//            iconRightImg.image = .icNextWhite
             
         case .iconEmpty:
             

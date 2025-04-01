@@ -116,10 +116,11 @@ class Loading : UIView {
         }
     }
     
-    func hideLoading(delay: CFTimeInterval = 0.0) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + delay ){ [self] in
+    func hideLoading(seconds: CFTimeInterval = 0.0, completion: (() -> Void)? = nil)  {
+        DispatchQueue.main.asyncAfter(deadline: .now() + seconds ){ [self] in
             loadingView.stopAnimating()
             self.removeFromSuperview()
+            completion?()
         }
     }
 }

@@ -6,7 +6,7 @@
 //
 
 import UIKit
-enum MenuTitle: String{
+enum MenuTitleEnum: String{
     case wallet = "Wallet"
     case reward = "Reward"
     case fun = "Fun"
@@ -117,7 +117,7 @@ extension DragDropCollectionVC{
     func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
         
         isDraggingItem = true
-        UIDevice.generateButtonFeedback()
+        UIDevice.shared.generateButtonFeedback()
         
         let titleImageModel = dataList[indexPath.item]
         let itemProvider = NSItemProvider(object: titleImageModel.title as NSString)
@@ -163,14 +163,14 @@ extension DragDropCollectionVC{
         }
         
         DataManager.shared.saveDragDropMenu(data: dataList)
-        UIDevice.generateButtonFeedback()
+        UIDevice.shared.generateButtonFeedback()
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if !isDraggingItem{
             let vc = UIViewController()
             vc.view.backgroundColor = .white
-            pushViewController(viewController: vc )
+            pushVC(to: vc )
         }
     }
     

@@ -20,5 +20,4 @@ extension UITextField {
         self.rightView = rightPaddingView
         self.rightViewMode = .always
     }
-    
 }

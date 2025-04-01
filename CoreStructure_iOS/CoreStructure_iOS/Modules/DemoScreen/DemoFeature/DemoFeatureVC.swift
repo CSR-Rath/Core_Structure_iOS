@@ -57,7 +57,7 @@ class DemoFeatureVC: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false // disable swipe
-//        navigationBarAppearance(titleColor: .mainBlueColor, barColor: .cyan)
+        navigationBarAppearance(titleColor: .mainBlueColor, barColor: .white)
 
     }
     
@@ -100,10 +100,10 @@ class DemoFeatureVC: UIViewController, UIGestureRecognizerDelegate {
         let button = BaseUIButton(frame: CGRect(x: 0,
                                             y: 10,
                                             width: 200,
-                                            height: 200))
+                                            height: 100))
         button.backgroundColor = .orange
         button.addTarget(self, action: #selector(didTappedButton), for: .touchUpInside)
-        view.addSubview(button)
+//        view.addSubview(button)
     }
     
     @objc private func pullRefresh(){
@@ -117,14 +117,13 @@ class DemoFeatureVC: UIViewController, UIGestureRecognizerDelegate {
                 ListModel(id: 4, name: "BoardCollectionVC", viewController: BoardCollectionVC()),
                 ListModel(id: 6, name: "CenteringCollectionViewCellVC", viewController: CenteringCellVC()),
                 ListModel(id: 7, name: "Cell Alert Error", viewController: nil),
-                
                 ListModel(id: 9, name: "GroupDateVC", viewController: GroupDateVC()),
                 ListModel(id: 10, name: "ExspandTableVC", viewController: ExspandTableVC()),
                 ListModel(id: 11, name: "DragDropCollectionVC", viewController: DragDropCollectionVC()),
                 ListModel(id: 12, name: "ButtonOntheKeyboradVC", viewController: ButtonOntheKeyboradVC()),
                 ListModel(id: 13, name: "HandleNavigationBarVC", viewController: HandleNavigationBarVC()),
                 ListModel(id: 14, name: "LocalNotificationVC", viewController: LocalNotificationVC()),
-                ListModel(id: 15, name: "PagViewControllerWithButtonVC", viewController: PagViewControllerWithButtonVC()),
+                ListModel(id: 15, name: "PagViewControllerWithButtonVC", viewController: SegmentPageViewController()),
                 ListModel(id: 16, name: "ViewController", viewController: PageViewController()),
                 ListModel(id: 17, name: "LocalizableContoller", viewController: LocalizableContoller()),
                 ListModel(id: 18, name: "SliderController", viewController: SliderController()),
@@ -135,6 +134,9 @@ class DemoFeatureVC: UIViewController, UIGestureRecognizerDelegate {
                 ListModel(id: 23, name: "HomeABAViewController", viewController: HomeABAViewController()),
                 ListModel(id: 24, name: "TestingButtonVC", viewController: TestingButtonVC()),
                 ListModel(id: 25, name: "PhoneNumberTextFieldVC", viewController: PhoneNumberTextFieldVC()),
+                ListModel(id: 25, name: "PaymentViewController", viewController: PaymentViewController()),
+                ListModel(id: 25, name: "BecomeFirstResponderVC", viewController: BecomeFirstResponderVC()),
+//                ListModel(id: 25, name: "BecomeFirstResponderVC1", viewController: BecomeFirstResponderVC1()),
     
             ]
         }
@@ -182,7 +184,7 @@ extension DemoFeatureVC: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        if tableView.isPagination(indexPath: indexPath,  arrayOfData: items.count, totalItems: 100){
+        if tableView.isPagination(indexPath: indexPath,  arrayCount: items.count, totalItems: 100){
             print("isPagination")
             currentPage += 1
         }
@@ -200,7 +202,6 @@ extension DemoFeatureVC: UITableViewDelegate, UITableViewDataSource{
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let currentOffsetY = scrollView.contentOffset.y
         didEndScrollView?(currentOffsetY, isScrollingDown)
-        
     }
     
    @objc func didTappedButton(){

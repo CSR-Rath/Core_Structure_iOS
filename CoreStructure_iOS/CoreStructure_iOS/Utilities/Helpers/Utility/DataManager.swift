@@ -8,7 +8,6 @@
 import Foundation
 
 class DataManager {
-    
     static let shared = DataManager() // Singleton pattern
     private let userDefaults = UserDefaults.standard
     private let userInforKey = "userInfor"

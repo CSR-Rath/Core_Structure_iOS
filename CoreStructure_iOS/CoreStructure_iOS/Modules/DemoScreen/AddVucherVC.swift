@@ -38,7 +38,7 @@ class AddVoucherVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .clear
         addVoucherView.actionDismiss = {
-            self.dismissViewController()
+            self.dismissVC()
         }
     }
 }

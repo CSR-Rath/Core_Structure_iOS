@@ -45,6 +45,7 @@ class BaseUIButton: UIButton {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
     
     private func setupButton() {
         self.titleLabel?.font = UIFont.systemFont(ofSize: 17) // Consider dynamic type
@@ -120,8 +121,8 @@ class BaseUIButton: UIButton {
     }
     
     deinit {
-        stopLoading()
         print("MainButton deinitialized")
+        self.stopLoading()
     }
 }
 

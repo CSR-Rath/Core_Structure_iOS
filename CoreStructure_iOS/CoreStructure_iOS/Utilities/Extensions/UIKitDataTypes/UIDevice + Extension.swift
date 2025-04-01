@@ -11,27 +11,30 @@ import AudioToolbox
 
 extension UIDevice {
     
-    static func isLandscape() -> Bool {
+    static let shared = UIDevice()
+    
+     func isLandscape() -> Bool {
         return UIDevice.current.orientation.isLandscape
     }
     
-    static func isIPhone() -> Bool {
+     func isIPhone() -> Bool {
         return UIDevice.current.userInterfaceIdiom == .phone
     }
     
-    static func isIPad() -> Bool {
+    func isIPad() -> Bool {
         return UIDevice.current.userInterfaceIdiom == .pad
     }
     
-    static func vibrateOnWrongPassword() {
+    func vibrateOnWrongPassword() {
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
     }
     
-    static func generateButtonFeedback(style: UIImpactFeedbackGenerator.FeedbackStyle = .medium){
+    func generateButtonFeedback(style: UIImpactFeedbackGenerator.FeedbackStyle = .medium){
         let generator = UIImpactFeedbackGenerator(style: style)
         generator.prepare()
         generator.impactOccurred()
     }
 }
+
 
 

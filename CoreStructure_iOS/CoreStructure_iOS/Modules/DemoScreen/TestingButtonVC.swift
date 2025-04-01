@@ -30,13 +30,16 @@ class TestingButtonVC: UIViewController{
             self.btn.startLoading()
         }
         view.addSubview(btn)
-        
-        
     }
     
     
    @objc func didTapped(){
        btn.stopLoading()
+        print("didTapped")
+       
+       let vc = UIViewController()
+       vc.view.backgroundColor = .blue
+       pushVC(to: vc)
         print("didTapped")
     }
 }

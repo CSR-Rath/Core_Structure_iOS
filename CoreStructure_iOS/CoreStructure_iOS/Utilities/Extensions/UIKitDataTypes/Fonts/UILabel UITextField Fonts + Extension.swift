@@ -17,20 +17,20 @@ extension UILabel{
         return requiredSize.height
     }
 
-    func fontRegular(_ size: CGFloat, color: UIColor = .white){
+    func fontRegular(_ size: CGFloat, color: UIColor = .black){
         self.font = UIFont.systemFont(ofSize: size, weight: .regular)
         self.textColor = color
     }
     
-    func fontMedium(_ size: CGFloat, color: UIColor = .white ){
+    func fontMedium(_ size: CGFloat, color: UIColor = .black ){
         self.font = UIFont.systemFont(ofSize: size, weight: .medium)
     }
     
-    func fontBold(_ size: CGFloat, color: UIColor = .white){
+    func fontBold(_ size: CGFloat, color: UIColor = .black){
         self.font = UIFont.systemFont(ofSize: size, weight: .bold)
     }
 
-    func fontSemiBold(_ size: CGFloat, color: UIColor = .white ){
+    func fontSemiBold(_ size: CGFloat, color: UIColor = .black ){
         self.font = UIFont.systemFont(ofSize: size, weight: .semibold)
     }
 }
@@ -38,20 +38,20 @@ extension UILabel{
 
 extension UITextField{
     
-    func fontRegular(_ size: CGFloat, color: UIColor = .white){
+    func fontRegular(_ size: CGFloat, color: UIColor = .black){
         self.font = UIFont.systemFont(ofSize: size, weight: .regular)
         self.textColor = color
     }
     
-    func fontMedium(_ size: CGFloat, color: UIColor = .white ){
+    func fontMedium(_ size: CGFloat, color: UIColor = .black ){
         self.font = UIFont.systemFont(ofSize: size, weight: .medium)
     }
     
-    func fontBold(_ size: CGFloat, color: UIColor = .white){
+    func fontBold(_ size: CGFloat, color: UIColor = .black){
         self.font = UIFont.systemFont(ofSize: size, weight: .bold)
     }
 
-    func fontSemiBold(_ size: CGFloat, color: UIColor = .white ){
+    func fontSemiBold(_ size: CGFloat, color: UIColor = .black ){
         self.font = UIFont.systemFont(ofSize: size, weight: .semibold)
     }
 }

@@ -11,24 +11,27 @@ import UIKit
 
 //MARK: ==================== Handle localize ====================
 
-func setLanguage(langCode: LanguageEnum) {
+func setLanguage(langCode: LanguageTypeEnum) {
     UserDefaults.standard.setValue(langCode.rawValue, forKey: KeyUser.language)
+}
+
+func getLanguageType() -> String{
+    return UserDefaults.standard.string(forKey: KeyUser.language) ?? "en"
 }
 
 extension String {
     
-    func getLangauge() -> String{
-        return UserDefaults.standard.string(forKey: KeyUser.language) ?? "en"
-    }
-    
-    func localizeString() -> String {
-        let lang = UserDefaults.standard.string(forKey: KeyUser.language)
-        let path = Bundle.main.path(forResource: lang, ofType: "lproj")
-        let bundle = Bundle(path: path!)
-        return NSLocalizedString(self, tableName: nil, bundle: bundle!, value: "", comment: "")
-    }
-    
+  
 }
+//
+//    func localizeString() -> String {
+//        let lang = UserDefaults.standard.string(forKey: KeyUser.language)
+//        let path = Bundle.main.path(forResource: lang, ofType: "lproj")
+//        let bundle = Bundle(path: path!)
+//        return NSLocalizedString(self, tableName: nil, bundle: bundle!, value: "", comment: "")
+//    }
+//    
+//}
 
 //MARK: ==================== End handle localize ====================
 
@@ -89,15 +92,6 @@ extension String{ // HTML to string
 
 //MARK: ==================== End handle webview ====================
 
-enum DateFormat: String {
-    case time = "h:mm a"  /// Time format (e.g., 5:30 PM)
-    case short = "dd-MM-yyyy"  /// Short date format (e.g., 31/12/2023)
-    case shortSlash = "dd/MM/yyyy"  /// Short date format (e.g., 31/12/2023)
-    case medium = "dd-MMMM-yyyy"   /// Medium date format (e.g., 31-December-2023)
-    case mediumSlash = "dd/MMMM/yyyy"   /// Medium date format (e.g., 31-December-2023)
-    case long = "EEEE, dd MMMM yyyy"  /// Long date format (e.g., Sunday, 31 December 2023)
-    case full = "EEEE, dd MMMM yyyy h:mm a"  /// Full date and time format (e.g., Sunday, 31 December 2023 5:30 PM)
-}
 
 
 //Localizable

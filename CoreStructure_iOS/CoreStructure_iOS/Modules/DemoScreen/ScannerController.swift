@@ -282,14 +282,19 @@ extension ScannerController{
      private func startScanAnimate() {
         DispatchQueue.main.async { [self] in
             scannerLine.isHidden = false
-            scannerLine.frame = CGRect(x: (screen.width-lineWidth)/2, y: positionScan.minY + 10  , width: lineWidth, height: 5)
-            // withDuration : for animate for display
-            // delay: for animate start first
+            scannerLine.frame = CGRect(x: (screen.width-lineWidth)/2,
+                                       y: positionScan.minY + 10  ,
+                                       width: lineWidth,
+                                       height: 5)
+            /// withDuration : for animate for display
+            /// delay: for animate start first
             UIView.animate(withDuration: 1,
                            delay: 0.5,
                            options: [.curveLinear, .repeat, .autoreverse],
                            animations: { [self] in
-                scannerLine.frame = CGRect(x: (screen.width-lineWidth)/2, y: positionScan.maxY - 10  , width: lineWidth, height: 5)
+                scannerLine.frame = CGRect(x: (screen.width-lineWidth)/2,
+                                           y: positionScan.maxY - 10,
+                                           width: lineWidth, height: 5)
             }, completion: nil)
         }
     }
@@ -361,6 +366,89 @@ extension ScannerController{
         
         return overlayView
     }
+    
+    
+//    func createOverlay() -> UIView {
+//        
+//        let overlayView = BlurredBackgroundView()
+//        overlayView.frame = view.bounds
+//        overlayView.backgroundColor = UIColor.black.withAlphaComponent(0.25)
+//        overlayView.alpha = 0.99
+//        
+//        // Define corner views
+//        let cornerSize: CGFloat = 30
+//        let cornerRadius: CGFloat = 4
+//        
+//        let topLeft = UIView()
+//        topLeft.backgroundColor = .white
+//        topLeft.layer.cornerRadius = cornerRadius
+//        topLeft.roundCorners(corners: [.topLeft], radius: cornerRadius)
+//        topLeft.translatesAutoresizingMaskIntoConstraints = false
+//        
+//        let topRight = UIView()
+//        topRight.backgroundColor = .white
+//        topRight.layer.cornerRadius = cornerRadius
+//        topRight.roundCorners(corners: [.topRight], radius: cornerRadius)
+//        topRight.translatesAutoresizingMaskIntoConstraints = false
+//        
+//        let bottomLeft = UIView()
+//        bottomLeft.backgroundColor = .white
+//        bottomLeft.layer.cornerRadius = cornerRadius
+//        bottomLeft.roundCorners(corners: [.bottomLeft], radius: cornerRadius)
+//        bottomLeft.translatesAutoresizingMaskIntoConstraints = false
+//        
+//        let bottomRight = UIView()
+//        bottomRight.backgroundColor = .white
+//        bottomRight.layer.cornerRadius = cornerRadius
+//        bottomRight.roundCorners(corners: [.bottomRight], radius: cornerRadius)
+//        bottomRight.translatesAutoresizingMaskIntoConstraints = false
+//        
+//        // Add corner views to overlay
+//        overlayView.addSubview(topLeft)
+//        overlayView.addSubview(topRight)
+//        overlayView.addSubview(bottomLeft)
+//        overlayView.addSubview(bottomRight)
+//        
+//        // Corrected constraints
+//        NSLayoutConstraint.activate([
+//            
+//            topLeft.widthAnchor.constraint(equalToConstant: cornerSize),
+//            topLeft.heightAnchor.constraint(equalToConstant: cornerSize),
+//            topLeft.topAnchor.constraint(equalTo: overlayView.topAnchor, constant: yC - cornerRadius),
+//            topLeft.leftAnchor.constraint(equalTo: overlayView.leftAnchor, constant: xC - cornerRadius),
+//            
+//            topRight.widthAnchor.constraint(equalToConstant: cornerSize),
+//            topRight.heightAnchor.constraint(equalToConstant: cornerSize),
+//            topRight.topAnchor.constraint(equalTo: overlayView.topAnchor, constant: yC - 5),
+//            topRight.rightAnchor.constraint(equalTo: overlayView.leftAnchor, constant: xC + sizePath + cornerRadius),
+//            
+//            bottomLeft.widthAnchor.constraint(equalToConstant: cornerSize),
+//            bottomLeft.heightAnchor.constraint(equalToConstant: cornerSize),
+//            bottomLeft.bottomAnchor.constraint(equalTo: overlayView.topAnchor, constant: yC + sizePath + cornerRadius),
+//            bottomLeft.leftAnchor.constraint(equalTo: overlayView.leftAnchor, constant: xC - cornerRadius),
+//            
+//            bottomRight.widthAnchor.constraint(equalToConstant: cornerSize),
+//            bottomRight.heightAnchor.constraint(equalToConstant: cornerSize),
+//            bottomRight.bottomAnchor.constraint(equalTo: overlayView.topAnchor, constant: yC + sizePath + cornerRadius),
+//            bottomRight.rightAnchor.constraint(equalTo: overlayView.leftAnchor, constant: xC + sizePath + cornerRadius)
+//        ])
+//        
+//        // Create a transparent area (cutout)
+//        let path = CGMutablePath()
+//        let transparentRect = CGRect(x: xC, y: yC, width: sizePath, height: sizePath)
+//        path.addRect(CGRect(origin: .zero, size: overlayView.frame.size)) // Outer rect
+//        path.addRoundedRect(in: transparentRect, cornerWidth: 0, cornerHeight: 0) // Transparent area
+//        path.closeSubpath()
+//        
+//        let maskLayer = CAShapeLayer()
+//        maskLayer.path = path
+//        maskLayer.fillRule = .evenOdd
+//        maskLayer.backgroundColor = UIColor.black.cgColor
+//        overlayView.layer.mask = maskLayer
+//        
+//        return overlayView
+//    }
+    
     
     @objc private func toggleFlash() {
         guard let device = currentDevice else { return }
@@ -434,10 +522,7 @@ extension ScannerController: UIImagePickerControllerDelegate,UINavigationControl
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
-
 }
-
-
 
 
 class viewCon : UIViewController{
@@ -448,6 +533,6 @@ class viewCon : UIViewController{
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        pushViewController(viewController: ScannerController())
+        pushVC(to: ScannerController())
     }
 }

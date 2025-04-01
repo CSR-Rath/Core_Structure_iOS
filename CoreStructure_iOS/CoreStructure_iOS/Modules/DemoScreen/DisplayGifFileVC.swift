@@ -46,7 +46,6 @@ class DisplayGifFileVC: UIViewController {
         
         NSLayoutConstraint.activate([
             imageView.widthAnchor.constraint(equalToConstant: 200),
-            //            imageView.heightAnchor.constraint(equalToConstant: 50),
             imageView.bottomAnchor.constraint(equalTo: view.centerYAnchor,constant: -70),
             imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor,constant: 0),
         ])

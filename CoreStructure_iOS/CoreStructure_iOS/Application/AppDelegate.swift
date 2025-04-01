@@ -12,26 +12,13 @@ import Firebase
 
 // Firebase Messaging need have account developer for
 
-//class AppDelegate: UIResponder, UIApplicationDelegate {
-//    var window: UIWindow?
-//
-//    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-//
-//        
-//        return true
-//    }
-//}
-
-
-
-
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        setLanguage(langCode: .english) // english default
+        setLanguage(langCode: .ENGLISH) // english default
         configureNotification() // notivication
         print("didFinishLaunchingWithOptions")
         
@@ -84,7 +71,7 @@ extension AppDelegate {
 extension AppDelegate: UNUserNotificationCenterDelegate {
     
     private func configureNotification() {
-//        FirebaseApp.configure() // need cell for using  firebase
+        //        FirebaseApp.configure() // need cell for using  firebase
         
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
             granted ? print("User granted authorization") : print("User denied authorization")
@@ -114,17 +101,16 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         print("Notification Response User Info:", userInfo)
         
         guard let navigationController = windowSceneDelegate.rootViewController as? UINavigationController else {
-            print("NavigationController is nil.")
+            print("Push ==> NavigationController is nil.")
             completionHandler()
             return
         }
         
         guard let window = windowSceneDelegate else{
-            print("Window is nil")
+            print("Present ==> Window is nil")
             completionHandler()
             return
         }
-        
         
         let targetViewController = UIViewController()
         targetViewController.leftBarButtonItem()
@@ -140,12 +126,24 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             
             print("Controller is Push.")
             navigationController.pushViewController(targetViewController, animated: true)
-
+            
         }
         
+        
+        let notificationType  = NotificationTypeEnum(rawValue: "") ?? .NONE; print("notificationType ==> \(notificationType)")
+        
+        switch notificationType{
+        case .NEAR_STATION:
+                break
+        case .NEW_STATION:
+            break
+        case .NONE:
+            break
+        }
+                
         completionHandler()
     }
-
+    
     private func updateBadgeIncreaseIconApp() {
         DispatchQueue.main.async {
             UIApplication.shared.applicationIconBadgeNumber += 1

@@ -64,7 +64,7 @@ class ButtonOntheKeyboradVC: BaseInteractionController/*, UIGestureRecognizerDel
             self.view.layoutIfNeeded()
         }
         
-        view.addGestureView(target: self, action: #selector(dismissKeyboard))
+        view.addGestureView(target: self, action: #selector(view.dismissKeyboard))
     }
     
     private func setupConstraint(){

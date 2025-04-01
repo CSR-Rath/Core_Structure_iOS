@@ -10,7 +10,7 @@ import UIKit
 
 extension UIView{
     
-    func viewContainingController() -> UIViewController? {
+    private func viewContainingController() -> UIViewController? {
         // for use push view controller in the UIView
         var nextResponder: UIResponder? = self
         
@@ -26,24 +26,24 @@ extension UIView{
         return nil
     }
     
-    @objc func dismissViewController(animated: Bool = true){
+    @objc func dismissVC(animated: Bool = true){
         viewContainingController()?.navigationController?.dismiss(animated: animated)
     }
     
-    @objc func popViewController(animated: Bool = true){
+    @objc func popVC(animated: Bool = true){
         viewContainingController()?.navigationController?.popViewController(animated: animated)
     }
     
-    @objc func popToRootViewController(animated: Bool = true){
+    @objc func popToRootVC(animated: Bool = true){
         viewContainingController()?.navigationController?.popToRootViewController(animated: animated)
     }
     
-    @objc func pushViewController(viewController: UIViewController){
-        viewContainingController()?.navigationController?.pushViewController(viewController, animated: true)
+    @objc func pushVC(to viewController: UIViewController, animated: Bool = true){
+        viewContainingController()?.navigationController?.pushViewController(viewController, animated: animated)
     }
     
-    @objc func popToViewController(viewController: UIViewController){
-        viewContainingController()?.navigationController?.popToViewController(viewController, animated: true)
+    @objc func popToVC(to viewController: UIViewController, animated: Bool = true){
+        viewContainingController()?.navigationController?.popToViewController(viewController, animated: animated)
     }
     
     func shareScreenshotView(title: String = "") {
@@ -72,7 +72,6 @@ extension UIView{
         
         viewController.present(activityViewController, animated: true)
     }
-    
     
     func addGestureView(target: Any, action: Selector? = #selector(viewTapped) ) {
         let tapGesture = UITapGestureRecognizer(target: target, action: action)

@@ -56,7 +56,7 @@ class MoreView: UIView{
         let image = UIImageView()
         image.backgroundColor = .clear
         image.contentMode = .scaleAspectFit
-        image.image = .icNext
+//        image.image = .icNext
         return image
     }()
     

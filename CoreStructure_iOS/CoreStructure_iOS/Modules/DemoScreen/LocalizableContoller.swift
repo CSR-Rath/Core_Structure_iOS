@@ -7,7 +7,18 @@
 
 import UIKit
 
+
+
 class LocalizableContoller: UIViewController {
+    
+    let keyLocalizable : [String] = [
+        "customer",
+        "first_name",
+        "last_name",
+        "welcome_message",
+        "goodbye_message",
+        "error_message"
+    ]
     
     var isKhmerLanguage: Bool = false
     private var textFields : [FloatingLabelTextField] = []
@@ -21,45 +32,43 @@ class LocalizableContoller: UIViewController {
     
     lazy var lblWelcome: UILabel = {
         let lbl = UILabel()
-        lbl.fontRegular(17)
+        lbl.fontRegular(17,color: .black)
         return lbl
     }()
     
     lazy var lblGoodBye: UILabel = {
         let lbl = UILabel()
-        lbl.fontRegular(17)
+        lbl.fontRegular(17,color: .black)
         return lbl
     }()
     
-    lazy var lblError: UILabel = {
-        let lbl = UILabel()
-        return lbl
-    }()
     
-    lazy var textField: FloatingLabelTextField = {
+    lazy var textField1: FloatingLabelTextField = {
         let textField = FloatingLabelTextField()
         textField.isRequiredStar()
-        textField.title = "Customer"
         return textField
     }()
     
     lazy var textField2: FloatingLabelTextField = {
         let textField = FloatingLabelTextField()
-        textField.title = "First Name"
         textField.changeIconRight(icon: .iconEmpty)
         return textField
     }()
     
     lazy var textField3: FloatingLabelTextField = {
         let textField = FloatingLabelTextField()
-        textField.title = "Last Name"
         textField.isOptionalTextField()
         textField.changeIconRight(icon: .iconDdate)
         return textField
     }()
     
     lazy var stackContainer: UIStackView = {
-        let stack  = UIStackView(arrangedSubviews: [ textField,textField2,textField3,lblWelcome,lblGoodBye,lblError,btnSwitchLang])
+        let stack  = UIStackView(arrangedSubviews: [textField1,
+                                                    textField2,
+                                                    textField3,
+                                                    lblWelcome,
+                                                    lblGoodBye,
+                                                    btnSwitchLang])
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .vertical
         stack.spacing = 15
@@ -69,11 +78,7 @@ class LocalizableContoller: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        let wellcon: String = "welcome_message".localizeString()
-        let bye: String = "goodbye_message".localizeString()
-        print("welcome_message", wellcon)
-        print("goodbye_message",bye)
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -98,10 +103,9 @@ class LocalizableContoller: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        textFields = [textField1,textField2,textField3]
         setupConstraint()
         reloadLabel()
-        
-        textFields = [textField,textField2,textField3]
     }
     
     private func setupConstraint(){
@@ -116,7 +120,8 @@ class LocalizableContoller: UIViewController {
     
     @objc private func didSwitch(){
         isKhmerLanguage.toggle()
-        setLanguage(langCode: isKhmerLanguage ? .khmer : .english)
+        //setLanguage(langCode: isKhmerLanguage ? .KHMER : .ENGLISH)
+        AppManager.shared.setLanguageTypes(langCode: isKhmerLanguage ? .KHMER : .ENGLISH)
         
         print("isKhmerLanguage \(isKhmerLanguage)")
         
@@ -126,29 +131,21 @@ class LocalizableContoller: UIViewController {
     
     private func reloadLabel(){
         
-        lblGoodBye.text = "goodbye_message".localizeString()
-        lblWelcome.text = "welcome_message".localizeString()
-        lblError.text = "error_message".localizeString()
-        textField.resignFirstResponder()
-        
-        
-        // Setup when touch begin textfields
-        textFields.forEach({ item in
-            item.didEditingDidBegin = { [self] in
-                stackContainer.setCustomSpacing(15, after: item)
+        for (index, element) in  keyLocalizable.enumerated(){
+            
+            print("index: \(index) ==> \(element.localizeString())")
+            
+            if index < 3{
+                textFields[index].text = element.localizeString()
+            }else if index == 3{
+                lblWelcome.text =  element.localizeString()
+            }else if  index == 4{
+                lblGoodBye.text =  element.localizeString()
             }
-        })
-        
-        
-        view.isValidateTextField(textFields: textFields) { [self] success in
-            
-            stackContainer.setCustomSpacing(15, after: success)
-            
-        } failure: { [self] failure in
-            
-            stackContainer.setCustomSpacing(30, after: failure)
-            
+
         }
+
+        
     }
 }
 

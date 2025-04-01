@@ -55,6 +55,7 @@ enum HandleMessageResponse{
 struct Response:Codable {
     var status: Int
     var message: String
+    var list: [String]
 }
 
 
