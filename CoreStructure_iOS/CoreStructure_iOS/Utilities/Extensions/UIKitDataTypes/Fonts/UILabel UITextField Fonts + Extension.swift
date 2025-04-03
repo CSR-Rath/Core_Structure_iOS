@@ -16,47 +16,88 @@ extension UILabel{
         let requiredSize = self.sizeThatFits(maxSize)
         return requiredSize.height
     }
-
+    
     func fontRegular(_ size: CGFloat, color: UIColor = .black){
-        self.font = UIFont.systemFont(ofSize: size, weight: .regular)
+        
+        AppManager.shared.getLanguageTypes { languageType in
+            switch languageType{
+            case .khmer:
+                self.font = UIFont(name: FontName.NotoSansKhmer_Regular  , size: size)
+            case .english:
+                self.font = UIFont(name: FontName.Roboto_Regular  , size: size)
+            }
+        }
         self.textColor = color
+        
     }
     
     func fontMedium(_ size: CGFloat, color: UIColor = .black ){
-        self.font = UIFont.systemFont(ofSize: size, weight: .medium)
+        
+        AppManager.shared.getLanguageTypes { languageType in
+            switch languageType{
+            case .khmer:
+                self.font =  UIFont(name: FontName.NotoSansKhmer_Medium  , size: size)
+            case .english:
+                self.font =  UIFont(name: FontName.Roboto_Medium  , size: size)
+            }
+        }
+        self.textColor = color
     }
     
     func fontBold(_ size: CGFloat, color: UIColor = .black){
-        self.font = UIFont.systemFont(ofSize: size, weight: .bold)
+        
+        AppManager.shared.getLanguageTypes { languageType in
+            switch languageType{
+            case .khmer:
+                self.font =  UIFont(name: FontName.NotoSansKhmer_Bold  , size: size)
+            case .english:
+                self.font =  UIFont(name: FontName.Roboto_Bold  , size: size)
+            }
+        }
+        self.textColor = color
     }
-
-    func fontSemiBold(_ size: CGFloat, color: UIColor = .black ){
-        self.font = UIFont.systemFont(ofSize: size, weight: .semibold)
-    }
+    
 }
 
 
 extension UITextField{
     
     func fontRegular(_ size: CGFloat, color: UIColor = .black){
-        self.font = UIFont.systemFont(ofSize: size, weight: .regular)
+        
+        AppManager.shared.getLanguageTypes { languageType in
+            switch languageType{
+            case .khmer:
+                self.font =  UIFont(name: FontName.NotoSansKhmer_Regular  , size: size)
+            case .english:
+                self.font =  UIFont(name: FontName.Roboto_Regular  , size: size)
+            }
+        }
         self.textColor = color
     }
     
     func fontMedium(_ size: CGFloat, color: UIColor = .black ){
-        self.font = UIFont.systemFont(ofSize: size, weight: .medium)
+        
+        AppManager.shared.getLanguageTypes { languageType in
+            switch languageType{
+            case .khmer:
+                self.font =  UIFont(name: FontName.NotoSansKhmer_Medium  , size: size)
+            case .english:
+                self.font =  UIFont(name: FontName.Roboto_Medium  , size: size)
+            }
+        }
+        self.textColor = color
     }
     
     func fontBold(_ size: CGFloat, color: UIColor = .black){
-        self.font = UIFont.systemFont(ofSize: size, weight: .bold)
-    }
-
-    func fontSemiBold(_ size: CGFloat, color: UIColor = .black ){
-        self.font = UIFont.systemFont(ofSize: size, weight: .semibold)
+        
+        AppManager.shared.getLanguageTypes { languageType in
+            switch languageType{
+            case .khmer:
+                self.font =  UIFont(name: FontName.NotoSansKhmer_Bold  , size: size)
+            case .english:
+                self.font =  UIFont(name: FontName.Roboto_Bold  , size: size)
+            }
+        }
+        self.textColor = color
     }
 }
-
-
-
-
-

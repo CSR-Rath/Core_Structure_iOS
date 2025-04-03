@@ -9,11 +9,11 @@ import UIKit
 
 extension UILabel {
     
-    /// Automatically scales the font size when the label's text exceeds the available width.
-    func enableAutoScaling(to scale: CGFloat = 0.8) {
+    ///  working when width of label width < width of content text
+    func autoScaling(to scale: CGFloat = 0.8) {
         self.adjustsFontSizeToFitWidth = true
         self.minimumScaleFactor = scale
-        self.numberOfLines = 0
+        self.numberOfLines = 11
     }
     
     /// Adjusts the label's size dynamically when used inside a `UIStackView` or to fit content.

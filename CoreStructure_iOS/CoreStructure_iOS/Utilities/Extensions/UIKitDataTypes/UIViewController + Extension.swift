@@ -74,20 +74,20 @@ extension UIViewController{
         print("Action ==> back button")
     }
     
-    func navigationBarAppearance(titleColor: UIColor?,
-                                 barColor: UIColor?){
+    func navigationBarAppearance(titleColor: UIColor,
+                                 barColor: UIColor){
         
         let setupFont: UIFont = UIFont.systemFont(ofSize: 16,weight: .bold)
         
         let appearance = UINavigationBarAppearance()
         
         appearance.titleTextAttributes = [
-            .foregroundColor: titleColor ?? .white,
+            .foregroundColor: titleColor,
             .font: setupFont
         ]
         
         appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = barColor ?? .mainBlueColor
+        appearance.backgroundColor = barColor
         appearance.shadowColor = .red// barColor ?? .mainBlueColor // line appearenc bar
 
         // Apply to all navigation bars
@@ -163,10 +163,3 @@ extension UIViewController{
         }
     }
 }
-
-
-
-
-
-
-

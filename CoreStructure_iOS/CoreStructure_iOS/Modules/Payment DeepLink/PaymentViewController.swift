@@ -49,7 +49,7 @@ class PaymentViewController: UIViewController {
     
     @objc private func paymentStatus(){
         Loading.shared.showLoading()
-        Loading.shared.hideLoading(seconds: 0.3) {
+        Loading.shared.hideLoading(seconds: 0.60) {
             /// remove notification UIApplication.didBecomeActiveNotification
             NotificationCenter.default.removeObserver(self,
                                                       name: UIApplication.didBecomeActiveNotification,

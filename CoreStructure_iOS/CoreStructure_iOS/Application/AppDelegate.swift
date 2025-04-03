@@ -6,9 +6,10 @@
 //
 
 import UIKit
-import UserNotifications //import UserNotifications 1 local
+import UserNotifications //import UserNotifications 1 local, (Notivication)
 import LocalAuthentication // For Get Biometrics Name
 import Firebase
+import FirebaseAuth
 
 // Firebase Messaging need have account developer for
 
@@ -18,8 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        setLanguage(langCode: .ENGLISH) // english default
-        configureNotification() // notivication
+        printFontsName()
+        Language.shared.setLanguage(langCode: .english) // english default
+        configureNotification(application: application) // notivication
         print("didFinishLaunchingWithOptions")
         
         if #available(iOS 13.0, *) {
@@ -39,40 +41,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
         print("didDiscardSceneSessions") // working when kill app or close app
     }
+    
 }
 
-// MARK: - Biometrics Handling
-extension AppDelegate {
-    
-    private func getBiometricsType() -> LABiometryType {
-        let context = LAContext()
-        var error: NSError?
-        guard context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) else { return .none }
-        return context.biometryType
-    }
-    
-    private func getBiometricsName() -> String {
-        switch getBiometricsType() {
-        case .faceID:
-            return "FaceID"
-        case .touchID:
-            return "TouchID"
-        case .none:
-            return "Biometrics Unavailable"
-        case .opticID:
-            return "Biometrics opticID"
-        @unknown default:
-            return "Biometrics Unavailable"
-        }
-    }
-}
+
 
 // MARK: - Push Notification Setup
 extension AppDelegate: UNUserNotificationCenterDelegate {
     
-    private func configureNotification() {
-        //        FirebaseApp.configure() // need cell for using  firebase
-        
+    private func configureNotification(application: UIApplication) {
+        FirebaseApp.configure() // need cell for using  firebase
+
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
             granted ? print("User granted authorization") : print("User denied authorization")
         }
@@ -130,17 +109,17 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         }
         
         
-        let notificationType  = NotificationTypeEnum(rawValue: "") ?? .NONE; print("notificationType ==> \(notificationType)")
-        
-        switch notificationType{
-        case .NEAR_STATION:
-                break
-        case .NEW_STATION:
-            break
-        case .NONE:
-            break
-        }
-                
+//        let notificationType  = NotificationTypeEnum(rawValue: "")!; print("notificationType ==> \(notificationType)")
+//        
+//        switch notificationType{
+//        case .NEAR_STATION:
+//                break
+//        case .NEW_STATION:
+//            break
+//        case .NONE:
+//            break
+//        }
+//                
         completionHandler()
     }
     
@@ -153,3 +132,44 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
 // MARK: - Video from youtube(How to push notificatin cloud Messaging) https://www.youtube.com/watch?v=WmKRWoqdC_Y
 // Apple Developer ==> certificated ==> identifi ==> Key ==> create key set key name ==> end nable tick push notification service ==> click continue ==> click rigister ==> clicl download ==> and then ==> firebase cloud  messaging ==> scroll ==> click upload APNs Key (get from Apple developer at pleace download key by cody keyID and teamId)  and then upload APNs auth key did download from Apple developer
+
+// MARK: - Biometrics Handling
+extension AppDelegate {
+    
+    private func getBiometricsType() -> LABiometryType {
+        let context = LAContext()
+        var error: NSError?
+        guard context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) else { return .none }
+        return context.biometryType
+    }
+    
+    private func getBiometricsName() -> String {
+        switch getBiometricsType() {
+        case .faceID:
+            return "FaceID"
+        case .touchID:
+            return "TouchID"
+        case .none:
+            return "Biometrics Unavailable"
+        case .opticID:
+            return "Biometrics opticID"
+        @unknown default:
+            return "Biometrics Unavailable"
+        }
+    }
+    
+}
+
+func printFontsName(){
+
+    for family in UIFont.familyNames {
+        print("Font Family: \(family)")
+        for fontName in UIFont.fontNames(forFamilyName: family) {
+            print("    \(fontName)")
+        }
+    }
+}
+
+
+
+

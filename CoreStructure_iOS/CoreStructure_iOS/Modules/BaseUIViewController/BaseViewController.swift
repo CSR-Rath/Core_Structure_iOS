@@ -8,21 +8,25 @@ import UIKit
 
 // MARK: - BaseViewController
 class BaseViewController: UIViewController {
-
+    
     // MARK: - Properties
-    var isBackBarItemButton: Bool = true
-
+    var isBackBarItemButton: Bool = false
+    {
+        didSet{
+            setupUI()
+        }
+    }
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         setupConstraints()
-//        setupActions()
     }
     
     // MARK: - Setup Methods
     func setupUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = .mainColor
         if isBackBarItemButton {
             setupBackButton()
         } else {
@@ -34,17 +38,8 @@ class BaseViewController: UIViewController {
         // To be overridden by subclasses
     }
     
-//    func setupActions() {
-//        // To be overridden by subclasses
-//    }
     
-    // MARK: - Helper Methods
-//    func showAlert(title: String, message: String) {
-//        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-//        alert.addAction(UIAlertAction(title: "OK", style: .default))
-//        present(alert, animated: true)
-//    }
-
+    
     private func setupBackButton() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: UIImage(systemName: "chevron.left"),
@@ -59,25 +54,256 @@ class BaseViewController: UIViewController {
     }
 }
 
+
+
+
+struct AvailableServiceModel{
+    let id: Int
+    let titleName: String
+    let iConName: String
+}
+
+
+
 // MARK: - Example Usage
 class HomeViewController: BaseViewController {
-    private let welcomeLabel = UILabel()
-
+    
+    let topView = UIView()
+    let viewFuelRate = UIView()
+    
+    var availableService: [AvailableServiceModel] = []
+    
+    lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.backgroundColor = .mainColor
+        tableView.delegate = self
+        tableView.dataSource = self
+        if #available(iOS 15.0, *) {
+            tableView.sectionHeaderTopPadding = 0
+        }
+        tableView.contentInset = UIEdgeInsets(top: 40, left: 0, bottom: 0, right: 0)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        return tableView
+    }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        super.isBackBarItemButton = true
+    }
+    
     override func setupUI() {
         super.setupUI()
-        welcomeLabel.text = "Welcome to Home"
-        welcomeLabel.textColor = .darkGray
-        welcomeLabel.textAlignment = .center
-        welcomeLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
-        view.addSubview(welcomeLabel)
+        topView.backgroundColor = .mainYellow
     }
     
     override func setupConstraints() {
-        welcomeLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        let stack = UIStackView(arrangedSubviews: [topView, tableView] )
+        stack.axis = .vertical
+        stack.spacing = 0
+        stack.alignment = .fill
+        stack.distribution = .fill
+        stack.frame = self.view.bounds
+        
+        viewFuelRate.layer.cornerRadius = 10
+        viewFuelRate.backgroundColor = .lightMainColor
+        viewFuelRate.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubviews(of: stack, viewFuelRate)
         NSLayoutConstraint.activate([
-            welcomeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            welcomeLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            topView.heightAnchor.constraint(equalToConstant: 155),
+            
+            viewFuelRate.heightAnchor.constraint(equalToConstant: 55),
+            viewFuelRate.centerYAnchor.constraint(equalTo: tableView.topAnchor),
+            viewFuelRate.leftAnchor.constraint(equalTo: view.leftAnchor,constant: .mainLeft),
+            viewFuelRate.rightAnchor.constraint(equalTo: view.rightAnchor,constant: .mainRight),
         ])
     }
 }
 
+//MARK: - AvailableServiceModel
+extension HomeViewController{
+    func setAvailableServiceModel(){
+        AppManager.shared.getAccountTypes { accountType in
+            switch accountType{
+            case .generalAccount:
+                
+                self.availableService = [
+                    AvailableServiceModel(id: 1, titleName: "", iConName: ""),
+                    AvailableServiceModel(id: 1, titleName: "", iConName: ""),
+                    AvailableServiceModel(id: 1, titleName: "", iConName: ""),
+                    AvailableServiceModel(id: 1, titleName: "", iConName: ""),
+                ]
+                
+            case .counterAccount:
+                
+                self.availableService = [
+                    AvailableServiceModel(id: 1, titleName: "", iConName: ""),
+                    AvailableServiceModel(id: 1, titleName: "", iConName: ""),
+                ]
+
+            case .stationAccount:
+                
+                self.availableService = [
+                    AvailableServiceModel(id: 1, titleName: "", iConName: ""),
+                    AvailableServiceModel(id: 1, titleName: "", iConName: ""),
+                ]
+
+            case .cooperateAccount:
+                
+                self.availableService = [
+                    AvailableServiceModel(id: 1, titleName: "", iConName: ""),
+                    AvailableServiceModel(id: 1, titleName: "", iConName: ""),
+                ]
+            }
+        }
+    }
+}
+
+
+extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 4
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell0 = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell1 = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell2 = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell3 = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        
+        cell0.backgroundColor = .clear
+        cell1.backgroundColor = .clear
+        cell2.backgroundColor = .clear
+        cell3.backgroundColor = .clear
+        
+        cell0.selectionStyle = .none
+        cell1.selectionStyle = .none
+        cell2.selectionStyle = .none
+        cell3.selectionStyle = .none
+        
+        switch indexPath.section {
+        case 0:// upgrade account
+            
+            AppManager.shared.getAccountTypes { accountType in
+                switch accountType{
+                case .generalAccount:
+                    
+                    print("accountType")
+                case .counterAccount:
+                    
+                    print("accountType")
+                case .stationAccount:
+                    
+                    print("accountType")
+                case .cooperateAccount:
+                    
+                    print("accountType")
+                }
+            }
+            
+            return cell0
+        case 1:// Fuel Balance
+            
+            AppManager.shared.getAccountTypes { accountType in
+                switch accountType{
+                case .generalAccount:
+                    
+                    print("accountType")
+                case .counterAccount:
+                    
+                    print("accountType")
+                case .stationAccount:
+                    
+                    print("accountType")
+                case .cooperateAccount:
+                    
+                    print("accountType")
+                }
+            }
+            
+            return cell1
+        case 2:// Avaiable Service
+            
+            AppManager.shared.getAccountTypes { accountType in
+                switch accountType{
+                case .generalAccount:
+                    
+                    print("accountType")
+                case .counterAccount:
+                    
+                    print("accountType")
+                case .stationAccount:
+                    
+                    print("accountType")
+                case .cooperateAccount:
+                    
+                    print("accountType")
+                }
+            }
+            
+            return cell2
+        case 3:// News
+            
+            AppManager.shared.getAccountTypes { accountType in
+                switch accountType{
+                case .generalAccount:
+                    
+                    print("accountType")
+                case .counterAccount:
+                    
+                    print("accountType")
+                case .stationAccount:
+                    
+                    print("accountType")
+                case .cooperateAccount:
+                    
+                    print("accountType")
+                }
+            }
+            
+            return cell3
+        default:
+            return cell0
+        }
+    }
+    
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        let viewHeader = UIView()
+        viewHeader.backgroundColor = .clear
+        
+        let labelTitleName = UILabel()
+        labelTitleName.translatesAutoresizingMaskIntoConstraints = false
+        labelTitleName.text = "Title"
+        labelTitleName.textColor = .white
+        viewHeader.addSubview(labelTitleName)
+
+        NSLayoutConstraint.activate([
+        
+            labelTitleName.leftAnchor.constraint(equalTo: viewHeader.leftAnchor,constant: .mainLeft),
+            labelTitleName.rightAnchor.constraint(equalTo: viewHeader.rightAnchor,constant: .mainRight),
+            
+            labelTitleName.topAnchor.constraint(equalTo: viewHeader.topAnchor,constant: 0),
+            labelTitleName.bottomAnchor.constraint(equalTo: viewHeader.bottomAnchor,constant: 0),
+        
+        ])
+        
+        return viewHeader
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        return UITableView.automaticDimension
+    }
+    
+}

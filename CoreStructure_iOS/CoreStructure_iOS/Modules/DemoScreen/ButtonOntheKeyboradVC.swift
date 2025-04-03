@@ -36,7 +36,7 @@ class ButtonOntheKeyboradVC: BaseInteractionController/*, UIGestureRecognizerDel
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationBarAppearance(titleColor: .clear, barColor: .clear)
+
         navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
 

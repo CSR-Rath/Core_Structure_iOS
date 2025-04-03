@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>Bundle_display_name</key>
+	<string>$(Bundle_Display_Name)</string>
 	<key>API_KEY</key>
 	<string>$(API_KEY)</string>
 	<key>BASE_URL</key>
@@ -18,6 +20,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>myapp</string>
+				<string>com.googleusercontent.apps.171109138269-vvb4e65sb53qstkt46mmih8vdlkcrg8j</string>
 			</array>
 		</dict>
 	</array>
@@ -26,6 +29,20 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>PAYMENT_KEY</key>
+	<string>$(PAYMENT_KEY)</string>
+	<key>PAYMENT_VECTOR</key>
+	<string>$(PAYMENT_VECTOR)</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Roboto-Regular.ttf</string>
+		<string>Roboto-Medium.ttf</string>
+		<string>Roboto-Bold.ttf</string>
+		<string>NotoSansKhmer-Bold.ttf</string>
+		<string>NotoSansKhmer-Medium.ttf</string>
+		<string>NotoSansKhmer-Regular.ttf</string>
+		<string>NotoSansKhmer-SemiBold.ttf</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

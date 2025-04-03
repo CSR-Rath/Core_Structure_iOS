@@ -112,10 +112,10 @@ extension Double {
     }
     
     var toCurrencyAsKHR: String {
-        return formatCurrency(currencyCode: "KHR", localeIdentifier: "km_KH", isLocalized: getLanguageType() != "en")
+        return formatCurrency(currencyCode: "KHR", localeIdentifier: "km_KH", isLocalized: Language.shared.getLanguageType() != "en")
     }
     
     var toCurrencyAsUSD: String {
-        return formatCurrency(currencyCode: "USD", localeIdentifier: "en_US", isLocalized: getLanguageType() != "en")
+        return formatCurrency(currencyCode: "USD", localeIdentifier: "en_US", isLocalized: Language.shared.getLanguageType() != "en")
     }
 }

@@ -51,9 +51,7 @@ class CustomTabBarCell: UICollectionViewCell {
     
     private func setupConstrain(){
         imgIcon.layer.cornerRadius = 35/2
-        
         addSubview(stack)
-
         NSLayoutConstraint.activate([
             stack.topAnchor.constraint(equalTo: topAnchor),
             stack.leftAnchor.constraint(equalTo: leftAnchor),

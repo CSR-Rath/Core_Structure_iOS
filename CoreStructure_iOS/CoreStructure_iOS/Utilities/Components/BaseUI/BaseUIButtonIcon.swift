@@ -17,7 +17,7 @@ class BaseUIButtonIcon: BaseUIButtonAnimation{
         if let status = isLeftIcon{
             handlerStack(isLeftIcon: status)
         }
-       
+        
         if let spac = spacing{
             stackContainer.spacing = spac
         }
@@ -26,10 +26,10 @@ class BaseUIButtonIcon: BaseUIButtonAnimation{
             iconHeightConstraint.constant = height
             layoutIfNeeded()
         }
-
+        
     }
-
-
+    
+    
     private var iconHeightConstraint = NSLayoutConstraint()
     
     lazy var imgIcon: UIImageView = {
@@ -70,16 +70,16 @@ class BaseUIButtonIcon: BaseUIButtonAnimation{
         fatalError("init(coder:) has not been implemented")
     }
     
-   @objc private func tapped(){
-       actionButton?()
+    @objc private func tapped(){
+        actionButton?()
     }
- 
+    
     
     func uiEdgeInsets(top: CGFloat = 0,
                       left: CGFloat = 0,
                       bottom: CGFloat = 0,
                       right: CGFloat = 0
-            ){
+    ){
         
         stackContainer.layoutMargins = UIEdgeInsets(top: top,
                                                     left: left,
@@ -96,7 +96,7 @@ class BaseUIButtonIcon: BaseUIButtonAnimation{
         iconHeightConstraint.isActive = true
         
         NSLayoutConstraint.activate([
-    
+            
             stackContainer.leftAnchor.constraint(equalTo: leftAnchor),
             stackContainer.rightAnchor.constraint(equalTo: rightAnchor),
             stackContainer.bottomAnchor.constraint(equalTo: bottomAnchor),
@@ -121,45 +121,45 @@ class BaseUIButtonIcon: BaseUIButtonAnimation{
 
 
 class BaseUIButtonAnimation: UIButton {
-
-private let animationDuration: TimeInterval = 0.05
-
-override func layoutSubviews() {
-    super.layoutSubviews()
-}
-
-override init(frame: CGRect) {
-    super.init(frame: frame)
-    setupButton()
-}
-
-required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-}
-
-private func setupButton() {
-    addTarget(self, action: #selector(buttonPressed), for: .touchDown)
-    addTarget(self, action: #selector(buttonReleased), for: [.touchUpInside, .touchUpOutside, .touchCancel])
-}
-
-@objc private func buttonPressed() {
-    print("Button Pressed") // Print response when button is pressed
-    animateButton(scale: 0.95, alpha: 0.5)
-}
-
-@objc private func buttonReleased() {
-    print("Button Released") // Print response when button is released
-    animateButton(scale: 1.0, alpha: 1)
-}
-
-private func animateButton(scale: CGFloat, alpha: CGFloat) {
-    UIView.animate(withDuration: animationDuration, animations: {
-        self.alpha = alpha
-        self.transform = CGAffineTransform(scaleX: scale, y: scale)
-    })
-}
-
-deinit {
-    print("MainButton deinitialized")
-}
+    
+    private let animationDuration: TimeInterval = 0.05
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupButton()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupButton() {
+        addTarget(self, action: #selector(buttonPressed), for: .touchDown)
+        addTarget(self, action: #selector(buttonReleased), for: [.touchUpInside, .touchUpOutside, .touchCancel])
+    }
+    
+    @objc private func buttonPressed() {
+        print("Button Pressed") // Print response when button is pressed
+        animateButton(scale: 0.95, alpha: 0.5)
+    }
+    
+    @objc private func buttonReleased() {
+        print("Button Released") // Print response when button is released
+        animateButton(scale: 1.0, alpha: 1)
+    }
+    
+    private func animateButton(scale: CGFloat, alpha: CGFloat) {
+        UIView.animate(withDuration: animationDuration, animations: {
+            self.alpha = alpha
+            self.transform = CGAffineTransform(scaleX: scale, y: scale)
+        })
+    }
+    
+    deinit {
+        print("MainButton deinitialized")
+    }
 }

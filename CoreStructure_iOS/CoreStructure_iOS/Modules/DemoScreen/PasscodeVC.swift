@@ -28,42 +28,23 @@ class PasscodeVC: UIViewController, UIGestureRecognizerDelegate {
     private var stackButton: UIStackView! = nil
     private var stackCircle: UIStackView! = nil
     private var btnForGot = UIButton()
+    private var arrayButton: [UIButton] = []
+    private let constainerView = UIView()
     
     var isPasscodeAction : PasscodeActionEnum = .none
-    private var captureWarningView: UIView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupUIView()
-        addBlurScreenWhenUseBio()
+   
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         navigationController?.interactivePopGestureRecognizer?.delegate = self // enable swap
-    }
-    
-   private var blurEffectView: UIVisualEffectView?
-
-    @objc func addBlurScreenWhenUseBio() {
-        // Handle the screenshot event
-        // You can show an alert, disable certain functionality, or take any other appropriate action
-        // Create a blur effect
-        let blurEffect = UIBlurEffect(style: .dark)
-        blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView?.frame = view.bounds
-        blurEffectView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
-        // Add the blur effect view above the view hierarchy
-        view.addSubview(blurEffectView!)
-        
-    }
-
-    func removeBlurEffect() {
-        blurEffectView?.removeFromSuperview()
-        blurEffectView = nil
     }
     
 }
@@ -76,7 +57,16 @@ extension  PasscodeVC {
         if passcod == "999999"{
             print("True")
         }else{
+            
             UIDevice.shared.vibrateOnWrongPassword()
+            UIDevice.shared.shakeStackView(to: stackCircle)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: { [self] in
+                textHandle.removeAll()
+                digitCircleView.forEach({ item in
+                    item.backgroundColor = .gray
+                })
+            })
         }
         
         if isPasscodeAction == .changePasscode{
@@ -110,7 +100,6 @@ extension PasscodeVC{
             }
         }
     }
-    
     
     private func showAlert(message: String) {
         let alert = UIAlertController(title: "Authentication Status", message: message, preferredStyle: .alert)
@@ -180,12 +169,17 @@ extension PasscodeVC{
 extension PasscodeVC{
     
     private func setupUIView(){
+        constainerView.frame = view.bounds
+        constainerView.backgroundColor = .cyan
+        view.addSubview(constainerView)
+//        constainerView.makeSecure()
+        
         setupCircleView()
         setupKeyborad()
         
-        view.addSubview(stackCircle)
-        view.addSubview(stackButton)
-        view.addSubview(btnForGot)
+        constainerView.addSubview(stackCircle)
+        constainerView.addSubview(stackButton)
+        constainerView.addSubview(btnForGot)
         
         btnForGot.setTitle("Forgot Passcode", for: .normal)
         btnForGot.setTitleColor(.orange, for: .normal)
@@ -196,14 +190,14 @@ extension PasscodeVC{
         
         NSLayoutConstraint.activate([
             
-            stackCircle.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stackCircle.centerYAnchor.constraint(equalTo: view.centerYAnchor,constant: -100),
+            stackCircle.centerXAnchor.constraint(equalTo: constainerView.centerXAnchor),
+            stackCircle.centerYAnchor.constraint(equalTo: constainerView.centerYAnchor,constant: -100),
             
-            stackButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,
+            stackButton.bottomAnchor.constraint(equalTo: constainerView.bottomAnchor,
                                                 constant: -50),
-            stackButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            stackButton.centerXAnchor.constraint(equalTo: constainerView.centerXAnchor),
             
-            btnForGot.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,constant: -20),
+            btnForGot.topAnchor.constraint(equalTo: constainerView.bottomAnchor,constant: -20),
             btnForGot.rightAnchor.constraint(equalTo: stackButton.rightAnchor),
             
         ])
@@ -242,13 +236,10 @@ extension PasscodeVC{
     // MARK: Setup Button View Keyborad
     private func setupKeyborad(){
         
-        
          var stackButton1: UIStackView! = nil
          var stackButton2: UIStackView! = nil
          var stackButton3: UIStackView! = nil
          var stackButton4: UIStackView! = nil
-         var arrayButton: [UIButton] = []
-        
         
         
         for index in 0...11 {
@@ -295,7 +286,7 @@ extension PasscodeVC{
         let stackAll: [UIStackView] = [stackButton1, stackButton2, stackButton3, stackButton4]
         
         setupStackButton(stack: stackAll)
-        
+
         stackButton = UIStackView(arrangedSubviews: stackAll)
         stackButton.translatesAutoresizingMaskIntoConstraints = false
         stackButton.axis = .vertical
@@ -305,6 +296,7 @@ extension PasscodeVC{
 
     }
     
+    // MARK: Getup stack horizontal button have 4 stack (1-3, 4-6, 7-9, icone-0-delete)
     private func setupStackButton(stack: [UIStackView]){
         stack.forEach({ itemStack in
             itemStack.axis = .horizontal
@@ -317,3 +309,121 @@ extension PasscodeVC{
 
 
 
+class PreventScreenVC: UIViewController{
+    
+    lazy var lblDescription: UILabel = {
+        let lbl = UILabel()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        lbl.textColor = .white
+        lbl.numberOfLines = 0
+        lbl.textAlignment = .center
+        lbl.text = "Screen recording is not allowed for security reasons. Please stop recording to continue."
+        return lbl
+    }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .black.withAlphaComponent(0.5)
+        setupUI()
+    }
+    
+    
+    private func setupUI(){
+        
+        view.addSubview(lblDescription)
+        
+        NSLayoutConstraint.activate([
+            lblDescription.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            lblDescription.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            lblDescription.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            
+        ])
+    }
+}
+
+
+
+
+import UIKit
+import FirebaseAuth
+
+class AuthViewController: UIViewController {
+    let phoneTextField = UITextField()
+    let sendOTPButton = UIButton()
+    let otpTextField = UITextField()
+    let verifyOTPButton = UIButton()
+    var verificationID: String?
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .white
+        setupUI()
+    }
+
+    func setupUI() {
+        phoneTextField.placeholder = "Enter Phone Number"
+        phoneTextField.borderStyle = .roundedRect
+        phoneTextField.keyboardType = .phonePad
+        phoneTextField.frame = CGRect(x: 20, y: 100, width: 280, height: 40)
+        view.addSubview(phoneTextField)
+
+        sendOTPButton.setTitle("Send OTP", for: .normal)
+        sendOTPButton.backgroundColor = .blue
+        sendOTPButton.frame = CGRect(x: 20, y: 160, width: 280, height: 40)
+        sendOTPButton.addTarget(self, action: #selector(sendOTP), for: .touchUpInside)
+        view.addSubview(sendOTPButton)
+
+        otpTextField.placeholder = "Enter OTP"
+        otpTextField.borderStyle = .roundedRect
+        otpTextField.keyboardType = .numberPad
+        otpTextField.frame = CGRect(x: 20, y: 220, width: 280, height: 40)
+        view.addSubview(otpTextField)
+
+        verifyOTPButton.setTitle("Verify OTP", for: .normal)
+        verifyOTPButton.backgroundColor = .green
+        verifyOTPButton.frame = CGRect(x: 20, y: 280, width: 280, height: 40)
+        verifyOTPButton.addTarget(self, action: #selector(verifyOTP), for: .touchUpInside)
+        view.addSubview(verifyOTPButton)
+    }
+
+    @objc func sendOTP() {
+        guard var phoneNumber = phoneTextField.text, !phoneNumber.isEmpty else {
+            print("Enter a valid phone number")
+            return
+        }
+        
+        if phoneNumber.first == "0" {
+            phoneNumber.removeFirst()
+        }
+        
+        PhoneAuthProvider.provider().verifyPhoneNumber("+855" + phoneNumber, uiDelegate: nil) { verificationID, error in
+            if let error = error {
+                print("Error sending OTP: \(error.localizedDescription)")
+                return
+            }
+            self.verificationID = verificationID
+            print("OTP Sent!")
+        }
+    }
+
+    @objc func verifyOTP() {
+        guard let verificationID = verificationID, let otpCode = otpTextField.text, !otpCode.isEmpty else {
+            print("Enter OTP")
+            return
+        }
+
+        let credential = PhoneAuthProvider.provider().credential(
+            withVerificationID: verificationID,
+            verificationCode: otpCode
+        )
+
+        Auth.auth().signIn(with: credential) { authResult, error in
+            if let error = error {
+                print("Error verifying OTP: \(error.localizedDescription)")
+                return
+            }
+            print("User signed in successfully: \(authResult?.user.phoneNumber ?? "")")
+        }
+    }
+    
+}

@@ -120,8 +120,8 @@ class LocalizableContoller: UIViewController {
     
     @objc private func didSwitch(){
         isKhmerLanguage.toggle()
-        //setLanguage(langCode: isKhmerLanguage ? .KHMER : .ENGLISH)
-        AppManager.shared.setLanguageTypes(langCode: isKhmerLanguage ? .KHMER : .ENGLISH)
+
+        AppManager.shared.setLanguageTypes(langCode: isKhmerLanguage ? .khmer : .english)
         
         print("isKhmerLanguage \(isKhmerLanguage)")
         
@@ -142,10 +142,7 @@ class LocalizableContoller: UIViewController {
             }else if  index == 4{
                 lblGoodBye.text =  element.localizeString()
             }
-
         }
-
-        
     }
 }
 

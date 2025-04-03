@@ -24,7 +24,6 @@ import UIKit
 //MARK: - UserDefaults (key name)
 struct KeyUser{
     static let token = "token"
-    static let language = "language"
     static let refreshToken = "refreshToken"
     static let loginSuccesFull = "loginSuccesFull"
     

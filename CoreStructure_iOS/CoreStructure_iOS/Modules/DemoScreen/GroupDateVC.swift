@@ -57,12 +57,12 @@ class GroupDateVC: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        navigationBarAppearance(titleColor: nil, barColor: .white)
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-//        navigationBarAppearance(titleColor: nil, barColor: .clear)
+
     }
     
     override func viewDidLoad() {

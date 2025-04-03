@@ -28,7 +28,7 @@ extension Int{ // timestapm int to string date
         let date = Date(timeIntervalSince1970: TimeInterval(self / 1000))
         let displayFormatter = DateFormatter()
         displayFormatter.dateFormat = "dd-MMMM-yyyy"
-        displayFormatter.locale = Locale(identifier: getLanguageType())
+        displayFormatter.locale = Locale(identifier: Language.shared.getLanguageType())
         let formattedDate = displayFormatter.string(from: date)
         
         return formattedDate
@@ -37,7 +37,7 @@ extension Int{ // timestapm int to string date
     func dateFromMilliseconds(format: DateFormatEnum) -> String {
         let date : NSDate! = NSDate(timeIntervalSince1970:Double(self) / 1000.0)
         let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: getLanguageType())
+        dateFormatter.locale = Locale(identifier: Language.shared.getLanguageType())
         dateFormatter.dateFormat = format.rawValue
         dateFormatter.timeZone = TimeZone.current
         

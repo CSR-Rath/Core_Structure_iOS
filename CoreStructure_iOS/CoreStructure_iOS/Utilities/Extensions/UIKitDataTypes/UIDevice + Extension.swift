@@ -13,11 +13,11 @@ extension UIDevice {
     
     static let shared = UIDevice()
     
-     func isLandscape() -> Bool {
+    func isLandscape() -> Bool {
         return UIDevice.current.orientation.isLandscape
     }
     
-     func isIPhone() -> Bool {
+    func isIPhone() -> Bool {
         return UIDevice.current.userInterfaceIdiom == .phone
     }
     
@@ -34,7 +34,19 @@ extension UIDevice {
         generator.prepare()
         generator.impactOccurred()
     }
+    
+    func shakeStackView(to view: UIView , width: CGFloat = 10) {
+        let shakeAnimation = CABasicAnimation(keyPath: "position")
+        shakeAnimation.duration = 0.07
+        shakeAnimation.repeatCount = 2
+        shakeAnimation.autoreverses = true
+        
+        let fromPoint = CGPoint(x: view.center.x - width, y: view.center.y)
+        let toPoint = CGPoint(x: view.center.x + width, y: view.center.y)
+        
+        shakeAnimation.fromValue = NSValue(cgPoint: fromPoint)
+        shakeAnimation.toValue = NSValue(cgPoint: toPoint)
+        
+        view.layer.add(shakeAnimation, forKey: "position")
+    }
 }
-
-
-

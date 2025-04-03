@@ -46,7 +46,7 @@ class CustomTabBarVC: UITabBarController {
         layout.scrollDirection = .horizontal
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collection.translatesAutoresizingMaskIntoConstraints = false
-        collection.backgroundColor = .clear
+        collection.backgroundColor = .mainColor//.clear
         collection.delegate = self
         collection.dataSource = self
         collection.register(CustomTabBarCell.self, forCellWithReuseIdentifier: CustomTabBarCell.identifier)
@@ -77,12 +77,14 @@ class CustomTabBarVC: UITabBarController {
         super.viewDidAppear(animated)
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false // disable
         self.tabBar.isHidden = true
-        self.addShape()  // Call to add the custom shape
+        print("TabBar is viewDidAppear")
+//        self.addShape()  // Call to add the custom shape
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true // enable
+        print("TabBar is viewWillDisappear")
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -117,7 +119,7 @@ extension CustomTabBarVC{
     
     private func validationButtonRight(){
         
-        let rightButton = UIBarButtonItem(image: .icFaceID,
+        let rightButton = UIBarButtonItem(image: .icFaceID.withRenderingMode(.alwaysOriginal),
                                           style: .plain,
                                           target: self,
                                           action: #selector(rightButtonTapped))
@@ -179,6 +181,8 @@ extension CustomTabBarVC{
 extension CustomTabBarVC{
     
     private func addShape() {
+        
+        collactionView.backgroundColor = .clear
 
         let shapeLayerTab = CAShapeLayer()
         shapeLayerTab.path = createPath()

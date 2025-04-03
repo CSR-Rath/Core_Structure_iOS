@@ -11,7 +11,7 @@ public class OneTimeCodeTextField: UITextField {
     // MARK: UI Components
     public var digitLabels = [UILabel]()
     public var digitLine = [UIView]()
-//    public var digitLabels = [UIStackView]()
+
     
     // MARK: Delegates
     public lazy var oneTimeCodeDelegate = OneTimeCodeTextFieldDelegate(oneTimeCodeTextField: self)
@@ -28,64 +28,50 @@ public class OneTimeCodeTextField: UITextField {
     public var didReceiveCode: ((String) -> Void)?
     
     // MARK: Customisations
-    /// Needs to be called after `configure()`.
-    /// Default value: `.secondarySystemBackground`
+
     public var codeBackgroundColor: UIColor = .secondarySystemBackground {
         didSet {
             digitLabels.forEach({ $0.backgroundColor = codeBackgroundColor })
         }
     }
-    
-    /// Needs to be called after `configure()`.
-    /// Default value: `.label`
+
     public var codeTextColor: UIColor = .label {
         didSet {
             digitLabels.forEach({ $0.textColor = codeTextColor })
         }
     }
-    
-    /// Needs to be called after `configure()`.
-    /// Default value: `.systemFont(ofSize: 24)`
+ 
     public var codeFont: UIFont = .systemFont(ofSize: 24) {
         didSet {
             digitLabels.forEach({ $0.font = codeFont })
         }
     }
     
-    /// Needs to be called after `configure()`.
-    /// Default value: 0.8
+
     public var codeMinimumScaleFactor: CGFloat = 0.8 {
         didSet {
             digitLabels.forEach({ $0.minimumScaleFactor = codeMinimumScaleFactor })
         }
     }
     
-    /// Needs to be called after `configure()`.
-    /// Default value: 8
     public var codeCornerRadius: CGFloat = 8 {
         didSet {
             digitLabels.forEach({ $0.layer.cornerRadius = codeCornerRadius })
         }
     }
     
-    /// Needs to be called after `configure()`.
-    /// Default value: `.continuous`
     public var codeCornerCurve: CALayerCornerCurve = .continuous {
         didSet {
             digitLabels.forEach({ $0.layer.cornerCurve = codeCornerCurve })
         }
     }
     
-    /// Needs to be called after `configure()`.
-    /// Default value: 0
     public var codeBorderWidth: CGFloat = 1 {
         didSet {
             digitLabels.forEach({ $0.layer.borderWidth = codeBorderWidth })
         }
     }
     
-    /// Needs to be called after `configure()`.
-    /// Default value: `.none`
     public var codeBorderColor: UIColor? = .lightGray {
         didSet {
             digitLabels.forEach({ $0.layer.borderColor = codeBorderColor?.cgColor })

@@ -20,7 +20,6 @@ enum HTTPMethodEnum: String {
 public typealias Parameters = [String: Any]
 public typealias HTTPHeaders = [String: String]
 
-
 class ApiManager {
     
     static let shared = ApiManager()
@@ -33,7 +32,6 @@ class ApiManager {
         headers: HTTPHeaders? = getHeader(),
         query: String = "",
         res: @escaping (T) -> ()) {
-            
             
             /// check internet connection befor call api to server
             if !isConnectedToNetwork(){
@@ -91,7 +89,7 @@ class ApiManager {
             
             /// Send the request
             let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-                
+    
                 /// Handle error
                 if let error = error as NSError? {
                     handleError(error)
@@ -200,18 +198,25 @@ private func refreshToken(success: @escaping () -> Void) {
     
 }
 
-func query(page: Int,
-           size: Int = 12,
+func query(page: Int? = nil,
+           size: Int? = nil,
            query: String? = nil,
            startDate: String? = nil,
            endDate: String? = nil,
            another: String? = nil
+           //...
 ) -> String {
     
-    var components: [String] = [
-        "page=\(page)",
-        "size=\(size)"
-    ]
+    var components: [String] = []
+    
+    
+    if let page = page{
+        components.append("page=\(page)")
+    }
+    
+    if let size = size{
+        components.append("query=\(size)")
+    }
     
     // Prevent issues with spaces or special characters in the query
     if let query = query?.trimmingCharacters(in: .whitespacesAndNewlines),

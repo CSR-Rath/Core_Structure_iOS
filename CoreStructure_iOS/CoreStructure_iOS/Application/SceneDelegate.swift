@@ -48,6 +48,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         windowSceneDelegate = window!
         bottomSafeAreaInsetsHeight = window?.safeAreaInsets.bottom
         barAppearanHeight = navigation.navigationBar.frame.height + (window?.safeAreaInsets.top ?? 0)
+        
+        printAppConfiguration()
     }
     
     private func networkMonitoring(){

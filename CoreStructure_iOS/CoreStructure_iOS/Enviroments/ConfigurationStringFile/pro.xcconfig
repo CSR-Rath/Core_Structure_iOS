@@ -1,0 +1,24 @@
+//
+//  pro.xcconfig
+//  CoreStructure_iOS
+//
+//  Created by Rath! on 12/9/24.
+//
+
+//Referent ==> https://medium.com/@tejaswini-27k/ios-project-different-environments-xcode-configurations-and-scheme-752ee4404bfa
+
+BASE_URL =  http:/$()/192.168.0.110:1110/api/
+
+API_KEY = AIzaSyB7phb_51lTr2yjxAeY0flXXiE_w2q2tFM
+
+BUNDLE_ID = com.rath.CoreStructure-iOS
+
+Bundle_Display_Name = PRO
+
+// Key AES
+
+PAYMENT_KEY = PAYMENT_KEY_PRO
+
+// InitializationVectorEnum
+
+PAYMENT_VECTOR = PAYMENT_VECTOR_PRO

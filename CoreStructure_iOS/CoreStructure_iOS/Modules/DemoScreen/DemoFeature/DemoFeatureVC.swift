@@ -57,8 +57,7 @@ class DemoFeatureVC: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false // disable swipe
-        navigationBarAppearance(titleColor: .mainBlueColor, barColor: .white)
-
+        self.navigationBarAppearance(titleColor: .red, barColor: .orange)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -103,7 +102,6 @@ class DemoFeatureVC: UIViewController, UIGestureRecognizerDelegate {
                                             height: 100))
         button.backgroundColor = .orange
         button.addTarget(self, action: #selector(didTappedButton), for: .touchUpInside)
-//        view.addSubview(button)
     }
     
     @objc private func pullRefresh(){
@@ -130,13 +128,12 @@ class DemoFeatureVC: UIViewController, UIGestureRecognizerDelegate {
                 ListModel(id: 19, name: "SectionedTableViewController", viewController: DragDropTableViewCellContoler()),
                 ListModel(id: 20, name: "ScannerController", viewController: ScannerController()),
                 ListModel(id: 21, name: "PreventionScreen", viewController: PreventionScreen()),
-                ListModel(id: 22, name: "GenerateQRCodeVC", viewController: GenerateQRCodeVC()),
                 ListModel(id: 23, name: "HomeABAViewController", viewController: HomeABAViewController()),
                 ListModel(id: 24, name: "TestingButtonVC", viewController: TestingButtonVC()),
                 ListModel(id: 25, name: "PhoneNumberTextFieldVC", viewController: PhoneNumberTextFieldVC()),
                 ListModel(id: 25, name: "PaymentViewController", viewController: PaymentViewController()),
                 ListModel(id: 25, name: "BecomeFirstResponderVC", viewController: BecomeFirstResponderVC()),
-//                ListModel(id: 25, name: "BecomeFirstResponderVC1", viewController: BecomeFirstResponderVC1()),
+                ListModel(id: 26, name: "GenerteQRAndBarCodeVC", viewController: GenerteQRAndBarCodeVC()),
     
             ]
         }
@@ -205,10 +202,10 @@ extension DemoFeatureVC: UITableViewDelegate, UITableViewDataSource{
     }
     
    @objc func didTappedButton(){
-       let vc = GenerateQRCodeVC()
-       vc.modalPresentationStyle = .custom
-       vc.transitioningDelegate = presentVC
-       self.present(vc, animated: true)
+//       let vc = GenerateQRCodeVC()
+//       vc.modalPresentationStyle = .custom
+//       vc.transitioningDelegate = presentVC
+//       self.present(vc, animated: true)
     }
     
 }
