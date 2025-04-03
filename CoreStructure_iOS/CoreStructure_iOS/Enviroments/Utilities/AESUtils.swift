@@ -25,7 +25,7 @@ enum KeyNum {
     }
 }
 
-enum InitializationVectorEnum {
+enum IVectorEnum {
     case paymentVector
 
     var value: String {
@@ -42,7 +42,7 @@ class AESUtils{
     
     func encryptionAES(value: String,
                        key256: KeyNum,
-                       initializationVector: InitializationVectorEnum) -> String {
+                       initializationVector: IVectorEnum) -> String {
         let result = value.aesEncrypt(key: key256,
                                       initializationVector: initializationVector)
         return result ?? ""
@@ -50,7 +50,7 @@ class AESUtils{
     
     func decryptionAES(value: String,
                        key256: KeyNum,
-                       initializationVector: InitializationVectorEnum) -> String {
+                       initializationVector: IVectorEnum) -> String {
         let result = value.aesDecrypt(key: key256,
                                       initializationVector: initializationVector)
         return result ?? ""
@@ -60,7 +60,7 @@ class AESUtils{
 extension String {
     
     fileprivate func aesEncrypt(key: KeyNum,
-                                initializationVector: InitializationVectorEnum,
+                                initializationVector: IVectorEnum,
                                 options: Int = kCCOptionPKCS7Padding) -> String? {
         
         if let keyData = key.value.data(using: String.Encoding.utf8),
@@ -99,7 +99,7 @@ extension String {
     }
     
     fileprivate func aesDecrypt(key: KeyNum,
-                                initializationVector: InitializationVectorEnum,
+                                initializationVector: IVectorEnum,
                                 options: Int = kCCOptionPKCS7Padding) -> String? {
         
         if let keyData = key.value.data(using: .utf8),

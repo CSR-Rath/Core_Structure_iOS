@@ -54,24 +54,19 @@ class BaseViewController: UIViewController {
     }
 }
 
-
-
-
 struct AvailableServiceModel{
     let id: Int
     let titleName: String
     let iConName: String
 }
 
-
-
 // MARK: - Example Usage
 class HomeViewController: BaseViewController {
     
+    var availableService: [AvailableServiceModel] = []
+    
     let topView = UIView()
     let viewFuelRate = UIView()
-    
-    var availableService: [AvailableServiceModel] = []
     
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -79,7 +74,7 @@ class HomeViewController: BaseViewController {
         tableView.delegate = self
         tableView.dataSource = self
         if #available(iOS 15.0, *) {
-            tableView.sectionHeaderTopPadding = 0
+        tableView.sectionHeaderTopPadding = 0
         }
         tableView.contentInset = UIEdgeInsets(top: 40, left: 0, bottom: 0, right: 0)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -161,7 +156,6 @@ extension HomeViewController{
         }
     }
 }
-
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
     
@@ -276,7 +270,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
         }
     }
     
-    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let viewHeader = UIView()
@@ -302,7 +295,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         return UITableView.automaticDimension
     }
     

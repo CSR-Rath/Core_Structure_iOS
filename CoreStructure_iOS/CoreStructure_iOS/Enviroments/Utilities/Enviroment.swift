@@ -51,7 +51,7 @@ extension String {
 }
 
 // MARK: - Class
-class FontName{
+class FontNameManager{
     // MARK: - Font English
     static let Roboto_Regular =  "Roboto-Regular"
     static let Roboto_Medium = "Roboto-Medium"

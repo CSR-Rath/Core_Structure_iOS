@@ -55,7 +55,6 @@ class PaymentViewController: UIViewController {
                                                       name: UIApplication.didBecomeActiveNotification,
                                                       object: nil)
         }
-        
     }
 
 }

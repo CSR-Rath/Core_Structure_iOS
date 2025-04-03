@@ -22,9 +22,9 @@ extension UILabel{
         AppManager.shared.getLanguageTypes { languageType in
             switch languageType{
             case .khmer:
-                self.font = UIFont(name: FontName.NotoSansKhmer_Regular  , size: size)
+                self.font = UIFont(name: FontNameManager.NotoSansKhmer_Regular  , size: size)
             case .english:
-                self.font = UIFont(name: FontName.Roboto_Regular  , size: size)
+                self.font = UIFont(name: FontNameManager.Roboto_Regular  , size: size)
             }
         }
         self.textColor = color
@@ -36,9 +36,9 @@ extension UILabel{
         AppManager.shared.getLanguageTypes { languageType in
             switch languageType{
             case .khmer:
-                self.font =  UIFont(name: FontName.NotoSansKhmer_Medium  , size: size)
+                self.font =  UIFont(name: FontNameManager.NotoSansKhmer_Medium  , size: size)
             case .english:
-                self.font =  UIFont(name: FontName.Roboto_Medium  , size: size)
+                self.font =  UIFont(name: FontNameManager.Roboto_Medium  , size: size)
             }
         }
         self.textColor = color
@@ -49,9 +49,9 @@ extension UILabel{
         AppManager.shared.getLanguageTypes { languageType in
             switch languageType{
             case .khmer:
-                self.font =  UIFont(name: FontName.NotoSansKhmer_Bold  , size: size)
+                self.font =  UIFont(name: FontNameManager.NotoSansKhmer_Bold  , size: size)
             case .english:
-                self.font =  UIFont(name: FontName.Roboto_Bold  , size: size)
+                self.font =  UIFont(name: FontNameManager.Roboto_Bold  , size: size)
             }
         }
         self.textColor = color
@@ -67,9 +67,9 @@ extension UITextField{
         AppManager.shared.getLanguageTypes { languageType in
             switch languageType{
             case .khmer:
-                self.font =  UIFont(name: FontName.NotoSansKhmer_Regular  , size: size)
+                self.font =  UIFont(name: FontNameManager.NotoSansKhmer_Regular  , size: size)
             case .english:
-                self.font =  UIFont(name: FontName.Roboto_Regular  , size: size)
+                self.font =  UIFont(name: FontNameManager.Roboto_Regular  , size: size)
             }
         }
         self.textColor = color
@@ -80,9 +80,9 @@ extension UITextField{
         AppManager.shared.getLanguageTypes { languageType in
             switch languageType{
             case .khmer:
-                self.font =  UIFont(name: FontName.NotoSansKhmer_Medium  , size: size)
+                self.font =  UIFont(name: FontNameManager.NotoSansKhmer_Medium  , size: size)
             case .english:
-                self.font =  UIFont(name: FontName.Roboto_Medium  , size: size)
+                self.font =  UIFont(name: FontNameManager.Roboto_Medium  , size: size)
             }
         }
         self.textColor = color
@@ -93,9 +93,9 @@ extension UITextField{
         AppManager.shared.getLanguageTypes { languageType in
             switch languageType{
             case .khmer:
-                self.font =  UIFont(name: FontName.NotoSansKhmer_Bold  , size: size)
+                self.font =  UIFont(name: FontNameManager.NotoSansKhmer_Bold  , size: size)
             case .english:
-                self.font =  UIFont(name: FontName.Roboto_Bold  , size: size)
+                self.font =  UIFont(name: FontNameManager.Roboto_Bold  , size: size)
             }
         }
         self.textColor = color

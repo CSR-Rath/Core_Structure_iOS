@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 //class Loading : UIView {
 //    
 //    static let shared = Loading()
@@ -65,16 +64,14 @@ import UIKit
 //    }
 //}
 
-
-
 class Loading : UIView {
     
     static let shared = Loading()
     
     private let loadingView: UIActivityIndicatorView = {
         let loading = UIActivityIndicatorView()
-        loading.color = .white //.mainBlueColor
-        loading.style = .large //.medium
+        loading.color = .white
+        loading.style = .large 
         loading.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         return loading
     }()
@@ -83,7 +80,7 @@ class Loading : UIView {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.text = "Loading..."
-        lbl.textColor = .white //.mainBlueColor
+        lbl.textColor = .white
         return lbl
     }()
     
@@ -123,4 +120,5 @@ class Loading : UIView {
             completion?()
         }
     }
+    
 }
