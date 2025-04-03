@@ -36,7 +36,6 @@ class PaymentViewController: UIViewController {
                 if let webUrl = URL(string: "https://www.youtube.com/watch?v=\(videoID)") {
                     UIApplication.shared.open(webUrl, options: [:], completionHandler: nil)
                 }
-                
             }
         }
         

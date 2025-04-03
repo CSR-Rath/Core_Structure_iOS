@@ -86,6 +86,7 @@ class Loading : UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         addSubview(lblLoading)
         NSLayoutConstraint.activate([
             lblLoading.centerYAnchor.constraint(equalTo: centerYAnchor,constant: 50),
@@ -97,7 +98,7 @@ class Loading : UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func showLoading(alpha: CGFloat = 0.0 ) {
+    func showLoading(alpha: CGFloat = 0.5) {
         DispatchQueue.main.async { [self] in
             
             guard let window = windowSceneDelegate else {

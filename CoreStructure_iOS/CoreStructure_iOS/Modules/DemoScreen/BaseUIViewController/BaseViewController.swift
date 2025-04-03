@@ -103,7 +103,7 @@ class HomeViewController: BaseViewController {
         stack.frame = self.view.bounds
         
         viewFuelRate.layer.cornerRadius = 10
-        viewFuelRate.backgroundColor = .lightMainColor
+        viewFuelRate.backgroundColor = .mainLightColor
         viewFuelRate.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubviews(of: stack, viewFuelRate)
@@ -174,16 +174,14 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
         let cell2 = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         let cell3 = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
-        cell0.backgroundColor = .clear
-        cell1.backgroundColor = .clear
-        cell2.backgroundColor = .clear
-        cell3.backgroundColor = .clear
+        let allCell = [cell0,cell1,cell2,cell3]
         
-        cell0.selectionStyle = .none
-        cell1.selectionStyle = .none
-        cell2.selectionStyle = .none
-        cell3.selectionStyle = .none
-        
+        allCell.forEach({ item in
+            item.backgroundColor = .clear
+            item.selectionStyle = .none
+            
+        })
+
         switch indexPath.section {
         case 0:// upgrade account
             
@@ -204,7 +202,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
                 }
             }
             
-            return cell0
+           
         case 1:// Fuel Balance
             
             AppManager.shared.getAccountTypes { accountType in
@@ -224,7 +222,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
                 }
             }
             
-            return cell1
+
         case 2:// Avaiable Service
             
             AppManager.shared.getAccountTypes { accountType in
@@ -244,7 +242,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
                 }
             }
             
-            return cell2
         case 3:// News
             
             AppManager.shared.getAccountTypes { accountType in
@@ -263,11 +260,12 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
                     print("accountType")
                 }
             }
-            
-            return cell3
+
         default:
-            return cell0
+            print("Another Selection")
         }
+        
+        return  allCell[indexPath.section]
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

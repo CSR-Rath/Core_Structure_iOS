@@ -18,9 +18,9 @@ enum IconButtonBar {
     var image: UIImage? {
         switch self {
         case .back:
-            return UIImage(named: "back_icon")
+            return .icAdd
         case .close:
-            return UIImage(named: "close_icon")
+            return .icAdd
         }
     }
 }
