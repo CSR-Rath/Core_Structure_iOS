@@ -6,18 +6,18 @@ enum StatusTextField{
     case editingDidEnd
 }
 
-class FloatingLabelTextField: UITextField {
+class FloatingLabelTextField: UITextField, UITextFieldDelegate {
     
+//    private var textFieldDidChangeSelection:((_text: String)->())?
     private var statusTextField: StatusTextField = .editingDidEnd
     private var isEditingDidBegin: Bool = false
     private var isRequired: Bool = false
     
     var isOptionalField: Bool = false
     var didEditingDidBegin:(()->())?
-    var  didEditingChanged:(()->())?
+    var didEditingChanged:(()->())?
     
     var  didEditingDidEnd:(()->())?
-    
     
     override var backgroundColor: UIColor?{
         didSet{
@@ -170,6 +170,7 @@ class FloatingLabelTextField: UITextField {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
+        self.delegate = self
         
     }
     
@@ -241,7 +242,6 @@ extension FloatingLabelTextField{
         borderView.layer.borderColor = UIColor.mainBlueColor.cgColor
         borderView.layer.borderWidth = 2
         
-        
         animateFloatingLabel(to: 1)
     }
     
@@ -254,7 +254,6 @@ extension FloatingLabelTextField{
         didEditingChanged?()
         
     }
-    
     
     @objc private func editingDidEnd() {
         isEditingDidBegin = false
@@ -278,20 +277,37 @@ extension FloatingLabelTextField{
             self.label.transform = alpha == 1 ? CGAffineTransform(translationX: 0, y: -25) : .identity
         }
     }
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        
+        if let  text = textField.text{
+            let dotCount = text.filter { $0 == "." }.count
+            let commaCount = text.filter { $0 == "," }.count
+            
+            print("dotCount: \(dotCount) \n comaCount: \(commaCount)")
+            
+            if dotCount + commaCount > 1{
+                textField.text?.removeLast()
+            }
+//            textFieldDidChangeSelection?(text)
+        }
+        
+    }
+    
 }
 
 // MARK: - Setup layoutConstraint
 extension FloatingLabelTextField{
     
     private func setupUI() {
-        
+      
         let fullView = UIView(frame: self.bounds)
         fullView.backgroundColor = .orange.withAlphaComponent(0.1)
         addSubview(fullView)
         
         //==========//====== Hendle self
         setPadding(left: 12, right: 12)
-//        addToolBar()
+
         heightAnchor.constraint(equalToConstant: 70).isActive = true
         //==========//======
         

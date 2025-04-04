@@ -14,3 +14,36 @@
 "first_name" = "នាមត្រកូល";
 "last_name" = "ត្រកូល";
 
+
+"product_order" = "ការបញ្ជាទិញផលិតផល";
+"customer_name" = "ឈ្មោះអតិថិជន";
+"phone_number" = "លេខទូរស័ព្ទ";
+"product_name" = "ឈ្មោះផលិតផល";
+"product_price" = "តម្លៃផលិតផល";
+"delivery" = "ថ្លៃដឹកជញ្ជូន";
+"location" = "ទីតាំង៖";
+"add_product" = "បន្ថែមផលិតផល";
+"submit_order" = "ដាក់បញ្ជាទិញ";
+"qty" = "ចំនួន៖";
+"add_product" = "បន្ថែមផលិតផល";
+"enter_detailed_information_about_the_product" = "បញ្ចូលព័ត៌មានលម្អិតអំពីផលិតផល";
+
+
+
+
+
+// ចំណងជើង
+"missing_info" = "ព័ត៌មានខ្វះ";
+"invalid_input" = "ទិន្នន័យមិនត្រឹមត្រូវ";
+
+// សារ Product Order
+"enter_customer_name" = "សូមបញ្ចូលឈ្មោះអតិថិជន។";
+"enter_phone_number" = "សូមបញ្ចូលលេខទូរសព្ទ។";
+"enter_delivery_price" = "សូមបញ្ចូលតម្លៃដឹកជញ្ជូន។";
+"enter_customer_location" = "សូមបញ្ចូលទីតាំងអតិថិជន។";
+
+// សារ add product
+"enter_product_name" = "សូមបញ្ចូលឈ្មោះផលិតផល។";
+"enter_product_price" = "សូមបញ្ចូលតម្លៃផលិតផល។";
+"enter_product_qty" = "សូមបញ្ចូលបរិមាណផលិតផល។";
+"ok" = "យល់ព្រម";

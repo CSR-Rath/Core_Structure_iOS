@@ -16,3 +16,35 @@
 "first_name" = "First Name";
 "last_name" = "Last Name";
 
+
+
+"product_order" = "Product Order";
+"customer_name" = "Customer Name";
+"phone_number" = "Phone number";
+"product_name" = "Product name";
+"product_price" = "Product price";
+"delivery" = "Delivery price";
+"location" = "Location:";
+"add_product" = "Add Product";
+"submit_order" = "Submit Order";
+"qty" = "Qty";
+"add_product" = "Add product";
+"enter_detailed_information_about_the_product" = "Enter detailed information about the product";
+
+
+
+// Alert Titles
+"missing_info" = "Missing Info";
+"invalid_input" = "Invalid Input";
+
+// Alert Messages
+"enter_customer_name" = "Please enter the customer's name.";
+"enter_phone_number" = "Please enter the phone number.";
+"enter_delivery_price" = "Please enter the delivery price.";
+"enter_customer_location" = "Please enter the customer's location.";
+
+// Alert messages
+"enter_product_name" = "Please enter the product name.";
+"enter_product_price" = "Please enter the product price.";
+"enter_product_qty" = "Please enter the product quantity.";
+"ok" = "OK";

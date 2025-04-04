@@ -47,7 +47,7 @@ extension UIViewController{
     }
 
     
-    func rightBarButtonItem(action: Selector? = #selector(leftBarButtonItemAction),
+    func rightBarButtonItem(action: Selector = #selector(leftBarButtonItemAction),
                             iconButton: IconButtonBar = .close){
         
         guard let icon = iconButton.image?.withRenderingMode(.alwaysOriginal) else {
@@ -88,7 +88,7 @@ extension UIViewController{
         
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = barColor
-        appearance.shadowColor = .red// barColor ?? .mainBlueColor // line appearenc bar
+//        appearance.shadowColor = .clear// barColor ?? .mainBlueColor // line appearenc bar
 
         // Apply to all navigation bars
 //           UINavigationBar.appearance().standardAppearance = appearance

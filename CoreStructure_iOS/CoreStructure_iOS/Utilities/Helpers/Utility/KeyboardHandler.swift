@@ -36,7 +36,7 @@ class KeyboardHandler {
     @objc private func keyboardWillShow(notification: NSNotification) {
         if let userInfo = notification.userInfo,
            let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let keyboardHeight = keyboardFrame.cgRectValue.height + 10  // Adding extra padding
+            let keyboardHeight = keyboardFrame.cgRectValue.height //+ 10  // Adding extra padding
             self.onKeyboardWillShow?(-keyboardHeight);  print("Keyboard height: \(keyboardHeight)")
         }
     }
@@ -49,59 +49,59 @@ class KeyboardHandler {
 
 
 
-class ScrollViewRefreshManager {
-    
-    private weak var scrollView: UIScrollView?
-    private var refreshControl: UIRefreshControl?
-    
-    init(scrollView: UIScrollView, target: Any, action: Selector) {
-        self.scrollView = scrollView
-        setupRefreshControl(target: target, action: action)
-    }
-    
-    private func setupRefreshControl(target: Any, action: Selector) {
-        let refreshControl = UIRefreshControl()
-        refreshControl.tintColor = .systemBlue // Customize the color
-        refreshControl.addTarget(target, action: action, for: .valueChanged)
-        
-        if let tableView = scrollView as? UITableView {
-            tableView.refreshControl = refreshControl
-        } else if let collectionView = scrollView as? UICollectionView {
-            collectionView.refreshControl = refreshControl
-        } else {
-            scrollView?.insertSubview(refreshControl, at: 0)
-        }
-        
-        self.refreshControl = refreshControl
-    }
-    
-    func endRefreshing() {
-        refreshControl?.endRefreshing()
-    }
-}
+//class ScrollViewRefreshManager {
+//    
+//    private weak var scrollView: UIScrollView?
+//    private var refreshControl: UIRefreshControl?
+//    
+//    init(scrollView: UIScrollView, target: Any, action: Selector) {
+//        self.scrollView = scrollView
+//        setupRefreshControl(target: target, action: action)
+//    }
+//    
+//    private func setupRefreshControl(target: Any, action: Selector) {
+//        let refreshControl = UIRefreshControl()
+//        refreshControl.tintColor = .systemBlue // Customize the color
+//        refreshControl.addTarget(target, action: action, for: .valueChanged)
+//        
+//        if let tableView = scrollView as? UITableView {
+//            tableView.refreshControl = refreshControl
+//        } else if let collectionView = scrollView as? UICollectionView {
+//            collectionView.refreshControl = refreshControl
+//        } else {
+//            scrollView?.insertSubview(refreshControl, at: 0)
+//        }
+//        
+//        self.refreshControl = refreshControl
+//    }
+//    
+//    func endRefreshing() {
+//        refreshControl?.endRefreshing()
+//    }
+//}
 
-class ViewControllerdsf: UIViewController {
-    
-    private var refreshManager: ScrollViewRefreshManager?
-    private let tableView = UITableView()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // Setup tableView (or collectionView, scrollView)
-        tableView.frame = view.bounds
-        view.addSubview(tableView)
-        
-        // Initialize the refresh manager
-        refreshManager = ScrollViewRefreshManager(scrollView: tableView,
-                                                  target: self,
-                                                  action: #selector(refreshData))
-    }
-    
-    @objc private func refreshData() {
-        // Simulate data refresh
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.refreshManager?.endRefreshing()
-        }
-    }
-}
+//class ViewControllerdsf: UIViewController {
+//    
+//    private var refreshManager: ScrollViewRefreshManager?
+//    private let tableView = UITableView()
+//    
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        
+//        // Setup tableView (or collectionView, scrollView)
+//        tableView.frame = view.bounds
+//        view.addSubview(tableView)
+//        
+//        // Initialize the refresh manager
+//        refreshManager = ScrollViewRefreshManager(scrollView: tableView,
+//                                                  target: self,
+//                                                  action: #selector(refreshData))
+//    }
+//    
+//    @objc private func refreshData() {
+//        // Simulate data refresh
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+//            self.refreshManager?.endRefreshing()
+//        }
+//    }
+//}

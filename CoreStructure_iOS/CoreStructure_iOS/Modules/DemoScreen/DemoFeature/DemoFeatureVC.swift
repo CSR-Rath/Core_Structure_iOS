@@ -96,12 +96,14 @@ class DemoFeatureVC: UIViewController, UIGestureRecognizerDelegate {
         ])
         
         
-        let button = BaseUIButton(frame: CGRect(x: 0,
-                                            y: 10,
+        let button = BaseUIButton(frame: CGRect(x: 100,
+                                            y: 150,
                                             width: 200,
-                                            height: 100))
+                                            height: 50))
         button.backgroundColor = .orange
         button.addTarget(self, action: #selector(didTappedButton), for: .touchUpInside)
+        view.addSubviews(of: button)
+        
     }
     
     @objc private func pullRefresh(){
@@ -136,6 +138,7 @@ class DemoFeatureVC: UIViewController, UIGestureRecognizerDelegate {
                 ListModel(id: 26, name: "GenerteQRAndBarCodeVC", viewController: GenerteQRAndBarCodeVC()),
     
             ]
+            
         }
     }
 }
@@ -206,6 +209,21 @@ extension DemoFeatureVC: UITableViewDelegate, UITableViewDataSource{
 //       vc.modalPresentationStyle = .custom
 //       vc.transitioningDelegate = presentVC
 //       self.present(vc, animated: true)
+//       tableView.exportAsPdfFromTable()
+       
+//       if let tableView = myTableView {
+//           let pdfFilePath = tableView.exportAsPdfFromTable()
+//           print("PDF saved at: \(pdfFilePath)")
+//       }
+       
+       
+       let pdfFilePath = tableView.exportAsPdfFromTable()
+       let pdfURL = URL(fileURLWithPath: pdfFilePath)
+
+       let activityViewController = UIActivityViewController(activityItems: [pdfURL], applicationActivities: nil)
+       present(activityViewController, animated: true, completion: nil)
+
+
     }
     
 }

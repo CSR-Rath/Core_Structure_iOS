@@ -15,7 +15,6 @@ import UIKit
     static let loginSuccesFull = "loginSuccesFull"
     static let saveTimer = "saveTimer"
     static let userInfor = "userInfor"
-    
     static let keyboradHeight = "keyboradHeight"
     
 }

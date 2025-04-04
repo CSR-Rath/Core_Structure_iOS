@@ -78,7 +78,7 @@ class BiometricAuthenticationManager {
     }
 }
 
-// Usage Example
+// How to use it. Example:
 func helper() {
     BiometricAuthenticationManager.shared.fingerPrintFaceID { result in
         switch result {
