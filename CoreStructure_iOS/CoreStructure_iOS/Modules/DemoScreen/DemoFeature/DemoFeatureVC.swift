@@ -46,18 +46,23 @@ class DemoFeatureVC: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
+//        NavigationBarAppearance.shared.navigationBarAppearance(titleColor: .black,
+//                                                               barAppearanceColor: .orange,
+//                                                               shadowColor: .clear)
+        self.navigationBarAppearance(titleColor: .black,
+                                     barAppearanceColor: .orange,
+                                     shadowColor: .clear)
     }
 
     @objc func rightButtonTapped() {
         print("Right button tapped")
     }
 
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false // disable swipe
-        self.navigationBarAppearance(titleColor: .red, barColor: .orange)
+        title = "Demo"
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -89,7 +94,7 @@ class DemoFeatureVC: UIViewController, UIGestureRecognizerDelegate {
         NSLayoutConstraint.activate([
         
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
             tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
         
@@ -97,10 +102,10 @@ class DemoFeatureVC: UIViewController, UIGestureRecognizerDelegate {
         
         
         let button = BaseUIButton(frame: CGRect(x: 100,
-                                            y: 150,
+                                            y: 0,
                                             width: 200,
-                                            height: 50))
-        button.backgroundColor = .orange
+                                            height: 300))
+        button.backgroundColor = .cyan
         button.addTarget(self, action: #selector(didTappedButton), for: .touchUpInside)
         view.addSubviews(of: button)
         
@@ -136,14 +141,13 @@ class DemoFeatureVC: UIViewController, UIGestureRecognizerDelegate {
                 ListModel(id: 25, name: "PaymentViewController", viewController: PaymentViewController()),
                 ListModel(id: 25, name: "BecomeFirstResponderVC", viewController: BecomeFirstResponderVC()),
                 ListModel(id: 26, name: "GenerteQRAndBarCodeVC", viewController: GenerteQRAndBarCodeVC()),
-    
+                ListModel(id: 26, name: "UploadImageViewController", viewController: UploadImageViewController()),
+                
             ]
             
         }
     }
 }
-
-
 
 extension DemoFeatureVC: UITableViewDelegate, UITableViewDataSource{
     
@@ -175,6 +179,7 @@ extension DemoFeatureVC: UITableViewDelegate, UITableViewDataSource{
             self.present(item.viewController!, animated: true)
         default:
             item.viewController?.leftBarButtonItem()
+            item.viewController?.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
             item.viewController?.navigationController?.interactivePopGestureRecognizer?.delegate = self
             self.navigationController?.pushViewController(item.viewController!, animated: true)
         }
@@ -198,7 +203,6 @@ extension DemoFeatureVC: UITableViewDelegate, UITableViewDataSource{
         didScrollView?(currentOffsetY, isScrollingDown)
     }
     
-    
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let currentOffsetY = scrollView.contentOffset.y
         didEndScrollView?(currentOffsetY, isScrollingDown)
@@ -220,9 +224,9 @@ extension DemoFeatureVC: UITableViewDelegate, UITableViewDataSource{
        let pdfFilePath = tableView.exportAsPdfFromTable()
        let pdfURL = URL(fileURLWithPath: pdfFilePath)
 
-       let activityViewController = UIActivityViewController(activityItems: [pdfURL], applicationActivities: nil)
+       let activityViewController = UIActivityViewController(activityItems: [pdfURL],
+                                                             applicationActivities: nil)
        present(activityViewController, animated: true, completion: nil)
-
 
     }
     

@@ -18,7 +18,11 @@ let igorneSafeAeaTop: CGRect = CGRect(x: 0,
                                       width: Int(screen.width),
                                       height: Int(screen.height-barAppearanHeight))
 
+import FirebaseAuth
+import FirebaseFirestore
 
+//pod 'Firebase/Database'
+//pod 'Firebase/Auth'
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
@@ -31,15 +35,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         rootViewController()
         
         let amount : Double = 10.67
-        
-        print("KHR ==\(amount.toCurrencyAsKHR)")
-        print("USD ==\(amount.toCurrencyAsUSD)")
+        print("KHR ==> \(amount.toCurrencyAsKHR)")
+        print("USD ==> \(amount.toCurrencyAsUSD)")
         
     }
     
     private func rootViewController(){
-        
-        let controller: UIViewController = MakeOrderViewController()
+
+        let controller: UIViewController = DemoFeatureVC()
         let navigation = UINavigationController(rootViewController: controller)
         window!.rootViewController = navigation
         window!.makeKeyAndVisible()
@@ -49,7 +52,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         bottomSafeAreaInsetsHeight = window?.safeAreaInsets.bottom
         barAppearanHeight = navigation.navigationBar.frame.height + (window?.safeAreaInsets.top ?? 0)
         
-        printAppConfiguration()
     }
     
     private func networkMonitoring(){
@@ -66,20 +68,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 print("✅ Internet connected")
                 
                 if let presentedAlert = rootVC.presentedViewController {
-                    presentedAlert.dismiss(animated: true)
+//                    presentedAlert.dismiss(animated: true)
                 }
                 
             } else {
                 print("❌ Internet disconnected")
                 
                 if rootVC.presentedViewController == nil {
-                    rootVC.present(alertNetwork, animated: true)
+//                    rootVC.present(alertNetwork, animated: true)
                 }
+           
             }
         }
     }
 }
-
 
 extension SceneDelegate {
     

@@ -77,7 +77,7 @@ class AddProductViewController: UIViewController {
     }
     
     private func setupUI(){
-        
+        btnAdd.isActionButton = false
         txtName.title = "product_name".localizeString()
         txtPrice.title = "price".localizeString()
         txtQty.title = "qty".localizeString()
@@ -87,10 +87,7 @@ class AddProductViewController: UIViewController {
         txtQty.keyboardType = .numberPad
         
         btnAdd.setTitle("add_product".localizeString(), for: .normal)
-        btnAdd.actionUIButton = {
-            self.addProduct()
-        }
-        
+  
         view.addSubview(stackView)
         NSLayoutConstraint.activate([
 
@@ -101,7 +98,46 @@ class AddProductViewController: UIViewController {
             selectView.widthAnchor.constraint(equalTo: stackPrice.widthAnchor, multiplier: 0.25),
         ])
         
+        btnAdd.actionUIButton = {
+            self.addProduct()
+        }
+        
+        txtName.didEditingChanged = {
+            self.validationTextField()
+        }
+        
+        txtPrice.didEditingChanged = {
+            
+            self.validationTextField()
+            
+        }
+        
+        txtQty.didEditingChanged = {
+            self.validationTextField()
+        }
+     
     }
+    
+    private func validationTextField(){
+        btnAdd.isActionButton = false
+        
+        guard let name = txtName.text, !name.isEmpty else {
+            return
+        }
+        
+        guard let priceText = txtPrice.text, !priceText.isEmpty,
+              let price = Double(priceText) else {
+            return
+        }
+        
+        guard let qtyText = txtQty.text, !qtyText.isEmpty,
+              let qty = Int(qtyText), qty > 0 else {
+            return
+        }
+        
+        btnAdd.isActionButton = true
+    }
+    
     
     func addProduct(){
         

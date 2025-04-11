@@ -50,11 +50,12 @@ func exportAsPdfFromTable() -> String {
 
     self.showsVerticalScrollIndicator = false
     let originalBounds = self.bounds
-    self.bounds = CGRect(x:originalBounds.origin.x,
+    self.bounds = CGRect(x: originalBounds.origin.x,
                          y: originalBounds.origin.y,
                          width: self.contentSize.width,
                          height: self.contentSize.height)
-    let pdfPageFrame = CGRect(x: 0, y: 0, width: self.bounds.size.width,
+    let pdfPageFrame = CGRect(x: 0, y: 0,
+                              width: self.bounds.size.width,
                               height: self.contentSize.height)
 
     let pdfData = NSMutableData()
@@ -78,7 +79,8 @@ func saveTablePdf(data: NSMutableData) -> String {
     if data.write(to: pdfPath, atomically: true) {
         return pdfPath.path
     } else {
-        return ""
+        return "nil"
     }
 }
 }
+

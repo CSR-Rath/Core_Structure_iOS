@@ -11,13 +11,10 @@ import LocalAuthentication // For Get Biometrics Name
 import Firebase
 import FirebaseAuth
 
-// Firebase Messaging need have account developer for
-
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    func application(_ application: UIApplication,
-                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         printFontsName()
         Language.shared.setLanguage(langCode: .english) // english default
@@ -29,7 +26,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }else{
             print("AppDelegate app lifecycle")
         }
-        
+
+        NavigationBarAppearance.shared.navigationBarAppearance(titleColor: .black,
+                                                               barAppearanceColor: .orange,
+                                                               shadowColor: .clear)
         return true
     }
     
@@ -43,8 +43,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
 }
-
-
 
 // MARK: - Push Notification Setup
 extension AppDelegate: UNUserNotificationCenterDelegate {
@@ -101,13 +99,13 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             print("Controller is Present.")
             window.rootViewController?.present(targetViewController, animated: true)
             
-        }else{
+        }
+        else{
             
             print("Controller is Push.")
             navigationController.pushViewController(targetViewController, animated: true)
             
         }
-        
         
 //        let notificationType  = NotificationTypeEnum(rawValue: "")!; print("notificationType ==> \(notificationType)")
 //        
@@ -119,7 +117,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 //        case .NONE:
 //            break
 //        }
-//                
+                
         completionHandler()
     }
     
@@ -128,6 +126,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             UIApplication.shared.applicationIconBadgeNumber += 1
         }
     }
+    
 }
 
 // MARK: - Video from youtube(How to push notificatin cloud Messaging) https://www.youtube.com/watch?v=WmKRWoqdC_Y
@@ -169,7 +168,3 @@ func printFontsName(){
         }
     }
 }
-
-
-
-

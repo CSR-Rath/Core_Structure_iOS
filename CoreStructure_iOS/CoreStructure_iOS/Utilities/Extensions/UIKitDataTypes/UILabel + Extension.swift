@@ -8,7 +8,6 @@
 import UIKit
 
 extension UILabel {
-    
     ///  working when width of label width < width of content text
     func autoScaling(to scale: CGFloat = 0.8) {
         self.adjustsFontSizeToFitWidth = true
@@ -28,8 +27,5 @@ extension UILabel {
         self.sizeToFit()
         return self.frame.width
     }
-    
 }
-
-
 

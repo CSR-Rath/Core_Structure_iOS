@@ -16,7 +16,7 @@ struct ItemDragDropModel: Codable{
     var description: String
 }
 
-class HomeABAViewController: UIViewController{
+class HomeABAViewController: UIViewController, UIGestureRecognizerDelegate{
     
     let text = UILabel()
     
@@ -122,6 +122,7 @@ class HomeABAViewController: UIViewController{
         let tableView = ContentSizedTableView()
         tableView.showsVerticalScrollIndicator = false
         tableView.register(TableCell.self, forCellReuseIdentifier: "cell")
+        tableView.separatorStyle = .none
         tableView.backgroundColor = .clear
         tableView.isScrollEnabled = false
         tableView.dataSource = self
@@ -158,7 +159,15 @@ class HomeABAViewController: UIViewController{
         setupData()
         seupConstraints()
         setupLongPressGestureRecognizers()
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
+        self.navigationBarAppearance(titleColor: .black,
+                                     barAppearanceColor: .white,
+                                     shadowColor: .clear)
     }
 
 }
@@ -191,7 +200,7 @@ extension HomeABAViewController{
         text.translatesAutoresizingMaskIntoConstraints = false
         text.text = "UI ABA"
         text.fontBold(25, color: .black)
-        //        text.backgroundColor = .red
+
         
         scrollView.addSubview(viewLine)
         viewCard.addSubview(text)
@@ -257,6 +266,7 @@ extension HomeABAViewController{
         tableView.dragDelegate = status ? self : nil
         tableView.dropDelegate = status ? self : nil
     }
+    
 }
 
 
@@ -462,6 +472,7 @@ extension HomeABAViewController:  UITableViewDataSource,
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableCell
         cell.backgroundColor = .clear
         cell.selectionStyle = .none
+        cell.textLabel?.textColor = .red
         cell.textLabel?.text = dataListTable[indexPath.section][indexPath.row]
         return cell
     }
@@ -523,7 +534,6 @@ extension HomeABAViewController:  UITableViewDataSource,
         UIDevice.shared.generateButtonFeedback(style: .medium)
         setupLongPressGestureRecognizers()
     }
-    
 
 }
 

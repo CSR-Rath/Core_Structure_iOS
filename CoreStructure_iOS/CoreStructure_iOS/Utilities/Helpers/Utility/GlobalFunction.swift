@@ -14,11 +14,9 @@ class GlobalFunction{
         let newNavController = UINavigationController(rootViewController: newController)
         newNavController.interactivePopGestureRecognizer?.isEnabled = false
         
-        // Get the SceneDelegate
-        guard let window = windowSceneDelegate else {
-            print("Window is nil")
-            return
-        }
+      
+      guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                   let window = windowScene.windows.first else { return }
         
         // Perform the transition with an animation
         UIView.transition(with: window,

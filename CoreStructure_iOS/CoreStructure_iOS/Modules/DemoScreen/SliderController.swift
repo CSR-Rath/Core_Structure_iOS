@@ -96,7 +96,6 @@ class SliderController: UIViewController {
         }
     }
 
-    
     func openYouTubeVideo(videoID: String) {
 //        URL(string: "youtube://watch?v=\(videoID)")
         
@@ -111,4 +110,5 @@ class SliderController: UIViewController {
             }
         }
     }
+    
 }

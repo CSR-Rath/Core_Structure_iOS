@@ -43,10 +43,8 @@ import UIKit
 //    func showLoading(alpha: CGFloat = 0.5 ) {
 //        DispatchQueue.main.async { [self] in
 //            
-//            guard let window = windowSceneDelegate else {
-//                print("Window is nil")
-//                return
-//            }
+//                        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+//let window = windowScene.windows.first else { return }
 //            self.frame = window.bounds
 //            window.addSubview(self)
 //            loadingView.frame = window.bounds
@@ -101,10 +99,9 @@ class Loading : UIView {
     func showLoading(alpha: CGFloat = 0.5) {
         DispatchQueue.main.async { [self] in
             
-            guard let window = windowSceneDelegate else {
-                print("Window is nil")
-                return
-            }
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                         let window = windowScene.windows.first else { return }
+
             self.frame = window.bounds
             window.addSubview(self)
             loadingView.frame = window.bounds

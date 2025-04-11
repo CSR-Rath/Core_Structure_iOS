@@ -88,7 +88,13 @@ class LoginViewController: UIViewController {
     }
     
     @objc private func createButtonTapped() {
-        Auth.auth().createUser(withEmail: "test@example.com", password: "123456") { result, error in
+        guard let email = emailTextField.text, !email.isEmpty,
+              let password = passwordTextField.text, !password.isEmpty else {
+            print("Email or password is empty")
+            return
+        }
+        
+        Auth.auth().createUser(withEmail: email, password: "123456") { result, error in
             if let error = error {
                 print("Error creating user: \(error.localizedDescription)")
                 return

@@ -7,10 +7,6 @@
 
 import UIKit
 
-
-
-
-
 enum IconButtonBar {
     case back
     case close
@@ -24,10 +20,6 @@ enum IconButtonBar {
         }
     }
 }
-
-
-
-
 
 //MARK: Handle Navigationbar
 extension UIViewController{
@@ -45,7 +37,6 @@ extension UIViewController{
             action: #selector(leftBarButtonItemAction)
         )
     }
-
     
     func rightBarButtonItem(action: Selector = #selector(leftBarButtonItemAction),
                             iconButton: IconButtonBar = .close){
@@ -74,10 +65,10 @@ extension UIViewController{
         print("Action ==> back button")
     }
     
-    func navigationBarAppearance(titleColor: UIColor,
-                                 barColor: UIColor){
+    func navigationBarAppearance(titleColor: UIColor, barAppearanceColor: UIColor, shadowColor: UIColor){
         
         let setupFont: UIFont = UIFont.systemFont(ofSize: 16,weight: .bold)
+        let largeFont: UIFont = UIFont.systemFont(ofSize: 34,weight: .bold)
         
         let appearance = UINavigationBarAppearance()
         
@@ -86,17 +77,19 @@ extension UIViewController{
             .font: setupFont
         ]
         
+        appearance.largeTitleTextAttributes = [
+            .foregroundColor: titleColor,
+            .font: largeFont
+        ]
+        
         appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = barColor
-//        appearance.shadowColor = .clear// barColor ?? .mainBlueColor // line appearenc bar
-
-        // Apply to all navigation bars
-//           UINavigationBar.appearance().standardAppearance = appearance
-//           UINavigationBar.appearance().scrollEdgeAppearance = appearance // For scrollable views
-//        
+        appearance.backgroundColor = barAppearanceColor
+        appearance.shadowColor = shadowColor// barColor ?? .mainBlueColor // line appearenc bar
+        
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
     }
+    
 }
 
 // MARK: Action change screen view contoller
@@ -124,12 +117,11 @@ extension UIViewController{
 
 }
 
-
 // MARK: EndEditing TextField When touch around else TextFields
 extension UIView {
 
     @objc func dismissKeyboard() { //resingtextfield
-        self.endEditing(true)
+        endEditing(true)
     }
 }
 
@@ -162,4 +154,5 @@ extension UIViewController{
         present(vc, animated: true) {
         }
     }
+    
 }

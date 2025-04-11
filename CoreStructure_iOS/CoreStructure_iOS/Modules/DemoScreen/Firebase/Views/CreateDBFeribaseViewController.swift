@@ -13,8 +13,6 @@ class CreateDBFeribaseViewController: UIViewController {
         super.viewDidLoad()
 
     }
-
-
 }
 
 

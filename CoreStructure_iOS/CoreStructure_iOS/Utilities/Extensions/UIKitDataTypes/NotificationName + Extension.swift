@@ -17,7 +17,6 @@ extension Notification.Name {
 
 class NotificationVC: UIViewController{
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -39,7 +38,6 @@ class NotificationVC: UIViewController{
         }
         view.addSubview(button)
     }
-    
     
     @objc func handleNewMessage(_ notification: Notification) {
         if let userInfo = notification.userInfo,

@@ -78,7 +78,8 @@ class ApiManager {
                     request.httpBody = try JSONSerialization.data(withJSONObject: param, options: []) // json to data
                     print("param ==> \(param)")
                     
-                }else{
+                }
+                else{
                     print("==> Note: param and modelCodable are nil.")
                 }
             }
@@ -204,7 +205,6 @@ func query(page: Int? = nil,
            startDate: String? = nil,
            endDate: String? = nil,
            another: String? = nil
-           //...
 ) -> String {
     
     var components: [String] = []

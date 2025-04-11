@@ -24,7 +24,8 @@ enum IconEmptyList {
 // MARK: - For pull refresh include Scrollview, TableView, CollectionView
 extension UIScrollView{
     
-    func addRefreshControl(target: Any, action: Selector) {
+    func addRefreshControl(target: Any, 
+                           action: Selector) {
         let refreshControl = UIRefreshControl()
         refreshControl.tintColor = .systemBlue
         refreshControl.addTarget(target, action: action, for: .valueChanged)
@@ -109,11 +110,14 @@ extension UIScrollView {
             })
         })
     }
+    
 }
 
 extension UIScrollView{
     
-    func isPagination(indexPath: IndexPath, arrayCount: Int, totalItems: Int) -> Bool {
+    func isPagination(indexPath: IndexPath, 
+                      arrayCount: Int,
+                      totalItems: Int) -> Bool {
          guard arrayCount < totalItems else { return false } // No need to paginate if all items are loaded
          
          if let tableView = self as? UITableView {
@@ -137,7 +141,6 @@ extension UIScrollView{
          }
         return false
      }
-  
     
     private func isShowLoadingSpinner(with title: String = "Fetching.") {
         // Create spinner and start animating
@@ -199,7 +202,6 @@ extension UIScrollView{
             }
         }
     }
-
     
     func isHideLoadingSpinner() {
         if let tableView = self as? UITableView {
@@ -210,4 +212,5 @@ extension UIScrollView{
             collectionView.reloadData() // Hide the footer
         }
     }
+    
 }

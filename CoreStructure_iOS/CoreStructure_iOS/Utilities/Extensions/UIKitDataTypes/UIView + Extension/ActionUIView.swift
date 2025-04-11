@@ -73,10 +73,10 @@ extension UIView{
         viewController.present(activityViewController, animated: true)
     }
     
-    func addGestureView(target: Any, action: Selector = #selector(viewTapped) ) {
+    func addGestureView(target: Any, action: Selector) {
         let tapGesture = UITapGestureRecognizer(target: target, action: action)
+        self.isUserInteractionEnabled = true
         self.addGestureRecognizer(tapGesture)
-        self.isUserInteractionEnabled = true // Ensure user interaction is enabled
     }
     
     @objc func viewTapped() {

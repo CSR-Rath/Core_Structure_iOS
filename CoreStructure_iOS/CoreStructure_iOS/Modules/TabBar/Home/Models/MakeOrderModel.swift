@@ -8,17 +8,20 @@
 import Foundation
 import UIKit
 
-struct ProductModel {
-    let name: String
-    let amount: Double
-    let qty: Int
+
+
+struct ProductModel: Codable {
+    let name: String?
+    let amount: Double?
+    let qty: Int?
 }
 
-struct MakeOrderModel {
-    var customerName: String
-    var phoneNumber: String
-    var created: Int
-    var products: [ProductModel]
-    var delivery: Double
-    var location: String
+struct MakeOrderModel: Codable {
+    var id:Int?
+    var customerName: String?
+    var phoneNumber: String?
+    var created: Int?
+    var products: [ProductModel]?
+    var delivery: Double?
+    var location: String?
 }

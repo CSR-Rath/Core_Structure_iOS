@@ -8,7 +8,6 @@ enum StatusTextField{
 
 class FloatingLabelTextField: UITextField, UITextFieldDelegate {
     
-//    private var textFieldDidChangeSelection:((_text: String)->())?
     private var statusTextField: StatusTextField = .editingDidEnd
     private var isEditingDidBegin: Bool = false
     private var isRequired: Bool = false

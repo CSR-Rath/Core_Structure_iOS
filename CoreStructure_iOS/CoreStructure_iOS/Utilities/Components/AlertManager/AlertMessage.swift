@@ -96,12 +96,12 @@ class AlertMessage{
             
             Loading.shared.hideLoading()
             
-            guard let window = windowSceneDelegate else{
-                print("Window is nil")
-                return
-            }
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                  let rootPresent = windowScene.windows.first?.rootViewController,
+                  let rootPush = windowScene.windows.first?.rootViewController as? UINavigationController
+            else { return }
     
-            window.rootViewController?.present(bottomSheetVC, animated: true, completion: {
+            rootPresent.present(bottomSheetVC, animated: true, completion: {
                 print("Present completion")
             })
         }

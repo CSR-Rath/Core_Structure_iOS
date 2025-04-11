@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BaseTextFieldFormate: UITextField, UITextFieldDelegate {
+class BaseTextFieldFormatePhoneNumber: UITextField, UITextFieldDelegate {
     
     var textDidChange: ((_ : String) -> ())?
     var isComplete: ((_ : Bool) -> ())?
@@ -109,7 +109,7 @@ public func formatter(mask: String, phoneNumber: String) -> String {
 
 class PhoneNumberTextFieldVC: UIViewController {
     
-    var phoneNumberTextField: BaseTextFieldFormate!
+    var phoneNumberTextField: BaseTextFieldFormatePhoneNumber!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -121,7 +121,7 @@ class PhoneNumberTextFieldVC: UIViewController {
     
     func setupPhoneNumberTextField() {
         // Create a UITextField programmatically
-        phoneNumberTextField = BaseTextFieldFormate()
+        phoneNumberTextField = BaseTextFieldFormatePhoneNumber()
         phoneNumberTextField.placeholder = "Enter phone number"
         phoneNumberTextField.borderStyle = .roundedRect
         phoneNumberTextField.keyboardType = .numberPad // Ensure this is set for number input

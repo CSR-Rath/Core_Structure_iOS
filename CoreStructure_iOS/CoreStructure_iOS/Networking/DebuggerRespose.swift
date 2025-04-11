@@ -94,11 +94,14 @@ class DebuggerRespose {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alert.addAction(action)
-        guard let window = windowSceneDelegate else {
-            print("Window is nil")
-            return
-        }
-        window.rootViewController?.present(alert, animated: true)
+
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let rootPresent = windowScene.windows.first?.rootViewController,
+              let rootPush = windowScene.windows.first?.rootViewController as? UINavigationController
+        else { return }
+
+        
+        rootPresent.present(alert, animated: true)
     }
 }
 
