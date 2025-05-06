@@ -107,7 +107,7 @@ class DemoFeatureVC: UIViewController, UIGestureRecognizerDelegate {
                                             height: 300))
         button.backgroundColor = .cyan
         button.addTarget(self, action: #selector(didTappedButton), for: .touchUpInside)
-        view.addSubviews(of: button)
+//        view.addSubviews(of: button)
         
     }
     
@@ -144,7 +144,6 @@ class DemoFeatureVC: UIViewController, UIGestureRecognizerDelegate {
                 ListModel(id: 26, name: "UploadImageViewController", viewController: UploadImageViewController()),
                 
             ]
-            
         }
     }
 }

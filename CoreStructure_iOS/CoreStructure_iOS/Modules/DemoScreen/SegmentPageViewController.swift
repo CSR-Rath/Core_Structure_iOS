@@ -47,19 +47,19 @@ class SegmentPageViewController: UIViewController, UIGestureRecognizerDelegate {
                               indexSelected: 0)
        
 
-        segmentedView.didSectedBuuton = { [self] index in
-            
-            print("didSectedBuuton", index)
-            pageview.currentPage  = index
-            
-        }
+//        segmentedView.didSectedBuuton = { [self] index in
+//            
+//            print("didSectedBuuton", index)
+////            pageview.  = index
+//            
+//        }
         
-        pageview.didChangeIndex = { [self] index in
-         
-            print("didChangeIndex", index)
-            segmentedView.selectedIndex = index
-            
-        }
+//        pageview.didChangeIndex = { [self] index in
+//         
+//            print("didChangeIndex", index)
+////            segmentedView.selectedIndex = index
+//            
+//        }
         
     }
     
@@ -70,13 +70,13 @@ class SegmentPageViewController: UIViewController, UIGestureRecognizerDelegate {
                                        titleButtons: [String],
                                        indexSelected: Int){
         
-        page.controllers = controllers
-        segment.items = titleButtons
-        
-        if controllers.count > 0 && titleButtons.count > 0{
-            page.currentPage = indexSelected
-            segment.selectedIndex = indexSelected
-        }
+//        page.controllers = controllers
+//        segment.items = titleButtons
+//        
+//        if controllers.count > 0 && titleButtons.count > 0{
+//            page.currentPage = indexSelected
+//            segment.selectedIndex = indexSelected
+//        }
 
     }
     

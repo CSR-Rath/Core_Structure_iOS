@@ -8,8 +8,6 @@
 import UIKit
 import Network
 
-
-
 class NetworkMonitor {
     static let shared = NetworkMonitor()
     

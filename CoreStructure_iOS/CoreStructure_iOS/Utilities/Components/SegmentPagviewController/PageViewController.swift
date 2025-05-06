@@ -7,99 +7,143 @@
 
 import UIKit
 
-class PageViewController: UIViewController {
-    
-    var didChangeIndex: ((_ index: Int)->())?
-    var willChangeIndex: ((_ index: Int)->())?
-    var controllers = [UIViewController]()
+class FirstViewController: UIViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .red
+    }
+}
 
-    private var pageController =  UIPageViewController(transitionStyle: .scroll,
-                                                       navigationOrientation: .horizontal,
-                                                       options: nil)
-    private var index: Int = 0
-    var currentPage: Int = 0{
-        didSet{
-            DispatchQueue.main.async {
-                let direction: UIPageViewController.NavigationDirection = (self.index < self.currentPage) ? .forward : .reverse
-                
-                if self.currentPage >= 0 && self.currentPage < self.controllers.count {
-                    self.pageController.setViewControllers(
-                        [self.controllers[self.currentPage]],
-                        direction: direction,
-                        animated: false,
-                        completion: nil
-                    )
-                    self.index = self.currentPage
-                }
-            }
-        }
+
+class SecondViewController: UIViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .green
+    }
+}
+
+
+class ThirdViewController: UIViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .blue
+    }
+}
+
+
+class PageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+    
+    private var currentIndex = 0
+    private var pages = [UIViewController]()
+    
+    func setupPages(pages: [UIViewController], currentIndex: Int){
+        self.currentIndex = currentIndex
+        self.pages = pages
+        setViewControllers([pages[currentIndex]], direction: .forward, animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-        setupPageController()
-    }
-
-    private func setupPageController(){
-        addChild(pageController)
-        view.addSubview(pageController.view)
-        pageController.view.backgroundColor = .white
-        pageController.view.frame = view.bounds
-        
-        //MARK: Disable animation
-//        pageController.dataSource = self
-//        pageController.delegate = self
+        self.delegate = self
+        self.dataSource = self
     }
     
-}
-
-
-
-//MARK: Handle pageController
-extension PageViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate{
-    
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        guard let currentIndex = controllers.firstIndex(of: viewController) else {
-            return nil
-        }
-        
-        let previousIndex = currentIndex - 1
-        
-        guard previousIndex >= 0 else {
-            return nil
-        }
-        
-        return controllers[previousIndex]
+    // ✅ Custom initializer with desired transition style
+    init() {
+        super.init(
+            transitionStyle: .scroll,
+            navigationOrientation: .horizontal,
+            options: nil
+        )
     }
     
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        guard let currentIndex = controllers.firstIndex(of: viewController) else {
-            return nil
-        }
-        
-        let nextIndex = currentIndex + 1
-        
-        // Check if the next index is within bounds
-        guard nextIndex < controllers.count else {
-            return nil
-        }
-        
-        return controllers[nextIndex]
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - DataSource
+    func pageViewController(_ pageViewController: UIPageViewController,
+                            viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        guard let index = pages.firstIndex(of: viewController), index > 0 else { return nil }
+        return pages[index - 1]
     }
     
     func pageViewController(_ pageViewController: UIPageViewController,
-                            didFinishAnimating finished: Bool,
-                            previousViewControllers: [UIViewController],
-                            transitionCompleted completed: Bool) {
+                            viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        guard let index = pages.firstIndex(of: viewController), index < pages.count - 1 else { return nil }
+        return pages[index + 1]
+    }
+    
+    // MARK: - Go to Page
+    func goToPage(index: Int) {
         
-        if completed {
-            if let currentViewController = pageViewController.viewControllers?.first,
-               let index = controllers.firstIndex(of: currentViewController) {
-                didChangeIndex?(index)
-                currentPage = index
-            }
-        }
+        let direction:  UIPageViewController.NavigationDirection = index > currentIndex ? .forward : .reverse
+        
+        guard index >= 0 && index < pages.count else { return }
+        setViewControllers([pages[index]], direction: direction, animated: true, completion: nil)
+        currentIndex = index
     }
 }
 
+
+
+class ViewController12: UIViewController {
+    
+    let pageVC = PageViewController()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .white
+        setupPageViewController()
+        setupButtons()
+        
+        let page1 = FirstViewController()
+        let page2 = SecondViewController()
+        let page3 = ThirdViewController()
+        
+        pageVC.setupPages(pages: [page1, page2, page3], currentIndex: 1)
+        
+    }
+    
+    func setupPageViewController() {
+        addChild(pageVC)
+        view.addSubview(pageVC.view)
+        pageVC.didMove(toParent: self)
+        pageVC.view.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            pageVC.view.topAnchor.constraint(equalTo: view.topAnchor),
+            pageVC.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            pageVC.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            pageVC.view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100) // leave space for buttons
+        ])
+    }
+    
+    func setupButtons() {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .equalSpacing
+        stackView.spacing = 20
+        
+        let buttonTitles = ["Page 1", "Page 2", "Page 3"]
+        for (index, title) in buttonTitles.enumerated() {
+            let button = UIButton(type: .system)
+            button.setTitle(title, for: .normal)
+            button.tag = index
+            button.addTarget(self, action: #selector(pageButtonTapped(_:)), for: .touchUpInside)
+            stackView.addArrangedSubview(button)
+        }
+        
+        view.addSubview(stackView)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+    }
+    
+    @objc func pageButtonTapped(_ sender: UIButton) {
+        let index = sender.tag
+        pageVC.goToPage(index: index)
+    }
+    
+}

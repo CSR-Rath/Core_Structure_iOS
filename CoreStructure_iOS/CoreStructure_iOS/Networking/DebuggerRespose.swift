@@ -75,18 +75,21 @@ class DebuggerRespose {
                 let json = try JSONDecoder().decode(T.self, from: newData) // date to codable
                 response(json)
             }
-        } catch let DecodingError.typeMismatch(type, context) {
+        } 
+        catch let DecodingError.typeMismatch(type, context) {
             DispatchQueue.main.async {
                 print("Validator error: =>\(type), \(context.codingPath), \(context.debugDescription)")
                 self.showAlert(message: context.showError(functionName: fun))
                 Loading.shared.hideLoading()
             }
-        } catch {
+        } 
+        catch {
             DispatchQueue.main.async {
                 print("General error decoding model: \(error.localizedDescription)")
                 self.showAlert(message: "Error decoding model: \(error.localizedDescription)")
             }
         }
+        
     }
     
     func showAlert(title: String = "",

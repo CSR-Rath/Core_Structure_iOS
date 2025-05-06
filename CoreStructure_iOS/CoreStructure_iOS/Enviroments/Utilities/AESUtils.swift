@@ -65,13 +65,13 @@ extension String {
         
         if let keyData = key.value.data(using: String.Encoding.utf8),
            let data = self.data(using: String.Encoding.utf8),
-           let cryptData    = NSMutableData(length: Int((data.count)) + kCCBlockSizeAES128) {
+           let cryptData = NSMutableData(length: Int((data.count)) + kCCBlockSizeAES128) {
             
             
-            let keyLength              = size_t(kCCKeySizeAES256)
+            let keyLength = size_t(kCCKeySizeAES256)
             let operation: CCOperation = UInt32(kCCEncrypt)
-            let algoritm:  CCAlgorithm = UInt32(kCCAlgorithmAES128)
-            let options:   CCOptions   = UInt32(options)
+            let algoritm: CCAlgorithm = UInt32(kCCAlgorithmAES128)
+            let options: CCOptions   = UInt32(options)
             
             
             var numBytesEncrypted :size_t = 0
@@ -108,8 +108,8 @@ extension String {
             
             let keyLength = size_t(kCCKeySizeAES256)
             let operation: CCOperation = UInt32(kCCDecrypt)
-            let algoritm:  CCAlgorithm = UInt32(kCCAlgorithmAES128)
-            let options:   CCOptions   = UInt32(options)
+            let algoritm: CCAlgorithm = UInt32(kCCAlgorithmAES128)
+            let options: CCOptions = UInt32(options)
             
             var numBytesDecrypted: size_t = 0
             

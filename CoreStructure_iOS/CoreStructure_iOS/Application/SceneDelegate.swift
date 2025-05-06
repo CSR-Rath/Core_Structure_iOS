@@ -42,7 +42,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     private func rootViewController(){
 
-        let controller: UIViewController = DemoFeatureVC()
+        let controller: UIViewController = ViewController12()
         let navigation = UINavigationController(rootViewController: controller)
         window!.rootViewController = navigation
         window!.makeKeyAndVisible()
@@ -106,3 +106,7 @@ extension SceneDelegate {
     }
     
 }
+
+
+
+

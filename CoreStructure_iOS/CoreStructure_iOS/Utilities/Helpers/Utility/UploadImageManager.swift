@@ -22,7 +22,7 @@ class UploadImageManager: NSObject, UIImagePickerControllerDelegate, UINavigatio
         pickerController.delegate = self
         pickerController.sourceType = .photoLibrary
         pickerController.allowsEditing = true // Enable cropping
-        
+        pickerController.modalPresentationStyle = .fullScreen // full screen
         viewController.present(pickerController, animated: true)
     }
     
@@ -38,7 +38,8 @@ class UploadImageManager: NSObject, UIImagePickerControllerDelegate, UINavigatio
                 }
                 
                 self.didPickImage?(editedImage, aspectRatio)
-            } else if let originalImage = info[.originalImage] as? UIImage {
+            } 
+            else if let originalImage = info[.originalImage] as? UIImage {
                 
                 var  aspectRatio = originalImage.size.height / originalImage.size.width
                 
@@ -54,6 +55,7 @@ class UploadImageManager: NSObject, UIImagePickerControllerDelegate, UINavigatio
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
+    
 }
 
 

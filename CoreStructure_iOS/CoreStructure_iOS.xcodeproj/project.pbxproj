@@ -154,6 +154,8 @@
 		FAC504832D5DCC6600DBC271 /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC504822D5DCC6600DBC271 /* CustomSearchBar.swift */; };
 		FAC761872D87F82500636660 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC761862D87F82500636660 /* BaseViewController.swift */; };
 		FAC7618A2D87FD3D00636660 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC761892D87FD3D00636660 /* PaymentViewController.swift */; };
+		FAD109A82DC8599200278B1B /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD109A72DC8599200278B1B /* KeychainManager.swift */; };
+		FAD109AA2DC85A4A00278B1B /* KeychainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD109A92DC85A4A00278B1B /* KeychainViewController.swift */; };
 		FAD38F2F2D14132200588DFA /* TransactionTypesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD38F2E2D14132200588DFA /* TransactionTypesEnum.swift */; };
 		FAE4A50A2DA6252B007D035A /* NavigationBarAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE4A5092DA6252B007D035A /* NavigationBarAppearance.swift */; };
 		FAF42EF02D1A47F50070AF49 /* DisplayWebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF42EEF2D1A47F50070AF49 /* DisplayWebController.swift */; };
@@ -335,6 +337,8 @@
 		FAC761862D87F82500636660 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		FAC761892D87FD3D00636660 /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		FAD0ABB42C992C0200608D7F /* Note + Read.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note + Read.swift"; sourceTree = "<group>"; };
+		FAD109A72DC8599200278B1B /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
+		FAD109A92DC85A4A00278B1B /* KeychainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainViewController.swift; sourceTree = "<group>"; };
 		FAD38F2E2D14132200588DFA /* TransactionTypesEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTypesEnum.swift; sourceTree = "<group>"; };
 		FAE400DD2C7D8CC4001D031F /* UIImageView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView + Extension.swift"; sourceTree = "<group>"; };
 		FAE4A5092DA6252B007D035A /* NavigationBarAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarAppearance.swift; sourceTree = "<group>"; };
@@ -484,6 +488,7 @@
 				FAA931792D9BC3160013B51D /* NIDScannerVC.swift */,
 				FAA9317B2D9BD1BE0013B51D /* GenerteQRAndBarCodeVC.swift */,
 				FA69708C2DA8C208001B340D /* UploadImageViewController.swift */,
+				FAD109A92DC85A4A00278B1B /* KeychainViewController.swift */,
 			);
 			path = DemoScreen;
 			sourceTree = "<group>";
@@ -553,6 +558,7 @@
 				FAA0F0072D8019A900FE4A23 /* FileDownloader.swift */,
 				FAE4A5092DA6252B007D035A /* NavigationBarAppearance.swift */,
 				FA69708A2DA8C1CB001B340D /* UploadImageManager.swift */,
+				FAD109A72DC8599200278B1B /* KeychainManager.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -1362,6 +1368,7 @@
 				FA1ADC482D9395B500B606D1 /* NetworkMonitor.swift in Sources */,
 				FA992E9D2CF8BE98007B2EB8 /* Loading.swift in Sources */,
 				FA992E9E2CF8BE98007B2EB8 /* Endpoints.swift in Sources */,
+				FAD109AA2DC85A4A00278B1B /* KeychainViewController.swift in Sources */,
 				FAB041E92D6EEFEB002737F8 /* AnimateUIView.swift in Sources */,
 				FA69708D2DA8C208001B340D /* UploadImageViewController.swift in Sources */,
 				FA992E9F2CF8BE98007B2EB8 /* ApiManager.swift in Sources */,
@@ -1411,6 +1418,7 @@
 				FA992ECF2CF8BE98007B2EB8 /* PreventionVC.swift in Sources */,
 				FA992ED42CF8BE98007B2EB8 /* AESUtils.swift in Sources */,
 				FA992ED52CF8BE98007B2EB8 /* DataManager.swift in Sources */,
+				FAD109A82DC8599200278B1B /* KeychainManager.swift in Sources */,
 				FAA99BE62D9FE7C80058272B /* FirebaseManager.swift in Sources */,
 				FA992ED72CF8BE98007B2EB8 /* DateManager.swift in Sources */,
 				FAA9317C2D9BD1BE0013B51D /* GenerteQRAndBarCodeVC.swift in Sources */,
