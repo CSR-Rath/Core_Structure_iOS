@@ -41,7 +41,7 @@ enum TransactionTypeEnum: String {
 
 // MARK: - Extension
 extension String {
-    //let hello = "hello".localizeString()
+
     func localizeString() -> String {
         let lang = UserDefaults.standard.string(forKey: keyLanguageType)
         let path = Bundle.main.path(forResource: lang, ofType: "lproj")
@@ -108,6 +108,7 @@ class AppManager{
         let currentType: TransactionTypeEnum = TransactionTypeEnum(rawValue: type) ?? .payment
         completion(currentType)
     }
+    
 }
 
 

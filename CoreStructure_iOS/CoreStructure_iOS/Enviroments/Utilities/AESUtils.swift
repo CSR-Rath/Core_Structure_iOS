@@ -45,6 +45,7 @@ class AESUtils{
                        initializationVector: IVectorEnum) -> String {
         let result = value.aesEncrypt(key: key256,
                                       initializationVector: initializationVector)
+        print("Result encryptionAES ==> \(result ?? "")")
         return result ?? ""
     }
     
@@ -53,6 +54,7 @@ class AESUtils{
                        initializationVector: IVectorEnum) -> String {
         let result = value.aesDecrypt(key: key256,
                                       initializationVector: initializationVector)
+        print("Result decryptionAES ==> \(result ?? "")")
         return result ?? ""
     }
 }

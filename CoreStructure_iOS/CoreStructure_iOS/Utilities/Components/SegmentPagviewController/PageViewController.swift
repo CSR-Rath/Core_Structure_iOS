@@ -86,7 +86,6 @@ class PageViewController: UIPageViewController, UIPageViewControllerDataSource, 
 }
 
 
-
 class ViewController12: UIViewController {
     
     let pageVC = PageViewController()
@@ -102,7 +101,6 @@ class ViewController12: UIViewController {
         let page3 = ThirdViewController()
         
         pageVC.setupPages(pages: [page1, page2, page3], currentIndex: 1)
-        
     }
     
     func setupPageViewController() {

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BaseTextFieldFormatePhoneNumber: UITextField, UITextFieldDelegate {
+class TextFieldFormatePhoneNumber: UITextField, UITextFieldDelegate {
     
     var textDidChange: ((_ : String) -> ())?
     var isComplete: ((_ : Bool) -> ())?
@@ -35,9 +35,9 @@ class BaseTextFieldFormatePhoneNumber: UITextField, UITextFieldDelegate {
     }
     
     
-    func textFieldDidChangeSelection(_ textField: UITextField) {
-        print("textFieldDidChangeSelection \(String(describing: textField.text))")
-    }
+//    func textFieldDidChangeSelection(_ textField: UITextField) {
+//        print("textFieldDidChangeSelection \(String(describing: textField.text))")
+//    }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
@@ -87,41 +87,58 @@ class BaseTextFieldFormatePhoneNumber: UITextField, UITextFieldDelegate {
         return false  // Prevent default text change
     }
     
-}
-
-public func formatter(mask: String, phoneNumber: String) -> String {
-    let number = phoneNumber.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
-    var result:String = ""
-    var index = number.startIndex
-    
-    for character in mask where index < number.endIndex {
-        if character == "X"{
-            result.append(number[index])
-            index = number.index(after: index)
-        }else {
-            result.append(character)
+    private func formatter(mask: String, phoneNumber: String) -> String {
+       
+        let number = phoneNumber.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
+        var result:String = ""
+        var index = number.startIndex
+        
+        for character in mask where index < number.endIndex {
+            if character == "X"{
+                result.append(number[index])
+                index = number.index(after: index)
+            }else {
+                result.append(character)
+            }
         }
+        
+        return result
     }
     
-    return result
 }
+
+//public func formatter(mask: String, phoneNumber: String) -> String {
+//    let number = phoneNumber.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
+//    var result:String = ""
+//    var index = number.startIndex
+//    
+//    for character in mask where index < number.endIndex {
+//        if character == "X"{
+//            result.append(number[index])
+//            index = number.index(after: index)
+//        }else {
+//            result.append(character)
+//        }
+//    }
+//    
+//    return result
+//}
 
 
 class PhoneNumberTextFieldVC: UIViewController {
     
-    var phoneNumberTextField: BaseTextFieldFormatePhoneNumber!
+    var phoneNumberTextField: TextFieldFormatePhoneNumber!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupPhoneNumberTextField()
-//        leftBarButtonItemAnimation()
         leftBarButtonItem()
     }
     
     func setupPhoneNumberTextField() {
         // Create a UITextField programmatically
-        phoneNumberTextField = BaseTextFieldFormatePhoneNumber()
+        phoneNumberTextField = TextFieldFormatePhoneNumber()
         phoneNumberTextField.placeholder = "Enter phone number"
         phoneNumberTextField.borderStyle = .roundedRect
         phoneNumberTextField.keyboardType = .numberPad // Ensure this is set for number input
@@ -142,6 +159,4 @@ class PhoneNumberTextFieldVC: UIViewController {
         // Optionally, you can make the text field first responder to test the input
         phoneNumberTextField.becomeFirstResponder()
     }
-    
-    
 }

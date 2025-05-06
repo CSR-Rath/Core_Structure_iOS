@@ -80,7 +80,7 @@ class BaseUIButtonIcon: BaseUIButtonAnimation{
                       bottom: CGFloat = 0,
                       right: CGFloat = 0
     ){
-        
+    
         stackContainer.layoutMargins = UIEdgeInsets(top: top,
                                                     left: left,
                                                     bottom: bottom,

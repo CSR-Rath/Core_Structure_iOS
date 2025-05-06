@@ -7,14 +7,21 @@
 
 //Referent ==> https://medium.com/@tejaswini-27k/ios-project-different-environments-xcode-configurations-and-scheme-752ee4404bfa
 
+// MARK: All key, We need add in info(example: BASE_URL : $(BASE_URL) )
+
 BASE_URL = http:/$()/192.168.0.110:1110/api/
 
 API_KEY = AIzaSyB7phb_51lTr2yjxAeY0flXXiE_w2q2tFM
 
 BUNDLE_ID = com.rath.CoreStructure-iOS
 
-
 Bundle_Display_Name = DEV
+
+
+
+
+
+
 
 // Key AES
 

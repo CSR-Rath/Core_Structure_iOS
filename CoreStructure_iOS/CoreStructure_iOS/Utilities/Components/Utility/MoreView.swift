@@ -98,9 +98,7 @@ class MoreView: UIView{
                 self.actionView.transform = CGAffineTransform.identity
             }
         }
-        
     }
-    
     
     private func setupUI(){
         addSubview(lblName)
@@ -124,4 +122,5 @@ class MoreView: UIView{
             imageNext.widthAnchor.constraint(equalToConstant: 15),
         ])
     }
+    
 }

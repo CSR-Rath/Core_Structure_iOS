@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 //ត្រីកោណកែង
 class TriangleView: UIView {
 
