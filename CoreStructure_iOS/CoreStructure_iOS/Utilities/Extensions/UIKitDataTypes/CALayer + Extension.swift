@@ -70,9 +70,13 @@ extension Date {
         let diff = Calendar.current.dateComponents([.weekOfYear], from: self, to: Date()).weekOfYear ?? 0
         return "\(diff)\(" week")"
     }
+
     
-    func currentTimeMillis() -> Int64 {
-        return Int64(self.timeIntervalSince1970 * 1000)
+}
+
+
+extension Date{
+    func currentTimeMillis() -> Int {
+        return Int(self.timeIntervalSince1970 * 1000)
     }
-    
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA0E74B52DD1901000113F2A /* TwoButtonSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0E74B42DD1901000113F2A /* TwoButtonSegmentView.swift */; };
 		FA165E1F2D8BB0B20006D5D9 /* BecomeFirstResponderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA165E1E2D8BB0B20006D5D9 /* BecomeFirstResponderVC.swift */; };
 		FA1ADC482D9395B500B606D1 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1ADC472D9395B500B606D1 /* NetworkMonitor.swift */; };
 		FA2123142D5EFF840001AAE6 /* BaseUIButtonIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2123132D5EFF830001AAE6 /* BaseUIButtonIcon.swift */; };
@@ -31,6 +32,7 @@
 		FA883E6F2D1D56D800F39E4B /* BaseInteractionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA883E6E2D1D56D800F39E4B /* BaseInteractionController.swift */; };
 		FA88F1712CF9BD0000B37C73 /* DashedLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA88F1702CF9BD0000B37C73 /* DashedLineView.swift */; };
 		FA88F1732CF9C04800B37C73 /* TriangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA88F1722CF9C04800B37C73 /* TriangleView.swift */; };
+		FA924EF12DD1F678007A73F7 /* JTAppleCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = FA924EF02DD1F678007A73F7 /* JTAppleCalendar */; };
 		FA96D8FA2D9E7BE1006F28DB /* CreateDBFeribaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA96D8F82D9E7BE1006F28DB /* CreateDBFeribaseViewController.swift */; };
 		FA96D8FB2D9E7BE1006F28DB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA96D8F92D9E7BE1006F28DB /* LoginViewController.swift */; };
 		FA9862CE2D81347C00BAFF9A /* ImagesLocalizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9862CD2D81347C00BAFF9A /* ImagesLocalizable.swift */; };
@@ -212,6 +214,7 @@
 		FA068B102C97EA31006A5A58 /* OneTimeCodeTextFieldExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OneTimeCodeTextFieldExtension.swift; sourceTree = "<group>"; };
 		FA068B112C97EA31006A5A58 /* OneTimeCodeTextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OneTimeCodeTextFieldDelegate.swift; sourceTree = "<group>"; };
 		FA068B122C97EA31006A5A58 /* OneTimeCodeTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OneTimeCodeTextField.swift; sourceTree = "<group>"; };
+		FA0E74B42DD1901000113F2A /* TwoButtonSegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoButtonSegmentView.swift; sourceTree = "<group>"; };
 		FA11394E2CBCF35600F76FF2 /* MainPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageVC.swift; sourceTree = "<group>"; };
 		FA1627642CED78A500418ECD /* CALayer + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer + Extension.swift"; sourceTree = "<group>"; };
 		FA165E1E2D8BB0B20006D5D9 /* BecomeFirstResponderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BecomeFirstResponderVC.swift; sourceTree = "<group>"; };
@@ -369,6 +372,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAC143202D7ADB0C007E3EC0 /* ImageSlideshow/SDWebImage in Frameworks */,
+				FA924EF12DD1F678007A73F7 /* JTAppleCalendar in Frameworks */,
 				FAC1431C2D7ADB0C007E3EC0 /* ImageSlideshow/Alamofire in Frameworks */,
 				FA49D7A22D7FD8D9008B7AF3 /* Pods_CoreStructure_iOS.framework in Frameworks */,
 				FAC1431A2D7ADB0C007E3EC0 /* ImageSlideshow in Frameworks */,
@@ -560,6 +564,7 @@
 				FAE4A5092DA6252B007D035A /* NavigationBarAppearance.swift */,
 				FA69708A2DA8C1CB001B340D /* UploadImageManager.swift */,
 				FAD109A72DC8599200278B1B /* KeychainManager.swift */,
+				FA0E74B42DD1901000113F2A /* TwoButtonSegmentView.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -1245,6 +1250,7 @@
 				FAC1431B2D7ADB0C007E3EC0 /* ImageSlideshow/Alamofire */,
 				FAC1431D2D7ADB0C007E3EC0 /* ImageSlideshow/Kingfisher */,
 				FAC1431F2D7ADB0C007E3EC0 /* ImageSlideshow/SDWebImage */,
+				FA924EF02DD1F678007A73F7 /* JTAppleCalendar */,
 			);
 			productName = CoreStructure_iOS;
 			productReference = FA494B9A2C69EB9C0086D346 /* CoreStructure_iOS.app */;
@@ -1277,6 +1283,7 @@
 			mainGroup = FA494B912C69EB9B0086D346;
 			packageReferences = (
 				FAC143182D7ADB0B007E3EC0 /* XCRemoteSwiftPackageReference "ImageSlideshow" */,
+				FA924EEF2DD1F677007A73F7 /* XCRemoteSwiftPackageReference "JTAppleCalendar" */,
 			);
 			productRefGroup = FA494B9B2C69EB9C0086D346 /* Products */;
 			projectDirPath = "";
@@ -1365,6 +1372,7 @@
 				FAA99BE32D9FC7140058272B /* SingleSelectView.swift in Sources */,
 				FA992E9C2CF8BE98007B2EB8 /* AppConfiguration.swift in Sources */,
 				FABB3A3A2D6EBE520007656A /* ContentSizedTableView.swift in Sources */,
+				FA0E74B52DD1901000113F2A /* TwoButtonSegmentView.swift in Sources */,
 				FA1ADC482D9395B500B606D1 /* NetworkMonitor.swift in Sources */,
 				FA992E9D2CF8BE98007B2EB8 /* Loading.swift in Sources */,
 				FA992E9E2CF8BE98007B2EB8 /* Endpoints.swift in Sources */,
@@ -1895,6 +1903,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		FA924EEF2DD1F677007A73F7 /* XCRemoteSwiftPackageReference "JTAppleCalendar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/patchthecode/JTAppleCalendar";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.5;
+			};
+		};
 		FAC143182D7ADB0B007E3EC0 /* XCRemoteSwiftPackageReference "ImageSlideshow" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/zvonicek/ImageSlideshow.git";
@@ -1906,6 +1922,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		FA924EF02DD1F678007A73F7 /* JTAppleCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FA924EEF2DD1F677007A73F7 /* XCRemoteSwiftPackageReference "JTAppleCalendar" */;
+			productName = JTAppleCalendar;
+		};
 		FAC143192D7ADB0C007E3EC0 /* ImageSlideshow */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = FAC143182D7ADB0B007E3EC0 /* XCRemoteSwiftPackageReference "ImageSlideshow" */;

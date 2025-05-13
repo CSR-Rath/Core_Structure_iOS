@@ -96,14 +96,16 @@ class ViewController12: UIViewController {
         setupPageViewController()
         setupButtons()
         
+  
+    }
+    
+    func setupPageViewController() {
+        
         let page1 = FirstViewController()
         let page2 = SecondViewController()
         let page3 = ThirdViewController()
         
         pageVC.setupPages(pages: [page1, page2, page3], currentIndex: 1)
-    }
-    
-    func setupPageViewController() {
         addChild(pageVC)
         view.addSubview(pageVC.view)
         pageVC.didMove(toParent: self)
@@ -145,3 +147,6 @@ class ViewController12: UIViewController {
     }
     
 }
+
+
+

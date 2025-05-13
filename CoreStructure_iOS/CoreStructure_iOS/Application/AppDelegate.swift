@@ -17,8 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         printFontsName()
-        Language.shared.setLanguage(langCode: .english) // english default
-        configureNotification(application: application) // notivication
+        Language.shared.setLanguage(langCode: .english) // set language
+        configureNotification(application: application) // configure នotification
         print("didFinishLaunchingWithOptions")
         
         if #available(iOS 13.0, *) {

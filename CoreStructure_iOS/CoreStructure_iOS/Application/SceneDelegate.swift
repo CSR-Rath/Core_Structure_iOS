@@ -42,7 +42,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     private func rootViewController(){
 
-        let controller: UIViewController = ViewController12()
+        let controller: UIViewController = DayRangeSelectionDemoViewController(monthsLayout: .horizontal(options: .init()))
         let navigation = UINavigationController(rootViewController: controller)
         window!.rootViewController = navigation
         window!.makeKeyAndVisible()
@@ -81,6 +81,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             }
         }
     }
+    
 }
 
 extension SceneDelegate {
