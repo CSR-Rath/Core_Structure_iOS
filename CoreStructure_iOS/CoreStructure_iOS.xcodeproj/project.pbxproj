@@ -88,9 +88,7 @@
 		FA992EE62CF8BE98007B2EB8 /* Float + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4775B82C7C22B3002DC134 /* Float + Extension.swift */; };
 		FA992EE72CF8BE98007B2EB8 /* String + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4775B42C7C2289002DC134 /* String + Extension.swift */; };
 		FA992EE82CF8BE98007B2EB8 /* Double + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4775B62C7C2295002DC134 /* Double + Extension.swift */; };
-		FA992EE92CF8BE98007B2EB8 /* UITextField  + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA87CD9B2C79A08D00349364 /* UITextField  + Extension.swift */; };
 		FA992EEA2CF8BE98007B2EB8 /* UIView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4775C32C7C8EDB002DC134 /* UIView + Extension.swift */; };
-		FA992EEB2CF8BE98007B2EB8 /* UILabel + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4775AC2C7C1BA4002DC134 /* UILabel + Extension.swift */; };
 		FA992EEC2CF8BE98007B2EB8 /* UIColor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2B10872CB785690095CDB1 /* UIColor + Extension.swift */; };
 		FA992EED2CF8BE98007B2EB8 /* UIImage + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA87CD992C79A08100349364 /* UIImage + Extension.swift */; };
 		FA992EEE2CF8BE98007B2EB8 /* UIDevice + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA36BAEA2C7EBD8A005A49C5 /* UIDevice + Extension.swift */; };
@@ -145,6 +143,8 @@
 		FAA99BE32D9FC7140058272B /* SingleSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA99BE22D9FC7140058272B /* SingleSelectView.swift */; };
 		FAA99BE62D9FE7C80058272B /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA99BE52D9FE7C80058272B /* FirebaseManager.swift */; };
 		FAAA89802DF0460100CA216D /* BaseUIViewConroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAA897F2DF0460100CA216D /* BaseUIViewConroller.swift */; };
+		FAAA89832DF04EBE00CA216D /* UIFont + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAA89822DF04EBE00CA216D /* UIFont + Extension.swift */; };
+		FAAA89872DF056B000CA216D /* UILabel + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAA89852DF056B000CA216D /* UILabel + Extension.swift */; };
 		FAB041E22D6EEDFA002737F8 /* CreateUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB041E12D6EEDFA002737F8 /* CreateUIView.swift */; };
 		FAB041E42D6EEF12002737F8 /* ActionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB041E32D6EEF12002737F8 /* ActionUIView.swift */; };
 		FAB041E62D6EEF80002737F8 /* ConditionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB041E52D6EEF80002737F8 /* ConditionUIView.swift */; };
@@ -242,7 +242,6 @@
 		FA45CE562C92D765000DA118 /* dev.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = dev.xcconfig; sourceTree = "<group>"; };
 		FA45CE572C92D77B000DA118 /* uat.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = uat.xcconfig; sourceTree = "<group>"; };
 		FA45CE582C92D78B000DA118 /* pro.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = pro.xcconfig; sourceTree = "<group>"; };
-		FA4775AC2C7C1BA4002DC134 /* UILabel + Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel + Extension.swift"; sourceTree = "<group>"; };
 		FA4775B12C7C1FC8002DC134 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		FA4775B42C7C2289002DC134 /* String + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Extension.swift"; sourceTree = "<group>"; };
 		FA4775B62C7C2295002DC134 /* Double + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double + Extension.swift"; sourceTree = "<group>"; };
@@ -297,7 +296,6 @@
 		FA87CD8B2C79A01A00349364 /* UITableViewCell + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell + Extension.swift"; sourceTree = "<group>"; };
 		FA87CD8D2C79A02700349364 /* UICollectionViewCell + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell + Extension.swift"; sourceTree = "<group>"; };
 		FA87CD992C79A08100349364 /* UIImage + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + Extension.swift"; sourceTree = "<group>"; };
-		FA87CD9B2C79A08D00349364 /* UITextField  + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField  + Extension.swift"; sourceTree = "<group>"; };
 		FA883E6E2D1D56D800F39E4B /* BaseInteractionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInteractionController.swift; sourceTree = "<group>"; };
 		FA88C16B2CDE7E1A00E006D0 /* DragDropTableViewCellContoler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragDropTableViewCellContoler.swift; sourceTree = "<group>"; };
 		FA88D4082CDB5B65004EE80F /* SegmentPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentPageViewController.swift; sourceTree = "<group>"; };
@@ -336,6 +334,8 @@
 		FAA99BE52D9FE7C80058272B /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		FAAA11862CDFC01F00EA15E3 /* NotificationName + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName + Extension.swift"; sourceTree = "<group>"; };
 		FAAA897F2DF0460100CA216D /* BaseUIViewConroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUIViewConroller.swift; sourceTree = "<group>"; };
+		FAAA89822DF04EBE00CA216D /* UIFont + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont + Extension.swift"; sourceTree = "<group>"; };
+		FAAA89852DF056B000CA216D /* UILabel + Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel + Extension.swift"; sourceTree = "<group>"; };
 		FAB041E12D6EEDFA002737F8 /* CreateUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUIView.swift; sourceTree = "<group>"; };
 		FAB041E32D6EEF12002737F8 /* ActionUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionUIView.swift; sourceTree = "<group>"; };
 		FAB041E52D6EEF80002737F8 /* ConditionUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionUIView.swift; sourceTree = "<group>"; };
@@ -607,7 +607,8 @@
 			isa = PBXGroup;
 			children = (
 				FAC5048F2D5DF9CF00DBC271 /* UIView + Extension */,
-				FADDCC8E2D62D9CA00120D69 /* Fonts */,
+				FAAA89822DF04EBE00CA216D /* UIFont + Extension.swift */,
+				FAAA89852DF056B000CA216D /* UILabel + Extension.swift */,
 				FA2B10872CB785690095CDB1 /* UIColor + Extension.swift */,
 				FA2B10912CB78C000095CDB1 /* UserDefaults + Extension.swift */,
 				FA87CD992C79A08100349364 /* UIImage + Extension.swift */,
@@ -1177,15 +1178,6 @@
 			path = PaymentDeepLink;
 			sourceTree = "<group>";
 		};
-		FADDCC8E2D62D9CA00120D69 /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				FA4775AC2C7C1BA4002DC134 /* UILabel + Extension.swift */,
-				FA87CD9B2C79A08D00349364 /* UITextField  + Extension.swift */,
-			);
-			path = Fonts;
-			sourceTree = "<group>";
-		};
 		FAF489612D9CE5FA00B20CE6 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -1431,6 +1423,7 @@
 				FA88F1732CF9C04800B37C73 /* TriangleView.swift in Sources */,
 				FA992EBC2CF8BE98007B2EB8 /* DragDropCollectionVC.swift in Sources */,
 				FA8534832D37AD90006A3688 /* HomeABAViewController.swift in Sources */,
+				FAAA89832DF04EBE00CA216D /* UIFont + Extension.swift in Sources */,
 				FA992EBD2CF8BE98007B2EB8 /* ExpandedMultipleSectionCell.swift in Sources */,
 				FABE50472DEEA5A200F7C0B0 /* TwoColorsTopBottomVC.swift in Sources */,
 				FA992EBE2CF8BE98007B2EB8 /* ExspandTableVC.swift in Sources */,
@@ -1476,10 +1469,9 @@
 				FA992EE62CF8BE98007B2EB8 /* Float + Extension.swift in Sources */,
 				FA992EE72CF8BE98007B2EB8 /* String + Extension.swift in Sources */,
 				FA992EE82CF8BE98007B2EB8 /* Double + Extension.swift in Sources */,
+				FAAA89872DF056B000CA216D /* UILabel + Extension.swift in Sources */,
 				FA3C20972D9F934600F6CD96 /* AddProductViewController.swift in Sources */,
-				FA992EE92CF8BE98007B2EB8 /* UITextField  + Extension.swift in Sources */,
 				FA992EEA2CF8BE98007B2EB8 /* UIView + Extension.swift in Sources */,
-				FA992EEB2CF8BE98007B2EB8 /* UILabel + Extension.swift in Sources */,
 				FA992EEC2CF8BE98007B2EB8 /* UIColor + Extension.swift in Sources */,
 				FA992EED2CF8BE98007B2EB8 /* UIImage + Extension.swift in Sources */,
 				FAC504832D5DCC6600DBC271 /* CustomSearchBar.swift in Sources */,

@@ -12,13 +12,9 @@ private let keyAccountType: String = "ACCOUNT_TYPE"
 private let keyNotificationType: String = "NOTIFICATION_TYPE"
 private let keyTransactionType: String = "TANSACTION"
 private let keyLanguageType: String = "LANGUAGE_TYPE"
-private let keyLanguage = "LANGUAGE"
 
-// MARK: - Enum Type
-enum LanguageTypeEnum: String {
-    case khmer = "km"
-    case english = "en"
-}
+
+
 
 enum AccountTypeEnum: String {
     case generalAccount = "GENERAL_ACCOUNT"
@@ -50,66 +46,80 @@ extension String {
     }
 }
 
-// MARK: - Class
-class FontNameManager{
-    // MARK: - Font English
-    static let Roboto_Regular =  "Roboto-Regular"
-    static let Roboto_Medium = "Roboto-Medium"
-    static let Roboto_Bold =  "Roboto-Bold"
-    
-    // MARK: - Font Khmer
-    static let NotoSansKhmer_Regular = "NotoSansKhmer-Regular"
-    static let NotoSansKhmer_Medium = "NotoSansKhmer-Medium"
-    static let NotoSansKhmer_Bold =  "NotoSansKhmer-Bold"
+
+// MARK: - Enum Type
+enum LanguageTypeEnum: String {
+    case khmer = "km"
+    case english = "en"
+    case chinese = "zh"
 }
 
+enum FontNameEnum {
 
-enum FontName {
-    enum English {
+    enum EnglishEnum {
+        static let light = "Roboto-Light"
         static let regular = "Roboto-Regular"
         static let medium = "Roboto-Medium"
+        static let semibold = "Roboto-SemiBold"
         static let bold = "Roboto-Bold"
+        static let italic = "Roboto-Italic"
     }
 
-    enum Khmer {
+    enum KhmerEnum {
+        static let light = "NotoSansKhmer-Light"
         static let regular = "NotoSansKhmer-Regular"
         static let medium = "NotoSansKhmer-Medium"
+        static let semibold = "NotoSansKhmer-SemiBold"
         static let bold = "NotoSansKhmer-Bold"
+    }
+
+    enum ChineseEnum {
+        static let light = "PingFangSC-Light"
+        static let regular = "PingFangSC-Regular"
+        static let medium = "PingFangSC-Medium"
+        static let semibold = "PingFangSC-Semibold"
+        static let bold = "PingFangSC-Bold"
     }
 }
 
 
-class LanguageManager{
+class LanguageManager {
     
     static let shared = LanguageManager()
     
-    private init() {} // prevent external init
+    private let keyLanguage = "LANGUAGE"
     
-    func setLanguage(langCode: LanguageTypeEnum) {
-        UserDefaults.standard.setValue(langCode.rawValue, forKey: keyLanguage)
+    private init() {} // Prevent external initialization
+    
+    // Save selected language
+    func setLanguage(_ lang: LanguageTypeEnum) {
+        UserDefaults.standard.setValue(lang.rawValue, forKey: keyLanguage)
     }
     
-    func getLanguageType() -> String{
-        return UserDefaults.standard.string(forKey: keyLanguage) ?? "en"
+    // Get language raw value (e.g. "en")
+    func getLanguageCode() -> String {
+        return UserDefaults.standard.string(forKey: keyLanguage) ?? LanguageTypeEnum.english.rawValue
     }
     
-    func getLanguageTypes(completion: @escaping (_ languageType: LanguageTypeEnum) -> Void) {
-        let type = UserDefaults.standard.string(forKey: keyLanguageType) ?? "en"
-        let currentType: LanguageTypeEnum = LanguageTypeEnum(rawValue: type) ?? .english
-        completion(currentType)
+    // Get current language as enum type
+    func getCurrentLanguage() -> LanguageTypeEnum {
+        let rawValue = UserDefaults.standard.string(forKey: keyLanguage) ?? LanguageTypeEnum.english.rawValue
+        return LanguageTypeEnum(rawValue: rawValue) ?? .english
     }
     
+    // Optional: async style completion (but generally unnecessary here)
+    func getCurrentLanguage(completion: @escaping (LanguageTypeEnum) -> Void) {
+        let lang = getCurrentLanguage()
+        completion(lang)
+    }
 }
+
 
 
 class AppManager{
     
     static let shared = AppManager()
-    
-    func setLanguageTypes(langCode: LanguageTypeEnum) {
-        UserDefaults.standard.setValue(langCode.rawValue, forKey: keyLanguageType)
-    }
-    
+
     
     func getAccountTypes(completion: @escaping (_ accountType: AccountTypeEnum) -> Void) {
         let type = UserDefaults.standard.string(forKey: keyAccountType) ?? ""

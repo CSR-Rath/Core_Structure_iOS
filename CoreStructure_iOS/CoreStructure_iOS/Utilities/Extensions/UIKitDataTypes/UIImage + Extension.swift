@@ -26,7 +26,6 @@ extension UIImage {
         return roundedImage
     }
     
-    
     func imageToString() -> String {
         guard let image = CIImage(image: self) else {
             return "==> Empty Stirng"

@@ -47,12 +47,9 @@ class DemoFeatureVC: UIViewController, UIGestureRecognizerDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        NavigationBarAppearance.shared.navigationBarAppearance(titleColor: .black,
-//                                                               barAppearanceColor: .orange,
-//                                                               shadowColor: .clear)
         self.navigationBarAppearance(titleColor: .black,
                                      barAppearanceColor: .orange,
-                                     shadowColor: .clear)
+                                     shadowColorLine: .clear)
     }
 
     @objc func rightButtonTapped() {

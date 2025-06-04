@@ -38,6 +38,18 @@ extension UIViewController{
         )
     }
     
+    @objc private func leftBarButtonItemAction() {
+    
+        if (self.navigationController?.presentingViewController) != nil {
+            self.dismiss(animated: true)
+        } else {
+            self.navigationController?.popViewController(animated: true)
+        }
+        
+        print("Action ==> back button")
+    }
+    
+    
     func rightBarButtonItem(action: Selector = #selector(leftBarButtonItemAction),
                             iconButton: IconButtonBar = .close){
         
@@ -54,18 +66,11 @@ extension UIViewController{
         )
     }
     
-    @objc private func leftBarButtonItemAction() {
-    
-        if (self.navigationController?.presentingViewController) != nil {
-            self.dismiss(animated: true)
-        } else {
-            self.navigationController?.popViewController(animated: true)
-        }
-        
-        print("Action ==> back button")
-    }
-    
-    func navigationBarAppearance(titleColor: UIColor, barAppearanceColor: UIColor, shadowColor: UIColor){
+   
+    func navigationBarAppearance(titleColor: UIColor = .black,
+                                 barAppearanceColor: UIColor = .clear,
+                                 shadowColorLine: UIColor = .clear
+    ){
         
         let setupFont: UIFont = UIFont.systemFont(ofSize: 16,weight: .bold)
         let largeFont: UIFont = UIFont.systemFont(ofSize: 34,weight: .bold)
@@ -84,7 +89,7 @@ extension UIViewController{
         
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = barAppearanceColor
-        appearance.shadowColor = shadowColor// barColor ?? .mainBlueColor // line appearenc bar
+        appearance.shadowColor = shadowColorLine// barColor ?? .mainBlueColor // line appearenc bar
         
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance

@@ -78,7 +78,7 @@ class FloatingLabelTextField: UITextField, UITextFieldDelegate {
     
     private let label: SSPaddingLabel = {
         let label = SSPaddingLabel()
-        label.fontMedium(14)
+        label.font = UIFont.appFont(style: .bold, size: 14)
         label.textColor = .black
         label.backgroundColor = .white
         label.text = "Title"

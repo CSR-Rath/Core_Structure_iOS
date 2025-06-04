@@ -167,7 +167,7 @@ class HomeABAViewController: UIViewController, UIGestureRecognizerDelegate{
         navigationController?.interactivePopGestureRecognizer?.delegate = self
         self.navigationBarAppearance(titleColor: .black,
                                      barAppearanceColor: .white,
-                                     shadowColor: .clear)
+                                     shadowColorLine: .clear)
     }
 
 }

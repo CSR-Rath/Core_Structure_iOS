@@ -58,11 +58,11 @@ extension Double {
     }
     
     var toCurrencyAsKHR: String {
-        return formatCurrency(currencyCode: "KHR", localeIdentifier: "km_KH", isLocalized: LanguageManager.shared.getLanguageType() != "en")
+        return formatCurrency(currencyCode: "KHR", localeIdentifier: "km_KH", isLocalized: LanguageManager.shared.getLanguageCode() != "en")
     }
     
     var toCurrencyAsUSD: String {
-        return formatCurrency(currencyCode: "USD", localeIdentifier: "en_US", isLocalized: LanguageManager.shared.getLanguageType() != "en")
+        return formatCurrency(currencyCode: "USD", localeIdentifier: "en_US", isLocalized: LanguageManager.shared.getLanguageCode() != "en")
     }
     var toLiter: String {
          let numberFormatter = NumberFormatter()
