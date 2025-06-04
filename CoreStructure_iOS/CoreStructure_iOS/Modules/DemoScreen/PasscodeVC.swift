@@ -343,87 +343,87 @@ class PreventScreenVC: UIViewController{
 
 
 
-
-import UIKit
-import FirebaseAuth
-
-class AuthViewController: UIViewController {
-    let phoneTextField = UITextField()
-    let sendOTPButton = UIButton()
-    let otpTextField = UITextField()
-    let verifyOTPButton = UIButton()
-    var verificationID: String?
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .white
-        setupUI()
-    }
-
-    func setupUI() {
-        phoneTextField.placeholder = "Enter Phone Number"
-        phoneTextField.borderStyle = .roundedRect
-        phoneTextField.keyboardType = .phonePad
-        phoneTextField.frame = CGRect(x: 20, y: 100, width: 280, height: 40)
-        view.addSubview(phoneTextField)
-
-        sendOTPButton.setTitle("Send OTP", for: .normal)
-        sendOTPButton.backgroundColor = .blue
-        sendOTPButton.frame = CGRect(x: 20, y: 160, width: 280, height: 40)
-        sendOTPButton.addTarget(self, action: #selector(sendOTP), for: .touchUpInside)
-        view.addSubview(sendOTPButton)
-
-        otpTextField.placeholder = "Enter OTP"
-        otpTextField.borderStyle = .roundedRect
-        otpTextField.keyboardType = .numberPad
-        otpTextField.frame = CGRect(x: 20, y: 220, width: 280, height: 40)
-        view.addSubview(otpTextField)
-
-        verifyOTPButton.setTitle("Verify OTP", for: .normal)
-        verifyOTPButton.backgroundColor = .green
-        verifyOTPButton.frame = CGRect(x: 20, y: 280, width: 280, height: 40)
-        verifyOTPButton.addTarget(self, action: #selector(verifyOTP), for: .touchUpInside)
-        view.addSubview(verifyOTPButton)
-    }
-
-    @objc func sendOTP() {
-        guard var phoneNumber = phoneTextField.text, !phoneNumber.isEmpty else {
-            print("Enter a valid phone number")
-            return
-        }
-        
-        if phoneNumber.first == "0" {
-            phoneNumber.removeFirst()
-        }
-        
-        PhoneAuthProvider.provider().verifyPhoneNumber("+855" + phoneNumber, uiDelegate: nil) { verificationID, error in
-            if let error = error {
-                print("Error sending OTP: \(error.localizedDescription)")
-                return
-            }
-            self.verificationID = verificationID
-            print("OTP Sent!")
-        }
-    }
-
-    @objc func verifyOTP() {
-        guard let verificationID = verificationID, let otpCode = otpTextField.text, !otpCode.isEmpty else {
-            print("Enter OTP")
-            return
-        }
-
-        let credential = PhoneAuthProvider.provider().credential(
-            withVerificationID: verificationID,
-            verificationCode: otpCode
-        )
-
-        Auth.auth().signIn(with: credential) { authResult, error in
-            if let error = error {
-                print("Error verifying OTP: \(error.localizedDescription)")
-                return
-            }
-            print("User signed in successfully: \(authResult?.user.phoneNumber ?? "")")
-        }
-    }
-    
-}
+//
+//import UIKit
+//import FirebaseAuth
+//
+//class AuthViewController: UIViewController {
+//    let phoneTextField = UITextField()
+//    let sendOTPButton = UIButton()
+//    let otpTextField = UITextField()
+//    let verifyOTPButton = UIButton()
+//    var verificationID: String?
+//
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        view.backgroundColor = .white
+//        setupUI()
+//    }
+//
+//    func setupUI() {
+//        phoneTextField.placeholder = "Enter Phone Number"
+//        phoneTextField.borderStyle = .roundedRect
+//        phoneTextField.keyboardType = .phonePad
+//        phoneTextField.frame = CGRect(x: 20, y: 100, width: 280, height: 40)
+//        view.addSubview(phoneTextField)
+//
+//        sendOTPButton.setTitle("Send OTP", for: .normal)
+//        sendOTPButton.backgroundColor = .blue
+//        sendOTPButton.frame = CGRect(x: 20, y: 160, width: 280, height: 40)
+//        sendOTPButton.addTarget(self, action: #selector(sendOTP), for: .touchUpInside)
+//        view.addSubview(sendOTPButton)
+//
+//        otpTextField.placeholder = "Enter OTP"
+//        otpTextField.borderStyle = .roundedRect
+//        otpTextField.keyboardType = .numberPad
+//        otpTextField.frame = CGRect(x: 20, y: 220, width: 280, height: 40)
+//        view.addSubview(otpTextField)
+//
+//        verifyOTPButton.setTitle("Verify OTP", for: .normal)
+//        verifyOTPButton.backgroundColor = .green
+//        verifyOTPButton.frame = CGRect(x: 20, y: 280, width: 280, height: 40)
+//        verifyOTPButton.addTarget(self, action: #selector(verifyOTP), for: .touchUpInside)
+//        view.addSubview(verifyOTPButton)
+//    }
+//
+//    @objc func sendOTP() {
+//        guard var phoneNumber = phoneTextField.text, !phoneNumber.isEmpty else {
+//            print("Enter a valid phone number")
+//            return
+//        }
+//        
+//        if phoneNumber.first == "0" {
+//            phoneNumber.removeFirst()
+//        }
+//        
+//        PhoneAuthProvider.provider().verifyPhoneNumber("+855" + phoneNumber, uiDelegate: nil) { verificationID, error in
+//            if let error = error {
+//                print("Error sending OTP: \(error.localizedDescription)")
+//                return
+//            }
+//            self.verificationID = verificationID
+//            print("OTP Sent!")
+//        }
+//    }
+//
+//    @objc func verifyOTP() {
+//        guard let verificationID = verificationID, let otpCode = otpTextField.text, !otpCode.isEmpty else {
+//            print("Enter OTP")
+//            return
+//        }
+//
+//        let credential = PhoneAuthProvider.provider().credential(
+//            withVerificationID: verificationID,
+//            verificationCode: otpCode
+//        )
+//
+//        Auth.auth().signIn(with: credential) { authResult, error in
+//            if let error = error {
+//                print("Error verifying OTP: \(error.localizedDescription)")
+//                return
+//            }
+//            print("User signed in successfully: \(authResult?.user.phoneNumber ?? "")")
+//        }
+//    }
+//    
+//}

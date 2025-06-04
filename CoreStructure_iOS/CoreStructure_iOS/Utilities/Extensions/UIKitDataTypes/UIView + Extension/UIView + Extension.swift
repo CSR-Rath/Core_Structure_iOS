@@ -50,5 +50,4 @@ extension UIView{
         field.leftView = view
         field.leftViewMode = .always
     }
-    
 }

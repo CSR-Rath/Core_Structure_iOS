@@ -26,7 +26,9 @@ extension UIImageView {
     // loadingImage = use loading SDWebImage 
     func loadingImage(urlString: String,
                       defaultImage: imageLoadingTypeEnum = .imageEmpty,
-                      style: UIActivityIndicatorView.Style = .medium ) {
+                      style: UIActivityIndicatorView.Style = .medium
+                      
+    ) {
         // Create and configure the activity indicator
         let activityIndicator = UIActivityIndicatorView(style: style)
         activityIndicator.color = .blue

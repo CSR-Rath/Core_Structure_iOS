@@ -30,8 +30,6 @@ extension CALayer {
     }
 }
 
-
-
 extension Date {
     
     func convertDate(format: String) -> String {

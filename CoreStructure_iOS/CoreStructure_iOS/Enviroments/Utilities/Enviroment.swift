@@ -63,9 +63,27 @@ class FontNameManager{
     static let NotoSansKhmer_Bold =  "NotoSansKhmer-Bold"
 }
 
-class Language{
+
+enum FontName {
+    enum English {
+        static let regular = "Roboto-Regular"
+        static let medium = "Roboto-Medium"
+        static let bold = "Roboto-Bold"
+    }
+
+    enum Khmer {
+        static let regular = "NotoSansKhmer-Regular"
+        static let medium = "NotoSansKhmer-Medium"
+        static let bold = "NotoSansKhmer-Bold"
+    }
+}
+
+
+class LanguageManager{
     
-    static let shared = Language()
+    static let shared = LanguageManager()
+    
+    private init() {} // prevent external init
     
     func setLanguage(langCode: LanguageTypeEnum) {
         UserDefaults.standard.setValue(langCode.rawValue, forKey: keyLanguage)
@@ -74,6 +92,13 @@ class Language{
     func getLanguageType() -> String{
         return UserDefaults.standard.string(forKey: keyLanguage) ?? "en"
     }
+    
+    func getLanguageTypes(completion: @escaping (_ languageType: LanguageTypeEnum) -> Void) {
+        let type = UserDefaults.standard.string(forKey: keyLanguageType) ?? "en"
+        let currentType: LanguageTypeEnum = LanguageTypeEnum(rawValue: type) ?? .english
+        completion(currentType)
+    }
+    
 }
 
 
@@ -85,11 +110,6 @@ class AppManager{
         UserDefaults.standard.setValue(langCode.rawValue, forKey: keyLanguageType)
     }
     
-    func getLanguageTypes(completion: @escaping (_ languageType: LanguageTypeEnum) -> Void) {
-        let type = UserDefaults.standard.string(forKey: keyLanguageType) ?? ""
-        let currentType: LanguageTypeEnum = LanguageTypeEnum(rawValue: type) ?? .english
-        completion(currentType)
-    }
     
     func getAccountTypes(completion: @escaping (_ accountType: AccountTypeEnum) -> Void) {
         let type = UserDefaults.standard.string(forKey: keyAccountType) ?? ""
@@ -112,3 +132,44 @@ class AppManager{
 }
 
 
+
+
+enum NotificationType {
+    case general(GeneralType)
+    case counter(CounterType)
+    
+    enum GeneralType: String {
+        case topUp = "TOP_UP"
+        case transfer = "TRANSFER"
+        case payment = "PAYMENT"
+        case received = "RECEIVED"
+        case revers = "REVERS"
+        case recordSale = "RECORD_SALE"
+        case correctBalance = "CORRECT_BALANCE"
+        case correctProduct = "CORRECT_PRODUCT"
+        case claim = "CLAIM"
+        case purchaseRequest = "PURCHASE_REQUEST"
+        case priceUpdate = "PRICE_UPDATE"
+        case transferQR = "TRANSFER_QR"
+        case receivedQR = "RECEIVED_QR"
+        case returnQR = "RETURN_QR"
+        case createAccount = "CREATE_ACCOUNT"
+    }
+
+    enum CounterType: String {
+        case receivedPayment = "RECEIVED_PAYMENT"
+        case clearance = "CLEARANCE"
+    }
+}
+
+
+func getNotificationTypeValue(_ type: NotificationType) -> String {
+    switch type {
+    case .general(let generalType):
+        return generalType.rawValue
+    case .counter(let counterType):
+        return counterType.rawValue
+    }
+}
+
+let raw = getNotificationTypeValue(.general(.claim)) // returns "CLAIM"

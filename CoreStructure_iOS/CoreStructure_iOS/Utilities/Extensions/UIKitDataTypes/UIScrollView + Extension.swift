@@ -91,7 +91,7 @@ extension UIScrollView {
     func restore() {
         if let tableView = self as? UITableView {
             tableView.backgroundView = nil
-            tableView.separatorStyle = .singleLine
+            tableView.separatorStyle = .none
         } else if let collectionView = self as? UICollectionView {
             collectionView.backgroundView = nil
         }

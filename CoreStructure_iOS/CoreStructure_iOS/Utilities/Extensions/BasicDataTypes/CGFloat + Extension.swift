@@ -13,5 +13,6 @@ extension CGFloat{
     static let mainRight: CGFloat = -16
     static let mainTop: CGFloat  = 16
     static let mainBottom: CGFloat  = -16
+    static let spacingBottomButton: CGFloat  = -20
     
 }

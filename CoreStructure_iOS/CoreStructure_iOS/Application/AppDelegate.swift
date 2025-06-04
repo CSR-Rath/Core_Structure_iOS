@@ -8,8 +8,7 @@
 import UIKit
 import UserNotifications //import UserNotifications 1 local, (Notivication)
 import LocalAuthentication // For Get Biometrics Name
-import Firebase
-import FirebaseAuth
+
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         printFontsName()
-        Language.shared.setLanguage(langCode: .english) // set language
+        LanguageManager.shared.setLanguage(langCode: .english) // set language
         configureNotification(application: application) // configure នotification
         print("didFinishLaunchingWithOptions")
         
@@ -48,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate: UNUserNotificationCenterDelegate {
     
     private func configureNotification(application: UIApplication) {
-        FirebaseApp.configure() // need cell for using  firebase
+//        FirebaseApp.configure() // need cell for using  firebase
 
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
             granted ? print("User granted authorization") : print("User denied authorization")

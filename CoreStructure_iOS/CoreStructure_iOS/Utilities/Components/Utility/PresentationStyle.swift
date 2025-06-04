@@ -21,6 +21,7 @@ func usingPresentationController( controller: UIViewController) {
 }
 
 let presentVC = PresentationStyle()
+
 class PresentationController: UIPresentationController {
     
     private var dimmingView: UIView?
@@ -47,7 +48,7 @@ class PresentationController: UIPresentationController {
     override func dismissalTransitionWillBegin() {
         guard let dimmingView = dimmingView else { return }
         
-        UIView.animate(withDuration: 0.2, animations: {
+        UIView.animate(withDuration: 0.1, animations: {
             dimmingView.alpha = 0.0
         }) { _ in
             dimmingView.removeFromSuperview()

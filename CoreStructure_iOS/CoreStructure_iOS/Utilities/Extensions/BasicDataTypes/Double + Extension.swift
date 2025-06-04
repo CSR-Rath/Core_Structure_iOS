@@ -17,60 +17,6 @@ extension Double{
 }
 
 
-//MARK: Double
-//extension Double {
-//    
-//    var toCurrencyAsKHR : String{
-//        let currencyCode = "KHR"
-//        
-//        let numberFormatter = NumberFormatter()
-//        numberFormatter.numberStyle = .decimal
-//        numberFormatter.minimumFractionDigits = 2
-//        numberFormatter.maximumFractionDigits = (currencyCode == "USD") ? 2 : 0
-//        numberFormatter.groupingSeparator = "," // Separator for thousands
-//        numberFormatter.decimalSeparator = "." // Separator for decimals
-//        
-//        let locale = Locale(identifier: "en_US") // Example: United States
-//        numberFormatter.locale = locale
-//        
-//        let formattedValue = numberFormatter.string(from: NSNumber(value: self)) ?? ""
-//        
-//        let separatedValue = formattedValue.replacingOccurrences(of: ",", with: ",")
-//        var currencyWithCode = "\(currencyCode) \(separatedValue)"
-//        if getLanguageType() != "en"{
-//            currencyWithCode = "\(separatedValue) រៀល"
-//        }
-//        return currencyWithCode
-//    }
-//    
-//    var toCurrencyAsUSD : String{
-//        
-//        let currencyCode = "USD"
-//        
-//        let numberFormatter = NumberFormatter()
-//        numberFormatter.numberStyle = .decimal
-//        numberFormatter.roundingMode = .halfUp
-//        numberFormatter.minimumFractionDigits = 2
-//        numberFormatter.maximumFractionDigits = 2
-//        numberFormatter.groupingSeparator = "," // Separator for thousands
-//        numberFormatter.decimalSeparator = "." // Separator for decimals
-//        
-//        let locale = Locale(identifier: "en_US") // Example: United States
-//        numberFormatter.locale = locale
-//        
-//        let formattedValue = numberFormatter.string(from: NSNumber(value: self)) ?? ""
-//        
-//        let separatedValue = formattedValue.replacingOccurrences(of: ",", with: ",")
-//        var currencyWithCode = "\(separatedValue) \(currencyCode)"
-//        
-//        if  getLanguageType() != "en"{
-//            currencyWithCode = "\(separatedValue) ដុល្លារ"
-//        }
-//        
-//        return currencyWithCode
-//    }
-   
-//}
 
 
 extension Double {
@@ -112,10 +58,21 @@ extension Double {
     }
     
     var toCurrencyAsKHR: String {
-        return formatCurrency(currencyCode: "KHR", localeIdentifier: "km_KH", isLocalized: Language.shared.getLanguageType() != "en")
+        return formatCurrency(currencyCode: "KHR", localeIdentifier: "km_KH", isLocalized: LanguageManager.shared.getLanguageType() != "en")
     }
     
     var toCurrencyAsUSD: String {
-        return formatCurrency(currencyCode: "USD", localeIdentifier: "en_US", isLocalized: Language.shared.getLanguageType() != "en")
+        return formatCurrency(currencyCode: "USD", localeIdentifier: "en_US", isLocalized: LanguageManager.shared.getLanguageType() != "en")
     }
+    var toLiter: String {
+         let numberFormatter = NumberFormatter()
+         numberFormatter.numberStyle = .decimal
+         numberFormatter.minimumFractionDigits = 2
+         numberFormatter.maximumFractionDigits = 2
+         numberFormatter.groupingSeparator = ","
+         numberFormatter.decimalSeparator = "."
+         
+         let formatted = numberFormatter.string(from: NSNumber(value: self)) ?? "0.00"
+         return "\(formatted) L"
+     }
 }
