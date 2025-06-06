@@ -23,9 +23,17 @@
 		FA5968F42D79565400440485 /* loadingGif.gif in Resources */ = {isa = PBXBuildFile; fileRef = FA5968F32D79565400440485 /* loadingGif.gif */; };
 		FA5968F62D795C7200440485 /* 0cMVlLSnnW.gif in Resources */ = {isa = PBXBuildFile; fileRef = FA5968F52D795C7200440485 /* 0cMVlLSnnW.gif */; };
 		FA6311B92D6FF9FE00A2F9FF /* SwipeTableViewHeaderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6311B82D6FF9FD00A2F9FF /* SwipeTableViewHeaderVC.swift */; };
+		FA64B0782DF299CD007FEAAA /* MultiDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA64B06F2DF299CD007FEAAA /* MultiDatePicker.swift */; };
+		FA64B0792DF299CD007FEAAA /* MDPMonthYearPickerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA64B0712DF299CD007FEAAA /* MDPMonthYearPickerButton.swift */; };
+		FA64B07A2DF299CD007FEAAA /* MDPDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA64B0722DF299CD007FEAAA /* MDPDayView.swift */; };
+		FA64B07B2DF299CD007FEAAA /* MDPMonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA64B0732DF299CD007FEAAA /* MDPMonthView.swift */; };
+		FA64B07C2DF299CD007FEAAA /* MDPContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA64B0742DF299CD007FEAAA /* MDPContentView.swift */; };
+		FA64B07D2DF299CD007FEAAA /* MDPMonthYearPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA64B0752DF299CD007FEAAA /* MDPMonthYearPicker.swift */; };
+		FA64B07E2DF299CD007FEAAA /* MDPModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA64B0762DF299CD007FEAAA /* MDPModel.swift */; };
+		FA64B07F2DF299CD007FEAAA /* MDPDayOfMonth.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA64B0772DF299CD007FEAAA /* MDPDayOfMonth.swift */; };
 		FA69708B2DA8C1CB001B340D /* UploadImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA69708A2DA8C1CB001B340D /* UploadImageManager.swift */; };
 		FA69708D2DA8C208001B340D /* UploadImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA69708C2DA8C208001B340D /* UploadImageViewController.swift */; };
-		FA70E73E2D264FD400A5EAE8 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70E73D2D264FD400A5EAE8 /* BaseView.swift */; };
+		FA70E73E2D264FD400A5EAE8 /* BaseUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70E73D2D264FD400A5EAE8 /* BaseUIView.swift */; };
 		FA7FF8E82CDC722B00C824BD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FA7FF8EA2CDC722B00C824BD /* Localizable.strings */; };
 		FA8534832D37AD90006A3688 /* HomeABAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8534822D37AD90006A3688 /* HomeABAViewController.swift */; };
 		FA8653FC2D1AAE0300D87D6F /* createDeepLinkApp.png in Resources */ = {isa = PBXBuildFile; fileRef = FA8653FB2D1AAE0300D87D6F /* createDeepLinkApp.png */; };
@@ -149,6 +157,7 @@
 		FAB041E42D6EEF12002737F8 /* ActionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB041E32D6EEF12002737F8 /* ActionUIView.swift */; };
 		FAB041E62D6EEF80002737F8 /* ConditionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB041E52D6EEF80002737F8 /* ConditionUIView.swift */; };
 		FAB041E92D6EEFEB002737F8 /* AnimateUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB041E82D6EEFEB002737F8 /* AnimateUIView.swift */; };
+		FAB8AAFA2DF2E0EB00DD581C /* CustomDatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB8AAF92DF2E0EB00DD581C /* CustomDatePickerView.swift */; };
 		FAB97CCD2DEFE42D00D494EF /* ImageSlideshowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB97CCC2DEFE42C00D494EF /* ImageSlideshowView.swift */; };
 		FABB3A372D6EA2AC0007656A /* KeyboardHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABB3A362D6EA2AC0007656A /* KeyboardHandler.swift */; };
 		FABB3A3A2D6EBE520007656A /* ContentSizedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABB3A392D6EBE520007656A /* ContentSizedTableView.swift */; };
@@ -165,6 +174,7 @@
 		FAD109A82DC8599200278B1B /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD109A72DC8599200278B1B /* KeychainManager.swift */; };
 		FAD109AA2DC85A4A00278B1B /* KeychainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD109A92DC85A4A00278B1B /* KeychainViewController.swift */; };
 		FAD38F2F2D14132200588DFA /* TransactionTypesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD38F2E2D14132200588DFA /* TransactionTypesEnum.swift */; };
+		FAD90E3C2DF279FC0052F724 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD90E3B2DF279FC0052F724 /* ContentView.swift */; };
 		FAE4A50A2DA6252B007D035A /* NavigationBarAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE4A5092DA6252B007D035A /* NavigationBarAppearance.swift */; };
 		FAF42EF02D1A47F50070AF49 /* DisplayWebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF42EEF2D1A47F50070AF49 /* DisplayWebController.swift */; };
 		FAF489602D9CCD1200B20CE6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FAF4895F2D9CCD1100B20CE6 /* GoogleService-Info.plist */; };
@@ -268,10 +278,18 @@
 		FA5968F52D795C7200440485 /* 0cMVlLSnnW.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 0cMVlLSnnW.gif; sourceTree = "<group>"; };
 		FA5C30FE2CF5CD45002ABA39 /* ScannerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerController.swift; sourceTree = "<group>"; };
 		FA6311B82D6FF9FD00A2F9FF /* SwipeTableViewHeaderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTableViewHeaderVC.swift; sourceTree = "<group>"; };
+		FA64B06F2DF299CD007FEAAA /* MultiDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiDatePicker.swift; sourceTree = "<group>"; };
+		FA64B0712DF299CD007FEAAA /* MDPMonthYearPickerButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDPMonthYearPickerButton.swift; sourceTree = "<group>"; };
+		FA64B0722DF299CD007FEAAA /* MDPDayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDPDayView.swift; sourceTree = "<group>"; };
+		FA64B0732DF299CD007FEAAA /* MDPMonthView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDPMonthView.swift; sourceTree = "<group>"; };
+		FA64B0742DF299CD007FEAAA /* MDPContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDPContentView.swift; sourceTree = "<group>"; };
+		FA64B0752DF299CD007FEAAA /* MDPMonthYearPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDPMonthYearPicker.swift; sourceTree = "<group>"; };
+		FA64B0762DF299CD007FEAAA /* MDPModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDPModel.swift; sourceTree = "<group>"; };
+		FA64B0772DF299CD007FEAAA /* MDPDayOfMonth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDPDayOfMonth.swift; sourceTree = "<group>"; };
 		FA69708A2DA8C1CB001B340D /* UploadImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadImageManager.swift; sourceTree = "<group>"; };
 		FA69708C2DA8C208001B340D /* UploadImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadImageViewController.swift; sourceTree = "<group>"; };
 		FA6D52D52C9A748F00710D93 /* PreventionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreventionVC.swift; sourceTree = "<group>"; };
-		FA70E73D2D264FD400A5EAE8 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		FA70E73D2D264FD400A5EAE8 /* BaseUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUIView.swift; sourceTree = "<group>"; };
 		FA7C0B2D2CDE1CEB00DDB3E6 /* SliderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderController.swift; sourceTree = "<group>"; };
 		FA7EFA2C2CF57CAD001FDFEC /* MoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreView.swift; sourceTree = "<group>"; };
 		FA7FF8D82CDC655300C824BD /* SetupLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupLanguage.swift; sourceTree = "<group>"; };
@@ -342,6 +360,7 @@
 		FAB041E82D6EEFEB002737F8 /* AnimateUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimateUIView.swift; sourceTree = "<group>"; };
 		FAB5D6402C6C3DA600A31A6F /* NameDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameDetailCell.swift; sourceTree = "<group>"; };
 		FAB5D6442C6CB0E900A31A6F /* CheckmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckmarkView.swift; sourceTree = "<group>"; };
+		FAB8AAF92DF2E0EB00DD581C /* CustomDatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDatePickerView.swift; sourceTree = "<group>"; };
 		FAB97CCC2DEFE42C00D494EF /* ImageSlideshowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSlideshowView.swift; sourceTree = "<group>"; };
 		FABB3A362D6EA2AC0007656A /* KeyboardHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandler.swift; sourceTree = "<group>"; };
 		FABB3A392D6EBE520007656A /* ContentSizedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentSizedTableView.swift; sourceTree = "<group>"; };
@@ -355,6 +374,7 @@
 		FAD109A72DC8599200278B1B /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		FAD109A92DC85A4A00278B1B /* KeychainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainViewController.swift; sourceTree = "<group>"; };
 		FAD38F2E2D14132200588DFA /* TransactionTypesEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTypesEnum.swift; sourceTree = "<group>"; };
+		FAD90E3B2DF279FC0052F724 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		FAE400DD2C7D8CC4001D031F /* UIImageView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView + Extension.swift"; sourceTree = "<group>"; };
 		FAE4A5092DA6252B007D035A /* NavigationBarAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarAppearance.swift; sourceTree = "<group>"; };
 		FAED81362CDB0A3800E5A2D5 /* SegmentedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedView.swift; sourceTree = "<group>"; };
@@ -556,6 +576,7 @@
 				FAA401432D79A7B30090BCE4 /* TextFieldFormatePhoneNumber.swift */,
 				FABE50462DEEA5A200F7C0B0 /* TwoColorsTopBottomVC.swift */,
 				FAB97CCC2DEFE42C00D494EF /* ImageSlideshowView.swift */,
+				FAB8AAF92DF2E0EB00DD581C /* CustomDatePickerView.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -735,6 +756,7 @@
 		FA494BB62C6A06900086D346 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				FAD90E432DF27FB70052F724 /* DayRangeSelection */,
 				FAA99BE12D9FC6FF0058272B /* SingleSelect */,
 				FABB3A382D6EBE320007656A /* ContentSize */,
 				FA2B10972CB7E1890095CDB1 /* Utility */,
@@ -769,10 +791,33 @@
 			path = GifFile;
 			sourceTree = "<group>";
 		};
+		FA64B06E2DF299CD007FEAAA /* MultiDatePicker Source */ = {
+			isa = PBXGroup;
+			children = (
+				FA64B06F2DF299CD007FEAAA /* MultiDatePicker.swift */,
+				FA64B0702DF299CD007FEAAA /* Components */,
+			);
+			path = "MultiDatePicker Source";
+			sourceTree = "<group>";
+		};
+		FA64B0702DF299CD007FEAAA /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				FA64B0712DF299CD007FEAAA /* MDPMonthYearPickerButton.swift */,
+				FA64B0722DF299CD007FEAAA /* MDPDayView.swift */,
+				FA64B0732DF299CD007FEAAA /* MDPMonthView.swift */,
+				FA64B0742DF299CD007FEAAA /* MDPContentView.swift */,
+				FA64B0752DF299CD007FEAAA /* MDPMonthYearPicker.swift */,
+				FA64B0762DF299CD007FEAAA /* MDPModel.swift */,
+				FA64B0772DF299CD007FEAAA /* MDPDayOfMonth.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		FA70E73A2D264F8900A5EAE8 /* BaseUI */ = {
 			isa = PBXGroup;
 			children = (
-				FA70E73D2D264FD400A5EAE8 /* BaseView.swift */,
+				FA70E73D2D264FD400A5EAE8 /* BaseUIView.swift */,
 				FAFCDC522CCF9AA100BACEC5 /* BaseUIButton.swift */,
 				FA2123132D5EFF830001AAE6 /* BaseUIButtonIcon.swift */,
 				FAAA897F2DF0460100CA216D /* BaseUIViewConroller.swift */,
@@ -1178,6 +1223,15 @@
 			path = PaymentDeepLink;
 			sourceTree = "<group>";
 		};
+		FAD90E432DF27FB70052F724 /* DayRangeSelection */ = {
+			isa = PBXGroup;
+			children = (
+				FA64B06E2DF299CD007FEAAA /* MultiDatePicker Source */,
+				FAD90E3B2DF279FC0052F724 /* ContentView.swift */,
+			);
+			path = DayRangeSelection;
+			sourceTree = "<group>";
+		};
 		FAF489612D9CE5FA00B20CE6 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -1402,6 +1456,7 @@
 				FA992EA02CF8BE98007B2EB8 /* DebuggerRespose.swift in Sources */,
 				FAF489732D9CE97300B20CE6 /* Enviroment.swift in Sources */,
 				FAB041E42D6EEF12002737F8 /* ActionUIView.swift in Sources */,
+				FA64B07D2DF299CD007FEAAA /* MDPMonthYearPicker.swift in Sources */,
 				FA992EAC2CF8BE98007B2EB8 /* SliderController.swift in Sources */,
 				FA165E1F2D8BB0B20006D5D9 /* BecomeFirstResponderVC.swift in Sources */,
 				FA992EAD2CF8BE98007B2EB8 /* LocalizableContoller.swift in Sources */,
@@ -1422,6 +1477,7 @@
 				FA992EBB2CF8BE98007B2EB8 /* MenuDragDropCell.swift in Sources */,
 				FA88F1732CF9C04800B37C73 /* TriangleView.swift in Sources */,
 				FA992EBC2CF8BE98007B2EB8 /* DragDropCollectionVC.swift in Sources */,
+				FA64B07C2DF299CD007FEAAA /* MDPContentView.swift in Sources */,
 				FA8534832D37AD90006A3688 /* HomeABAViewController.swift in Sources */,
 				FAAA89832DF04EBE00CA216D /* UIFont + Extension.swift in Sources */,
 				FA992EBD2CF8BE98007B2EB8 /* ExpandedMultipleSectionCell.swift in Sources */,
@@ -1453,7 +1509,7 @@
 				FAA9317C2D9BD1BE0013B51D /* GenerteQRAndBarCodeVC.swift in Sources */,
 				FA992ED82CF8BE98007B2EB8 /* GlobalVariables.swift in Sources */,
 				FA992ED92CF8BE98007B2EB8 /* TimeAgoFormatter.swift in Sources */,
-				FA70E73E2D264FD400A5EAE8 /* BaseView.swift in Sources */,
+				FA70E73E2D264FD400A5EAE8 /* BaseUIView.swift in Sources */,
 				FA992EDA2CF8BE98007B2EB8 /* FingerPrintAndFaceID.swift in Sources */,
 				FA992EDB2CF8BE98007B2EB8 /* UPCarouselFlowLayout.swift in Sources */,
 				FAA0F0042D800BA200FE4A23 /* SignatureViewController.swift in Sources */,
@@ -1478,13 +1534,18 @@
 				FAB041E22D6EEDFA002737F8 /* CreateUIView.swift in Sources */,
 				FA2123142D5EFF840001AAE6 /* BaseUIButtonIcon.swift in Sources */,
 				FA992EEE2CF8BE98007B2EB8 /* UIDevice + Extension.swift in Sources */,
+				FA64B07B2DF299CD007FEAAA /* MDPMonthView.swift in Sources */,
 				FA96D8FA2D9E7BE1006F28DB /* CreateDBFeribaseViewController.swift in Sources */,
+				FAB8AAFA2DF2E0EB00DD581C /* CustomDatePickerView.swift in Sources */,
 				FA992EF02CF8BE98007B2EB8 /* UIImageView + Extension.swift in Sources */,
 				FA88F1712CF9BD0000B37C73 /* DashedLineView.swift in Sources */,
+				FA64B0782DF299CD007FEAAA /* MultiDatePicker.swift in Sources */,
 				FA992EF12CF8BE98007B2EB8 /* UserDefaults + Extension.swift in Sources */,
 				FA992EF22CF8BE98007B2EB8 /* UITableViewCell + Extension.swift in Sources */,
+				FA64B07F2DF299CD007FEAAA /* MDPDayOfMonth.swift in Sources */,
 				FABB3A3C2D6EBE600007656A /* ContentSizedCollectionView.swift in Sources */,
 				FAA0519C2DD3045500103F90 /* DayRangeSelectionTracker.swift in Sources */,
+				FA64B0792DF299CD007FEAAA /* MDPMonthYearPickerButton.swift in Sources */,
 				FAA0F0082D8019A900FE4A23 /* FileDownloader.swift in Sources */,
 				FA992EF32CF8BE98007B2EB8 /* UIViewController + Extension.swift in Sources */,
 				FA992EF52CF8BE98007B2EB8 /* UICollectionViewCell + Extension.swift in Sources */,
@@ -1502,6 +1563,7 @@
 				FA992EFD2CF8BE98007B2EB8 /* SegmentedView.swift in Sources */,
 				FA992EFE2CF8BE98007B2EB8 /* NameDetailCell.swift in Sources */,
 				FAA0519A2DD3040C00103F90 /* DemoViewController.swift in Sources */,
+				FAD90E3C2DF279FC0052F724 /* ContentView.swift in Sources */,
 				FA992EFF2CF8BE98007B2EB8 /* PageVC.swift in Sources */,
 				FA992F002CF8BE98007B2EB8 /* PasscodeVC.swift in Sources */,
 				FA69708B2DA8C1CB001B340D /* UploadImageManager.swift in Sources */,
@@ -1517,6 +1579,7 @@
 				FA96D8FB2D9E7BE1006F28DB /* LoginViewController.swift in Sources */,
 				FA992F072CF8BE98007B2EB8 /* MainTextField.swift in Sources */,
 				FA992F082CF8BE98007B2EB8 /* SSPaddingLabel.swift in Sources */,
+				FA64B07E2DF299CD007FEAAA /* MDPModel.swift in Sources */,
 				FA992F092CF8BE98007B2EB8 /* MoreView.swift in Sources */,
 				FA992F0A2CF8BE98007B2EB8 /* OneTimeCodeTextField.swift in Sources */,
 				FA992F0B2CF8BE98007B2EB8 /* OneTimeCodeTextFieldDelegate.swift in Sources */,
@@ -1528,6 +1591,7 @@
 				FA992F0F2CF8BE98007B2EB8 /* CustomTabBarCell.swift in Sources */,
 				FA992F102CF8BE98007B2EB8 /* AlertErrorVC.swift in Sources */,
 				FA992F112CF8BE98007B2EB8 /* AlertMessage.swift in Sources */,
+				FA64B07A2DF299CD007FEAAA /* MDPDayView.swift in Sources */,
 				FA992F122CF8BE98007B2EB8 /* AlertInternetVC.swift in Sources */,
 				FA992F132CF8BE98007B2EB8 /* Note + Read.swift in Sources */,
 			);
@@ -1659,7 +1723,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1771,7 +1835,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1882,7 +1946,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

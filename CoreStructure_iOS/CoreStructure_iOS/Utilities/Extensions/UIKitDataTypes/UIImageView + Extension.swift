@@ -69,6 +69,7 @@ extension UIImageView {
                 if let error = error {
                     print("Error loading image: \(error)")
                     self.image = gotImage // Set default image on error
+                    self.contentMode = .scaleAspectFill
                     return
                 }
                 

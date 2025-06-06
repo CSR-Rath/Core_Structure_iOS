@@ -35,6 +35,7 @@
 	</dict>
 	<key>UIAppFonts</key>
 	<array>
+        
 		<string>Roboto-Regular.ttf</string>
 		<string>Roboto-Medium.ttf</string>
 		<string>Roboto-Bold.ttf</string>
@@ -42,6 +43,7 @@
 		<string>NotoSansKhmer-Medium.ttf</string>
 		<string>NotoSansKhmer-Regular.ttf</string>
 		<string>NotoSansKhmer-SemiBold.ttf</string>
+        
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

@@ -18,8 +18,23 @@ enum FontStyle {
 
 extension UILabel {
     
+    func fontLight(_ size: CGFloat,  color: UIColor = .black){
+        self.font = UIFont.appFont(style: .light, size: size)
+        self.textColor = color
+    }
+    
     func fontRegular(_ size: CGFloat, color: UIColor = .black){
         self.font = UIFont.appFont(style: .regular, size: size)
+        self.textColor = color
+    }
+    
+    func fontMedium(_ size: CGFloat, color: UIColor = .black){
+        self.font = UIFont.appFont(style: .medium, size: size)
+        self.textColor = color
+    }
+    
+    func fontSemibold(_ size: CGFloat, color: UIColor = .black){
+        self.font = UIFont.appFont(style: .semibold, size: size)
         self.textColor = color
     }
     
@@ -27,18 +42,99 @@ extension UILabel {
         self.font = UIFont.appFont(style: .bold, size: size)
         self.textColor = color
     }
-
-    func setFont(style: FontStyle, size: CGFloat) {
-        self.font = UIFont.appFont(style: style, size: size)
-
+    
+    func fontItalic(_ size: CGFloat,  color: UIColor = .black){
+        self.font = UIFont.appFont(style: .italic, size: size)
+        self.textColor = color
     }
     
 }
 
+extension UITextField {
+    
+    func fontLight(_ size: CGFloat,  color: UIColor = .black){
+        self.font = UIFont.appFont(style: .light, size: size)
+        self.textColor = color
+    }
+    
+    func fontRegular(_ size: CGFloat, color: UIColor = .black){
+        self.font = UIFont.appFont(style: .regular, size: size)
+        self.textColor = color
+    }
+    
+    func fontMedium(_ size: CGFloat, color: UIColor = .black){
+        self.font = UIFont.appFont(style: .medium, size: size)
+        self.textColor = color
+    }
+    
+    func fontSemibold(_ size: CGFloat, color: UIColor = .black){
+        self.font = UIFont.appFont(style: .semibold, size: size)
+        self.textColor = color
+    }
+    
+    func fontBold(_ size: CGFloat,  color: UIColor = .black){
+        self.font = UIFont.appFont(style: .bold, size: size)
+        self.textColor = color
+    }
+    
+    func fontItalic(_ size: CGFloat,  color: UIColor = .black){
+        self.font = UIFont.appFont(style: .italic, size: size)
+        self.textColor = color
+    }
+}
+
+extension UITextView {
+    
+    func fontLight(_ size: CGFloat,  color: UIColor = .black){
+        self.font = UIFont.appFont(style: .light, size: size)
+        self.textColor = color
+    }
+    
+    func fontRegular(_ size: CGFloat, color: UIColor = .black){
+        self.font = UIFont.appFont(style: .regular, size: size)
+        self.textColor = color
+    }
+    
+    func fontMedium(_ size: CGFloat, color: UIColor = .black){
+        self.font = UIFont.appFont(style: .medium, size: size)
+        self.textColor = color
+    }
+    
+    func fontSemibold(_ size: CGFloat, color: UIColor = .black){
+        self.font = UIFont.appFont(style: .semibold, size: size)
+        self.textColor = color
+    }
+    
+    func fontBold(_ size: CGFloat,  color: UIColor = .black){
+        self.font = UIFont.appFont(style: .bold, size: size)
+        self.textColor = color
+    }
+    
+    func fontItalic(_ size: CGFloat,  color: UIColor = .black){
+        self.font = UIFont.appFont(style: .italic, size: size)
+        self.textColor = color
+    }
+}
+
 extension UIButton {
+    
+    func fontLight(_ size: CGFloat,  color: UIColor = .black){
+        self.titleLabel?.font = UIFont.appFont(style: .light, size: size)
+        self.setTitleColor(color, for: .normal)
+    }
     
     func fontRegular(_ size: CGFloat, color: UIColor = .black ){
         self.titleLabel?.font = UIFont.appFont(style: .regular, size: size)
+        self.setTitleColor(color, for: .normal)
+    }
+    
+    func fontMedium(_ size: CGFloat, color: UIColor = .black){
+        self.titleLabel?.font = UIFont.appFont(style: .medium, size: size)
+        self.setTitleColor(color, for: .normal)
+    }
+    
+    func fontSemibold(_ size: CGFloat, color: UIColor = .black){
+        self.titleLabel?.font = UIFont.appFont(style: .semibold, size: size)
         self.setTitleColor(color, for: .normal)
     }
     
@@ -47,42 +143,11 @@ extension UIButton {
         self.setTitleColor(color, for: .normal)
     }
     
-    func setFont(style: FontStyle, size: CGFloat) {
-        self.titleLabel?.font = UIFont.appFont(style: style, size: size)
-    }
-}
-
-extension UITextField {
-    
-    func fontRegular(_ size: CGFloat, color: UIColor = .black){
-        self.font = UIFont.appFont(style: .regular, size: size)
-        self.textColor = color
+    func fontItalic(_ size: CGFloat,  color: UIColor = .black){
+        self.titleLabel?.font = UIFont.appFont(style: .italic, size: size)
+        self.setTitleColor(color, for: .normal)
     }
     
-    func fontBold(_ size: CGFloat, color: UIColor = .black){
-        self.font = UIFont.appFont(style: .bold, size: size)
-        self.textColor = color
-    }
-    
-    func setFont(style: FontStyle, size: CGFloat) {
-        self.font = UIFont.appFont(style: style, size: size)
-    }
-    
-}
-
-extension UITextView {
-    
-    func fontRegular(_ size: CGFloat){
-        self.font = UIFont.appFont(style: .regular, size: size)
-    }
-    
-    func fontBold(_ size: CGFloat){
-        self.font = UIFont.appFont(style: .bold, size: size)
-    }
-    
-    func setFont(style: FontStyle, size: CGFloat) {
-        self.font = UIFont.appFont(style: style, size: size)
-    }
 }
 
 extension UIFont {
@@ -92,7 +157,8 @@ extension UIFont {
         let lang = LanguageManager.shared.getCurrentLanguage()
         let fontName: String?
 
-        switch (lang, style) {
+        switch (lang, style) { //Check language and font style
+            
         // MARK: - For Khmer
         case (.khmer, .light): fontName = FontNameEnum.KhmerEnum.light
         case (.khmer, .regular): fontName = FontNameEnum.KhmerEnum.regular

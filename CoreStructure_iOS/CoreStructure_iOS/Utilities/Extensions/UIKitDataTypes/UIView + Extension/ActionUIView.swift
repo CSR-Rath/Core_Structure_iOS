@@ -46,6 +46,11 @@ extension UIView{
         viewContainingController()?.navigationController?.popToViewController(viewController, animated: animated)
     }
     
+    func presentVC(to viewController: UIViewController, animated: Bool = true){
+        viewContainingController()?.present(viewController, animated: animated)
+    }
+    
+    
     func shareScreenshotView(title: String = "") {
         let renderer = UIGraphicsImageRenderer(size: self.bounds.size)
         

@@ -42,7 +42,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     private func rootViewController(){
 
-        let controller: UIViewController = TwoColorsTopBottomVC()//CustomTabBarVC()
+        let controller: UIViewController = CustomDatePickerViewController()//CustomTabBarVC()
         let navigation = UINavigationController(rootViewController: controller)
         window!.rootViewController = navigation
         window!.makeKeyAndVisible()
@@ -452,70 +452,3 @@ extension CropImageViewController: UIScrollViewDelegate {
     }
 }
 
-//class ViewController12: UIViewController {
-//    var webView: WKWebView!
-//    let termAndConditionRoyaltyViewModel = TermAndConditionRoyaltyViewModel()
-//
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        view.backgroundColor = .orange
-//       
-//        webView = WKWebView(frame: view.bounds)
-//        webView.backgroundColor = .cyan
-//        view.addSubview(webView)
-//
-//        Loading.shared.showLoading()
-//        
-//     
-//        termAndConditionRoyaltyViewModel.getTermAndConditionRoyalty { [self] res in
-//            
-//            DispatchQueue.main.sync {
-//                
-//                if res.response?.code == 200 {
-//                    
-//                    let description =  Localize.currentLanguage() == "en" ?   res.results?.descriptionEn?.replacingOccurrences(of: "<p><br></p>", with: "<br>") : res.results?.descriptionKh?.replacingOccurrences(of: "<p><br></p>", with: "<br>")
-//
-//                    
-//                    var htmlString = ""
-//                    
-//                    
-//                    
-//                    
-//                    htmlString = """
-//                    <html>
-//                    <meta charset="utf-8" />
-//                    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-//                    <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0'>
-//                    <head>
-//                        <style>
-//                            body {
-//                                color: red; /* default text color */
-//                                padding: 0;
-//                            }
-//                            h1 {
-//                                color: blue; /* h1 text color */
-//                    
-//                            }
-//                            p {
-//                                color: green; /* p text color */
-//                    
-//                            }
-//                        </style>
-//                    </head>
-//                    <body>\(description ?? "")</body>
-//                    </html>
-//                    """
-//
-//                    webView.loadHTMLString(htmlString, baseURL: nil)
-//
-//                    
-//                    Loading.shared.stopLoading()
-//                }else{
-//                    self.alertError(response: res.response ?? Response())
-//                }
-//            }
-//        }
-//        
-//        
-//    }
-//}

@@ -1,13 +1,14 @@
 //
-//  BaseView.swift
+//  BaseUIView.swift
 //  CoreStructure_iOS
 //
 //  Created by Rath! on 2/1/25.
 //
 
 import UIKit
+import SwiftUI
 
-class BaseView: UIView {
+class BaseUIView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)

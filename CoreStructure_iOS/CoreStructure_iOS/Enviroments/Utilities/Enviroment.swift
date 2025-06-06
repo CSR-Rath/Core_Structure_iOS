@@ -13,41 +13,8 @@ private let keyNotificationType: String = "NOTIFICATION_TYPE"
 private let keyTransactionType: String = "TANSACTION"
 private let keyLanguageType: String = "LANGUAGE_TYPE"
 
+// ================== Start Language ================
 
-
-
-enum AccountTypeEnum: String {
-    case generalAccount = "GENERAL_ACCOUNT"
-    case counterAccount = "COUNTER_ACCOUNT"
-    case stationAccount = "STATION_ACCOUNT"
-    case cooperateAccount = "COOPERATE_ACCOUNT"
-}
-
-enum NotificationTypeEnum: String {
-    case newStation = "NEW_STATION"
-    case nearStation = "NEAR_STATION"
-}
-
-enum TransactionTypeEnum: String {
-    case payment = "PAYMENY"
-    case transferQRCode = "TANSFER_QR"
-    case transferFavorite = "TANSFER_FAVORIT"
-}
-
-
-// MARK: - Extension
-extension String {
-
-    func localizeString() -> String {
-        let lang = UserDefaults.standard.string(forKey: keyLanguageType)
-        let path = Bundle.main.path(forResource: lang, ofType: "lproj")
-        let bundle = Bundle(path: path!)
-        return NSLocalizedString(self, tableName: nil, bundle: bundle!, value: "", comment: "")
-    }
-}
-
-
-// MARK: - Enum Type
 enum LanguageTypeEnum: String {
     case khmer = "km"
     case english = "en"
@@ -80,8 +47,8 @@ enum FontNameEnum {
         static let semibold = "PingFangSC-Semibold"
         static let bold = "PingFangSC-Bold"
     }
+    
 }
-
 
 class LanguageManager {
     
@@ -114,13 +81,42 @@ class LanguageManager {
     }
 }
 
+// ================== End Language ==================
 
+enum AccountTypeEnum: String {
+    case generalAccount = "GENERAL_ACCOUNT"
+    case counterAccount = "COUNTER_ACCOUNT"
+    case stationAccount = "STATION_ACCOUNT"
+    case cooperateAccount = "COOPERATE_ACCOUNT"
+}
+
+enum NotificationTypeEnum: String {
+    case newStation = "NEW_STATION"
+    case nearStation = "NEAR_STATION"
+}
+
+enum TransactionTypeEnum: String {
+    case payment = "PAYMENY"
+    case transferQRCode = "TANSFER_QR"
+    case transferFavorite = "TANSFER_FAVORIT"
+}
+
+// MARK: - Extension
+extension String {
+
+    func localizeString() -> String {
+        let lang = UserDefaults.standard.string(forKey: keyLanguageType)
+        let path = Bundle.main.path(forResource: lang, ofType: "lproj")
+        let bundle = Bundle(path: path!)
+        return NSLocalizedString(self, tableName: nil, bundle: bundle!, value: "", comment: "")
+    }
+    
+}
 
 class AppManager{
     
     static let shared = AppManager()
 
-    
     func getAccountTypes(completion: @escaping (_ accountType: AccountTypeEnum) -> Void) {
         let type = UserDefaults.standard.string(forKey: keyAccountType) ?? ""
         let currentType: AccountTypeEnum = AccountTypeEnum(rawValue: type) ?? .generalAccount
@@ -141,14 +137,14 @@ class AppManager{
     
 }
 
-
-
-
 enum NotificationType {
+    
     case general(GeneralType)
+    
     case counter(CounterType)
     
     enum GeneralType: String {
+        
         case topUp = "TOP_UP"
         case transfer = "TRANSFER"
         case payment = "PAYMENT"
@@ -164,14 +160,15 @@ enum NotificationType {
         case receivedQR = "RECEIVED_QR"
         case returnQR = "RETURN_QR"
         case createAccount = "CREATE_ACCOUNT"
+        
     }
 
     enum CounterType: String {
         case receivedPayment = "RECEIVED_PAYMENT"
         case clearance = "CLEARANCE"
     }
+    
 }
-
 
 func getNotificationTypeValue(_ type: NotificationType) -> String {
     switch type {
