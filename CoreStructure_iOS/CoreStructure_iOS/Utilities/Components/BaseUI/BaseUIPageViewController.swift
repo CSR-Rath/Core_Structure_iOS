@@ -7,41 +7,36 @@
 
 import UIKit
 
-class FirstViewController: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .red
-    }
-}
-
-
-class SecondViewController: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .green
-    }
-}
-
-
-class ThirdViewController: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .blue
-    }
-}
-
-
-class PageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+class BaseUIPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
     private var currentIndex = 0
     private var pages = [UIViewController]()
     
-    func setupPages(pages: [UIViewController], currentIndex: Int){
-        self.currentIndex = currentIndex
+    func setupPageViewController(pages: [UIViewController],
+                                 currentIndex: Int,
+                                 in container: UIView,
+                                 from parent: UIViewController) {
         self.pages = pages
-        setViewControllers([pages[currentIndex]], direction: .forward, animated: true, completion: nil)
+        self.currentIndex = currentIndex
+        
+        parent.addChild(self)
+        container.addSubview(view)
+        self.didMove(toParent: parent)
+        
+        setViewControllers([pages[currentIndex]],
+                           direction: .forward,
+                           animated: true,
+                           completion: nil)
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            view.topAnchor.constraint(equalTo: container.topAnchor),
+            view.leadingAnchor.constraint(equalTo: container.leadingAnchor),
+            view.trailingAnchor.constraint(equalTo: container.trailingAnchor),
+            view.bottomAnchor.constraint(equalTo: container.bottomAnchor)
+        ])
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self
@@ -75,7 +70,7 @@ class PageViewController: UIPageViewController, UIPageViewControllerDataSource, 
     }
     
     // MARK: - Go to Page
-    func goToPage(index: Int) {
+    func goToPageViewControoler(index: Int) {
         
         let direction:  UIPageViewController.NavigationDirection = index > currentIndex ? .forward : .reverse
         
@@ -86,9 +81,9 @@ class PageViewController: UIPageViewController, UIPageViewControllerDataSource, 
 }
 
 
-class ViewController12: UIViewController {
+class DisplayPageViewController: UIViewController {
     
-    let pageVC = PageViewController()
+    let pageVC = BaseUIPageViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,27 +96,26 @@ class ViewController12: UIViewController {
     
     func setupPageViewController() {
         
-        let page1 = FirstViewController()
-        let page2 = SecondViewController()
-        let page3 = ThirdViewController()
+        let page1 = UIViewController()
+        page1.view.backgroundColor = .white
+        let page2 = UIViewController()
+        page2.view.backgroundColor = .cyan
+        let page3 = UIViewController()
+        page3.view.backgroundColor = .gray
         
-        pageVC.setupPages(pages: [page1, page2, page3], currentIndex: 1)
-        addChild(pageVC)
-        view.addSubview(pageVC.view)
-        pageVC.didMove(toParent: self)
-        pageVC.view.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            pageVC.view.topAnchor.constraint(equalTo: view.topAnchor),
-            pageVC.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            pageVC.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            pageVC.view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100) // leave space for buttons
-        ])
+        pageVC.setupPageViewController(
+            pages: [page1, page2, page3],
+            currentIndex: 1,
+            in: view,
+            from: self
+        )
+
     }
     
     func setupButtons() {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.distribution = .equalSpacing
+        stackView.distribution = .fillEqually
         stackView.spacing = 20
         
         let buttonTitles = ["Page 1", "Page 2", "Page 3"]
@@ -136,16 +130,17 @@ class ViewController12: UIViewController {
         view.addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100),
+            stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            stackView.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 100),
+            stackView.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -100),
         ])
     }
     
     @objc func pageButtonTapped(_ sender: UIButton) {
         let index = sender.tag
-        pageVC.goToPage(index: index)
+        pageVC.goToPageViewControoler(index: index)
     }
-    
 }
 
 

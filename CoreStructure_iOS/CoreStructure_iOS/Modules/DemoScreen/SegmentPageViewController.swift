@@ -9,7 +9,7 @@ import UIKit
 
 class SegmentPageViewController: UIViewController, UIGestureRecognizerDelegate {
     
-    let pageview = PageViewController()
+    let pageview = BaseUIPageViewController()
     let segmentedView = SegmentedView()
     
     var isFromButton: Bool = false
@@ -64,7 +64,7 @@ class SegmentPageViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     
-    private func setupPagviewAndButton(page: PageViewController,
+    private func setupPagviewAndButton(page: BaseUIPageViewController,
                                        segment: SegmentedView,
                                        controllers: [UIViewController],
                                        titleButtons: [String],

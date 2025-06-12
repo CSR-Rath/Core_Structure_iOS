@@ -12,14 +12,14 @@ class GenerteQRAndBarCodeVC: UIViewController {
     lazy var viewQRCode: QRCodeView = {
         let view = QRCodeView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.imgQR.image = "Hello Cambodia".toQRCode()
+        view.imgQR.image = "Hello Cambodia".toCodeImage(type: .qrCode)
         return view
     }()
     
     lazy var viewBarCode: QRCodeView = {
         let view = QRCodeView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.imgQR.image = "123456789".toBarcode()
+        view.imgQR.image = "123456789".toCodeImage(type: .barCode128)
         return view
     }()
 

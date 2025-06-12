@@ -156,17 +156,17 @@ extension UIFont {
         
         let lang = LanguageManager.shared.getCurrentLanguage()
         let fontName: String?
-
+        
         switch (lang, style) { //Check language and font style
             
-        // MARK: - For Khmer
+            // MARK: - For Khmer
         case (.khmer, .light): fontName = FontNameEnum.KhmerEnum.light
         case (.khmer, .regular): fontName = FontNameEnum.KhmerEnum.regular
         case (.khmer, .medium): fontName = FontNameEnum.KhmerEnum.medium
         case (.khmer, .semibold): fontName = FontNameEnum.KhmerEnum.semibold
         case (.khmer, .bold): fontName = FontNameEnum.KhmerEnum.bold
             
-        // MARK: - For English
+            // MARK: - For English
         case (.english, .light): fontName = FontNameEnum.EnglishEnum.light
         case (.english, .regular): fontName = FontNameEnum.EnglishEnum.regular
         case (.english, .medium): fontName = FontNameEnum.EnglishEnum.medium
@@ -174,17 +174,25 @@ extension UIFont {
         case (.english, .bold): fontName = FontNameEnum.EnglishEnum.bold
         case (.english, .italic): fontName = FontNameEnum.EnglishEnum.italic
             
-        // MARK: - For Chinese
+            // MARK: - For Chinese
         case (.chinese, .light): fontName = FontNameEnum.ChineseEnum.light
         case (.chinese, .regular): fontName = FontNameEnum.ChineseEnum.regular
         case (.chinese, .medium): fontName = FontNameEnum.ChineseEnum.medium
         case (.chinese, .semibold): fontName = FontNameEnum.ChineseEnum.semibold
         case (.chinese, .bold): fontName = FontNameEnum.ChineseEnum.bold
-
+            
         default: fontName = nil
         }
+        
+        guard let fontName =  UIFont(name: fontName ?? "", size: size) else {
+            
+            print("Font name not found.")
+            
+            return UIFont.systemFont(ofSize: size)
+        }
+        
 
-        return UIFont(name: fontName ?? "", size: size) ?? UIFont.systemFont(ofSize: size)
+        return fontName
     }
 }
 

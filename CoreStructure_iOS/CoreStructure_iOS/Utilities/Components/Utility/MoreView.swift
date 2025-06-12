@@ -36,10 +36,6 @@ class MoreView: UIView{
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .clear
         view.layer.cornerRadius = 5
-       
-        // Add a tap gesture recognizer
-//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleActionViewTap))
-//        view.addGestureRecognizer(tapGesture)
         
         return view
     }()
@@ -56,7 +52,6 @@ class MoreView: UIView{
         let image = UIImageView()
         image.backgroundColor = .clear
         image.contentMode = .scaleAspectFit
-//        image.image = .icNext
         return image
     }()
     

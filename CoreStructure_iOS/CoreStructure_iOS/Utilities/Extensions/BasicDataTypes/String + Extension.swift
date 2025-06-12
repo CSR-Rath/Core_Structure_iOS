@@ -52,55 +52,65 @@ extension String{ // HTML to string
 
 
 //Localizable
-extension String{
-   
-    static let  confirmlLocalizable  = "confirm".localizeString()
-    
+//extension String{
+//   
+//    static let  confirmlLocalizable  = "confirm".localizeString()
+//    
+//}
+
+
+
+import UIKit
+import CoreImage
+
+enum CodeType {
+    case qrCode
+    case barCode128
 }
 
-
-
-
-extension String{
+extension String {
     
-    func toQRCode() -> UIImage? {
+    func toCodeImage(type: CodeType) -> UIImage? {
+        let data: Data?
         
-        let data = self.data(using: String.Encoding.utf8)
-        if let filter = CIFilter(name: "CIQRCodeGenerator") {
-            guard let colorFilter = CIFilter(name: "CIFalseColor") else { return nil }
-            
-            filter.setValue(data, forKey: "inputMessage")
-            
+        switch type {
+        case .qrCode:
+            data = self.data(using: .utf8)
+        case .barCode128:
+            data = self.data(using: .ascii)
+        }
+        
+        guard let inputData = data else { return nil }
+        
+        let filterName: String
+        
+        switch type {
+        case .qrCode:
+            filterName = "CIQRCodeGenerator"
+        case .barCode128:
+            filterName = "CICode128BarcodeGenerator"
+        }
+        
+        guard let filter = CIFilter(name: filterName) else { return nil }
+        filter.setValue(inputData, forKey: "inputMessage")
+        
+        let scale: CGFloat = 8 // >= 15 recommment
+        
+        // For QR code, add color filter to make background clear and foreground black
+        if type == .qrCode, let colorFilter = CIFilter(name: "CIFalseColor") {
             colorFilter.setValue(filter.outputImage, forKey: "inputImage")
             colorFilter.setValue(CIColor(color: UIColor.clear), forKey: "inputColor1") // Background clear
-            colorFilter.setValue(CIColor(color: UIColor.black), forKey: "inputColor0") // Foreground or the barcode black
-            let transform = CGAffineTransform(scaleX: 15, y: 15)
+            colorFilter.setValue(CIColor(color: UIColor.black), forKey: "inputColor0") // Foreground black
             
-            
-            if let output = colorFilter.outputImage?.transformed(by: transform) {
+            if let output = colorFilter.outputImage?.transformed(by: CGAffineTransform(scaleX: scale, y: scale)) {
                 return UIImage(ciImage: output)
             }
-        }
-        return nil
-    }
-
-
-    func toBarcode() -> UIImage? {
-        guard let data = self.data(using: .ascii) else { return nil }
-
-        if let filter = CIFilter(name: "CICode128BarcodeGenerator") {
-            filter.setValue(data, forKey: "inputMessage")
-            
-            // Ensure the barcode image is generated
-            guard let barcodeImage = filter.outputImage else { return nil }
-
-            // Scale up for better resolution
-            let transform = CGAffineTransform(scaleX: 15, y: 15) // Adjust scale as needed
-            let scaledImage = barcodeImage.transformed(by: transform)
-
-            return UIImage(ciImage: scaledImage)
+        } else if let outputImage = filter.outputImage?.transformed(by: CGAffineTransform(scaleX: scale, y: scale)) {
+            // For barcode, just scale and return
+            return UIImage(ciImage: outputImage)
         }
         
         return nil
     }
 }
+

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TextFieldFormatePhoneNumber: UITextField, UITextFieldDelegate {
+class PhoneNumberTextField: UITextField, UITextFieldDelegate {
     
     var textDidChange: ((_ : String) -> ())?
     var isComplete: ((_ : Bool) -> ())?
@@ -33,11 +33,6 @@ class TextFieldFormatePhoneNumber: UITextField, UITextFieldDelegate {
         self.delegate = self  // Ensure delegate is set to self
         self.setPadding(left: 15, right: 15)
     }
-    
-    
-//    func textFieldDidChangeSelection(_ textField: UITextField) {
-//        print("textFieldDidChangeSelection \(String(describing: textField.text))")
-//    }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
@@ -104,30 +99,14 @@ class TextFieldFormatePhoneNumber: UITextField, UITextFieldDelegate {
         
         return result
     }
-    
 }
 
-//public func formatter(mask: String, phoneNumber: String) -> String {
-//    let number = phoneNumber.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
-//    var result:String = ""
-//    var index = number.startIndex
-//    
-//    for character in mask where index < number.endIndex {
-//        if character == "X"{
-//            result.append(number[index])
-//            index = number.index(after: index)
-//        }else {
-//            result.append(character)
-//        }
-//    }
-//    
-//    return result
-//}
+
 
 
 class PhoneNumberTextFieldVC: UIViewController {
     
-    var phoneNumberTextField: TextFieldFormatePhoneNumber!
+    var phoneNumberTextField: PhoneNumberTextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -138,7 +117,7 @@ class PhoneNumberTextFieldVC: UIViewController {
     
     func setupPhoneNumberTextField() {
         // Create a UITextField programmatically
-        phoneNumberTextField = TextFieldFormatePhoneNumber()
+        phoneNumberTextField = PhoneNumberTextField()
         phoneNumberTextField.placeholder = "Enter phone number"
         phoneNumberTextField.borderStyle = .roundedRect
         phoneNumberTextField.keyboardType = .numberPad // Ensure this is set for number input

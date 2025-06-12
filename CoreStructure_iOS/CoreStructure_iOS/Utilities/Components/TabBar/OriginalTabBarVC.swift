@@ -9,9 +9,7 @@ import UIKit
 
 class OriginalTabBarVC: UITabBarController,UITabBarControllerDelegate {
     private var previousIndex: Int = 0
-    
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .clear

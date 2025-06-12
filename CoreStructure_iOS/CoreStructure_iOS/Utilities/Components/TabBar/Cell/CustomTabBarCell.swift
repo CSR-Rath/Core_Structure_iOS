@@ -36,7 +36,6 @@ class CustomTabBarCell: UICollectionViewCell {
         stack.isLayoutMarginsRelativeArrangement = true
         return stack
     }()
-
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -61,4 +60,5 @@ class CustomTabBarCell: UICollectionViewCell {
             imgIcon.widthAnchor.constraint(equalToConstant: 25),
         ])
     }
+    
 }

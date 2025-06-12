@@ -96,6 +96,7 @@ extension DataManager {
         let data = try? encoder.encode(object)
         userDefaults.set(data, forKey: key)
     }
+    
 }
 
 

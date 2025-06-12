@@ -10,7 +10,7 @@ import UIKit
 
 class UploadImageViewController: UIViewController {
     
-    private let imagePicker = UploadImageManager()
+    private let imagePicker = BaseUIImagePickerController()
     private var imageHeightConstraint = NSLayoutConstraint()
 
     // Lazy initialization for imageView

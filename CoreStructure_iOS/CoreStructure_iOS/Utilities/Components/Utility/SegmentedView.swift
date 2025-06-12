@@ -98,8 +98,6 @@ extension SegmentedView{
         didSectedBuuton?(index)
     }
     
-    
-    
     private func setupAnimateLabelView() {
         self.layer.cornerRadius = 20
         self.clipsToBounds = true

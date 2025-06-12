@@ -8,7 +8,8 @@
 import Foundation
 import UIKit
 
-class ContentSizedTableView: UITableView {
+class ContentSizedTableView: UITableView {// working with vertical
+    
     override var contentSize: CGSize {
         didSet {
             invalidateIntrinsicContentSize()

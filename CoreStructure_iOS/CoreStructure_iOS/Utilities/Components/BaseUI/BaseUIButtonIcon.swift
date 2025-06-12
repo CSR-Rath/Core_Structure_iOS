@@ -26,7 +26,6 @@ class BaseUIButtonIcon: BaseUIButtonAnimation{
             iconHeightConstraint.constant = height
             layoutIfNeeded()
         }
-        
     }
     
     

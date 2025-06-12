@@ -126,7 +126,7 @@ class DemoFeatureVC: UIViewController, UIGestureRecognizerDelegate {
                 ListModel(id: 13, name: "HandleNavigationBarVC", viewController: HandleNavigationBarVC()),
                 ListModel(id: 14, name: "LocalNotificationVC", viewController: LocalNotificationVC()),
                 ListModel(id: 15, name: "PagViewControllerWithButtonVC", viewController: SegmentPageViewController()),
-                ListModel(id: 16, name: "ViewController", viewController: PageViewController()),
+                ListModel(id: 16, name: "ViewController", viewController: BaseUIPageViewController()),
                 ListModel(id: 17, name: "LocalizableContoller", viewController: LocalizableContoller()),
                 ListModel(id: 18, name: "SliderController", viewController: SliderController()),
                 ListModel(id: 19, name: "SectionedTableViewController", viewController: DragDropTableViewCellContoler()),

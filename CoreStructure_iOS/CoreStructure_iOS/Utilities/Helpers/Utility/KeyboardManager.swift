@@ -7,9 +7,9 @@
 
 import UIKit
 
-let keyboardHandler = KeyboardHandler()
+let keyboardManager = KeyboardManager()
 
-class KeyboardHandler {
+class KeyboardManager {
     
     var onKeyboardWillShow: ((_ keyboardHeight: CGFloat) -> Void)?
     var onKeyboardWillHide: ((_ bottomSafeAreaInsetsHeight: CGFloat) -> Void)?

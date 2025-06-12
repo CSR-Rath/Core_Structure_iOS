@@ -34,15 +34,26 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         networkMonitoring()
         rootViewController()
         
-        let amount : Double = 10.67
-        print("KHR ==> \(amount.toCurrencyAsKHR)")
-        print("USD ==> \(amount.toCurrencyAsUSD)")
+        let amount : Double = 889910.47890
+        
+        let pont = amount.formattedString(as: .asPoints)
+        let currencyKHR = amount.formattedString(as: .currencyAsKHR)
+        let currencyUSD = amount.formattedString(as: .currencyAsUSD)
+        let fuel = amount.formattedString(as: .asLiters)
+        
+        print(
+        "\npont \(pont)\n",
+        "currencyKHR \(currencyKHR)\n",
+        "currencyUSD \(currencyUSD)\n",
+        "fuel \(fuel)\n"
+        )
+
         
     }
     
     private func rootViewController(){
 
-        let controller: UIViewController = CustomDatePickerViewController()//CustomTabBarVC()
+        let controller: UIViewController = DisplayPageViewController()//CustomTabBarVC()
         let navigation = UINavigationController(rootViewController: controller)
         window!.rootViewController = navigation
         window!.makeKeyAndVisible()
@@ -67,16 +78,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             if isConnected {
                 print("✅ Internet connected")
                 
-                if let presentedAlert = rootVC.presentedViewController {
+//                if let presentedAlert = rootVC.presentedViewController {
 //                    presentedAlert.dismiss(animated: true)
-                }
+//                }
                 
             } else {
                 print("❌ Internet disconnected")
                 
-                if rootVC.presentedViewController == nil {
+//                if rootVC.presentedViewController == nil {
 //                    rootVC.present(alertNetwork, animated: true)
-                }
+//                }
            
             }
         }

@@ -7,72 +7,71 @@
 
 import Foundation
 
-extension Double{
+enum FormatType {
     
-    func twoDigit(sign: String = "")->String{
-        let formattedNumber = String(format: "%.2f", self)
-        return sign + " " + formattedNumber
-    }
+    case currencyAsKHR
+    case currencyAsUSD
+    case asLiters
+    case asPoints
     
+    //MARK: - Raw values only (no suffixes)
+    case currencyKHR
+    case currencyUSD
+    case liters
+    case points
 }
-
-
-
 
 extension Double {
     
-    private func formatCurrency(currencyCode: String, 
-                                localeIdentifier: String,
-                                isLocalized: Bool) -> String {
-        // Set up number formatter
+    func formattedString(as type: FormatType, isSuffixAfterValue: Bool = true) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
-        numberFormatter.minimumFractionDigits = (currencyCode == "USD") ? 2 : 0
-        numberFormatter.maximumFractionDigits = (currencyCode == "USD") ? 2 : 0
+        numberFormatter.roundingMode = .halfUp
         numberFormatter.groupingSeparator = ","
         numberFormatter.decimalSeparator = "."
-        
-        let locale = Locale(identifier: localeIdentifier)
-        numberFormatter.locale = locale
-        
-        let formattedValue = numberFormatter.string(from: NSNumber(value: self)) ?? ""
-        
-        // Replace commas
-        let separatedValue = formattedValue.replacingOccurrences(of: ",", with: ",")
-        
-        // Format with the currency code or localized name
-        var currencyWithCode = "\(currencyCode) \(separatedValue)"
-        
-        if isLocalized {
-            switch currencyCode {
-            case "KHR":
-                currencyWithCode = "\(separatedValue) រៀល"
-            case "USD":
-                currencyWithCode = "\(separatedValue) ដុល្លារ"
-            default:
-                break
+        numberFormatter.locale = Locale(identifier: "en_US")
+
+        var formattedValue = ""
+        var suffix = ""
+
+        switch type {
+        case .currencyAsKHR, .currencyKHR:
+          
+            numberFormatter.minimumFractionDigits = 0
+            numberFormatter.maximumFractionDigits = 0
+            
+            if type == .currencyAsKHR{
+                suffix = "KHR".localizeString()
+            }
+            
+        case .currencyAsUSD, .currencyUSD:
+
+            numberFormatter.minimumFractionDigits = 2
+            numberFormatter.maximumFractionDigits = 2
+            
+            if type == .currencyAsUSD{
+                suffix = "USD".localizeString()
+            }
+
+        case .asLiters, .liters:
+            numberFormatter.roundingMode = .floor
+            numberFormatter.maximumFractionDigits = self.truncatingRemainder(dividingBy: 1) == 0 ? 0 : 2
+            
+            if type == .asLiters{
+                suffix = self > 1 ? "Liters".localizeString() : "Liter".localizeString()
+            }
+
+        case .asPoints, .points:
+            numberFormatter.roundingMode = .floor
+            numberFormatter.maximumFractionDigits = self.truncatingRemainder(dividingBy: 1) == 0 ? 0 : 2
+            
+            if type == .asPoints{
+                suffix = self > 1 ? "Points".localizeString() : "Point".localizeString()
             }
         }
         
-        return currencyWithCode
+        formattedValue = numberFormatter.string(from: NSNumber(value: self)) ?? "0"
+        
+        return isSuffixAfterValue ? "\(formattedValue) \(suffix)" : "\(suffix) \(formattedValue)"
     }
-    
-    var toCurrencyAsKHR: String {
-        return formatCurrency(currencyCode: "KHR", localeIdentifier: "km_KH", isLocalized: LanguageManager.shared.getLanguageCode() != "en")
-    }
-    
-    var toCurrencyAsUSD: String {
-        return formatCurrency(currencyCode: "USD", localeIdentifier: "en_US", isLocalized: LanguageManager.shared.getLanguageCode() != "en")
-    }
-    var toLiter: String {
-         let numberFormatter = NumberFormatter()
-         numberFormatter.numberStyle = .decimal
-         numberFormatter.minimumFractionDigits = 2
-         numberFormatter.maximumFractionDigits = 2
-         numberFormatter.groupingSeparator = ","
-         numberFormatter.decimalSeparator = "."
-         
-         let formatted = numberFormatter.string(from: NSNumber(value: self)) ?? "0.00"
-         return "\(formatted) L"
-     }
 }

@@ -97,8 +97,8 @@ class AlertMessage{
             Loading.shared.hideLoading()
             
             guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                  let rootPresent = windowScene.windows.first?.rootViewController,
-                  let rootPush = windowScene.windows.first?.rootViewController as? UINavigationController
+                  let rootPresent = windowScene.windows.first?.rootViewController
+//                  let rootPush = windowScene.windows.first?.rootViewController as? UINavigationController
             else { return }
     
             rootPresent.present(bottomSheetVC, animated: true, completion: {

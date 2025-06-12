@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class UploadImageManager: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class BaseUIImagePickerController: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     private var pickerController: UIImagePickerController!
     private weak var presentingVC: UIViewController?

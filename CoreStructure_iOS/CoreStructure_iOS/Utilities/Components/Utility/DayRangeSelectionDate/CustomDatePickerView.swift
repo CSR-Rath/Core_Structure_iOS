@@ -18,8 +18,8 @@ class CustomDatePickerViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
+    
 }
 
 class CustomDatePickerView: UIView {
@@ -52,7 +52,6 @@ class CustomDatePickerView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     private func setupHeader() {
         let headerStack = UIStackView()
         headerStack.axis = .horizontal
@@ -71,10 +70,8 @@ class CustomDatePickerView: UIView {
         nextButton.titleLabel?.font = .boldSystemFont(ofSize: 20)
         nextButton.addTarget(self, action: #selector(showNextMonth), for: .touchUpInside)
         
-        
         let nextButtonLeft = UIButton(type: .system)
         nextButtonLeft.setTitle(">", for: .normal)
-        
         
         let yearStack = UIStackView()
         yearStack.axis = .horizontal
@@ -85,7 +82,6 @@ class CustomDatePickerView: UIView {
         yearStack.addArrangedSubview(headerLabel)
         yearStack.addArrangedSubview(nextButtonLeft)
         
-        
         headerLabel.font = .boldSystemFont(ofSize: 18)
         headerLabel.textAlignment = .center
         headerLabel.isUserInteractionEnabled = true
@@ -95,14 +91,11 @@ class CustomDatePickerView: UIView {
         
         updateHeaderLabel()
         
-        
         headerStack.addArrangedSubview(prevButton)
         headerStack.addArrangedSubview(nextButton)
         
         addSubview(headerStack)
-        
         addSubview(yearStack)
-        
         
         NSLayoutConstraint.activate([
             
@@ -124,7 +117,15 @@ class CustomDatePickerView: UIView {
         weekdaysStackView.isLayoutMarginsRelativeArrangement = true
         weekdaysStackView.layoutMargins = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         
-        let weekdaySymbols = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+        let weekdaySymbols = ["Mon".localizeString(),
+                              "Tue".localizeString(),
+                              "Wed".localizeString(),
+                              "Thu".localizeString(),
+                              "Fri".localizeString(),
+                              "Sat".localizeString(),
+                              "Sun".localizeString()
+        ]
+        
         for day in weekdaySymbols {
             let label = UILabel()
             label.text = day
@@ -159,8 +160,6 @@ class CustomDatePickerView: UIView {
         print("itemSize ==> \(itemSize)")
         print("itemSize ==> \(itemSize * 7)")
         
-        
-        
         layout.itemSize = CGSize(width: itemSize, height: itemSize)
         
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -182,11 +181,10 @@ class CustomDatePickerView: UIView {
         
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-    }
-    
+//    override func layoutSubviews() {
+//        super.layoutSubviews()
+//        
+//    }
     
     private func setupSubmitButton() {
         submitButton.setTitle("Submit", for: .normal)
@@ -222,14 +220,11 @@ class CustomDatePickerView: UIView {
             return
         }
         
-        
         // Format with local timezone
         let formatter = DateFormatter()
         formatter.dateFormat = "dd MMMM yyyy"
         formatter.timeZone = TimeZone.current //(identifier: "Asia/Phnom_Penh") // or .current
         print("✅ Selected range: \(formatter.string(from: start)) to \(formatter.string(from: end))")
-        
-        
     }
     
     
@@ -384,73 +379,4 @@ extension CustomDatePickerView: UIPickerViewDataSource, UIPickerViewDelegate {
         }
     }
     
-}
-
-class DateCell: UICollectionViewCell {
-    let label = UILabel()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupUI()
-    }
-    
-    private func setupUI(){
-        
-        addSubview(label)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
-        label.fontRegular(14)
-        label.clipsToBounds = true
-        
-        NSLayoutConstraint.activate([
-            
-            label.topAnchor.constraint(equalTo: topAnchor),
-            label.bottomAnchor.constraint(equalTo: bottomAnchor),
-            label.leftAnchor.constraint(equalTo: leftAnchor),
-            label.rightAnchor.constraint(equalTo: rightAnchor),
-            
-        ])
-        
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func configure(with date: Date, isSelected: Bool, isStart: Bool, isEnd: Bool) {
-        let calendar = Calendar.current
-        
-        if date == Date.distantPast {
-            label.text = ""
-            reloadColor(color: .clear)
-            label.layer.cornerRadius = 0
-            return
-        }
-        
-        let day = calendar.component(.day, from: date)
-        label.text = "\(day)"
-        label.layer.cornerRadius = label.frame.width/2
-        
-        if isStart || isEnd {
-            
-            label.backgroundColor = .orange
-            label.textColor = .white
-            
-        } else if isSelected {
-            
-            label.textColor = .black
-            let color =  UIColor.orange.withAlphaComponent(0.3)
-            reloadColor(color: color)
-            
-        } else {
-            
-            reloadColor(color: .clear)
-            label.textColor = .black
-        }
-    }
-    
-    private func reloadColor(color: UIColor){
-        
-        label.backgroundColor = color
-    }
 }

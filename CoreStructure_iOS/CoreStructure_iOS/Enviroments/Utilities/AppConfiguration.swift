@@ -6,7 +6,8 @@
 //
 
 import Foundation
-//Referent ==> https://medium.com/@tejaswini-27k/ios-project-different-environments-xcode-configurations-and-scheme-752ee4404bfa
+//MARK: - Referent ==> https://medium.com/@tejaswini-27k/ios-project-different-environments-xcode-configurations-and-scheme-752ee4404bfa
+
 class AppConfiguration {
     
     static let shared = AppConfiguration()
@@ -38,13 +39,6 @@ class AppConfiguration {
         }
         return baseURL
     }()
-    
-//    lazy var imagesBaseURL: String = {
-//        guard let imageBaseURL = Bundle.main.object(forInfoDictionaryKey: "ImageBaseURL") as? String else {
-//            fatalError("ImageBaseURL must not be empty in plist")
-//        }
-//        return imageBaseURL
-//    }()
     
     lazy var bundleID: String = {
         guard let id = Bundle.main.object(forInfoDictionaryKey: "BUNDLE_ID") as? String else {

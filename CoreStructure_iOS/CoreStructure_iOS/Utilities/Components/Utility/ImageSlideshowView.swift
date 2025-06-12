@@ -15,7 +15,6 @@ let baseURLRoadImageRoyalty = ""
 
 class ImageSlideshowView: UIView, ImageSlideshowDelegate {
     
-    // MARK: - Properties
     
     private var localSource: [InputSource] = []
     
@@ -25,8 +24,6 @@ class ImageSlideshowView: UIView, ImageSlideshowDelegate {
         }
     }
 
-    // MARK: - UI Components
-    
     private lazy var slideshow: ImageSlideshow = {
         let slideshow = ImageSlideshow()
         slideshow.translatesAutoresizingMaskIntoConstraints = false
