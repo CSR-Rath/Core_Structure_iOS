@@ -11,7 +11,11 @@ import UIKit
 
 //MARK: - key UserDefaults
  struct AppConstants{
-    
+     
+     static let token = "token"
+     static let refreshToken = "refreshToken"
+     
+     
 //    static let loginSuccesFull = "loginSuccesFull"
 //    static let saveTimer = "saveTimer"
 //    static let userInfor = "userInfor"

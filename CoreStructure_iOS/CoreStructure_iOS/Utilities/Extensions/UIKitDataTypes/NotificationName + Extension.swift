@@ -36,6 +36,7 @@ class NotificationVC: UIViewController{
         button.actionUIButton = {
             self.sendNotification()
         }
+        
         view.addSubview(button)
     }
     

@@ -31,6 +31,23 @@ class KeychainManager {
         print("status ==> \(status == errSecSuccess)")
         return status == errSecSuccess
     }
+    
+
+    static func update(key: String, value: String) -> Bool {
+        guard let data = value.data(using: .utf8) else { return false }
+
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrAccount as String: key
+        ]
+
+        let attributesToUpdate: [String: Any] = [
+            kSecValueData as String: data
+        ]
+
+        let status = SecItemUpdate(query as CFDictionary, attributesToUpdate as CFDictionary)
+        return status == errSecSuccess
+    }
 
     static func read(key: String) -> String? {
         let query: [String: Any] = [

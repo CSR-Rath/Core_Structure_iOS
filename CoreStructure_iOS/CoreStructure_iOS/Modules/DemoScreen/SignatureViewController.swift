@@ -168,12 +168,12 @@ class Sign: UIViewController {
             
             if let imageData = signatureImage.pngData() {
                 print("PNG Data Size: \(imageData.count) bytes")
-                FileDownloader.shared.shareFile(data: imageData, doc_name: "Testing.png")
+                FileDownloaderManager.shared.shareFile(data: imageData, doc_name: "Testing.png")
             }
 
             if let jpegData = signatureImage.jpegData(compressionQuality: 0.8) {
                 print("JPEG Data Size: \(jpegData.count) bytes")
-                FileDownloader.shared.shareFile(data: jpegData, doc_name: "Testing.jpeg")
+                FileDownloaderManager.shared.shareFile(data: jpegData, doc_name: "Testing.jpeg")
             }
 
         }))

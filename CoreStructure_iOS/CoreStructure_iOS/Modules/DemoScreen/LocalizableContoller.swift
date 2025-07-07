@@ -121,7 +121,7 @@ class LocalizableContoller: UIViewController {
     @objc private func didSwitch(){
         isKhmerLanguage.toggle()
         
-        LanguageManager.shared.setLanguage(isKhmerLanguage ? .khmer : .english)
+        LanguageManager.shared.setCurrentLanguage(isKhmerLanguage ? .khmer : .english)
 
         
         print("isKhmerLanguage \(isKhmerLanguage)")

@@ -17,6 +17,15 @@ class OTPVC: UIViewController, UIGestureRecognizerDelegate {
         //Enable back swipe gesture
         navigationController?.interactivePopGestureRecognizer?.delegate = self
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+      
     }
     
     override func viewDidLoad() {
@@ -24,7 +33,7 @@ class OTPVC: UIViewController, UIGestureRecognizerDelegate {
         view.backgroundColor = .white
         title = "OTP"
         codeTxt = OneTimeCodeTextField()
-        
+       
         
         view.addSubview(codeTxt)
         codeTxt.translatesAutoresizingMaskIntoConstraints = false
@@ -43,7 +52,7 @@ class OTPVC: UIViewController, UIGestureRecognizerDelegate {
         codeTxt.keyboardType = .numberPad
         
         view.addSubview(btnClear)
-        btnClear.frame = CGRect(x: 100, y: 100, width: 200, height: 50)
+        btnClear.frame = CGRect(x: 100, y: 200, width: 200, height: 50)
         btnClear.backgroundColor = .red
 
         btnClear.setTitle("clear", for: .normal)

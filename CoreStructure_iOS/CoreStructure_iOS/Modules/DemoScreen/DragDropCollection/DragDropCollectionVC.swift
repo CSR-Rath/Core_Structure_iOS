@@ -51,7 +51,7 @@ class DragDropCollectionVC: UIViewController,
     //MARK: Set default date and fetching data
     func loadDataList() {
         
-        let dateMenu =  DataManager.shared.getDragDropMenu() ?? []
+        let dateMenu =  StoreLocalDataManager.shared.getDragDropMenu() ?? []
         if  dateMenu.count > 0  {
             dataList = dateMenu
         }else{
@@ -66,7 +66,7 @@ class DragDropCollectionVC: UIViewController,
                 MenuListModel(imageName: "", title: "Titem 6", id: 6)
             ]
             
-            DataManager.shared.saveDragDropMenu(data: dataList)
+            StoreLocalDataManager.shared.saveDragDropMenu(data: dataList)
         }
     }
     
@@ -117,7 +117,7 @@ extension DragDropCollectionVC{
     func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
         
         isDraggingItem = true
-        UIDevice.shared.generateButtonFeedback()
+        UIDevice.generateButtonFeedback()
         
         let titleImageModel = dataList[indexPath.item]
         let itemProvider = NSItemProvider(object: titleImageModel.title as NSString)
@@ -162,8 +162,8 @@ extension DragDropCollectionVC{
             }
         }
         
-        DataManager.shared.saveDragDropMenu(data: dataList)
-        UIDevice.shared.generateButtonFeedback()
+        StoreLocalDataManager.shared.saveDragDropMenu(data: dataList)
+        UIDevice.generateButtonFeedback()
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

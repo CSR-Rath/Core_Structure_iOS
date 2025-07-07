@@ -58,7 +58,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     private func networkMonitoring(){
-        NetworkMonitor.shared.onStatusChange = { isConnected in
+        NetworkMonitorManager.shared.onStatusChange = { isConnected in
             
             if isConnected {
                 print("✅ Internet connected")

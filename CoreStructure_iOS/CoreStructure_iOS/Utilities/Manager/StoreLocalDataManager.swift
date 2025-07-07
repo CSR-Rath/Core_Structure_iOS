@@ -1,5 +1,5 @@
 //
-//  SaveData.swift
+//  StoreLocalDataManager.swift
 //  CoreStructure_iOS
 //
 //  Created by Rath! on 26/8/24.
@@ -7,8 +7,8 @@
 
 import Foundation
 
-class StoreDataManager {
-    static let shared = StoreDataManager() // Singleton pattern
+class StoreLocalDataManager {
+    static let shared = StoreLocalDataManager() // Singleton pattern
     private let userDefaults = UserDefaults.standard
     private let userInforKey = "userInfor"
     private let phoneNumberKey = "phoneNumber"
@@ -17,10 +17,26 @@ class StoreDataManager {
     private let itemTwoDropModel = "itemTwoDropModel"
 }
 
+// MARK: - function save and get object
+extension StoreLocalDataManager {
+    
+    // MARK: Get Object
+    private func getObject<T: Codable>(_ type: T.Type, with key: String, usingDecoder decoder: JSONDecoder = JSONDecoder()) -> T? {
+        guard let data = userDefaults.data(forKey: key) else { return nil }
+        return try? decoder.decode(type, from: data)
+    }
+    
+    // MARK: Save Object
+    private func saveObject<T: Codable>(object: T, forKey key: String, usingEncoder encoder: JSONEncoder = JSONEncoder()) {
+        let data = try? encoder.encode(object)
+        userDefaults.set(data, forKey: key)
+    }
+    
+}
 
 
-// MARK: - Save object
-extension StoreDataManager {
+// MARK: - How to save object
+extension StoreLocalDataManager {
     
     func saveDragDropMenu(data: [MenuListModel]) {
         saveObject(object: data, forKey: dragDropMenu)
@@ -44,8 +60,8 @@ extension StoreDataManager {
     }
 }
 
-// MARK: - Get object
-extension StoreDataManager {
+// MARK: - How to get object
+extension StoreLocalDataManager {
     
     func getDragDropMenu() -> [MenuListModel]? {
         return getObject([MenuListModel].self, with: dragDropMenu) ?? []
@@ -70,8 +86,8 @@ extension StoreDataManager {
 }
 
 
-// Remove data
-extension StoreDataManager {
+// MARK: - How to remove object
+extension StoreLocalDataManager {
     
     func removeItemOneDropModel(){
         userDefaults.removeObject(forKey: itemOneDropModel)
@@ -81,27 +97,6 @@ extension StoreDataManager {
         userDefaults.removeObject(forKey: itemTwoDropModel)
     }
 }
-
-// MARK: - Object Storage Functions
-extension StoreDataManager {
-    
-    // MARK: Get Object
-    private func getObject<T: Codable>(_ type: T.Type, with key: String, usingDecoder decoder: JSONDecoder = JSONDecoder()) -> T? {
-        guard let data = userDefaults.data(forKey: key) else { return nil }
-        return try? decoder.decode(type, from: data)
-    }
-    
-    // MARK: Save Object
-    private func saveObject<T: Codable>(object: T, forKey key: String, usingEncoder encoder: JSONEncoder = JSONEncoder()) {
-        let data = try? encoder.encode(object)
-        userDefaults.set(data, forKey: key)
-    }
-    
-}
-
-
-
-
 
 struct UserInforModel: Codable{
     var name: String = "Rath"

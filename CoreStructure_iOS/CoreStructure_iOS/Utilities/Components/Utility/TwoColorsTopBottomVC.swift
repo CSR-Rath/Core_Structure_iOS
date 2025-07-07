@@ -46,7 +46,6 @@ class TwoColorsTopBottomVC: UIViewController {
         view.backgroundColor = .clear
         setupLayout()
         setupTableView()
-        setupRefreshControl()
     }
     
     private func setupLayout() {
@@ -74,21 +73,7 @@ class TwoColorsTopBottomVC: UIViewController {
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
-    
-    private func setupRefreshControl() {
-        
-        //        tableView.addRefreshControl(target: self, action: #selector(handleRefresh))
-    }
-    
-    @objc private func handleRefresh() {
-        
-        //        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-        //
-        //            print("Done")
-        //            self.tableView.endRefreshing()
-        //        }
-        
-    }
+
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         

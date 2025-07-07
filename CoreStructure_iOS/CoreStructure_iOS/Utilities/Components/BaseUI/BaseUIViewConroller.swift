@@ -25,15 +25,11 @@ class BaseUIViewConroller: UIViewController, UIGestureRecognizerDelegate {
         super.viewDidLoad()
         setupLeftBarButtonItem()
         setupInteractivePopGestureRecognizer()
-        
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        
-
     }
     
     private func setupInteractivePopGestureRecognizer(){
@@ -61,6 +57,4 @@ class BaseUIViewConroller: UIViewController, UIGestureRecognizerDelegate {
             self.navigationItem.leftBarButtonItem = nil
         }
     }
-    
-    
 }

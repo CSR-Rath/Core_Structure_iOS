@@ -12,9 +12,14 @@ class BaseUIButton: UIButton {
     private var activityIndicator: UIActivityIndicatorView!
     private let animationDuration: TimeInterval = 0.05
     private var nsContraint = NSLayoutConstraint()
-    private var titleButton: String = ""
-    
+
     var actionUIButton: (()->())?
+    
+    var titleButton: String = ""{
+        didSet{
+            self.setTitle(titleButton, for: .normal)
+        }
+    }
     
     var isActionButton: Bool = true {
         didSet {
@@ -30,12 +35,6 @@ class BaseUIButton: UIButton {
         }
     }
     
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-    }
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupButton()
@@ -48,7 +47,7 @@ class BaseUIButton: UIButton {
 
     
     private func setupButton() {
-        self.titleLabel?.font = UIFont.systemFont(ofSize: 17) // Consider dynamic type
+        self.titleLabel?.fontMedium(17, color: .white)
         self.layer.cornerRadius = buttonHeight/2
         self.layer.borderWidth = 1
         self.setTitleColor(.white, for: .normal)
@@ -61,7 +60,8 @@ class BaseUIButton: UIButton {
             self.layer.borderColor = UIColor.clear.cgColor
             self.backgroundColor = .mainBlueColor
             self.alpha = 1
-        } else {
+        }
+        else {
             self.isUserInteractionEnabled = false
             self.layer.borderColor = UIColor.white.cgColor
             self.alpha = 0.5

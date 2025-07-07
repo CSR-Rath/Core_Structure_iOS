@@ -2,16 +2,28 @@
 # platform :ios, '13.0'
 
 target 'CoreStructure_iOS' do
+  platform :ios, '13.0'
   use_frameworks!
 
+# pod deintegrate pod install // pod delete and pod install
 
- 	
-#  pod 'Firebase/Auth' # Auth create account, log in log out
-#  pod 'Firebase/Firestore'  # Add this line for Firestore store data in bd
-#  pod 'Firebase/Messaging' # push message from fire base
-#  pod 'GoogleSignIn'
-#  pod 'RealmSwift', '~>10'
-  pod 'HorizonCalendar'
+# Firebase dependencies
+  pod 'Firebase/Analytics', '~> 10.15'
+  pod 'Firebase/Auth', '~> 10.15'
+  pod 'Firebase/Firestore', '~> 10.15'
+  pod 'Firebase/Messaging', '~> 10.15'
+  pod 'Firebase/Crashlytics', '~> 10.15'
 
+# Google Sign-In
+# pod 'GoogleSignIn'
+
+ pod 'IQKeyboardManagerSwift'
+# pod 'MarqueeLabel' // marquee auto scroll label
+
+# RealmSwift for local database
+# pod 'RealmSwift', '~> 10.15'
+
+# Google Maps SDK
+  pod 'GoogleMaps'
 
 end

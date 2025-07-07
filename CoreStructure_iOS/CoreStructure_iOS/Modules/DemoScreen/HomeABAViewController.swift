@@ -27,7 +27,7 @@ class HomeABAViewController: UIViewController, UIGestureRecognizerDelegate{
 
     private var data1: [ItemDragDropModel] = []{
         didSet{
-            DataManager.shared.saveItemOneDropModel(data: data1)
+            StoreLocalDataManager.shared.saveItemOneDropModel(data: data1)
             print("Change data1")
             collectionView1.reloadData()
         }
@@ -35,7 +35,7 @@ class HomeABAViewController: UIViewController, UIGestureRecognizerDelegate{
     
     private var data2: [ItemDragDropModel] = []{
         didSet{
-            DataManager.shared.saveItemTwoDropModel(data: data2)
+            StoreLocalDataManager.shared.saveItemTwoDropModel(data: data2)
             print("Change data2")
             collectionView2.reloadData()
         }
@@ -165,9 +165,7 @@ class HomeABAViewController: UIViewController, UIGestureRecognizerDelegate{
         super.viewWillAppear(animated)
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         navigationController?.interactivePopGestureRecognizer?.delegate = self
-        self.navigationBarAppearance(titleColor: .black,
-                                     barAppearanceColor: .white,
-                                     shadowColorLine: .clear)
+ 
     }
 
 }
@@ -222,8 +220,8 @@ extension HomeABAViewController{
     
     private func setupData() {
         
-        let getData1 = DataManager.shared.getItemOneDropModel()
-        let getData2 = DataManager.shared.getItemTwoDropModel()
+        let getData1 = StoreLocalDataManager.shared.getItemOneDropModel()
+        let getData2 = StoreLocalDataManager.shared.getItemTwoDropModel()
         
         if let data1Items = getData1, let data2Items = getData2, data1Items.count > 0, data2Items.count > 0 {
             data1 = data1Items
@@ -383,7 +381,7 @@ extension HomeABAViewController:  UICollectionViewDataSource,
         
         isDragging = true
         dragDropTableView(status: false)
-        UIDevice.shared.generateButtonFeedback(style: .medium)
+        UIDevice.generateButtonFeedback(style: .medium)
         
         // Get the ItemDropModel
         let item = collectionView == collectionView1 ? data1[indexPath.row] : data2[indexPath.row]
@@ -448,7 +446,7 @@ extension HomeABAViewController:  UICollectionViewDataSource,
     
     func collectionView(_ collectionView: UICollectionView, dragSessionDidEnd session: UIDragSession) {
         print("dragSessionDidEnd collectionView ")
-        UIDevice.shared.generateButtonFeedback(style: .medium)
+        UIDevice.generateButtonFeedback(style: .medium)
         setupLongPressGestureRecognizers()
     }
     
@@ -531,7 +529,7 @@ extension HomeABAViewController:  UITableViewDataSource,
     
     func tableView(_ tableView: UITableView, dragSessionDidEnd: UIDragSession) {
         print("dragSessionDidEnd tableView")
-        UIDevice.shared.generateButtonFeedback(style: .medium)
+        UIDevice.generateButtonFeedback(style: .medium)
         setupLongPressGestureRecognizers()
     }
 

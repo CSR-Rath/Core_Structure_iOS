@@ -166,7 +166,9 @@ struct EncrypoitAES: Codable{
     var data: String
 }
 
-class HowToUse {
+
+
+class HowToUseCryptoHelper {
 
     /// Example: Encrypt an `Auth` object
     func useEncryptionAES() {

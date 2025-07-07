@@ -234,7 +234,7 @@ class ItemsListView: UIView {
     lazy  var minusButton: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.setImage(UIImage.icMinus, for: .normal)
+//        btn.setImage(UIImage.icMinus, for: .normal)
         btn.addTarget(self, action: #selector(self.didTapButtonMinus(_:)), for: .touchUpInside)
         return btn
     }()
@@ -242,7 +242,7 @@ class ItemsListView: UIView {
     lazy var plusButton: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.setImage(UIImage.icPlus, for: .normal)
+//        btn.setImage(UIImage.icPlus, for: .normal)
         btn.addTarget(self, action: #selector(self.didTapButtonPlus(_:)), for: .touchUpInside)
         return btn
     }()

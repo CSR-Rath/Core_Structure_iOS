@@ -7,23 +7,45 @@
 
 import UIKit
 
+
 class CrashlyticsViewController: UIViewController {
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
 
-        // Do any additional setup after loading the view.
+        let button = UIButton(type: .system)
+        button.setTitle("Crash App", for: .normal)
+        button.frame = CGRect(x: 100, y: 200, width: 200, height: 50)
+        button.addTarget(self, action: #selector(crashApp), for: .touchUpInside)
+        view.addSubview(button)
     }
+
+    @objc func crashApp() {
+        let crashlytics = Crashlytics()
+        self.pushVC(to: crashlytics)
+        
+    }
+}
+
+
+class Crashlytics: UIViewController {
+    var a: Int! = nil
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .white
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        let button = UIButton(type: .system)
+        button.setTitle("Crash App", for: .normal)
+        button.frame = CGRect(x: 100, y: 200, width: 200, height: 50)
+        button.addTarget(self, action: #selector(crashApp), for: .touchUpInside)
+        view.addSubview(button)
     }
-    */
 
+    @objc func crashApp() {
+        print("==> a: \(a!)")
+        
+    }
 }

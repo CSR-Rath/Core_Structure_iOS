@@ -12,7 +12,6 @@ class DayManager{
     
     static let shared = DayManager()
     
-    
      func statusGreetingDay() {
         
         let hour = (Calendar.current.component(.hour, from: Date()))

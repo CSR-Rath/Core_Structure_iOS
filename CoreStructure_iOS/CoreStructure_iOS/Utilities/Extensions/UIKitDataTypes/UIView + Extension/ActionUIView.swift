@@ -51,7 +51,7 @@ extension UIView{
     }
     
     
-    func shareScreenshotView(title: String = "") {
+    func shareViewScreenshot(title: String = "") {
         let renderer = UIGraphicsImageRenderer(size: self.bounds.size)
         
         let image = renderer.image { ctx in

@@ -8,7 +8,7 @@
 import UIKit
 
 
-class ButtonOntheKeyboradVC: BaseInteractionController/*, UIGestureRecognizerDelegate*/ {
+class ButtonOntheKeyboradVC: BaseInteractionController{
     
     private  var nsButton = NSLayoutConstraint()
     
@@ -31,7 +31,7 @@ class ButtonOntheKeyboradVC: BaseInteractionController/*, UIGestureRecognizerDel
     }()
     
     @objc func didTappedDone(){
-        btnButton.shareScreenshotView()
+        btnButton.shareViewScreenshot()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -42,6 +42,7 @@ class ButtonOntheKeyboradVC: BaseInteractionController/*, UIGestureRecognizerDel
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Testing Keyborad"
         view.backgroundColor = .white
         setupConstraint()
         keyboradHandleer()
@@ -49,22 +50,22 @@ class ButtonOntheKeyboradVC: BaseInteractionController/*, UIGestureRecognizerDel
     
     private func keyboradHandleer(){
         
-        keyboardHandler.onKeyboardWillShow = { keyboardHeight in
-            // add animation
-            UIView.animate(withDuration: 0.5, delay: 0.25, // Use a non-zero duration
-                           options: .curveEaseIn,
-                           animations: {
-                self.nsButton.constant = keyboardHeight
-                self.view.layoutIfNeeded()
-            })
-        }
-        
-        keyboardHandler.onKeyboardWillHide = { _ in
-            self.nsButton.constant = -30
+        keyboardManager.onKeyboardWillShow = { keyboardHeight in
+            
+            self.nsButton.constant = keyboardHeight
             self.view.layoutIfNeeded()
         }
         
-        view.addGestureView(target: self, action: #selector(view.dismissKeyboard))
+        keyboardManager.onKeyboardWillHide = { _ in
+            self.nsButton.constant = -30
+            self.view.layoutIfNeeded()
+
+        }
+        
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.dismissKeyboard()
     }
     
     private func setupConstraint(){

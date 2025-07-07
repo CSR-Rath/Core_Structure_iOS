@@ -24,16 +24,22 @@ enum IconEmptyList {
 // MARK: - For pull refresh include Scrollview, TableView, CollectionView
 extension UIScrollView{
     
-    func addRefreshControl(target: Any, 
+    func addRefreshControl(tintColor: UIColor = .red,
+                           target: Any,
                            action: Selector) {
-        let refreshControl = UIRefreshControl()
-        refreshControl.tintColor = .systemBlue
-        refreshControl.addTarget(target, action: action, for: .valueChanged)
-        self.refreshControl = refreshControl
+        if self.refreshControl == nil {
+            
+            let refreshControl = UIRefreshControl()
+            refreshControl.tintColor = tintColor
+            refreshControl.addTarget(target, action: action, for: .valueChanged)
+            self.refreshControl = refreshControl
+        }
     }
     
     func endRefreshing() {
-        self.refreshControl?.endRefreshing()
+        if self.refreshControl?.isRefreshing == true {
+           self.refreshControl?.endRefreshing()
+        }
     }
 }
 
@@ -42,7 +48,7 @@ extension UIScrollView{
 // MARK: - Handle Empty list for UITableView & UICollectionView
 extension UIScrollView {
     
-    func isEmptyListView(title: String? = nil,
+    func isEmptyListView(messsage: String? = nil,
                           icon: IconEmptyList = .back
     ) {
         let emptyView = UIView(frame: CGRect(x: 0,
@@ -58,7 +64,7 @@ extension UIScrollView {
         
         // Label
         let titleLabel = UILabel()
-        titleLabel.text = title ?? "Data not found."
+        titleLabel.text = messsage ?? "Data not found."
         titleLabel.textColor = .black
         titleLabel.font = UIFont.boldSystemFont(ofSize: 14)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -142,7 +148,7 @@ extension UIScrollView{
         return false
      }
     
-    private func isShowLoadingSpinner(with title: String = "Fetching.") {
+    private func isShowLoadingSpinner(with message: String = "Fetching") {
         // Create spinner and start animating
         let spinner = UIActivityIndicatorView(style: .medium)
         spinner.startAnimating()
@@ -150,7 +156,7 @@ extension UIScrollView{
         
         // Create title label for dynamic dots
         let titleLabel = UILabel()
-        titleLabel.text = title
+        titleLabel.text = message
         titleLabel.font = UIFont.systemFont(ofSize: 12, weight: .bold)
         titleLabel.textColor = .gray
         titleLabel.textAlignment = .center
@@ -158,7 +164,7 @@ extension UIScrollView{
         
         // Stack view for spinner and label
         let stackView = UIStackView(arrangedSubviews: [spinner, titleLabel])
-        stackView.axis = .vertical
+        stackView.axis = .horizontal
         stackView.spacing = 8
         stackView.alignment = .center
         stackView.layoutMargins = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
@@ -190,7 +196,7 @@ extension UIScrollView{
         var dotCount = 1
         Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { timer in
             let dotString = String(repeating: ".", count: dotCount)
-            titleLabel.text = title + "\(dotString)"
+            titleLabel.text = message + "\(dotString)"
             
             // Update dot count
             dotCount = (dotCount % 3) + 1

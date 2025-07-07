@@ -29,10 +29,10 @@ class PasscodeVC: UIViewController, UIGestureRecognizerDelegate {
     private var stackCircle: UIStackView! = nil
     private var btnForGot = UIButton()
     private var arrayButton: [UIButton] = []
-    private let constainerView = UIView()
     
+    var digitColor: UIColor = .clear
+
     var isPasscodeAction : PasscodeActionEnum = .none
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,16 +55,17 @@ extension  PasscodeVC {
     private func completeDigit(passcod: String){
         
         if passcod == "999999"{
-            print("True")
-        }else{
+            susseccfullyPasscode()
+        }
+        else{
             
-            UIDevice.shared.vibrateOnWrongPassword()
-            UIDevice.shared.shakeStackView(to: stackCircle)
+            UIDevice.vibrateOnWrongPassword()
+            UIDevice.shakeStackView(to: stackCircle)
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: { [self] in
                 textHandle.removeAll()
                 digitCircleView.forEach({ item in
-                    item.backgroundColor = .gray
+                    item.backgroundColor = digitColor
                 })
             })
         }
@@ -73,29 +74,40 @@ extension  PasscodeVC {
             
         }
     }
+    
+    
+    private func susseccfullyPasscode(isBiometricAuthentication: Bool = false){
+        
+        let vc = SuccessfullyViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+        if isBiometricAuthentication{
+//            let vc = SuccessfullyViewController()
+//            self.navigationController?.pushViewController(vc, animated: true)
+        }else{
+          
+        }
+    }
+    
 }
 
 // MARK: - Handle biometricAuthentication
 extension PasscodeVC{
     
     private func biometricAuthentication(){
-        //
+    
         BiometricAuthenticationManager.shared.fingerPrintFaceID { result in
             switch result {
             case .success(let status):
                 print("Authentication successful: \(status)") // Navigate or perform action based on success
-                
-                let vc = UIViewController()
-                vc.view.backgroundColor = .green
-                self.navigationController?.pushViewController(vc, animated: true)
+                self.susseccfullyPasscode(isBiometricAuthentication: true)
                 
             case .failure(let message):
-                
-                print("Authentication failed: \(message)")
+            
+                print("Authentication failed: \(message)") // Navigate or perform action based on success
                 
             case .unavailable(let errorCode):
-                print("Biometric authentication not available, error code: \(errorCode)")
-                // Optionally show an alert
+
                 self.showAlert(message: "Biometric authentication not available. Error code: \(errorCode)")
             }
         }
@@ -125,7 +137,7 @@ extension PasscodeVC{
     
     @objc private func buttonTappedKeyborad(_ sender: UIButton) {
         
-        UIDevice.shared.generateButtonFeedback()
+        UIDevice.generateButtonFeedback()
         
         let text = items[sender.tag]
         print("text  ==> \(text)")
@@ -135,7 +147,7 @@ extension PasscodeVC{
             if textHandle.count > 0 {
                 textHandle.removeLast()
                 let i =  textHandle.count
-                digitCircleView[i].backgroundColor = .gray
+                digitCircleView[i].backgroundColor = digitColor
             }
         }
         else if sender.tag == 9{
@@ -169,17 +181,13 @@ extension PasscodeVC{
 extension PasscodeVC{
     
     private func setupUIView(){
-        constainerView.frame = view.bounds
-        constainerView.backgroundColor = .cyan
-        view.addSubview(constainerView)
-//        constainerView.makeSecure()
         
         setupCircleView()
         setupKeyborad()
         
-        constainerView.addSubview(stackCircle)
-        constainerView.addSubview(stackButton)
-        constainerView.addSubview(btnForGot)
+        view.addSubview(stackCircle)
+        view.addSubview(stackButton)
+        view.addSubview(btnForGot)
         
         btnForGot.setTitle("Forgot Passcode", for: .normal)
         btnForGot.setTitleColor(.orange, for: .normal)
@@ -190,14 +198,14 @@ extension PasscodeVC{
         
         NSLayoutConstraint.activate([
             
-            stackCircle.centerXAnchor.constraint(equalTo: constainerView.centerXAnchor),
-            stackCircle.centerYAnchor.constraint(equalTo: constainerView.centerYAnchor,constant: -100),
+            stackCircle.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            stackCircle.centerYAnchor.constraint(equalTo: view.centerYAnchor,constant: -100),
             
-            stackButton.bottomAnchor.constraint(equalTo: constainerView.bottomAnchor,
+            stackButton.bottomAnchor.constraint(equalTo: view.bottomAnchor,
                                                 constant: -50),
-            stackButton.centerXAnchor.constraint(equalTo: constainerView.centerXAnchor),
+            stackButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            btnForGot.topAnchor.constraint(equalTo: constainerView.bottomAnchor,constant: -20),
+            btnForGot.bottomAnchor.constraint(equalTo: stackButton.topAnchor, constant: -20),
             btnForGot.rightAnchor.constraint(equalTo: stackButton.rightAnchor),
             
         ])
@@ -216,7 +224,7 @@ extension PasscodeVC{
             print(i)
             let circle = UIView()
             circle.layer.cornerRadius = 10
-            circle.backgroundColor = .gray
+            circle.backgroundColor = digitColor
             circle.layer.borderWidth = 1
             circle.layer.borderColor = UIColor.orange.cgColor
             circle.heightAnchor.constraint(equalToConstant: 20).isActive = true
@@ -245,7 +253,7 @@ extension PasscodeVC{
         for index in 0...11 {
             
             let button = BaseUIButton(type: .system)  
-            button.backgroundColor = .clear
+            button.backgroundColor = digitColor
             button.setTitleColor(.orange, for: .normal)
             button.setTitle(items[index], for: .normal)
             button.layer.cornerRadius = 40
@@ -307,123 +315,3 @@ extension PasscodeVC{
     }
 }
 
-
-
-class PreventScreenVC: UIViewController{
-    
-    lazy var lblDescription: UILabel = {
-        let lbl = UILabel()
-        lbl.translatesAutoresizingMaskIntoConstraints = false
-        lbl.textColor = .white
-        lbl.numberOfLines = 0
-        lbl.textAlignment = .center
-        lbl.text = "Screen recording is not allowed for security reasons. Please stop recording to continue."
-        return lbl
-    }()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .black.withAlphaComponent(0.5)
-        setupUI()
-    }
-    
-    
-    private func setupUI(){
-        
-        view.addSubview(lblDescription)
-        
-        NSLayoutConstraint.activate([
-            lblDescription.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            lblDescription.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            lblDescription.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            
-        ])
-    }
-}
-
-
-
-//
-//import UIKit
-//import FirebaseAuth
-//
-//class AuthViewController: UIViewController {
-//    let phoneTextField = UITextField()
-//    let sendOTPButton = UIButton()
-//    let otpTextField = UITextField()
-//    let verifyOTPButton = UIButton()
-//    var verificationID: String?
-//
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        view.backgroundColor = .white
-//        setupUI()
-//    }
-//
-//    func setupUI() {
-//        phoneTextField.placeholder = "Enter Phone Number"
-//        phoneTextField.borderStyle = .roundedRect
-//        phoneTextField.keyboardType = .phonePad
-//        phoneTextField.frame = CGRect(x: 20, y: 100, width: 280, height: 40)
-//        view.addSubview(phoneTextField)
-//
-//        sendOTPButton.setTitle("Send OTP", for: .normal)
-//        sendOTPButton.backgroundColor = .blue
-//        sendOTPButton.frame = CGRect(x: 20, y: 160, width: 280, height: 40)
-//        sendOTPButton.addTarget(self, action: #selector(sendOTP), for: .touchUpInside)
-//        view.addSubview(sendOTPButton)
-//
-//        otpTextField.placeholder = "Enter OTP"
-//        otpTextField.borderStyle = .roundedRect
-//        otpTextField.keyboardType = .numberPad
-//        otpTextField.frame = CGRect(x: 20, y: 220, width: 280, height: 40)
-//        view.addSubview(otpTextField)
-//
-//        verifyOTPButton.setTitle("Verify OTP", for: .normal)
-//        verifyOTPButton.backgroundColor = .green
-//        verifyOTPButton.frame = CGRect(x: 20, y: 280, width: 280, height: 40)
-//        verifyOTPButton.addTarget(self, action: #selector(verifyOTP), for: .touchUpInside)
-//        view.addSubview(verifyOTPButton)
-//    }
-//
-//    @objc func sendOTP() {
-//        guard var phoneNumber = phoneTextField.text, !phoneNumber.isEmpty else {
-//            print("Enter a valid phone number")
-//            return
-//        }
-//        
-//        if phoneNumber.first == "0" {
-//            phoneNumber.removeFirst()
-//        }
-//        
-//        PhoneAuthProvider.provider().verifyPhoneNumber("+855" + phoneNumber, uiDelegate: nil) { verificationID, error in
-//            if let error = error {
-//                print("Error sending OTP: \(error.localizedDescription)")
-//                return
-//            }
-//            self.verificationID = verificationID
-//            print("OTP Sent!")
-//        }
-//    }
-//
-//    @objc func verifyOTP() {
-//        guard let verificationID = verificationID, let otpCode = otpTextField.text, !otpCode.isEmpty else {
-//            print("Enter OTP")
-//            return
-//        }
-//
-//        let credential = PhoneAuthProvider.provider().credential(
-//            withVerificationID: verificationID,
-//            verificationCode: otpCode
-//        )
-//
-//        Auth.auth().signIn(with: credential) { authResult, error in
-//            if let error = error {
-//                print("Error verifying OTP: \(error.localizedDescription)")
-//                return
-//            }
-//            print("User signed in successfully: \(authResult?.user.phoneNumber ?? "")")
-//        }
-//    }
-//    
-//}

@@ -120,41 +120,41 @@ class HomeViewController: BaseViewController {
 
 //MARK: - AvailableServiceModel
 extension HomeViewController{
-    func setAvailableServiceModel(){
-        AppManager.shared.getAccountTypes { accountType in
-            switch accountType{
-            case .generalAccount:
-                
-                self.availableService = [
-                    AvailableServiceModel(id: 1, titleName: "", iConName: ""),
-                    AvailableServiceModel(id: 1, titleName: "", iConName: ""),
-                    AvailableServiceModel(id: 1, titleName: "", iConName: ""),
-                    AvailableServiceModel(id: 1, titleName: "", iConName: ""),
-                ]
-                
-            case .counterAccount:
-                
-                self.availableService = [
-                    AvailableServiceModel(id: 1, titleName: "", iConName: ""),
-                    AvailableServiceModel(id: 1, titleName: "", iConName: ""),
-                ]
-
-            case .stationAccount:
-                
-                self.availableService = [
-                    AvailableServiceModel(id: 1, titleName: "", iConName: ""),
-                    AvailableServiceModel(id: 1, titleName: "", iConName: ""),
-                ]
-
-            case .cooperateAccount:
-                
-                self.availableService = [
-                    AvailableServiceModel(id: 1, titleName: "", iConName: ""),
-                    AvailableServiceModel(id: 1, titleName: "", iConName: ""),
-                ]
-            }
-        }
-    }
+//    func setAvailableServiceModel(){
+//        AppManager.shared.getAccountTypes { accountType in
+//            switch accountType{
+//            case .generalAccount:
+//                
+//                self.availableService = [
+//                    AvailableServiceModel(id: 1, titleName: "", iConName: ""),
+//                    AvailableServiceModel(id: 1, titleName: "", iConName: ""),
+//                    AvailableServiceModel(id: 1, titleName: "", iConName: ""),
+//                    AvailableServiceModel(id: 1, titleName: "", iConName: ""),
+//                ]
+//                
+//            case .counterAccount:
+//                
+//                self.availableService = [
+//                    AvailableServiceModel(id: 1, titleName: "", iConName: ""),
+//                    AvailableServiceModel(id: 1, titleName: "", iConName: ""),
+//                ]
+//
+//            case .stationAccount:
+//                
+//                self.availableService = [
+//                    AvailableServiceModel(id: 1, titleName: "", iConName: ""),
+//                    AvailableServiceModel(id: 1, titleName: "", iConName: ""),
+//                ]
+//
+//            case .cooperateAccount:
+//                
+//                self.availableService = [
+//                    AvailableServiceModel(id: 1, titleName: "", iConName: ""),
+//                    AvailableServiceModel(id: 1, titleName: "", iConName: ""),
+//                ]
+//            }
+//        }
+//    }
 }
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
@@ -174,98 +174,98 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
         let cell2 = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         let cell3 = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
-        let allCell = [cell0,cell1,cell2,cell3]
-        
-        allCell.forEach({ item in
-            item.backgroundColor = .clear
-            item.selectionStyle = .none
-            
-        })
-
-        switch indexPath.section {
-        case 0:// upgrade account
-            
-            AppManager.shared.getAccountTypes { accountType in
-                switch accountType{
-                case .generalAccount:
-                    
-                    print("accountType")
-                case .counterAccount:
-                    
-                    print("accountType")
-                case .stationAccount:
-                    
-                    print("accountType")
-                case .cooperateAccount:
-                    
-                    print("accountType")
-                }
-            }
-            
-           
-        case 1:// Fuel Balance
-            
-            AppManager.shared.getAccountTypes { accountType in
-                switch accountType{
-                case .generalAccount:
-                    
-                    print("accountType")
-                case .counterAccount:
-                    
-                    print("accountType")
-                case .stationAccount:
-                    
-                    print("accountType")
-                case .cooperateAccount:
-                    
-                    print("accountType")
-                }
-            }
-            
-
-        case 2:// Avaiable Service
-            
-            AppManager.shared.getAccountTypes { accountType in
-                switch accountType{
-                case .generalAccount:
-                    
-                    print("accountType")
-                case .counterAccount:
-                    
-                    print("accountType")
-                case .stationAccount:
-                    
-                    print("accountType")
-                case .cooperateAccount:
-                    
-                    print("accountType")
-                }
-            }
-            
-        case 3:// News
-            
-            AppManager.shared.getAccountTypes { accountType in
-                switch accountType{
-                case .generalAccount:
-                    
-                    print("accountType")
-                case .counterAccount:
-                    
-                    print("accountType")
-                case .stationAccount:
-                    
-                    print("accountType")
-                case .cooperateAccount:
-                    
-                    print("accountType")
-                }
-            }
-
-        default:
-            print("Another Selection")
-        }
-        
-        return  allCell[indexPath.section]
+//        let allCell = [cell0,cell1,cell2,cell3]
+//        
+//        allCell.forEach({ item in
+//            item.backgroundColor = .clear
+//            item.selectionStyle = .none
+//            
+//        })
+//
+//        switch indexPath.section {
+//        case 0:// upgrade account
+//            
+//            AppManager.shared.getAccountTypes { accountType in
+//                switch accountType{
+//                case .generalAccount:
+//                    
+//                    print("accountType")
+//                case .counterAccount:
+//                    
+//                    print("accountType")
+//                case .stationAccount:
+//                    
+//                    print("accountType")
+//                case .cooperateAccount:
+//                    
+//                    print("accountType")
+//                }
+//            }
+//            
+//           
+//        case 1:// Fuel Balance
+//            
+//            AppManager.shared.getAccountTypes { accountType in
+//                switch accountType{
+//                case .generalAccount:
+//                    
+//                    print("accountType")
+//                case .counterAccount:
+//                    
+//                    print("accountType")
+//                case .stationAccount:
+//                    
+//                    print("accountType")
+//                case .cooperateAccount:
+//                    
+//                    print("accountType")
+//                }
+//            }
+//            
+//
+//        case 2:// Avaiable Service
+//            
+//            AppManager.shared.getAccountTypes { accountType in
+//                switch accountType{
+//                case .generalAccount:
+//                    
+//                    print("accountType")
+//                case .counterAccount:
+//                    
+//                    print("accountType")
+//                case .stationAccount:
+//                    
+//                    print("accountType")
+//                case .cooperateAccount:
+//                    
+//                    print("accountType")
+//                }
+//            }
+//            
+//        case 3:// News
+//            
+//            AppManager.shared.getAccountTypes { accountType in
+//                switch accountType{
+//                case .generalAccount:
+//                    
+//                    print("accountType")
+//                case .counterAccount:
+//                    
+//                    print("accountType")
+//                case .stationAccount:
+//                    
+//                    print("accountType")
+//                case .cooperateAccount:
+//                    
+//                    print("accountType")
+//                }
+//            }
+//
+//        default:
+//            print("Another Selection")
+//        }
+//        
+        return cell2// allCell[indexPath.section]
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

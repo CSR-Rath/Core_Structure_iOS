@@ -19,8 +19,10 @@ class DemoFeatureVC: UIViewController, UIGestureRecognizerDelegate {
     private var previousOffsetY: CGFloat = 0
     private var isScrollingDown : Bool = false
 
-    var didScrollView: ((_ offsetY: CGFloat, _ isScrollingDown: Bool)->())?
-    var didEndScrollView: ((_ offsetY: CGFloat, _ isScrollingDown: Bool)->())?
+    
+    var didScrollView: ((_ : UIScrollView)->())?
+//    var didScrollView: ((_ offsetY: CGFloat)->())?
+//    var didEndScrollView: ((_ offsetY: CGFloat, _ isScrollingDown: Bool)->())?
     
     var currentPage: Int = 0
     var totalList: Int = 0
@@ -36,7 +38,6 @@ class DemoFeatureVC: UIViewController, UIGestureRecognizerDelegate {
         return .default // Black text on white background
     }
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -44,13 +45,7 @@ class DemoFeatureVC: UIViewController, UIGestureRecognizerDelegate {
         pullRefresh()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.navigationBarAppearance(titleColor: .black,
-                                     barAppearanceColor: .orange,
-                                     shadowColorLine: .clear)
-    }
+
 
     @objc func rightButtonTapped() {
         print("Right button tapped")
@@ -58,17 +53,25 @@ class DemoFeatureVC: UIViewController, UIGestureRecognizerDelegate {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false // disable swipe
         title = "Demo"
+        
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = false
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        print("viewDidDisappear")
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true // enable swipe
     }
     
@@ -91,7 +94,7 @@ class DemoFeatureVC: UIViewController, UIGestureRecognizerDelegate {
         NSLayoutConstraint.activate([
         
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
             tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
         
@@ -114,6 +117,8 @@ class DemoFeatureVC: UIViewController, UIGestureRecognizerDelegate {
             
             items =   [
                 
+                
+                ListModel(id: 1, name: "CrashlyticsViewController", viewController: CrashlyticsViewController()),
                 ListModel(id: 2, name: "PasscodeVC", viewController: PasscodeVC()),
                 ListModel(id: 3, name: "OTPVC", viewController: OTPVC()),
                 ListModel(id: 4, name: "BoardCollectionVC", viewController: BoardCollectionVC()),
@@ -134,11 +139,12 @@ class DemoFeatureVC: UIViewController, UIGestureRecognizerDelegate {
                 ListModel(id: 21, name: "PreventionScreen", viewController: PreventionScreen()),
                 ListModel(id: 23, name: "HomeABAViewController", viewController: HomeABAViewController()),
                 ListModel(id: 24, name: "TestingButtonVC", viewController: TestingButtonVC()),
-                ListModel(id: 25, name: "PhoneNumberTextFieldVC", viewController: PhoneNumberTextFieldVC()),
+                ListModel(id: 25, name: "PhoneTextFieldVC", viewController: PhoneTextFieldVC()),
                 ListModel(id: 25, name: "PaymentViewController", viewController: PaymentViewController()),
                 ListModel(id: 25, name: "BecomeFirstResponderVC", viewController: BecomeFirstResponderVC()),
                 ListModel(id: 26, name: "GenerteQRAndBarCodeVC", viewController: GenerteQRAndBarCodeVC()),
                 ListModel(id: 26, name: "UploadImageViewController", viewController: UploadImageViewController()),
+                ListModel(id: 26, name: "PageViewController", viewController: PageViewController()),
                 
             ]
             
@@ -196,27 +202,14 @@ extension DemoFeatureVC: UITableViewDelegate, UITableViewDataSource{
         let currentOffsetY = scrollView.contentOffset.y
         isScrollingDown = currentOffsetY > previousOffsetY
         previousOffsetY = currentOffsetY
-        // ------
-        didScrollView?(currentOffsetY, isScrollingDown)
+
+//        didScrollView?(currentOffsetY)
+        
+        didScrollView?(scrollView)
     }
     
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        let currentOffsetY = scrollView.contentOffset.y
-        didEndScrollView?(currentOffsetY, isScrollingDown)
-    }
-    
+
    @objc func didTappedButton(){
-//       let vc = GenerateQRCodeVC()
-//       vc.modalPresentationStyle = .custom
-//       vc.transitioningDelegate = presentVC
-//       self.present(vc, animated: true)
-//       tableView.exportAsPdfFromTable()
-       
-//       if let tableView = myTableView {
-//           let pdfFilePath = tableView.exportAsPdfFromTable()
-//           print("PDF saved at: \(pdfFilePath)")
-//       }
-       
        
        let pdfFilePath = tableView.exportAsPdfFromTable()
        let pdfURL = URL(fileURLWithPath: pdfFilePath)

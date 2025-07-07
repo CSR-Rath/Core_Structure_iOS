@@ -10,13 +10,16 @@ import UIKit
 enum IconButtonBar {
     case back
     case close
-
+    case isEmpty
+    
     var image: UIImage? {
         switch self {
         case .back:
-            return .icAdd
+            return  UIImage(named: "icBack")
         case .close:
             return .icAdd
+        case .isEmpty:
+            return UIImage()
         }
     }
 }
@@ -29,17 +32,22 @@ extension UIViewController{
             print("Icon bar invalid")
             return
         }
-
-        navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: icon,
-            style: .plain,
-            target: self,
-            action: #selector(leftBarButtonItemAction)
-        )
+        
+            navigationItem.leftBarButtonItem = UIBarButtonItem(
+                image: icon,
+                style: .plain,
+                target: self,
+                action: iconButton == .isEmpty ? #selector(leftBarButtonItemAction) :  #selector(helperAction)
+            )
+        
+    }
+    
+    @objc private func helperAction() {
+        print("==> helperAction")
     }
     
     @objc private func leftBarButtonItemAction() {
-    
+        
         if (self.navigationController?.presentingViewController) != nil {
             self.dismiss(animated: true)
         } else {
@@ -66,14 +74,15 @@ extension UIViewController{
         )
     }
     
-   
-    func navigationBarAppearance(titleColor: UIColor = .black,
-                                 barAppearanceColor: UIColor = .clear,
+    
+    func navigationBarAppearance(titleColor: UIColor,
+                                 barAppearanceColor: UIColor,
                                  shadowColorLine: UIColor = .clear
     ){
         
-        let setupFont: UIFont = UIFont.systemFont(ofSize: 16,weight: .bold)
-        let largeFont: UIFont = UIFont.systemFont(ofSize: 34,weight: .bold)
+        let setupFont: UIFont = UIFont.appFont(style: .bold, size: 16)
+        
+        let largeFont: UIFont = UIFont.appFont(style: .bold, size: 34)
         
         let appearance = UINavigationBarAppearance()
         
@@ -108,6 +117,7 @@ extension UIViewController{
         self.navigationController?.popViewController(animated: animated)
     }
     
+    // pop to first step
     @objc func popToRootVC(animated: Bool = true){
         self.navigationController?.popToRootViewController(animated: animated)
     }
@@ -116,15 +126,21 @@ extension UIViewController{
         self.navigationController?.pushViewController(viewController, animated: animated)
     }
     
-    @objc func popToVC(to viewController: UIViewController, animated: Bool = true){
-        self.navigationController?.popToViewController(viewController, animated: animated)
+    // pop to controller
+    func popToVC<T: UIViewController>(ofType type: T.Type, animated: Bool = true) {
+        guard let viewControllers = self.navigationController?.viewControllers else { return }
+        
+        for vc in viewControllers {
+            if vc is T {
+                self.navigationController?.popToViewController(vc, animated: animated)
+                break
+            }
+        }
     }
-
 }
 
 // MARK: EndEditing TextField When touch around else TextFields
 extension UIView {
-
     @objc func dismissKeyboard() { //resingtextfield
         endEditing(true)
     }

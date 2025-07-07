@@ -48,6 +48,9 @@ class SplashScreenVC: UIViewController {
         view.backgroundColor = .white
         setupConstraint()
         title = "Please choose"
+        
+        let tabBar = CustomTabBarVC()
+        self.pushVC(to: tabBar)
     }
     
     private func setupConstraint() {
@@ -61,18 +64,8 @@ class SplashScreenVC: UIViewController {
     }
     
     @objc private func didTappedButton(sender: UIButton) {
-        
-        let vc = BecomeFirstResponderVC()
-        
-        if sender.tag == 0{
-            vc.isViewDidLoaded = true
-            pushVC(to: vc)
-        }else{
-            presentCustomBottomSheet()
-            //            vc.isViewDidLoaded = false
-            //            pushViewController(to: vc)
-        }
-        
+        let tabBar = CustomTabBarVC()
+        self.pushVC(to: tabBar)
     }
     
     func presentCustomBottomSheet() {
@@ -80,7 +73,6 @@ class SplashScreenVC: UIViewController {
         multiplVC.modalPresentationStyle = .custom
         self.present(multiplVC, animated: false, completion: nil)
     }
-    
 }
 
 

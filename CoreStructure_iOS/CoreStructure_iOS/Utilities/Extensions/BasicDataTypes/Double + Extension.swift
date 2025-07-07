@@ -7,23 +7,27 @@
 
 import Foundation
 
-enum FormatType {
+enum FormatTypeEnum {
     
     case currencyAsKHR
     case currencyAsUSD
     case asLiters
     case asPoints
     
-    //MARK: - Raw values only (no suffixes)
     case currencyKHR
     case currencyUSD
     case liters
     case points
 }
 
+enum CurrencyCodeEnum: String{
+    case currencyKHR = "KHR"
+    case currencyUSD = "USD"
+}
+
 extension Double {
     
-    func formattedString(as type: FormatType, isSuffixAfterValue: Bool = true) -> String {
+    func toFormate(as type: FormatTypeEnum, currencyCodeAfterAmount: Bool = true) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.roundingMode = .halfUp
@@ -31,7 +35,6 @@ extension Double {
         numberFormatter.decimalSeparator = "."
         numberFormatter.locale = Locale(identifier: "en_US")
 
-        var formattedValue = ""
         var suffix = ""
 
         switch type {
@@ -70,8 +73,51 @@ extension Double {
             }
         }
         
-        formattedValue = numberFormatter.string(from: NSNumber(value: self)) ?? "0"
+       let formattedValue = numberFormatter.string(from: NSNumber(value: self)) ?? "0"
         
-        return isSuffixAfterValue ? "\(formattedValue) \(suffix)" : "\(suffix) \(formattedValue)"
+        return currencyCodeAfterAmount ? "\(formattedValue) \(suffix)" : "\(suffix) \(formattedValue)"
     }
+    
+    func toCurrency(
+        for currency: CurrencyCodeEnum,
+        includeCurrencyCode: Bool = true,
+        currencyCodeAfterAmount: Bool = true
+    ) -> String{
+    
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.roundingMode = .halfUp
+        numberFormatter.groupingSeparator = ","
+        numberFormatter.decimalSeparator = "."
+        numberFormatter.locale = Locale(identifier: "en_US")
+
+        
+        var suffix = ""
+
+        switch currency {
+        case .currencyKHR:
+          
+            numberFormatter.minimumFractionDigits = 0
+            numberFormatter.maximumFractionDigits = 0
+            
+            if includeCurrencyCode{
+                suffix = "KHR".localizeString()
+            }
+            
+        case .currencyUSD:
+
+            numberFormatter.minimumFractionDigits = 2
+            numberFormatter.maximumFractionDigits = 2
+            
+            if includeCurrencyCode{
+                suffix = "USD".localizeString()
+            }
+        }
+        
+       let formattedValue = numberFormatter.string(from: NSNumber(value: self)) ?? "0"
+        
+        return currencyCodeAfterAmount ? "\(formattedValue) \(suffix)" : "\(suffix) \(formattedValue)"
+        
+    }
+    
 }

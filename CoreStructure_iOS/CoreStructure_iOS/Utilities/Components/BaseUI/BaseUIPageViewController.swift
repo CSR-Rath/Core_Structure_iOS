@@ -1,5 +1,5 @@
 //
-//  PageViewController.swift
+//  BaseUIPageViewController.swift
 //  CoreStructure_iOS
 //
 //  Created by Rath! on 6/11/24.
@@ -81,17 +81,17 @@ class BaseUIPageViewController: UIPageViewController, UIPageViewControllerDataSo
 }
 
 
-class DisplayPageViewController: UIViewController {
+class PageViewController: UIViewController {
     
     let pageVC = BaseUIPageViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .mainColor
+        title = "Page ViewController"
+        
         setupPageViewController()
         setupButtons()
-        
-  
     }
     
     func setupPageViewController() {
@@ -142,6 +142,4 @@ class DisplayPageViewController: UIViewController {
         pageVC.goToPageViewControoler(index: index)
     }
 }
-
-
 

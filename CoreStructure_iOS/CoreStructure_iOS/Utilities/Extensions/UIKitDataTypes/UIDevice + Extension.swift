@@ -11,31 +11,29 @@ import AudioToolbox
 
 extension UIDevice {
     
-    static let shared = UIDevice()
-    
-    func isLandscape() -> Bool {
+    static func isLandscape() -> Bool {
         return UIDevice.current.orientation.isLandscape
     }
     
-    func isIPhone() -> Bool {
+    static func isiPhone() -> Bool {
         return UIDevice.current.userInterfaceIdiom == .phone
     }
     
-    func isIPad() -> Bool {
+    static func isIPad() -> Bool {
         return UIDevice.current.userInterfaceIdiom == .pad
     }
     
-    func vibrateOnWrongPassword() {
+    static func vibrateOnWrongPassword() {
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
     }
     
-    func generateButtonFeedback(style: UIImpactFeedbackGenerator.FeedbackStyle = .medium){
+    static func generateButtonFeedback(style: UIImpactFeedbackGenerator.FeedbackStyle = .medium) {
         let generator = UIImpactFeedbackGenerator(style: style)
         generator.prepare()
         generator.impactOccurred()
     }
     
-    func shakeStackView(to view: UIView , width: CGFloat = 10) {
+    static func shakeStackView(to view: UIView , width: CGFloat = 10) {
         let shakeAnimation = CABasicAnimation(keyPath: "position")
         shakeAnimation.duration = 0.07
         shakeAnimation.repeatCount = 2
@@ -49,4 +47,20 @@ extension UIDevice {
         
         view.layer.add(shakeAnimation, forKey: "position")
     }
+    
+    static func isDeviceHasSafeArea() -> Bool {
+        guard let window = UIApplication.shared
+                .connectedScenes
+                .compactMap({ $0 as? UIWindowScene })
+                .first?
+                .windows
+                .first else {
+            return false
+        }
+        
+        // DeviceHasSafeArea iPhone X up
+        let safeArea = window.safeAreaInsets
+        return safeArea.top > 20 || safeArea.bottom > 0
+    }
+    
 }

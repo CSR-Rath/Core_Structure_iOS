@@ -7,23 +7,43 @@
 
 import UIKit
 
-class SuccessfullyViewController: UIViewController {
-
+class SuccessfullyViewController: UIViewController, UIGestureRecognizerDelegate {
+    
+    lazy var btnDone: BaseUIButton = {
+        let btn = BaseUIButton()
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.titleButton = "Done"
+        btn.actionUIButton = {
+            self.popToVC(ofType: CustomTabBarVC.self, animated: true)
+        }
+        return btn
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        leftBarButtonItem(iconButton: .isEmpty)
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
+        
+        view.backgroundColor = .white
+        title = "Susseccfully"
+       
+        setupConstraint()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    
+    private func setupConstraint() {
+        
+        view.addSubview(btnDone)
+        
+        NSLayoutConstraint.activate([
+            
+            btnDone.leftAnchor.constraint(equalTo: view.leftAnchor, constant: .mainLeft),
+            btnDone.rightAnchor.constraint(equalTo: view.rightAnchor, constant: .mainRight),
+            btnDone.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: .mainBottom),
+        ])
     }
-    */
-
+    
 }

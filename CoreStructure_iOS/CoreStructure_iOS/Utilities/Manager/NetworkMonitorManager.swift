@@ -1,5 +1,5 @@
 //
-//  NetworkMonitor.swift
+//  NetworkMonitorManager.swift
 //  CoreStructure_iOS
 //
 //  Created by Rath! on 26/3/25.

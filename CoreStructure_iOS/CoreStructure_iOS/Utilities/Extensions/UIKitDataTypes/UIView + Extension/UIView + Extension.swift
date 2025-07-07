@@ -20,14 +20,6 @@ extension UIView{
         views.forEach { addSubview($0) }
     }
     
-    func calculateLabelWidth(text: String, font: UIFont) -> CGFloat {
-        let label = UILabel()
-        label.text = text
-        label.font = font
-        label.sizeToFit()
-        return label.frame.width
-    }
-    
     func roundCorners(corners:[RoundCornersAt], radius: CGFloat) {
         self.layer.cornerRadius = radius
         self.layer.maskedCorners = [

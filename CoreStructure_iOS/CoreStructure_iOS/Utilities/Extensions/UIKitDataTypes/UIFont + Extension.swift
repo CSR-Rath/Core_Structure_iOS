@@ -160,26 +160,26 @@ extension UIFont {
         switch (lang, style) { //Check language and font style
             
             // MARK: - For Khmer
-        case (.khmer, .light): fontName = FontNameEnum.KhmerEnum.light
-        case (.khmer, .regular): fontName = FontNameEnum.KhmerEnum.regular
-        case (.khmer, .medium): fontName = FontNameEnum.KhmerEnum.medium
-        case (.khmer, .semibold): fontName = FontNameEnum.KhmerEnum.semibold
-        case (.khmer, .bold): fontName = FontNameEnum.KhmerEnum.bold
+        case (.khmer, .light): fontName = FontName.FontKhmer.light
+        case (.khmer, .regular): fontName = FontName.FontKhmer.regular
+        case (.khmer, .medium): fontName = FontName.FontKhmer.medium
+        case (.khmer, .semibold): fontName = FontName.FontKhmer.semibold
+        case (.khmer, .bold): fontName = FontName.FontKhmer.bold
             
             // MARK: - For English
-        case (.english, .light): fontName = FontNameEnum.EnglishEnum.light
-        case (.english, .regular): fontName = FontNameEnum.EnglishEnum.regular
-        case (.english, .medium): fontName = FontNameEnum.EnglishEnum.medium
-        case (.english, .semibold): fontName = FontNameEnum.EnglishEnum.semibold
-        case (.english, .bold): fontName = FontNameEnum.EnglishEnum.bold
-        case (.english, .italic): fontName = FontNameEnum.EnglishEnum.italic
+        case (.english, .light): fontName = FontName.FontEnglish.light
+        case (.english, .regular): fontName = FontName.FontEnglish.regular
+        case (.english, .medium): fontName = FontName.FontEnglish.medium
+        case (.english, .semibold): fontName = FontName.FontEnglish.semibold
+        case (.english, .bold): fontName = FontName.FontEnglish.bold
+        case (.english, .italic): fontName = FontName.FontEnglish.italic
             
             // MARK: - For Chinese
-        case (.chinese, .light): fontName = FontNameEnum.ChineseEnum.light
-        case (.chinese, .regular): fontName = FontNameEnum.ChineseEnum.regular
-        case (.chinese, .medium): fontName = FontNameEnum.ChineseEnum.medium
-        case (.chinese, .semibold): fontName = FontNameEnum.ChineseEnum.semibold
-        case (.chinese, .bold): fontName = FontNameEnum.ChineseEnum.bold
+        case (.chinese, .light): fontName = FontName.FontChinese.light
+        case (.chinese, .regular): fontName = FontName.FontChinese.regular
+        case (.chinese, .medium): fontName = FontName.FontChinese.medium
+        case (.chinese, .semibold): fontName = FontName.FontChinese.semibold
+        case (.chinese, .bold): fontName = FontName.FontChinese.bold
             
         default: fontName = nil
         }

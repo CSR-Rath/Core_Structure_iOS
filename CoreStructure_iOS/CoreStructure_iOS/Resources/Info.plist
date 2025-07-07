@@ -2,18 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Bundle_display_name</key>
-	<string>$(Bundle_Display_Name)</string>
 	<key>API_KEY</key>
 	<string>$(API_KEY)</string>
 	<key>BASE_URL</key>
 	<string>$(BASE_URL)</string>
 	<key>BUNDLE_ID</key>
 	<string>$(BUNDLE_ID)</string>
-	<key>PAYMENT_KEY</key>
-	<string>$(PAYMENT_KEY)</string>
-	<key>PAYMENT_VECTOR</key>
-	<string>$(PAYMENT_VECTOR)</string>
+	<key>Bundle_display_name</key>
+	<string>$(Bundle_Display_Name)</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -33,9 +29,12 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>PAYMENT_KEY</key>
+	<string>$(PAYMENT_KEY)</string>
+	<key>PAYMENT_VECTOR</key>
+	<string>$(PAYMENT_VECTOR)</string>
 	<key>UIAppFonts</key>
 	<array>
-        
 		<string>Roboto-Regular.ttf</string>
 		<string>Roboto-Medium.ttf</string>
 		<string>Roboto-Bold.ttf</string>
@@ -43,7 +42,6 @@
 		<string>NotoSansKhmer-Medium.ttf</string>
 		<string>NotoSansKhmer-Regular.ttf</string>
 		<string>NotoSansKhmer-SemiBold.ttf</string>
-        
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
@@ -65,9 +63,7 @@
 		</dict>
 	</dict>
 	<key>UIBackgroundModes</key>
-	<array>
-		<string>remote-notification</string>
-	</array>
+	<array/>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
 </dict>

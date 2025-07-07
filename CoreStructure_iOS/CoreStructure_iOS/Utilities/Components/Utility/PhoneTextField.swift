@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TextFieldPhone: UITextField, UITextFieldDelegate {
+class PhoneTextField: UITextField, UITextFieldDelegate {
     
     var textDidChange: ((_ : String) -> ())?
     var isComplete: ((_ : Bool) -> ())?
@@ -104,21 +104,21 @@ class TextFieldPhone: UITextField, UITextFieldDelegate {
 
 
 
-class TextFieldPhoneVC: UIViewController {
+class PhoneTextFieldVC: UIViewController {
     
-    var phoneNumberTextField: TextFieldPhone!
+    var phoneNumberTextField: PhoneTextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        title = "TextField Phone"
+        title = "Phone TextField"
         setupPhoneNumberTextField()
         leftBarButtonItem()
     }
     
     func setupPhoneNumberTextField() {
         // Create a UITextField programmatically
-        phoneNumberTextField = TextFieldPhoneManger()
+        phoneNumberTextField = PhoneTextField()
         phoneNumberTextField.placeholder = "Enter phone number"
         phoneNumberTextField.borderStyle = .roundedRect
         phoneNumberTextField.keyboardType = .numberPad // Ensure this is set for number input

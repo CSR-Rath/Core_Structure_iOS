@@ -71,6 +71,6 @@ class UploadImageViewController: UIViewController {
     }
     
     @objc private func selectImageTapped() {
-        imagePicker.presentImagePicker(from: self)
+        imagePicker.presentChooseOption(from: self)
     }
 }
