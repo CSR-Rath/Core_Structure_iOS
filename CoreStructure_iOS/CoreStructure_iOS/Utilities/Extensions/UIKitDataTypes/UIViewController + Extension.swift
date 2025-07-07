@@ -37,7 +37,7 @@ extension UIViewController{
                 image: icon,
                 style: .plain,
                 target: self,
-                action: iconButton == .isEmpty ? #selector(leftBarButtonItemAction) :  #selector(helperAction)
+                action: iconButton != .isEmpty ? #selector(leftBarButtonItemAction) :  #selector(helperAction)
             )
         
     }
@@ -58,21 +58,21 @@ extension UIViewController{
     }
     
     
-    func rightBarButtonItem(action: Selector = #selector(leftBarButtonItemAction),
-                            iconButton: IconButtonBar = .close){
-        
-        guard let icon = iconButton.image?.withRenderingMode(.alwaysOriginal) else {
-            print("Icon bar invalid")
-            return
-        }
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: icon,
-            style: .plain,
-            target: self,
-            action: action
-        )
-    }
+//        func rightBarButtonItem(action: Selector = #selector(leftBarButtonItemAction),
+//                                iconButton: IconButtonBar = .close){
+//    
+//            guard let icon = iconButton.image?.withRenderingMode(.alwaysOriginal) else {
+//                print("Icon bar invalid")
+//                return
+//            }
+//    
+//            navigationItem.rightBarButtonItem = UIBarButtonItem(
+//                image: icon,
+//                style: .plain,
+//                target: self,
+//                action: action
+//            )
+//        }
     
     
     func navigationBarAppearance(titleColor: UIColor,
@@ -95,6 +95,7 @@ extension UIViewController{
             .foregroundColor: titleColor,
             .font: largeFont
         ]
+        
         
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = barAppearanceColor

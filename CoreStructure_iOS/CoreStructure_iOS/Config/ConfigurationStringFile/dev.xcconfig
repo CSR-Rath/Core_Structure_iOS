@@ -11,23 +11,24 @@
 
 BASE_URL = http:/$()/192.168.0.110:1110/api/
 
-API_KEY = AIzaSyAm5BMkEHnbOcVm1jtMHLUGCSJz4xvJ6s4 // get from firebase key API_KEY AIzaSyAm5BMkEHnbOcVm1jtMHLUGCSJz4xvJ6s4 AIzaSyAm5BMkEHnbOcVm1jtMHLUGCSJz4xvJ6s4
+API_KEY = AIzaSyBqVewVBMEhIqsP8uNDkkSD1wZYJCCXFgw // get from firebase key API_KEY
 
-BUNDLE_ID = com.rath.CoreStructure-iOS
+//AIzaSyBqVewVBMEhIqsP8uNDkkSD1wZYJCCXFgw
 
+BUNDLE_ID = com.rath.CoreStructure-iOS.dev
 
 Bundle_Display_Name = DEV Testing
-
-
-
-
-
-
 
 // Key AES
 
 PAYMENT_KEY = PAYMENT_KEY_DEV
 
-// InitializationVectorEnum
-
 PAYMENT_VECTOR = PAYMENT_VECTOR_DEV
+
+//Dear Sir Sothea,
+//My name is Chhan Sophearath, and I am writing to express my interest in the iOS Developer position at your company.
+//I have almost three years of experience, working on iOS projects such as ANUPHEAP, The Real Reward, and The Real Merchant. I am skilled in Swift, UIKit, and the MVVM architecture, and I am passionate about creating clean, efficient, and user-friendly mobile applications.
+//I would be grateful for the opportunity to further discuss how I can contribute to your development team.
+//Thank you very much for considering my application.
+//Sincerely,
+// Chhan Sophearath

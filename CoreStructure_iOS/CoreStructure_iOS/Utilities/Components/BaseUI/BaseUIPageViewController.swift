@@ -9,7 +9,7 @@ import UIKit
 
 class BaseUIPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
-    private var currentIndex = 0
+    var currentIndex = 0
     private var pages = [UIViewController]()
     
     func setupPageViewController(pages: [UIViewController],
@@ -139,7 +139,13 @@ class PageViewController: UIViewController {
     
     @objc func pageButtonTapped(_ sender: UIButton) {
         let index = sender.tag
-        pageVC.goToPageViewControoler(index: index)
+        
+        if pageVC.currentIndex != index{
+            pageVC.goToPageViewControoler(index: index)
+        }
+        
+        
+      
     }
 }
 

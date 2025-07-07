@@ -22,6 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         messagingFirebase(application) // messaging firebase
         
+        
+       print("==> apiKey: \(AppConfiguration.shared.apiKey)") //AIzaSyBqVewVBMEhIqsP8uNDkkSD1wZYJCCXFgw
         GMSServices.provideAPIKey(AppConfiguration.shared.apiKey) // google maps
         
      
@@ -58,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
-    func nearbyLocation(title: String = "title", body: String = "body"){
+    func nearbyLocation(title: String = "Message", body: String = "Nearby location"){
         let content = UNMutableNotificationContent()
         content.title = title
         content.body = body

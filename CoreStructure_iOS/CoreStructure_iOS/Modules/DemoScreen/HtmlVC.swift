@@ -17,7 +17,6 @@ class HtmlVC: UIViewController, UIGestureRecognizerDelegate{
         textView.textColor = .white
         textView.backgroundColor = .clear//.mainColor
         textView.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
-        textView.attributedText = ""
         textView.showsVerticalScrollIndicator = false
         textView.isScrollEnabled = true // isSroll true
         return textView

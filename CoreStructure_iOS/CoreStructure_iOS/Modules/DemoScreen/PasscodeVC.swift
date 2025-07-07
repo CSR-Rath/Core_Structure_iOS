@@ -36,6 +36,7 @@ class PasscodeVC: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Passcode"
         view.backgroundColor = .white
         setupUIView()
    

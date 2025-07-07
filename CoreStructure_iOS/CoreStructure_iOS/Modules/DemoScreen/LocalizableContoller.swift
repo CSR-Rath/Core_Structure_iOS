@@ -103,6 +103,7 @@ class LocalizableContoller: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        title = "Localizable"
         textFields = [textField1,textField2,textField3]
         setupConstraint()
         reloadLabel()

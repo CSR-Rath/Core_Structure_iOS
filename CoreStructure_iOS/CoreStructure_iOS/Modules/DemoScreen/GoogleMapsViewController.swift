@@ -94,7 +94,7 @@ class GoogleMapsViewController: UIViewController {
     
     @objc private func actionCurrentLocation() {
         
-        LocationManager.shared.getCurrentLocation(isLiveLocation: true) { location in
+        LocationManager.shared.getCurrentLocation(isLiveLocation: false) { location in
 //            print("Live location")
             if let location = location{
                 self.zoomToLocation(location)

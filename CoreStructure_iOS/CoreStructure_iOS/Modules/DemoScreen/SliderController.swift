@@ -30,6 +30,7 @@ class SliderController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Slider"
         setupViews()
         setupGesture()
     }

@@ -39,11 +39,11 @@ class CollectionViewManagerHelper<T: Codable>: NSObject,
 
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        if items.count > 0 {
-            collectionView.restore()
-        }else{
-            collectionView.isEmptyListView()
-        }
+//        if items.count > 0 {
+//            collectionView.isrestore()
+//        }else{
+//            collectionView.isEmptyListView()
+//        }
         
         return items.count
     }

@@ -24,7 +24,7 @@ enum IconEmptyList {
 // MARK: - For pull refresh include Scrollview, TableView, CollectionView
 extension UIScrollView{
     
-    func addRefreshControl(tintColor: UIColor = .red,
+    func isAddRefreshControl(tintColor: UIColor = .red,
                            target: Any,
                            action: Selector) {
         if self.refreshControl == nil {
@@ -36,7 +36,7 @@ extension UIScrollView{
         }
     }
     
-    func endRefreshing() {
+    func isEndRefreshing() {
         if self.refreshControl?.isRefreshing == true {
            self.refreshControl?.endRefreshing()
         }
@@ -48,7 +48,7 @@ extension UIScrollView{
 // MARK: - Handle Empty list for UITableView & UICollectionView
 extension UIScrollView {
     
-    func isEmptyListView(messsage: String? = nil,
+    func isShowEmptyState(messsage: String? = nil,
                           icon: IconEmptyList = .back
     ) {
         let emptyView = UIView(frame: CGRect(x: 0,
@@ -94,7 +94,7 @@ extension UIScrollView {
         }
     }
     
-    func restore() {
+    func isRestoreEmptyState() {
         if let tableView = self as? UITableView {
             tableView.backgroundView = nil
             tableView.separatorStyle = .none

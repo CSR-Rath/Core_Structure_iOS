@@ -32,6 +32,7 @@ class UploadImageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        title = "Upload Image"
         setupLayout()
         
         selectImageButton.addTarget(self, action: #selector(selectImageTapped), for: .touchUpInside)

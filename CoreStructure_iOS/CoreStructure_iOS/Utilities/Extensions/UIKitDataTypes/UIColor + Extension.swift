@@ -52,6 +52,10 @@ extension UIColor {
     static var mainYellow = #colorLiteral(red: 0.9450980392, green: 0.7450980392, blue: 0.2823529412, alpha: 1) // #F1BE48
     static var mainRed = #colorLiteral(red: 0.9985015988, green: 0.3468284607, blue: 0.2801859975, alpha: 1) //#FF5847
 
+    
+    
+    
+    
 }
 
 

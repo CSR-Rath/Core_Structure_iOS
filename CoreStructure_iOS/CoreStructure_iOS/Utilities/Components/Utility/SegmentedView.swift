@@ -69,7 +69,7 @@ class SegmentedView: UIView {
         }
         
         // Set the frame for the backgroundIndicatorView initially
-        updateLocationAnimation(button: buttons[selectedIndex],isFirstTime: false)
+//        updateLocationAnimation(button: buttons[selectedIndex],isFirstTime: false)
 
     }
 }

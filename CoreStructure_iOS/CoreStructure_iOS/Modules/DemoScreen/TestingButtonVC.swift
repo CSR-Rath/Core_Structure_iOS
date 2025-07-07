@@ -13,6 +13,7 @@ class TestingButtonVC: UIViewController{
      
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Testing Button"
         view.backgroundColor = .white
         
         let button = CustomUIButton()

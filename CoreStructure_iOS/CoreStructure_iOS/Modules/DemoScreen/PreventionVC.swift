@@ -38,7 +38,7 @@ class PreventionScreen: UIViewController {
         viewScreen.backgroundColor = .green
         viewScreen.frame = view.bounds
         view.addSubview(viewScreen)
-        viewScreen.makeSecure()
+//        viewScreen.makeSecure()
 
     }
 }

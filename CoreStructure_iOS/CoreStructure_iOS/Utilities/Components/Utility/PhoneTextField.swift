@@ -106,37 +106,85 @@ class PhoneTextField: UITextField, UITextFieldDelegate {
 
 class PhoneTextFieldVC: UIViewController {
     
-    var phoneNumberTextField: PhoneTextField!
+    private  var nsButton = NSLayoutConstraint()
+
+    
+    lazy var phoneTextField: PhoneTextField = {
+        let textField = PhoneTextField()
+        textField.placeholder = "Enter phone number"
+        textField.borderStyle = .roundedRect
+        textField.keyboardType = .numberPad
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        
+        return textField
+    }()
+    
+    
+    lazy var btnButton: BaseUIButton = {
+        let button = BaseUIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Done", for: .normal)
+        button.addTarget(self, action: #selector(didTappedDone), for: .touchUpInside)
+        return button
+    }()
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.dismissKeyboard()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         title = "Phone TextField"
+//        leftBarButtonItem(named: .back)
         setupPhoneNumberTextField()
-        leftBarButtonItem()
+        keyboradHandleer()
+        
+        
     }
     
-    func setupPhoneNumberTextField() {
-        // Create a UITextField programmatically
-        phoneNumberTextField = PhoneTextField()
-        phoneNumberTextField.placeholder = "Enter phone number"
-        phoneNumberTextField.borderStyle = .roundedRect
-        phoneNumberTextField.keyboardType = .numberPad // Ensure this is set for number input
-        phoneNumberTextField.translatesAutoresizingMaskIntoConstraints = false
-        phoneNumberTextField.delegate = phoneNumberTextField // Make sure the delegate is set to PhoneNumberTextField
-        view.addSubview(phoneNumberTextField)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        phoneTextField.becomeFirstResponder()
+    }
+    
+    
+    @objc private func didTappedDone(){
+        print("didTappedDone")
+    }
+    
+    private func keyboradHandleer(){
         
+        keyboardManager.onKeyboardWillShow = { keyboardHeight in
+            self.nsButton.constant = keyboardHeight - 20
+            self.view.layoutIfNeeded()
+        }
+        
+        keyboardManager.onKeyboardWillHide = { _ in
+            self.nsButton.constant = .mainSpacingBottomButton
+            self.view.layoutIfNeeded()
 
+        }
+    }
+    
+    private func setupPhoneNumberTextField() {
+        // Create a UITextField programmatically
+        view.addSubview(btnButton)
+        view.addSubview(phoneTextField)
         
         // Set constraints for the phone number text field
         NSLayoutConstraint.activate([
-            phoneNumberTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            phoneNumberTextField.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            phoneNumberTextField.widthAnchor.constraint(equalToConstant: 250),  // Width of 250 points
-            phoneNumberTextField.heightAnchor.constraint(equalToConstant: 50)   // Height of 50 points
+            phoneTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            phoneTextField.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -100),
+            phoneTextField.widthAnchor.constraint(equalToConstant: 250),
+            phoneTextField.heightAnchor.constraint(equalToConstant: 50),
+            
+            btnButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            btnButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+          
         ])
         
-        // Optionally, you can make the text field first responder to test the input
-        phoneNumberTextField.becomeFirstResponder()
+        nsButton = btnButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: .mainSpacingBottomButton)
+        nsButton.isActive = true
     }
 }

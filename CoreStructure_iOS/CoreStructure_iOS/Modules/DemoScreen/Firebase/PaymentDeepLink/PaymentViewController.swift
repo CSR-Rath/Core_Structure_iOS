@@ -12,6 +12,7 @@ class PaymentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        title = "Process Payment"
         
         let buttonPay = BaseUIButton(frame: CGRect(x: (Int(screen.width)-300)/2,
                                                    y: (Int(screen.height)-50)/2,
@@ -45,7 +46,6 @@ class PaymentViewController: UIViewController {
                                                object: nil)
     }
 
-    
     @objc private func paymentStatus(){
         Loading.shared.showLoading()
         Loading.shared.hideLoading(seconds: 0.60) {

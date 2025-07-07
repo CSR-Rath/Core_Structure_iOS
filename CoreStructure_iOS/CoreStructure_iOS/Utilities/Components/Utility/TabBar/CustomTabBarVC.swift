@@ -40,7 +40,7 @@ class CustomTabBarVC: UITabBarController, UIGestureRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        leftBarButtonItem(iconButton: .isEmpty)
+//        leftBarButtonItem(iconButton: .isEmpty)
         setupViewControllers()
         setupConstraintAndSetupController()
         setupNavigationBar()

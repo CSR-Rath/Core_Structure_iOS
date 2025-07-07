@@ -51,7 +51,7 @@ class BaseUIViewConroller: UIViewController, UIGestureRecognizerDelegate {
         
         if isLeftBarButtonItem {
             
-            leftBarButtonItem()
+//            leftBarButtonItem()
         }else{
             
             self.navigationItem.leftBarButtonItem = nil

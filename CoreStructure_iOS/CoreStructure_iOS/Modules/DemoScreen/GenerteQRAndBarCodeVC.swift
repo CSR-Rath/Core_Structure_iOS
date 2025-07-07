@@ -25,6 +25,7 @@ class GenerteQRAndBarCodeVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Generale QRCode or Bar Code"
         view.backgroundColor = .white
         setupUI()
     }

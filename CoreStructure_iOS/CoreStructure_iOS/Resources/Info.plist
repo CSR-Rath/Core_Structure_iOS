@@ -8,7 +8,7 @@
 	<string>$(BASE_URL)</string>
 	<key>BUNDLE_ID</key>
 	<string>$(BUNDLE_ID)</string>
-	<key>Bundle_display_name</key>
+	<key>Bundle_Display_Name</key>
 	<string>$(Bundle_Display_Name)</string>
 	<key>CFBundleURLTypes</key>
 	<array>
