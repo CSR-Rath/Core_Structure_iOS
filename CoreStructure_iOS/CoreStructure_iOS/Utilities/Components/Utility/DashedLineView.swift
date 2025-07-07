@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DashedLineView: UIView {
+class DashedLineViewManager: UIView {
     
     var lineColor: UIColor = UIColor.black {
         didSet {

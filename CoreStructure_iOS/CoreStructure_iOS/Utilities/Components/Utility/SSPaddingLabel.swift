@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class SSPaddingLabel: UILabel {
+class SSPaddingLabelManager: UILabel {
     var padding : UIEdgeInsets
     
     // Create a new SSPaddingLabel instance programamtically with the desired insets

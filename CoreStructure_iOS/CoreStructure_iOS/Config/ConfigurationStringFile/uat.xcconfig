@@ -1,0 +1,27 @@
+//
+//  uat.xcconfig
+//  CoreStructure_iOS
+//
+//  Created by Rath! on 12/9/24.
+//
+
+//Referent ==> https://medium.com/@tejaswini-27k/ios-project-different-environments-xcode-configurations-and-scheme-752ee4404bfa
+
+// MARK: All key, We need add in info(example: BASE_URL : $(BASE_URL) )
+
+BASE_URL = http:/$()/192.168.0.110:1110/api/
+
+API_KEY = AIzaSyAm5BMkEHnbOcVm1jtMHLUGCSJz4xvJ6s4 // get from firebase key API_KEY
+
+BUNDLE_ID = com.rath.CoreStructure-iOS
+
+Bundle_Display_Name = UAT
+
+
+/// MARK: - ASUtils are key and vector
+
+PAYMENT_KEY = PAYMENT_KEY_UAT
+
+//==========
+
+PAYMENT_VECTOR = PAYMENT_VECTOR_UAT
