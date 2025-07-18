@@ -28,7 +28,6 @@ class CustomTabBarVC: UITabBarController, UIGestureRecognizerDelegate {
     private lazy var tabBarView: TabBarView = {
         let tabBarView = TabBarView()
         tabBarView.backgroundColor = .orange
-//        tabBarView.alpha = 0.3
         tabBarView.indexDidChange = { [weak self] index in
             self?.selectedIndex = index
             self?.setupNavigationBar(index: index)
@@ -40,7 +39,7 @@ class CustomTabBarVC: UITabBarController, UIGestureRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        leftBarButtonItem(iconButton: .isEmpty)
+        leftBarButtonItem(iconButton: .isEmpty)
         setupViewControllers()
         setupConstraintAndSetupController()
         setupNavigationBar()

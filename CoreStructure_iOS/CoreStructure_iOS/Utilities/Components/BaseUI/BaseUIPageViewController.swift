@@ -81,7 +81,7 @@ class BaseUIPageViewController: UIPageViewController, UIPageViewControllerDataSo
 }
 
 
-class PageViewController: UIViewController {
+class PageVC: BaseInteractionViewController {
     
     let pageVC = BaseUIPageViewController()
     
@@ -143,9 +143,6 @@ class PageViewController: UIViewController {
         if pageVC.currentIndex != index{
             pageVC.goToPageViewControoler(index: index)
         }
-        
-        
-      
     }
 }
 

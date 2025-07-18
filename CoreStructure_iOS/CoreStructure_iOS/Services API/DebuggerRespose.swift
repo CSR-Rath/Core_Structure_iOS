@@ -116,3 +116,26 @@ extension DecodingError.Context {
         return String(format: "%@ \n %@ : %@", functionName, stringValue , self.debugDescription)
     }
 }
+
+
+class Validator {
+    
+    static func validateModel<T: Codable>(model: T, data: Data, fun: String, response: (T)->()) {
+        do {
+            let jsonData = try JSONDecoder().decode(T.self, from: data)
+            response(jsonData)
+
+            print("Validator success: =>",jsonData)
+
+
+        } catch let DecodingError.typeMismatch(type, context) {
+
+            print("Validator error: =>\(type) , \(context.codingPath), \(context.debugDescription)")
+
+        } catch {
+
+            print("error: ", error)
+
+        }
+    }
+}

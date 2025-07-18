@@ -75,13 +75,12 @@ extension UIViewController{
 //        }
     
     
-    func navigationBarAppearance(titleColor: UIColor,
-                                 barAppearanceColor: UIColor,
+    func navigationBarAppearance(titleColor: UIColor = .black,
+                                 barAppearanceColor: UIColor = .clear,
                                  shadowColorLine: UIColor = .clear
     ){
         
         let setupFont: UIFont = UIFont.appFont(style: .bold, size: 16)
-        
         let largeFont: UIFont = UIFont.appFont(style: .bold, size: 34)
         
         let appearance = UINavigationBarAppearance()
@@ -99,7 +98,7 @@ extension UIViewController{
         
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = barAppearanceColor
-        appearance.shadowColor = shadowColorLine// barColor ?? .mainBlueColor // line appearenc bar
+        appearance.shadowColor = .orange//shadowColorLine// barColor ?? .mainBlueColor // line appearenc bar
         
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance

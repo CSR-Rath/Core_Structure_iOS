@@ -8,16 +8,21 @@
 import UIKit
 import CoreLocation
 
-enum DistanceEnum{
-    case mm
-    case km
+//enum DistanceEnum{
+//    case mm
+//    case km
+//}
+
+enum DistanceUnit {
+    case meters
+    case kilometers
 }
 
 class LocationManager: NSObject, CLLocationManagerDelegate {
-    
+
     // MARK: - Singleton
     static let shared = LocationManager()
-    
+
     // MARK: - Private properties
     private let locationManager = CLLocationManager()
     private var locationCompletion: ((CLLocation?) -> Void)?
@@ -29,11 +34,12 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         super.init()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.distanceFilter = 10 // 🔥 Update location every 10 meters
     }
 
     // MARK: - Public Methods
 
-    /// Request current or continuous location
+    /// Start getting current or continuous location
     func getCurrentLocation(isLiveLocation: Bool = false, completion: @escaping (CLLocation?) -> Void) {
         locationCompletion = completion
         isContinuousUpdate = isLiveLocation
@@ -51,58 +57,67 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
             completion(nil)
         }
     }
-    
-    
-    func distancew(formate: DistanceEnum, fromLocation: CLLocation, toLocation: CLLocation) -> Double {
 
-        let distanceMeters = fromLocation.distance(from: toLocation)
-        
-        if formate == .km{
-            let distanceKilometers = distanceMeters / 1000.0
-            return  distanceKilometers //String(format: "%.2f km", distanceKilometers)
-        }else if formate == .mm {
-            // Show in meters (mm)
-            return distanceMeters//String(format: "%.0f m", distanceMeters)
-        }
-        
-        return 0
+    /// Set a custom distance filter (e.g. 5 meters, 50 meters)
+    func setDistanceFilter(_ meters: CLLocationDistance) {
+        locationManager.distanceFilter = meters
     }
 
-  
-
-    // Stop location updates manually
+    /// Stop updating location manually
     func stopUpdatingLocation() {
         locationManager.stopUpdatingLocation()
         locationCompletion = nil
         isContinuousUpdate = false
     }
 
+    /// Calculate distance between two locations
+    func distance(from fromLocation: CLLocation, to toLocation: CLLocation, unit: DistanceUnit) -> Double {
+        let distanceInMeters = fromLocation.distance(from: toLocation)
+
+        switch unit {
+        case .kilometers:
+            return distanceInMeters / 1000.0
+        case .meters:
+            return distanceInMeters
+        }
+    }
+
     // MARK: - CLLocationManagerDelegate
+
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let latestLocation = locations.last
+        guard let latestLocation = locations.last else {
+            locationCompletion?(nil)
+            return
+        }
+
         locationCompletion?(latestLocation)
-        
+
         if !isContinuousUpdate {
             stopUpdatingLocation()
         }
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Failed to get location: \(error.localizedDescription)")
+        print("❌ Failed to get location: \(error.localizedDescription)")
         locationCompletion?(nil)
         locationCompletion = nil
     }
 
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         let status = CLLocationManager.authorizationStatus()
-        if status == .authorizedWhenInUse || status == .authorizedAlways {
+        switch status {
+        case .authorizedWhenInUse, .authorizedAlways:
             if shouldStartAfterAuthorization {
                 shouldStartAfterAuthorization = false
                 locationManager.startUpdatingLocation()
             }
-        } else if status == .denied || status == .restricted {
+        case .denied, .restricted:
             locationCompletion?(nil)
             locationCompletion = nil
+        case .notDetermined:
+            break
+        @unknown default:
+            break
         }
     }
 }

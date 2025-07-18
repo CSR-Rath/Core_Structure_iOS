@@ -7,27 +7,30 @@
 
 import Foundation
 
-enum FormatTypeEnum {
+enum FormateTypeEnum{
+    case KHR
+    case USD
+    case POINTS
+    case LISTERS
     
-    case currencyAsKHR
-    case currencyAsUSD
-    case asLiters
-    case asPoints
     
-    case currencyKHR
-    case currencyUSD
-    case liters
-    case points
+    case TYPE_KHR
+    case TYPE_USD
+    case TYPE_POINS
+    case TYPE_LISTERS
+    
+    case KHR_TYPE
+    case USD_TYPE
+    case POINTS_TYPE
+    case LISTERS_TYPE
+    
+    
 }
 
-enum CurrencyCodeEnum: String{
-    case currencyKHR = "KHR"
-    case currencyUSD = "USD"
-}
 
 extension Double {
     
-    func toFormate(as type: FormatTypeEnum, currencyCodeAfterAmount: Bool = true) -> String {
+    func toFormate(as type: FormateTypeEnum) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.roundingMode = .halfUp
@@ -38,86 +41,56 @@ extension Double {
         var suffix = ""
 
         switch type {
-        case .currencyAsKHR, .currencyKHR:
+        case .KHR, .KHR_TYPE, .TYPE_KHR:
           
             numberFormatter.minimumFractionDigits = 0
             numberFormatter.maximumFractionDigits = 0
             
-            if type == .currencyAsKHR{
+            if type != .KHR{
                 suffix = "KHR".localizeString()
             }
             
-        case .currencyAsUSD, .currencyUSD:
-
+        case .USD, .USD_TYPE, .TYPE_USD:
             numberFormatter.minimumFractionDigits = 2
             numberFormatter.maximumFractionDigits = 2
             
-            if type == .currencyAsUSD{
+            if type != .USD{
                 suffix = "USD".localizeString()
             }
 
-        case .asLiters, .liters:
+        case .LISTERS, .LISTERS_TYPE, .TYPE_LISTERS:
             numberFormatter.roundingMode = .floor
             numberFormatter.maximumFractionDigits = self.truncatingRemainder(dividingBy: 1) == 0 ? 0 : 2
             
-            if type == .asLiters{
+            if type != .LISTERS{
                 suffix = self > 1 ? "Liters".localizeString() : "Liter".localizeString()
             }
 
-        case .asPoints, .points:
+        case .POINTS, .POINTS_TYPE, .TYPE_POINS:
             numberFormatter.roundingMode = .floor
             numberFormatter.maximumFractionDigits = self.truncatingRemainder(dividingBy: 1) == 0 ? 0 : 2
             
-            if type == .asPoints{
+            if type != .POINTS{
                 suffix = self > 1 ? "Points".localizeString() : "Point".localizeString()
             }
         }
         
        let formattedValue = numberFormatter.string(from: NSNumber(value: self)) ?? "0"
         
-        return currencyCodeAfterAmount ? "\(formattedValue) \(suffix)" : "\(suffix) \(formattedValue)"
-    }
-    
-    func toCurrency(
-        for currency: CurrencyCodeEnum,
-        includeCurrencyCode: Bool = true,
-        currencyCodeAfterAmount: Bool = true
-    ) -> String{
-    
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.roundingMode = .halfUp
-        numberFormatter.groupingSeparator = ","
-        numberFormatter.decimalSeparator = "."
-        numberFormatter.locale = Locale(identifier: "en_US")
-
-        
-        var suffix = ""
-
-        switch currency {
-        case .currencyKHR:
-          
-            numberFormatter.minimumFractionDigits = 0
-            numberFormatter.maximumFractionDigits = 0
+        if type == .KHR_TYPE ||
+            type == .USD_TYPE ||
+            type == .POINTS_TYPE ||
+            type == .LISTERS_TYPE {
             
-            if includeCurrencyCode{
-                suffix = "KHR".localizeString()
-            }
+            return "\(formattedValue) \(suffix)"
             
-        case .currencyUSD:
-
-            numberFormatter.minimumFractionDigits = 2
-            numberFormatter.maximumFractionDigits = 2
-            
-            if includeCurrencyCode{
-                suffix = "USD".localizeString()
-            }
+        }else if type == .TYPE_KHR ||
+                    type == .TYPE_USD ||
+                    type == .TYPE_POINS ||
+                    type == .TYPE_LISTERS {
+            return "\(suffix) \(formattedValue)"
+        }else{
+            return formattedValue
         }
-        
-       let formattedValue = numberFormatter.string(from: NSNumber(value: self)) ?? "0"
-        
-        return currencyCodeAfterAmount ? "\(formattedValue) \(suffix)" : "\(suffix) \(formattedValue)"
-        
     }
-    
 }

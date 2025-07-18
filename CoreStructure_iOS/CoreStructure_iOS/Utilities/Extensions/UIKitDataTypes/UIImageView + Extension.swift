@@ -22,8 +22,8 @@ extension UIImageView {
         self.tintColor = color
     }
     
-    func loadingImage(urlString: String,
-                      defaultImage: imageLoadingTypeEnum = .imageEmpty,
+    func isLoadingImage(urlString: String,
+                      defaultImage: imageLoadingTypeEnum,
                       style: UIActivityIndicatorView.Style = .medium,
                       isHaveToken: Bool = false // ✅ Optional token parameter
     ) {

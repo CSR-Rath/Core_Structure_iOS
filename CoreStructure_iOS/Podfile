@@ -21,7 +21,7 @@ target 'CoreStructure_iOS' do
 # pod 'MarqueeLabel' // marquee auto scroll label
 
 # RealmSwift for local database
-# pod 'RealmSwift', '~> 10.15'
+ pod 'RealmSwift', '~> 10.15'
 
 # Google Maps SDK
   pod 'GoogleMaps'

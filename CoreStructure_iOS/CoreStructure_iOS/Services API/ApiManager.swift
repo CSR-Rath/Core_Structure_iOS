@@ -97,8 +97,6 @@ class ApiManager {
                 guard let httpResponse = response as? HTTPURLResponse else { return }
                 
                 
-                
-                
                 switch httpResponse.statusCode {
                 case 200..<300:
                     
@@ -125,7 +123,7 @@ class ApiManager {
                         }
                         else{
                             
-                            AlertMessage.shared.alertError(message: apiResponse.response.message)
+                            AlertMessage.shared.alertError()
                             
                         }
                         

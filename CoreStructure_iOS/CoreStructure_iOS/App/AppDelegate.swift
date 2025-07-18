@@ -17,36 +17,16 @@ import LocalAuthentication
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    private var orientationLock = UIInterfaceOrientationMask.all
+    private var orientationLock = UIInterfaceOrientationMask.portrait
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         messagingFirebase(application) // messaging firebase
         
-        
-       print("==> apiKey: \(AppConfiguration.shared.apiKey)") //AIzaSyBqVewVBMEhIqsP8uNDkkSD1wZYJCCXFgw
+        print("==> apiKey: \(AppConfiguration.shared.apiKey)") //AIzaSyBqVewVBMEhIqsP8uNDkkSD1wZYJCCXFgw
         GMSServices.provideAPIKey(AppConfiguration.shared.apiKey) // google maps
         
      
-        LocationManager.shared.getCurrentLocation(isLiveLocation: true) { location in
-            
-            guard let location = location else { return }
-            
-            let latitude: Double =  11.5564
-            let longitude: Double = 104.9282
-            
-            // Fixed coordinate (Phnom Penh)
-            let toLocation = CLLocation(latitude: latitude, longitude: longitude)
-
-            
-            let km =  LocationManager.shared.distancew(formate: .mm,
-                                                       fromLocation: location,
-                                                       toLocation: toLocation)
-            
-            if km < 5000{
-                LocationManager.shared.stopUpdatingLocation()
-                self.nearbyLocation()
-            }
-        }
+        handleNearbyLocation()
         
         return true
     }
@@ -60,24 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
-    func nearbyLocation(title: String = "Message", body: String = "Nearby location"){
-        let content = UNMutableNotificationContent()
-        content.title = title
-        content.body = body
-        content.sound = UNNotificationSound.default
-        
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false) // 60 seconds for testing
-        
-        let request = UNNotificationRequest(identifier: "scheduledNotification", content: content, trigger: trigger)
-        
-        UNUserNotificationCenter.current().add(request) { error in
-            if let error = error {
-                print("Error scheduling notification: \(error.localizedDescription)")
-            } else {
-                print("Notification scheduled successfully.")
-            }
-        }
-    }
+
 }
 
 extension AppDelegate: UNUserNotificationCenterDelegate, MessagingDelegate {
@@ -116,28 +79,74 @@ extension AppDelegate: UNUserNotificationCenterDelegate, MessagingDelegate {
         
     }
     
-    func sendTestLocalNotification() {
-        let content = UNMutableNotificationContent()
-        content.title = "Test Notification"
-        content.body = "This is a local notification"
-        content.sound = .default
+//    func sendTestLocalNotification() {
+//        let content = UNMutableNotificationContent()
+//        content.title = "Test Notification"
+//        content.body = "This is a local notification"
+//        content.sound = .default
+//
+//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: true)
+//        let request = UNNotificationRequest(identifier: "test", content: content, trigger: trigger)
+//        
+//        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+//    }
+}
 
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: true)
-        let request = UNNotificationRequest(identifier: "test", content: content, trigger: trigger)
+
+
+
+// MARK: - Live location
+extension AppDelegate{
+    
+    private func handleNearbyLocation(){
         
-        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+        LocationManager.shared.getCurrentLocation(isLiveLocation: true) { [self] currentLocation in
+            
+            guard let location = currentLocation else { return }
+            
+            // Fixed coordinate (Phnom Penh)
+            let toLocation = CLLocation(latitude: 11.5564, longitude: 104.9282)
+            
+            let km =  LocationManager.shared.distance(from: location, to: toLocation, unit: .meters)
+            
+            if km < 500{
+                LocationManager.shared.stopUpdatingLocation()
+                pushNotificationNearby()
+            }
+        }
+    }
+    
+    func pushNotificationNearby(title: String = "Message", body: String = "Nearby location"){
+        let content = UNMutableNotificationContent()
+        content.title = title
+        content.body = body
+        content.sound = UNNotificationSound.default
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false) // 60 seconds for testing
+        
+        let request = UNNotificationRequest(identifier: "scheduledNotification", content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request) { error in
+            if let error = error {
+                print("Error scheduling notification: \(error.localizedDescription)")
+            } else {
+                print("Notification scheduled successfully.")
+            }
+        }
     }
 }
 
 
+
+// MARK: - App Orientation
 extension AppDelegate{
     
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
-        
         return orientationLock
     }
     
     struct AppLockOrientationManager {
+        
         static func lockOrientation(_ orientation: UIInterfaceOrientationMask) {
             if let delegate = UIApplication.shared.delegate as? AppDelegate {
                 delegate.orientationLock = orientation
@@ -145,19 +154,41 @@ extension AppDelegate{
         }
         
         // Forces the device to rotate to the specified orientation
-        static func lockOrientation(_ orientation: UIInterfaceOrientationMask, andRotateTo rotateOrientation:UIInterfaceOrientation) {
+        static func lockOrientation(_ orientation: UIInterfaceOrientationMask,
+                                    andRotateTo rotateOrientation:UIInterfaceOrientation) {
             self.lockOrientation(orientation)
             UIDevice.current.setValue(rotateOrientation.rawValue, forKey: "orientation")
         }
+        
+        // AppLockOrientationManager.lockOrientation(.portrait)
+        // AppLockOrientationManager.lockOrientation(.landscape, andRotateTo: .landscapeRight)
     }
-    
-    // Lock to portrait only
-//    AppLockOrientationManager.lockOrientation(.portrait)
-
-    // Lock to landscape and rotate to landscape right
-//    AppLockOrientationManager.lockOrientation(.landscape, andRotateTo: .landscapeRight)
-
 }
 
 
+
+// MARK: - App lifecycle methods
+extension AppDelegate{
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        print("App did become active")
+    }
+    
+    func applicationWillResignActive(_ application: UIApplication) {
+        print("App will resign active")
+    }
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        print("App entered background")
+    }
+    
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        print("App will enter foreground")
+    }
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        print("App will terminate") // kill app
+    }
+    
+}
 

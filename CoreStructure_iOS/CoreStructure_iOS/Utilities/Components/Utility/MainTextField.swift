@@ -76,8 +76,8 @@ class FloatingLabelTextField: UITextField, UITextFieldDelegate {
         }
     }
     
-    private let label: SSPaddingLabel = {
-        let label = SSPaddingLabel()
+    private let label: BaseUILabelPadding = {
+        let label = BaseUILabelPadding()
         label.font = UIFont.appFont(style: .bold, size: 14)
         label.textColor = .black
         label.backgroundColor = .white
@@ -206,21 +206,21 @@ extension FloatingLabelTextField{
         case .iconDdate:
             
 //            iconRightImg.image = .icNextWhite
-            setPadding(left: 12, right: 40)
+            isPadding(left: 12, right: 40)
             
         case .iconCircle:
             
 //            iconRightImg.image = .icNextWhite
-            setPadding(left: 12, right: 40)
+            isPadding(left: 12, right: 40)
             
         case .iconDropDown:
             
-            setPadding(left: 12, right: 40)
+            isPadding(left: 12, right: 40)
 //            iconRightImg.image = .icNextWhite
             
         case .iconEmpty:
             
-            setPadding(left: 12, right: 12)
+            isPadding(left: 12, right: 12)
             iconRightImg.isHidden = true
             
         }
@@ -305,7 +305,7 @@ extension FloatingLabelTextField{
         addSubview(fullView)
         
         //==========//====== Hendle self
-        setPadding(left: 12, right: 12)
+        isPadding(left: 12, right: 12)
 
         heightAnchor.constraint(equalToConstant: 70).isActive = true
         //==========//======

@@ -66,7 +66,7 @@ class AlertErrorVC: UIViewController {
         setupView()
         addPanGesture()
         closeButton.addTarget(self, action: #selector(close), for: .touchUpInside)
-        contentView.addGestureView(target: self, action: #selector(close))
+//        contentView.addGestureView(target: self, action: #selector(close))
     }
     
     private func setupView() {
