@@ -17,7 +17,7 @@ class DebuggerRespose {
         let body = urlRequest.httpBody.flatMap { String(decoding: $0, as: UTF8.self) }
         
         let result = """
-        \n
+        \n\n\n
         ⚡️⚡️⚡️⚡️ Headers: \(allHeaders)
         ⚡️⚡️⚡️⚡️ Request Body: \(String(describing: body))
         """
@@ -44,9 +44,9 @@ class DebuggerRespose {
         """
         
         if error {
-            print("❌❌❌❌ \(printer) ❌❌❌❌")
+            print("\n❌❌❌❌ \(printer) ❌❌❌❌")
         } else {
-            print("✅✅✅✅ \(printer) ✅✅✅✅")
+            print("\n✅✅✅✅ \(printer) ✅✅✅✅")
         }
     }
     
