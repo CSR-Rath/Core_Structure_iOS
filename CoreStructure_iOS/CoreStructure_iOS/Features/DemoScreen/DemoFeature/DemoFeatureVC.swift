@@ -108,10 +108,11 @@ class DemoFeatureVC: BaseInteractionViewController {
     
     @objc private func pullRefresh(){
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0) { [self] in
             
             items =   [
                 
+                
+                ListModel(id: 26, name: "APITheSameTimeVC", viewController: APITheSameTimeVC()),
                 ListModel(id: 26, name: "PageVC", viewController: PageVC()),
                 ListModel(id: 25, name: "UploadImageVC", viewController: UploadImageVC()),
                 ListModel(id: 24, name: "GenerteQRAndBarCodeVC", viewController: GenerteQRAndBarCodeVC()),
@@ -142,7 +143,7 @@ class DemoFeatureVC: BaseInteractionViewController {
 
                 
             ]
-        }
+        
     }
 }
 
@@ -164,24 +165,27 @@ extension DemoFeatureVC: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let item =  items[0].viewController ?? UIViewController()
         
-        let item =  items[indexPath.row]
+        self.pushVC(to: item)
         
-        switch item.id{
-        case 7:
-            AlertMessage.shared.alertError()
-        case 5,8,22:
-            item.viewController!.modalPresentationStyle = .custom
-            item.viewController!.transitioningDelegate = presentVC
-            self.present(item.viewController!, animated: true)
-        default:
-//            item.viewController?.leftBarButtonItem()
-            item.viewController?.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-            item.viewController?.navigationController?.interactivePopGestureRecognizer?.delegate = self
-            self.navigationController?.pushViewController(item.viewController!, animated: true)
-        }
+//        let item =  items[indexPath.row]
+//        
+//        switch item.id{
+//        case 7:
+//            AlertMessage.shared.alertError()
+//        case 5,8,22:
+//            item.viewController!.modalPresentationStyle = .custom
+//            item.viewController!.transitioningDelegate = presentVC
+//            self.present(item.viewController!, animated: true)
+//        default:
+//
+//            item.viewController?.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+//            item.viewController?.navigationController?.interactivePopGestureRecognizer?.delegate = self
+//            self.navigationController?.pushViewController(item.viewController!, animated: true)
+//        }
         
-        tableView.deselectRow(at: indexPath, animated: true)
+//        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

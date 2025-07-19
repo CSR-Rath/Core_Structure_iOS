@@ -13,7 +13,6 @@ import FirebaseCrashlytics
 import LocalAuthentication
 
 
-
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -25,8 +24,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("==> apiKey: \(AppConfiguration.shared.apiKey)") //AIzaSyBqVewVBMEhIqsP8uNDkkSD1wZYJCCXFgw
         GMSServices.provideAPIKey(AppConfiguration.shared.apiKey) // google maps
         
+//        let refreshToken = "bf2d64d0-97d5-4b74-9ff4-9137b5c851a4"
+//        let token = "eyJhbGciOiJIUzUxMiJ9.eyJyb2wiOlsiVVNSIl0sInN1YiI6IlpRdm1xM3g3TDJiSENxeXQwdGNvSUZlMEd3Mk02L05SNElXQ1gza0tIMWpEM0hYVW1xT2NSNW5zbUZ2YXB0NXUiLCJpYXQiOjE3NTI5MzkwMzUsImV4cCI6MTc1Mjk0MjYzNX0.F9jWGMLdAXKU6SMiV84NU-uDsewajevvHUpKgwGxbXSL2C0QBKpCtB86xkVNVSXqDsSTfCWoaO9btEorvAcW-g"
+
+        
+//        UserDefaults.standard.setValue(refreshToken, forKey: AppConstants.refreshToken)
+//        UserDefaults.standard.setValue(token, forKey: AppConstants.token)
+        
      
-        handleNearbyLocation()
+//        handleNearbyLocation()
         
         return true
     }
@@ -39,8 +45,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
         
     }
-    
-
 }
 
 extension AppDelegate: UNUserNotificationCenterDelegate, MessagingDelegate {
@@ -78,18 +82,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate, MessagingDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
         
     }
-    
-//    func sendTestLocalNotification() {
-//        let content = UNMutableNotificationContent()
-//        content.title = "Test Notification"
-//        content.body = "This is a local notification"
-//        content.sound = .default
-//
-//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: true)
-//        let request = UNNotificationRequest(identifier: "test", content: content, trigger: trigger)
-//        
-//        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-//    }
 }
 
 

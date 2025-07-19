@@ -44,7 +44,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private func rootViewController(){
         
         printFontsName()
-        let controller: UIViewController = UserViewController()
+        let controller: UIViewController = LifeCycleViewController()
         let navigation = UINavigationController(rootViewController: controller)
         window!.rootViewController = navigation
         window!.makeKeyAndVisible()

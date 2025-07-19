@@ -9,7 +9,9 @@
 
 // MARK: All key, We need add in info(example: BASE_URL : $(BASE_URL) )
 
-BASE_URL = http:/$()/192.168.0.110:1110/aut/
+//uat-api-prime.therealreward.com/
+//jsonplaceholder.typicode.com/
+BASE_URL = https:/$()/api-prime.therealreward.com/
 
 API_KEY = AIzaSyBqVewVBMEhIqsP8uNDkkSD1wZYJCCXFgw // get from firebase key API_KEY
 
