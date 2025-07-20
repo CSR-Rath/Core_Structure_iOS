@@ -19,8 +19,9 @@ enum EndpointEnum: String {
     case getUsers = "users"
     case getPosts = "posts"
     case refreshToken = "user/auth/refresh-token" //auth/refresh-token"
-    case infoUserApp = "master/transaction?page=0&size=25"
-    case infoUserApp2 = "master/transaction?page=1&size=10"
+    case infoUserApp = "master/transaction?page=1&size=10"
+    case infoUserApp2 = "master/transaction?page=2&size=20"
+    case infoUserApp3 = "master/transaction?page=3&size=30"
      
 }
 

@@ -50,6 +50,7 @@ class APITheSameTimeViewModel {
     
     var userInfoModel1: ApiResponse?
     var userInfoModel2: ApiResponse?
+    var userInfoModel3: ApiResponse?
     
     
     var onDataUpdated: (() -> Void)?   // Closure property to notify data updated
@@ -72,6 +73,15 @@ class APITheSameTimeViewModel {
             }
             group.leave()
         }
+        
+        group.enter()
+        ApiManager.shared.apiConnection(url: .infoUserApp3) { (res: ApiResponse) in
+            DispatchQueue.main.async {
+                self.userInfoModel3 = res
+            }
+            group.leave()
+        }
+
 
         group.notify(queue: .main) {
             self.onDataUpdated?()
@@ -80,5 +90,3 @@ class APITheSameTimeViewModel {
     }
     
 }
-
-
