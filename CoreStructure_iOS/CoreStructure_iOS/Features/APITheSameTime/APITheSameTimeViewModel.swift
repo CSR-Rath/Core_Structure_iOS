@@ -7,59 +7,19 @@
 
 import Foundation
 
-struct User1: Codable {
-    let id: Int
-    let name: String
-    let email: String
-}
-
-struct Post: Codable {
-    let id: Int
-    let userId: Int
-    let title: String
-    let body: String
-}
-
-struct ResponseModel:Codable {
-    var status: Int?
-    var message: String?
-}
-
-struct UserInfoModel : Codable{
-    var results : ResultsUserInfoModel?
-    var response : ResponseModel?
-    
-}
-
-struct ResultsUserInfoModel : Codable{
-    var name: String?
-    var phone: String?
-    var photo: String?
-    var number: String?
-    var verify: Bool?
-    var gender: String?
-    var dob: String?
-    var nid: String?
-    var email: String?
-}
-
 class APITheSameTimeViewModel {
  
-        var users: [User1] = []
-        var posts: [Post] = []
+    var userInfoModel1: APITheSameModel?
+    var userInfoModel2: APITheSameModel?
+    var userInfoModel3: APITheSameModel?
     
-    var userInfoModel1: ApiResponse?
-    var userInfoModel2: ApiResponse?
-    var userInfoModel3: ApiResponse?
+    var onDataUpdated: (() -> Void)?
     
-    
-    var onDataUpdated: (() -> Void)?   // Closure property to notify data updated
-    
-    func fetchUsersAndPosts() {
-        let group = DispatchGroup()
+    func fetchApiTheSameTime() {
+        let group = DispatchGroup() // iOS 8+ DispatchGroup -> iOS 15+  withTaskGroup
         
         group.enter()
-        ApiManager.shared.apiConnection(url: .infoUserApp) { (res: ApiResponse) in
+        ApiManager.shared.apiConnection(url: .infoUserApp) { (res: APITheSameModel) in
             DispatchQueue.main.async { [self] in
                 userInfoModel2 = res
             }
@@ -67,7 +27,7 @@ class APITheSameTimeViewModel {
         }
         
         group.enter()
-        ApiManager.shared.apiConnection(url: .infoUserApp2) { (res: ApiResponse) in
+        ApiManager.shared.apiConnection(url: .infoUserApp2) { (res: APITheSameModel) in
             DispatchQueue.main.async {
                 self.userInfoModel2 = res
             }
@@ -75,18 +35,16 @@ class APITheSameTimeViewModel {
         }
         
         group.enter()
-        ApiManager.shared.apiConnection(url: .infoUserApp3) { (res: ApiResponse) in
+        ApiManager.shared.apiConnection(url: .infoUserApp3) { (res: APITheSameModel) in
             DispatchQueue.main.async {
                 self.userInfoModel3 = res
             }
             group.leave()
         }
 
-
         group.notify(queue: .main) {
             self.onDataUpdated?()
             print("✅ All APIs completed")
         }
     }
-    
 }

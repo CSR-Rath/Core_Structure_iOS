@@ -18,10 +18,10 @@ enum HTTPMethodEnum: String {
 // MARK: - Token Model
 struct RefreshTokenResponse: Codable {
     var results: RefreshTokenResults?
-    var response: APIResponseStatus?
+    var response: ResponseModel?
 }
 
-struct APIResponseStatus: Codable {
+struct ResponseModel:Codable {
     var status: Int?
     var message: String?
 }
@@ -31,6 +31,7 @@ struct RefreshTokenResults: Codable {
     var refreshToken: String?
     var expired: Int?
 }
+
 
 //
 //// MARK: - Header
@@ -83,6 +84,7 @@ class ApiManager {
     private let lock = NSLock()
     private var isRefreshingToken = false
     private var pendingRequests: [() -> Void] = []
+    private let refreshQueue = DispatchQueue(label: "com.yourapp.tokenRefreshQueue")
     
     func apiConnection<T: Codable>(
         url: EndpointEnum,
@@ -94,6 +96,7 @@ class ApiManager {
         res: @escaping (T) -> Void
     ) {
         let startTime = Date()
+        
         
         if !isConnectedToNetwork() {
             AlertMessage.shared.alertError(status: .internet)
@@ -111,10 +114,12 @@ class ApiManager {
         request.httpMethod = method.rawValue
         
         // Always get fresh headers
-        let finalHeaders = headers ?? getHeader()
-        for (headerField, headerValue) in finalHeaders {
-            request.setValue(headerValue, forHTTPHeaderField: headerField)
+        if let finalHeaders = headers{
+            for (headerField, headerValue) in finalHeaders {
+                request.setValue(headerValue, forHTTPHeaderField: headerField)
+            }
         }
+
 
         do {
             if let model = modelCodable {
@@ -130,7 +135,7 @@ class ApiManager {
         currentTask = URLSession.shared.dataTask(with: request) { data, response, error in
             let duration = Date().timeIntervalSince(startTime)
             
-            if let error = error as NSError? {
+            if (error as NSError?) != nil {
                 AlertMessage.shared.alertError(title: "Error!", message: "Error requested", status: .timedOut)
                 return
             }
@@ -154,48 +159,44 @@ class ApiManager {
             case 401:
                 print("🔒 Unauthorized – preparing to refresh token")
                 
-                self.lock.lock()
-                // Add the request to pending requests
-                self.pendingRequests.append { [weak self] in
-                    self?.apiConnection(
-                        url: url,
-                        method: method,
-                        param: param,
-                        modelCodable: modelCodable,
-                        headers: getHeader(), // Use fresh headers
-                        query: query,
-                        res: res
-                    )
-                }
-                
-                // Only start refresh if not already refreshing
-                if !self.isRefreshingToken {
-                    self.isRefreshingToken = true
-                    self.lock.unlock()
-                    
-                    print("🔄 Starting token refresh - pending requests: \(self.pendingRequests.count)")
-                    
-                    self.refreshTokenIfNeeded { success in
-                        self.lock.lock()
-                        let requests = self.pendingRequests
-                        self.pendingRequests.removeAll()
-                        self.isRefreshingToken = false
-                        self.lock.unlock()
-                        
-                        if success {
-                            print("🔄 Token refresh succeeded - retrying \(requests.count) requests")
-                            requests.forEach { $0() }
-                        } else {
-                            print("❌ Token refresh failed")
-                            AlertMessage.shared.alertError(title: "Message",
-                                                         message: "Token refresh failed",
-                                                         status: .code401)
-                        }
-                    }
-                } else {
-                    print("\n\n\n⏳ Token refresh already in progress - queuing request")
-                    self.lock.unlock()
-                }
+      
+                           
+                           self.refreshQueue.sync {
+                               self.pendingRequests.append {
+                                   self.apiConnection(url: url,
+                                                      method: method,
+                                                      param: param,
+                                                      modelCodable: modelCodable,
+                                                      headers: getHeader(),
+                                                      query: query,
+                                                      res: res)
+                               }
+
+                               guard !self.isRefreshingToken else { return }
+                               self.isRefreshingToken = true
+
+                               self.refreshTokenIfNeeded { success in
+                                   self.refreshQueue.async {
+                                       self.isRefreshingToken = false
+                                       if success {
+                                           print("🔄 Retrying pending requests...")
+                                           self.pendingRequests.forEach { $0() }
+                                       } else {
+                                           print("❌ Token refresh failed. Clearing pending requests.")
+                                       
+                                           guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                                                 let rootPresent = windowScene.windows.first?.rootViewController,
+                                                 let rootPush = windowScene.windows.first?.rootViewController as? UINavigationController
+                                           else { return }
+                                           
+                                           let controller = LoginViewController()
+                                           let navigation = UINavigationController(rootViewController: controller)
+                                           rootPush.pushViewController(navigation, animated: true)
+                                       }
+                                       self.pendingRequests.removeAll()
+                                   }
+                               }
+                           }
                 
             default:
                 print("⚠️ HTTP Status Code: \(httpResponse.statusCode)")
@@ -206,48 +207,51 @@ class ApiManager {
     }
 
     private func refreshTokenIfNeeded(completion: @escaping (Bool) -> Void) {
-        let refreshToken = UserDefaults.standard.string(forKey: AppConstants.refreshToken) ?? ""
-        print("\n🔄 RefreshingToken: \(refreshToken)")
         
         let url = URL(string: AppConfiguration.shared.apiBaseURL + EndpointEnum.refreshToken.rawValue)!
         var request = URLRequest(url: url)
         request.timeoutInterval = 60
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        let body: [String: Any] = ["refreshToken": refreshToken]
+        let body: [String: Any] = [
+            "refresh": UserDefaults.standard.string(forKey: AppConstants.refreshToken) ?? ""
+//            "username": "rath",
+//             "password": "123"
+        ]
         request.httpBody = try? JSONSerialization.data(withJSONObject: body)
         
         print("request: \(url)")
         
         URLSession.shared.dataTask(with: request) { data, response, error in
+           
+            
             guard let httpResponse = response as? HTTPURLResponse, let data = data else {
                 print("❌ Token refresh failed – no response")
                 completion(false)
                 return
             }
             
+            print(String(data: data, encoding: .utf8)!)
+            
             if httpResponse.statusCode == 200 {
                 do {
-                    let decoded = try JSONDecoder().decode(RefreshTokenResponse.self, from: data)
-                    if decoded.response?.status == 200,
-                       let newToken = decoded.results?.token,
-                       let newRefreshToken = decoded.results?.refreshToken {
-                        UserDefaults.standard.set(newToken, forKey: AppConstants.token)
-                        UserDefaults.standard.set(newRefreshToken, forKey: AppConstants.refreshToken)
+                    let decoded = try JSONDecoder().decode(LoginModel.self, from: data)
+                        
+                        UserDefaults.standard.setValue(decoded.access, forKey: AppConstants.token)
+                        UserDefaults.standard.setValue(decoded.refresh, forKey: AppConstants.refreshToken)
+                      
                         print("🔑 New tokens saved")
                         completion(true)
-                    } else {
-                        print("❌ Token refresh response invalid")
-                        completion(false)
-                    }
                 } catch {
                     print("❌ Failed to decode token refresh response: \(error)")
                     completion(false)
                 }
-            } else {
+            }
+            else {
                 print("❌ Token refresh failed with status: \(httpResponse.statusCode)")
                 completion(false)
             }
+            
         }.resume()
     }
 }

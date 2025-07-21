@@ -14,6 +14,7 @@ import UIKit
      
      static let token = "token"
      static let refreshToken = "refreshToken"
+     static let loginSuuccess = "loginSuuccess"
      
      
 //    static let loginSuccesFull = "loginSuccesFull"

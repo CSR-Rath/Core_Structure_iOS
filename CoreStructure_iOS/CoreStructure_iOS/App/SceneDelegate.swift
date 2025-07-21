@@ -44,7 +44,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private func rootViewController(){
         
         printFontsName()
-        let controller: UIViewController = LifeCycleViewController()
+        var controller: UIViewController!
+        
+        if UserDefaults.standard.bool(forKey: AppConstants.loginSuuccess) == true{
+            controller = CallMultipleApiTheSameThie()
+        }else{
+            controller = LoginViewController()
+        }
+        
+        
+      
         let navigation = UINavigationController(rootViewController: controller)
         window!.rootViewController = navigation
         window!.makeKeyAndVisible()
