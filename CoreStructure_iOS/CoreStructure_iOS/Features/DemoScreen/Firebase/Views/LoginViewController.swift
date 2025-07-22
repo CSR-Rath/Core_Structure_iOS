@@ -33,7 +33,6 @@ class LoginViewController: UIViewController {
         btn.translatesAutoresizingMaskIntoConstraints = false
         return btn
     }()
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,7 +72,7 @@ class LoginViewController: UIViewController {
         let password = passwordTextField.text ?? ""
         viewModel.login(username: username, password: password)
         viewModel.onSuccessLogin = {
-            let vc = CallMultipleApiTheSameThie()
+            let vc = APITheSameTimeVC()
             self.navigationController?.pushViewController(vc, animated: true)
             
         }
@@ -112,14 +111,6 @@ class CallMultipleApiTheSameThie: UIViewController{
         }
         
     }
-    
-    
-//   @objc private func TappedCallAPI(){
-//  
-//        viewModel.onDataUpdated = {
-//        
-//        }
-//    }
     
   
 }
@@ -168,33 +159,6 @@ class CallMultipleApiTheSameThieViewModel{
 }
 
 
-import Foundation
-
-// Top-level response for paginated products
-struct ProductListResponse: Codable {
-    let count: Int
-    let next: String?
-    let previous: String?
-    let results: [Product]
-}
-
-// Single product model
-struct Product: Codable {
-    let id: Int
-    let name: String
-    let price: String
-    let createdAt: String
-    let createdBy: Int
-
-    // Map JSON keys to Swift properties
-    enum CodingKeys: String, CodingKey {
-        case id, name, price
-        case createdAt = "created_at"
-        case createdBy = "created_by"
-    }
-}
-
-
 
 class LoginViewModel{
     
@@ -223,7 +187,4 @@ struct ParamLogin: Codable{
     let password: String
 }
 
-struct LoginModel: Codable{
-    let refresh: String
-    let access: String
-}
+

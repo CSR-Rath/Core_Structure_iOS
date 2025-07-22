@@ -7,6 +7,17 @@
 
 import UIKit
 
+
+//MARK: - Noted
+
+//button.actionUIButton = { [weak self] in
+//    self?.doSomething()
+//}
+
+//button.actionUIButton = {
+//    self.doSomething()  // 'self' is the view controller strongly captured here
+//}
+
 class BaseUIButton: UIButton {
     
     private var activityIndicator: UIActivityIndicatorView!
@@ -77,13 +88,11 @@ class BaseUIButton: UIButton {
     }
     
     @objc private func buttonReleased() {
-        print("buttonReleased")
         animateButton(scale: 1.0, alpha: 1)
     }
     
     @objc private func didTappedButton() {
         actionUIButton?()
-       print("didTappedButton")
     }
     
     private func animateButton(scale: CGFloat, alpha: CGFloat) {
@@ -121,7 +130,7 @@ class BaseUIButton: UIButton {
     }
     
     deinit {
-        print("MainButton deinitialized")
+        print("✅ BaseUIButton is deinitialized")
         self.stopLoading()
     }
 }

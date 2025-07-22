@@ -132,6 +132,7 @@
 		FAA5F4E22E1265EC0073DE30 /* GoogleMapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA5F4E12E1265EC0073DE30 /* GoogleMapsViewController.swift */; };
 		FAA5F4E42E1273D70073DE30 /* TableViewManagerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA5F4E32E1273D70073DE30 /* TableViewManagerHelper.swift */; };
 		FAA5F4E72E1276F00073DE30 /* CollectionViewManagerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA5F4E62E1276F00073DE30 /* CollectionViewManagerHelper.swift */; };
+		FAA6F6AF2E2F2965009DBF99 /* MemoryleaksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA6F6AE2E2F2965009DBF99 /* MemoryleaksVC.swift */; };
 		FAA9317A2D9BC3160013B51D /* NIDScannerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA931792D9BC3160013B51D /* NIDScannerVC.swift */; };
 		FAA9317C2D9BD1BE0013B51D /* GenerteQRAndBarCodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA9317B2D9BD1BE0013B51D /* GenerteQRAndBarCodeVC.swift */; };
 		FAA98FDF2E0BD93900A20BA5 /* CrashlyticsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA98FDE2E0BD93800A20BA5 /* CrashlyticsVC.swift */; };
@@ -324,6 +325,7 @@
 		FAA5F4E12E1265EC0073DE30 /* GoogleMapsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapsViewController.swift; sourceTree = "<group>"; };
 		FAA5F4E32E1273D70073DE30 /* TableViewManagerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewManagerHelper.swift; sourceTree = "<group>"; };
 		FAA5F4E62E1276F00073DE30 /* CollectionViewManagerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewManagerHelper.swift; sourceTree = "<group>"; };
+		FAA6F6AE2E2F2965009DBF99 /* MemoryleaksVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryleaksVC.swift; sourceTree = "<group>"; };
 		FAA80CF92CDC4F81001A8EEA /* HtmlVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlVC.swift; sourceTree = "<group>"; };
 		FAA931792D9BC3160013B51D /* NIDScannerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NIDScannerVC.swift; sourceTree = "<group>"; };
 		FAA9317B2D9BD1BE0013B51D /* GenerteQRAndBarCodeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerteQRAndBarCodeVC.swift; sourceTree = "<group>"; };
@@ -477,6 +479,7 @@
 		FA0664272CD1EAAF00694A9B /* DemoScreen */ = {
 			isa = PBXGroup;
 			children = (
+				FAF07E982E249550006628C3 /* TestingRealmSwift.swift */,
 				FAB0C41D2E1672CA009405C3 /* GoogleMaps */,
 				FAAD14552D68661E00C13166 /* Firebase */,
 				FAC761852D87F7FD00636660 /* BaseUIViewController */,
@@ -513,7 +516,9 @@
 				FAA98FDE2E0BD93800A20BA5 /* CrashlyticsVC.swift */,
 				FAA5F4E12E1265EC0073DE30 /* GoogleMapsViewController.swift */,
 				FAB0C41B2E1666F8009405C3 /* SuccessfullyViewController.swift */,
+				FAAA0F692E2A90F7000B9D11 /* LifeCycleViewController.swift */,
 				FA902C202E1E02C1002C2DF7 /* LifecycleVC.swift */,
+				FAA6F6AE2E2F2965009DBF99 /* MemoryleaksVC.swift */,
 			);
 			path = DemoScreen;
 			sourceTree = "<group>";
@@ -750,8 +755,6 @@
 				FA96D8FC2D9E97D9006F28DB /* Register */,
 				FAABFE1D2D817A02009B3721 /* Success */,
 				FA0664272CD1EAAF00694A9B /* DemoScreen */,
-				FAF07E982E249550006628C3 /* TestingRealmSwift.swift */,
-				FAAA0F692E2A90F7000B9D11 /* LifeCycleViewController.swift */,
 				FA91B2EB2E2AC35E002676C1 /* APITheSameTime */,
 			);
 			path = Features;
@@ -1463,6 +1466,7 @@
 				FA1ADC482D9395B500B606D1 /* NetworkMonitorManager.swift in Sources */,
 				FA992E9D2CF8BE98007B2EB8 /* Loading.swift in Sources */,
 				FAAA0F6A2E2A90F7000B9D11 /* LifeCycleViewController.swift in Sources */,
+				FAA6F6AF2E2F2965009DBF99 /* MemoryleaksVC.swift in Sources */,
 				FA992E9E2CF8BE98007B2EB8 /* Endpoints.swift in Sources */,
 				FAD109AA2DC85A4A00278B1B /* KeychainViewController.swift in Sources */,
 				FAB041E92D6EEFEB002737F8 /* AnimateUIView.swift in Sources */,

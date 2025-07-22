@@ -52,6 +52,12 @@ class BaseViewController: UIViewController {
     @objc private func backButtonTapped() {
         navigationController?.popViewController(animated: true)
     }
+    
+    
+    deinit{
+        print("🔴 BaseViewController is working deinit")
+        
+    }
 }
 
 struct AvailableServiceModel{

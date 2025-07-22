@@ -27,7 +27,6 @@ class LanguageManager {
     
     func getCurrentLanguage() -> LanguageTypeEnum {
         let rawValue = UserDefaults.standard.string(forKey: langualeKey) ?? LanguageTypeEnum.english.rawValue
-//        print("===> getCurrentLanguage: \(rawValue)")
         return LanguageTypeEnum(rawValue: rawValue) ?? .english
     }
 }

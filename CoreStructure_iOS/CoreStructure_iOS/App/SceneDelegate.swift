@@ -8,6 +8,24 @@
 import UIKit
 import RealmSwift
 
+class TouchPuchVC: UIViewController{
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let vc = MemoryleaksVC()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .white
+    }
+    
+    deinit{
+        print("Deinit TouchPuchVC")
+    }
+    
+}
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
@@ -16,14 +34,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        networkMonitoring()
+//        networkMonitoring()
         rootViewController()
-        
-        formateDouble()
-        
-        
-        let config = Realm.Configuration(schemaVersion: 1)
-        Realm.Configuration.defaultConfiguration = config
+//        formateDouble()
+//        
+//        let config = Realm.Configuration(schemaVersion: 1)
+//        Realm.Configuration.defaultConfiguration = config
         
     }
     
@@ -44,16 +60,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private func rootViewController(){
         
         printFontsName()
-        var controller: UIViewController!
+        var controller: UIViewController = TouchPuchVC()
         
-        if UserDefaults.standard.bool(forKey: AppConstants.loginSuuccess) == true{
-            controller = CallMultipleApiTheSameThie()
-        }else{
-            controller = LoginViewController()
-        }
-        
-        
-      
+//        if UserDefaults.standard.bool(forKey: AppConstants.loginSuuccess) == true{
+//            controller = TouchPuchVC()
+//        }else{
+//            controller = LoginViewController()
+//        }
+    
         let navigation = UINavigationController(rootViewController: controller)
         window!.rootViewController = navigation
         window!.makeKeyAndVisible()
@@ -63,9 +77,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                                            shadowColorLine: .clear)
         
         // MARK: - configuretion height
-        windowSceneDelegate = window!
-        bottomSafeAreaInsetsHeight = window?.safeAreaInsets.bottom
-        barAppearanHeight = navigation.navigationBar.frame.height + (window?.safeAreaInsets.top ?? 0)
+//        windowSceneDelegate = window!
+//        bottomSafeAreaInsetsHeight = window?.safeAreaInsets.bottom
+//        barAppearanHeight = navigation.navigationBar.frame.height + (window?.safeAreaInsets.top ?? 0)
         
     }
     
