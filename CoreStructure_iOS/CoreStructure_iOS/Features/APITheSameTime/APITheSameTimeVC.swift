@@ -12,21 +12,29 @@ class APITheSameTimeVC: UIViewController {
     private let tableView = UITableView()
     private let viewModel = APITheSameTimeViewModel()
     
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
         setupTableView()
         
-        Loading.shared.showLoading()
-        viewModel.fetchApiTheSameTime()
-        viewModel.onDataUpdated = {
+        Loading.shared.showLoading() // Show loading before fetch
+
+        viewModel.onDataUpdated = { [weak self] in
+            guard let self else { return }
+
+            print("✅ Data updated callback fired — all APIs done")
+
             self.tableView.reloadData()
-            self.tableView.isEndRefreshing()
+            self.tableView.stopRefreshing()
             self.tableView.isHideLoadingSpinner()
             Loading.shared.hideLoading()
         }
+
+        viewModel.fetchApiTheSameTime() // ✅ Call it here
     }
+
     
     private func setupTableView() {
         view.addSubview(tableView)
@@ -36,11 +44,13 @@ class APITheSameTimeVC: UIViewController {
         
         // Register a simple UITableViewCell
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.isAddRefreshControl(target: self, action: #selector(pullRefreshData))
+//        tableView.addRefreshControl(target: <#T##Any#>, action: <#T##Selector#>)
+        tableView.addRefreshControl(target: self, action: #selector(pullRefreshData))
     }
     
     @objc private func pullRefreshData() {
-        viewModel.fetchApiTheSameTime()
+      viewModel.fetchApiTheSameTime()
+          
     }
 }
 
@@ -48,11 +58,11 @@ extension APITheSameTimeVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        if tableView.isPagination(indexPath: indexPath,
-                                  arrayCount: viewModel.productList1?.results?.count ?? 0,
-                                  totalItems: viewModel.productList1?.count ?? 0){
-            
-        }
+//        if tableView.isPagination(indexPath: indexPath,
+//                                  arrayCount: viewModel.productList1?.results?.count ?? 0,
+//                                  totalItems: viewModel.productList1?.count ?? 0){
+//            
+//        }
     }
 }
 

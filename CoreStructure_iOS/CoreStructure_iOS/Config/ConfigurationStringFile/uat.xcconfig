@@ -15,7 +15,7 @@ BASE_URL = http:/$()/192.168.1.101:8000/api/
 
 API_KEY = AIzaSyBqVewVBMEhIqsP8uNDkkSD1wZYJCCXFgw // get from firebase key API_KEY
 
-BUNDLE_ID = com.rath.CoreStructure-iOS.uat
+BUNDLE_ID = com.rath.CoreStructure-iOS.dev//com.rath.CoreStructure-iOS.uat
 
 Bundle_Display_Name = UAT Testing
 

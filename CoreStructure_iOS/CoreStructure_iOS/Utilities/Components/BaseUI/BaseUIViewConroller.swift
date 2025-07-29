@@ -36,12 +36,12 @@ class BaseUIViewConroller: UIViewController, UIGestureRecognizerDelegate {
         
         if isInteractivePopGestureRecognizer{
             
-            navigationController?.interactivePopGestureRecognizer?.delegate = self
-            navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+//            navigationController?.interactivePopGestureRecognizer?.delegate = self
+//            navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         }else{
             
-            navigationController?.interactivePopGestureRecognizer?.delegate = nil
-            navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+//            navigationController?.interactivePopGestureRecognizer?.delegate = nil
+//            navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         }
         
     }

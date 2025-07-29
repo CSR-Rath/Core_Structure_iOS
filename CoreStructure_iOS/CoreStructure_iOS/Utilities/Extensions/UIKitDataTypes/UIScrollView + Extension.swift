@@ -10,7 +10,7 @@ import UIKit
 enum IconEmptyList {
     case back
     case close
-
+    
     var image: UIImage? {
         switch self {
         case .back:
@@ -21,28 +21,26 @@ enum IconEmptyList {
     }
 }
 
-// MARK: - For pull refresh include Scrollview, TableView, CollectionView
-extension UIScrollView{
-    
-    func isAddRefreshControl(tintColor: UIColor = .red,
+
+
+extension UIScrollView {
+    func addRefreshControl(tintColor: UIColor = .systemBlue,
                            target: Any,
                            action: Selector) {
-        if self.refreshControl == nil {
-            
-            let refreshControl = UIRefreshControl()
-            refreshControl.tintColor = tintColor
-            refreshControl.addTarget(target, action: action, for: .valueChanged)
-            self.refreshControl = refreshControl
-        }
+        
+        // Otherwise, create a new one
+        let refresh = UIRefreshControl()
+        refresh.tintColor = tintColor
+        refresh.addTarget(target, action: action, for: .valueChanged)
+        self.refreshControl = refresh
+        
     }
     
-    func isEndRefreshing() {
-        if self.refreshControl?.isRefreshing == true {
-           self.refreshControl?.endRefreshing()
-        }
+    func stopRefreshing() {
+        self.refreshControl?.endRefreshing()
     }
-    
 }
+
 
 // MARK: - Handle Empty list for UITableView & UICollectionView
 extension UIScrollView {
@@ -122,29 +120,29 @@ extension UIScrollView{
     func isPagination(indexPath: IndexPath,
                       arrayCount: Int,
                       totalItems: Int) -> Bool {
-         guard arrayCount < totalItems else { return false } // No need to paginate if all items are loaded
-         
-         if let tableView = self as? UITableView {
-             let lastSection = tableView.numberOfSections - 1
-             let lastRow = tableView.numberOfRows(inSection: lastSection) - 1
-             
-             if (indexPath.section == lastSection && indexPath.row == lastRow){
-                 isShowLoadingSpinner()
-                 return true
-             }
-         }
-         
-         if let collectionView = self as? UICollectionView {
-             let lastSection = collectionView.numberOfSections - 1
-             let lastItem = collectionView.numberOfItems(inSection: lastSection) - 1
-             
-             if  (indexPath.section == lastSection && indexPath.row == lastItem) {
-                 isShowLoadingSpinner()
-                 return true
-             }
-         }
+        guard arrayCount < totalItems else { return false } // No need to paginate if all items are loaded
+        
+        if let tableView = self as? UITableView {
+            let lastSection = tableView.numberOfSections - 1
+            let lastRow = tableView.numberOfRows(inSection: lastSection) - 1
+            
+            if (indexPath.section == lastSection && indexPath.row == lastRow){
+                isShowLoadingSpinner()
+                return true
+            }
+        }
+        
+        if let collectionView = self as? UICollectionView {
+            let lastSection = collectionView.numberOfSections - 1
+            let lastItem = collectionView.numberOfItems(inSection: lastSection) - 1
+            
+            if  (indexPath.section == lastSection && indexPath.row == lastItem) {
+                isShowLoadingSpinner()
+                return true
+            }
+        }
         return false
-     }
+    }
     
     private func isShowLoadingSpinner(with message: String = "Fetching") {
         // Create spinner and start animating

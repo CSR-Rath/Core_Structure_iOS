@@ -33,10 +33,9 @@
 		FA91B2EA2E2AB523002676C1 /* APITheSameTimeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA91B2E92E2AB523002676C1 /* APITheSameTimeVC.swift */; };
 		FA91B2ED2E2AC380002676C1 /* APITheSameTimeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA91B2EC2E2AC380002676C1 /* APITheSameTimeViewModel.swift */; };
 		FA96D8FA2D9E7BE1006F28DB /* CreateDBFeribaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA96D8F82D9E7BE1006F28DB /* CreateDBFeribaseViewController.swift */; };
-		FA96D8FB2D9E7BE1006F28DB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA96D8F92D9E7BE1006F28DB /* LoginViewController.swift */; };
+		FA96D8FB2D9E7BE1006F28DB /* LoginScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA96D8F92D9E7BE1006F28DB /* LoginScreenVC.swift */; };
 		FA97463A2E12253600173529 /* RealmSwiftHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9746392E12253600173529 /* RealmSwiftHelper.swift */; };
 		FA9746732E12337800173529 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9746722E12337800173529 /* LocationManager.swift */; };
-		FA98EAF32E1BD16E001C3D9E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA98EAF22E1BD16E001C3D9E /* GoogleService-Info.plist */; };
 		FA992E9A2CF8BE98007B2EB8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA494B9D2C69EB9C0086D346 /* AppDelegate.swift */; };
 		FA992E9B2CF8BE98007B2EB8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA494B9F2C69EB9C0086D346 /* SceneDelegate.swift */; };
 		FA992E9C2CF8BE98007B2EB8 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D7D762CDBC71900B45826 /* AppConfiguration.swift */; };
@@ -73,7 +72,7 @@
 		FA992ECD2CF8BE98007B2EB8 /* CenteringCellVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA022D4B2CB76A1C00D3C039 /* CenteringCellVC.swift */; };
 		FA992ECE2CF8BE98007B2EB8 /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA022D4D2CB76A5800D3C039 /* CardCell.swift */; };
 		FA992ECF2CF8BE98007B2EB8 /* PreventionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6D52D52C9A748F00710D93 /* PreventionVC.swift */; };
-		FA992ED42CF8BE98007B2EB8 /* CryptoHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA81F0A72C7DD281003B7EA6 /* CryptoHelper.swift */; };
+		FA992ED42CF8BE98007B2EB8 /* EncryptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA81F0A72C7DD281003B7EA6 /* EncryptionManager.swift */; };
 		FA992ED52CF8BE98007B2EB8 /* StoreLocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4775B12C7C1FC8002DC134 /* StoreLocalDataManager.swift */; };
 		FA992ED72CF8BE98007B2EB8 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA022D6A2CB77CA300D3C039 /* DateManager.swift */; };
 		FA992ED92CF8BE98007B2EB8 /* TimestampManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA022D672CB77CA300D3C039 /* TimestampManager.swift */; };
@@ -129,6 +128,8 @@
 		FAA401422D798D0E0090BCE4 /* DisplayGifFileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA401412D798D0E0090BCE4 /* DisplayGifFileVC.swift */; };
 		FAA401442D79A7B30090BCE4 /* BaseUITextFieldPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA401432D79A7B30090BCE4 /* BaseUITextFieldPhone.swift */; };
 		FAA4FBA12E2DDDB60012705E /* APITheSameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA4FBA02E2DDDB60012705E /* APITheSameModel.swift */; };
+		FAA56E722E38FD820064009C /* CalculatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA56E712E38FD820064009C /* CalculatorManager.swift */; };
+		FAA56E742E39090E0064009C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FAA56E732E39090E0064009C /* GoogleService-Info.plist */; };
 		FAA5F4E22E1265EC0073DE30 /* GoogleMapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA5F4E12E1265EC0073DE30 /* GoogleMapsViewController.swift */; };
 		FAA5F4E42E1273D70073DE30 /* TableViewManagerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA5F4E32E1273D70073DE30 /* TableViewManagerHelper.swift */; };
 		FAA5F4E72E1276F00073DE30 /* CollectionViewManagerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA5F4E62E1276F00073DE30 /* CollectionViewManagerHelper.swift */; };
@@ -277,7 +278,7 @@
 		FA7FF8EB2CDC722D00C824BD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FA7FF8EC2CDC729700C824BD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		FA81F0A52C7DCF72003B7EA6 /* BlurredBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurredBackgroundView.swift; sourceTree = "<group>"; };
-		FA81F0A72C7DD281003B7EA6 /* CryptoHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoHelper.swift; sourceTree = "<group>"; };
+		FA81F0A72C7DD281003B7EA6 /* EncryptionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionManager.swift; sourceTree = "<group>"; };
 		FA81F0A92C7DD74D003B7EA6 /* PresentationStyleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationStyleManager.swift; sourceTree = "<group>"; };
 		FA837DFE2C9AF35800213AE4 /* CustomTabBarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarCell.swift; sourceTree = "<group>"; };
 		FA837E022C9B31D300213AE4 /* DemoFeatureVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoFeatureVC.swift; sourceTree = "<group>"; };
@@ -303,12 +304,11 @@
 		FA91B2E92E2AB523002676C1 /* APITheSameTimeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APITheSameTimeVC.swift; sourceTree = "<group>"; };
 		FA91B2EC2E2AC380002676C1 /* APITheSameTimeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APITheSameTimeViewModel.swift; sourceTree = "<group>"; };
 		FA96D8F82D9E7BE1006F28DB /* CreateDBFeribaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateDBFeribaseViewController.swift; sourceTree = "<group>"; };
-		FA96D8F92D9E7BE1006F28DB /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		FA96D8F92D9E7BE1006F28DB /* LoginScreenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginScreenVC.swift; sourceTree = "<group>"; };
 		FA9746392E12253600173529 /* RealmSwiftHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmSwiftHelper.swift; sourceTree = "<group>"; };
 		FA9746722E12337800173529 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		FA97E6822C9ACAFD003C0966 /* OriginalTabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OriginalTabBarVC.swift; sourceTree = "<group>"; };
 		FA97E6842C9AD1A7003C0966 /* CustomTabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarVC.swift; sourceTree = "<group>"; };
-		FA98EAF22E1BD16E001C3D9E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FA9AE4792CDB212700A07C50 /* BaseUIPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUIPageViewController.swift; sourceTree = "<group>"; };
 		FA9C00102CCC10A800F277E3 /* SelfSizingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSizingViewController.swift; sourceTree = "<group>"; };
 		FA9DD5D32D6DBB4C003ED865 /* GlobalFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFunction.swift; sourceTree = "<group>"; };
@@ -322,6 +322,8 @@
 		FAA401412D798D0E0090BCE4 /* DisplayGifFileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayGifFileVC.swift; sourceTree = "<group>"; };
 		FAA401432D79A7B30090BCE4 /* BaseUITextFieldPhone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUITextFieldPhone.swift; sourceTree = "<group>"; };
 		FAA4FBA02E2DDDB60012705E /* APITheSameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APITheSameModel.swift; sourceTree = "<group>"; };
+		FAA56E712E38FD820064009C /* CalculatorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorManager.swift; sourceTree = "<group>"; };
+		FAA56E732E39090E0064009C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FAA5F4E12E1265EC0073DE30 /* GoogleMapsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapsViewController.swift; sourceTree = "<group>"; };
 		FAA5F4E32E1273D70073DE30 /* TableViewManagerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewManagerHelper.swift; sourceTree = "<group>"; };
 		FAA5F4E62E1276F00073DE30 /* CollectionViewManagerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewManagerHelper.swift; sourceTree = "<group>"; };
@@ -724,7 +726,7 @@
 				FA494BA62C69EBD70086D346 /* Assets.xcassets */,
 				FA494BA82C69EBD70086D346 /* LaunchScreen.storyboard */,
 				FA494BAB2C69EBD70086D346 /* Info.plist */,
-				FA98EAF22E1BD16E001C3D9E /* GoogleService-Info.plist */,
+				FAA56E732E39090E0064009C /* GoogleService-Info.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1034,6 +1036,7 @@
 				FAA5F4E62E1276F00073DE30 /* CollectionViewManagerHelper.swift */,
 				FA494BDF2C6A16FE0086D346 /* BiometricAuthenticationManager.swift */,
 				FAAAE3302E1D02AB0055C04F /* TimerManager.swift */,
+				FAA56E712E38FD820064009C /* CalculatorManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -1118,7 +1121,7 @@
 			isa = PBXGroup;
 			children = (
 				FAB5194A2E0A43790028F381 /* CryptoConfig.swift */,
-				FA81F0A72C7DD281003B7EA6 /* CryptoHelper.swift */,
+				FA81F0A72C7DD281003B7EA6 /* EncryptionManager.swift */,
 				FAB5194C2E0A47980028F381 /* CodableConverter.swift */,
 			);
 			path = Encryption;
@@ -1176,7 +1179,7 @@
 			isa = PBXGroup;
 			children = (
 				FA96D8F82D9E7BE1006F28DB /* CreateDBFeribaseViewController.swift */,
-				FA96D8F92D9E7BE1006F28DB /* LoginViewController.swift */,
+				FA96D8F92D9E7BE1006F28DB /* LoginScreenVC.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1368,7 +1371,7 @@
 				FA494BA52C69EB9C0086D346 /* Main.storyboard in Resources */,
 				FA5968F62D795C7200440485 /* 0cMVlLSnnW.gif in Resources */,
 				FAF4896E2D9CE5FA00B20CE6 /* NotoSansKhmer-Medium.ttf in Resources */,
-				FA98EAF32E1BD16E001C3D9E /* GoogleService-Info.plist in Resources */,
+				FAA56E742E39090E0064009C /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1527,7 +1530,7 @@
 				FABB3A372D6EA2AC0007656A /* KeyboardManager.swift in Sources */,
 				FA992ECE2CF8BE98007B2EB8 /* CardCell.swift in Sources */,
 				FA992ECF2CF8BE98007B2EB8 /* PreventionVC.swift in Sources */,
-				FA992ED42CF8BE98007B2EB8 /* CryptoHelper.swift in Sources */,
+				FA992ED42CF8BE98007B2EB8 /* EncryptionManager.swift in Sources */,
 				FA992ED52CF8BE98007B2EB8 /* StoreLocalDataManager.swift in Sources */,
 				FAD109A82DC8599200278B1B /* KeychainManager.swift in Sources */,
 				FAA5F4E22E1265EC0073DE30 /* GoogleMapsViewController.swift in Sources */,
@@ -1549,6 +1552,7 @@
 				FA992EE52CF8BE98007B2EB8 /* Int + Extension.swift in Sources */,
 				FA992EE72CF8BE98007B2EB8 /* String + Extension.swift in Sources */,
 				FA992EE82CF8BE98007B2EB8 /* Double + Extension.swift in Sources */,
+				FAA56E722E38FD820064009C /* CalculatorManager.swift in Sources */,
 				FAAA89872DF056B000CA216D /* UILabel + Extension.swift in Sources */,
 				FA3C20972D9F934600F6CD96 /* AddProductViewController.swift in Sources */,
 				FA992EEA2CF8BE98007B2EB8 /* UIView + Extension.swift in Sources */,
@@ -1594,7 +1598,7 @@
 				FA992F032CF8BE98007B2EB8 /* BlurredBackgroundView.swift in Sources */,
 				FA992F042CF8BE98007B2EB8 /* BottomSheetViewController.swift in Sources */,
 				FA992F062CF8BE98007B2EB8 /* BaseUIButton.swift in Sources */,
-				FA96D8FB2D9E7BE1006F28DB /* LoginViewController.swift in Sources */,
+				FA96D8FB2D9E7BE1006F28DB /* LoginScreenVC.swift in Sources */,
 				FA992F072CF8BE98007B2EB8 /* MainTextField.swift in Sources */,
 				FA992F082CF8BE98007B2EB8 /* BaseUILabelPadding.swift in Sources */,
 				FA902C212E1E02C1002C2DF7 /* LifecycleVC.swift in Sources */,
@@ -1741,12 +1745,12 @@
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to show it on the map.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app requires access to your photo library to save captured images.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1858,12 +1862,12 @@
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to show it on the map.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app requires access to your photo library to save captured images.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1974,12 +1978,12 @@
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to show it on the map.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app requires access to your photo library to save captured images.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

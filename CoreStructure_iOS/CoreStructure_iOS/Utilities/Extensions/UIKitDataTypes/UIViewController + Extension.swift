@@ -58,51 +58,38 @@ extension UIViewController{
     }
     
     
-//        func rightBarButtonItem(action: Selector = #selector(leftBarButtonItemAction),
-//                                iconButton: IconButtonBar = .close){
-//    
-//            guard let icon = iconButton.image?.withRenderingMode(.alwaysOriginal) else {
-//                print("Icon bar invalid")
-//                return
-//            }
-//    
-//            navigationItem.rightBarButtonItem = UIBarButtonItem(
-//                image: icon,
-//                style: .plain,
-//                target: self,
-//                action: action
-//            )
-//        }
-    
+
     
     func navigationBarAppearance(titleColor: UIColor = .black,
                                  barAppearanceColor: UIColor = .clear,
-                                 shadowColorLine: UIColor = .clear
-    ){
+                                 barAppearanceScrollingColor: UIColor = .clear,
+                                 shadowColorLine: UIColor = .clear) {
         
         let setupFont: UIFont = UIFont.appFont(style: .bold, size: 16)
         let largeFont: UIFont = UIFont.appFont(style: .bold, size: 34)
         
         let appearance = UINavigationBarAppearance()
-        
         appearance.titleTextAttributes = [
             .foregroundColor: titleColor,
             .font: setupFont
         ]
-        
         appearance.largeTitleTextAttributes = [
             .foregroundColor: titleColor,
             .font: largeFont
         ]
-        
-        
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = barAppearanceColor
-        appearance.shadowColor = .orange//shadowColorLine// barColor ?? .mainBlueColor // line appearenc bar
+        appearance.shadowColor = shadowColorLine
         
-        navigationController?.navigationBar.standardAppearance = appearance
+        let appearanceScrolling = UINavigationBarAppearance()
+        appearanceScrolling.configureWithOpaqueBackground()
+        appearanceScrolling.backgroundColor = barAppearanceScrollingColor
+        appearanceScrolling.shadowColor = shadowColorLine
+        
+        navigationController?.navigationBar.standardAppearance = appearanceScrolling
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
     }
+
     
 }
 

@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class BaseUITextFieldPhone: UITextField, UITextFieldDelegate {
     
     var textDidChange: ((_ : String) -> ())?
@@ -83,7 +84,7 @@ class BaseUITextFieldPhone: UITextField, UITextFieldDelegate {
     }
     
     private func formatter(mask: String, phoneNumber: String) -> String {
-       
+        
         let number = phoneNumber.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
         var result:String = ""
         var index = number.startIndex
@@ -107,7 +108,7 @@ class BaseUITextFieldPhone: UITextField, UITextFieldDelegate {
 class PhoneTextFieldVC: BaseInteractionViewController {
     
     private  var nsButton = NSLayoutConstraint()
-
+    
     
     lazy var phoneTextField: BaseUITextFieldPhone = {
         let textField = BaseUITextFieldPhone()
@@ -136,7 +137,7 @@ class PhoneTextFieldVC: BaseInteractionViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         title = "Phone TextField"
-//        leftBarButtonItem(named: .back)
+        //        leftBarButtonItem(named: .back)
         setupPhoneNumberTextField()
         keyboradHandleer()
         
@@ -155,15 +156,22 @@ class PhoneTextFieldVC: BaseInteractionViewController {
     
     private func keyboradHandleer(){
         
-        keyboardManager.onKeyboardWillShow = { keyboardHeight in
+       
+        
+        keyboardManager.onKeyboardWillShow = { [weak self] keyboardHeight in
+            guard let self = self else { return }
             self.nsButton.constant = keyboardHeight - 20
-            self.view.layoutIfNeeded()
+            UIView.animate(withDuration: 0.3) {
+                self.view.layoutIfNeeded()
+            }
         }
         
-        keyboardManager.onKeyboardWillHide = { _ in
+        keyboardManager.onKeyboardWillHide = { [weak self] in
+            guard let self = self else { return }
             self.nsButton.constant = .mainSpacingBottomButton
-            self.view.layoutIfNeeded()
-
+            UIView.animate(withDuration: 0.3) {
+                self.view.layoutIfNeeded()
+            }
         }
     }
     
@@ -181,7 +189,7 @@ class PhoneTextFieldVC: BaseInteractionViewController {
             
             btnButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
             btnButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-          
+            
         ])
         
         nsButton = btnButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: .mainSpacingBottomButton)

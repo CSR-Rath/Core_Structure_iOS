@@ -68,19 +68,3 @@
 	<true/>
 </dict>
 </plist>
-
-
-
-<!--<key>NSAppTransportSecurity</key>-->
-<!--<dict>-->
-<!--  <key>NSExceptionDomains</key>-->
-<!--  <dict>-->
-<!--    <key>192.168.0.175</key>-->
-<!--    <dict>-->
-<!--      <key>NSIncludesSubdomains</key>-->
-<!--      <true/>-->
-<!--      <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>-->
-<!--      <true/>-->
-<!--    </dict>-->
-<!--  </dict>-->
-<!--</dict>-->

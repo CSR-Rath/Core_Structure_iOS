@@ -7,8 +7,8 @@
 
 import Foundation
 
-class APITheSameTimeViewModel {
- 
+class APITheSameTimeViewModel_iOS13 {
+    
     var productList1: ProductListResponse?
     var productList2: ProductListResponse?
     var productList3: ProductListResponse?
@@ -16,7 +16,7 @@ class APITheSameTimeViewModel {
     var onDataUpdated: (() -> Void)?
     
     func fetchApiTheSameTime() {
-        let group = DispatchGroup() // iOS 8+ DispatchGroup -> iOS 15+  withTaskGroup
+        let group = DispatchGroup()
         
         group.enter()
         ApiManager.shared.apiConnection(url: .products1) { (res: ProductListResponse) in
@@ -41,7 +41,7 @@ class APITheSameTimeViewModel {
             }
             group.leave()
         }
-
+        
         group.notify(queue: .main) {
             self.onDataUpdated?()
             print("✅ All APIs completed")
@@ -51,31 +51,86 @@ class APITheSameTimeViewModel {
 
 
 class APITheSameTimeViewModel {
-
-    var productList1: ProductListResponse?
-    var productList2: ProductListResponse?
+    
+    var productList1: ProductListResponse1?
+    var productList2: ProductListResponse2?
     var productList3: ProductListResponse?
-
+    
     var onDataUpdated: (() -> Void)?
-
-    func fetchApiTheSameTime() async {
-        async let result1 = ApiManager.shared.apiConnectionAsync(url: .products1)
-        async let result2 = ApiManager.shared.apiConnectionAsync(url: .products2)
-        async let result3 = ApiManager.shared.apiConnectionAsync(url: .products3)
-
-        do {
-            let (res1, res2, res3) = try await (result1, result2, result3)
-
-            // Assign to properties on the main thread
-            await MainActor.run {
-                self.productList1 = res1
-                self.productList2 = res2
-                self.productList3 = res3
-                self.onDataUpdated?()
-                print("✅ All APIs completed")
+    
+    func fetchApiTheSameTime() {
+        Task {
+            await fetchAllProducts()
+        }
+    }
+    
+    private func fetchAllProducts() async {
+        await withTaskGroup(of: (Int, Any?).self) { group in
+            
+            group.addTask {
+                let result: ProductListResponse1? = await self.fetch(endpoint: .products1)
+                return (1, result)
             }
-        } catch {
-            print("❌ Failed to fetch data: \(error)")
+            
+            group.addTask {
+                let result: ProductListResponse2? = await self.fetch(endpoint: .products2)
+                return (2, result)
+            }
+            
+            group.addTask {
+                let result: ProductListResponse? = await self.fetch(endpoint: .products3)
+                return (3, result)
+            }
+            
+            for await (index, result) in group {
+                switch index {
+                case 1: self.productList1 = result as? ProductListResponse1
+                    
+                    print("Handle response here.")
+                case 2: self.productList2 = result as? ProductListResponse2
+                    
+                    print("Handle response here.")
+                case 3: self.productList3 = result as? ProductListResponse
+                    
+                    print("Handle response here.")
+                default: break
+                }
+            }
+        }
+        
+        self.onDataUpdated?()
+        print("✅ All APIs completed (async/await)")
+    }
+    
+    
+    private func fetch<T: Codable>(endpoint: EndpointEnum) async -> T? {
+        await withCheckedContinuation { continuation in
+            ApiManager.shared.apiConnection(url: endpoint) { (res: T) in
+                continuation.resume(returning: res)
+            }
+        }
+    }
+}
+
+
+//@MainActor
+class SingleCallApiViewModel {
+    var productList1: ProductListResponse?
+    var onDataUpdated: (() -> Void)?
+    
+    func fetchProduct() {
+        Task {
+            let result: ProductListResponse? = await fetch(endpoint: .products1)
+            self.productList1 = result
+            self.onDataUpdated?()
+        }
+    }
+    
+    private func fetch<T: Codable>(endpoint: EndpointEnum) async -> T? {
+        await withCheckedContinuation { continuation in
+            ApiManager.shared.apiConnection(url: endpoint) { (res: T) in
+                continuation.resume(returning: res)
+            }
         }
     }
 }

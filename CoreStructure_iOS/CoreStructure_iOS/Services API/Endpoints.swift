@@ -26,7 +26,7 @@ enum EndpointEnum: String {
     case products2 = "products/?page=2"
     case products3 = "products/?page=3"
     case login = "login/"
-    case refreshToken = "token/refresh/"//"token/refresh/"
+    case refreshToken = "token/refresh/"
      
 }
 

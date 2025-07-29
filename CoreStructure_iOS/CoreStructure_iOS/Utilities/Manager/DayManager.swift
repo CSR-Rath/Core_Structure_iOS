@@ -10,9 +10,7 @@ import UIKit
 
 class DayManager{
     
-    static let shared = DayManager()
-    
-     func statusGreetingDay() {
+    static func statusGreetingDay() {
         
         let hour = (Calendar.current.component(.hour, from: Date()))
         
@@ -28,8 +26,6 @@ class DayManager{
             break
         }
     }
-
-    
 }
 
 

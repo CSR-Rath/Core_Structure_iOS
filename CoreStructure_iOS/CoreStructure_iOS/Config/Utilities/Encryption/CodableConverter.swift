@@ -39,3 +39,18 @@ class CodableConverter{
         }
     }
 }
+
+
+extension Encodable {
+    public func toJsonObj() -> String{
+        let jsonEncoder = JSONEncoder()
+        let jsonData = try! jsonEncoder.encode(self)
+        return String(data: jsonData, encoding: .utf8) ?? ""
+    }
+    
+    public func toData() -> Data {
+        let jsonEncoder = JSONEncoder()
+        let jsonData = try! jsonEncoder.encode(self)
+        return jsonData
+    }
+}

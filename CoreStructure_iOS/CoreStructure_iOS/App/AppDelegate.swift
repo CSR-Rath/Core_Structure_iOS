@@ -15,75 +15,93 @@ import LocalAuthentication
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    
-    private var orientationLock = UIInterfaceOrientationMask.portrait
-    
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        messagingFirebase(application) // messaging firebase
-        
-        print("==> apiKey: \(AppConfiguration.shared.apiKey)") //AIzaSyBqVewVBMEhIqsP8uNDkkSD1wZYJCCXFgw
-        GMSServices.provideAPIKey(AppConfiguration.shared.apiKey) // google maps
-        
-//        let refreshToken = "bf2d64d0-97d5-4b74-9ff4-9137b5c851a4"
-//        let token = "eyJhbGciOiJIUzUxMiJ9.eyJyb2wiOlsiVVNSIl0sInN1YiI6IlpRdm1xM3g3TDJiSENxeXQwdGNvSUZlMEd3Mk02L05SNElXQ1gza0tIMWpEM0hYVW1xT2NSNW5zbUZ2YXB0NXUiLCJpYXQiOjE3NTI5MzkwMzUsImV4cCI6MTc1Mjk0MjYzNX0.F9jWGMLdAXKU6SMiV84NU-uDsewajevvHUpKgwGxbXSL2C0QBKpCtB86xkVNVSXqDsSTfCWoaO9btEorvAcW-g"
 
+    private var orientationLock = UIInterfaceOrientationMask.portrait
+
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+    ) -> Bool {
         
-//        UserDefaults.standard.setValue(refreshToken, forKey: AppConstants.refreshToken)
-//        UserDefaults.standard.setValue(token, forKey: AppConstants.token)
+        configureFirebaseMessaging(application)
+        configureGoogleMaps()
         
-     
-//        handleNearbyLocation()
+       
         
         return true
     }
-    
-    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+
+    func application(
+        _ application: UIApplication,
+        configurationForConnecting connectingSceneSession: UISceneSession,
+        options: UIScene.ConnectionOptions
+    ) -> UISceneConfiguration {
         
-        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+        UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
-    
+
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-        
+        // Handle discarded scenes if needed
     }
 }
 
+// MARK: - Firebase Messaging and Notification Handling
+
 extension AppDelegate: UNUserNotificationCenterDelegate, MessagingDelegate {
 
-
-    private func messagingFirebase(_ application: UIApplication) {
+    private func configureFirebaseMessaging(_ application: UIApplication) {
         FirebaseApp.configure()
-
+        
+        // Setup notification center delegate
         UNUserNotificationCenter.current().delegate = self
+        
+        // Request notification authorization
         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
         UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { granted, error in
             if granted {
-//                self.sendTestLocalNotification()
+                // Authorization granted; handle if needed
             }
         }
-
+        
         application.registerForRemoteNotifications()
+        
+        // Set messaging delegate
         Messaging.messaging().delegate = self
     }
 
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         print("✅ FCM token: \(fcmToken ?? "")")
+        // Send token to your server if needed
     }
 
-    func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                willPresent notification: UNNotification,
-                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
+    ) {
         if #available(iOS 14.0, *) {
-              completionHandler([.banner, .sound, .badge]) // iOS 14+: Use .banner
-          } else {
-              completionHandler([.alert, .sound, .badge]) // iOS 10–13: Use .alert
-          }
+            completionHandler([.banner, .sound, .badge])
+        } else {
+            completionHandler([.alert, .sound, .badge])
+        }
     }
-    
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
-        
+
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        didReceive response: UNNotificationResponse
+    ) async {
+        // Handle notification response if needed
     }
 }
 
+// MARK: - Google Maps Configuration
+
+private extension AppDelegate {
+    func configureGoogleMaps() {
+        print("==> apiKey: \(AppConfiguration.shared.apiKey)")
+        GMSServices.provideAPIKey(AppConfiguration.shared.apiKey)
+    }
+}
 
 
 

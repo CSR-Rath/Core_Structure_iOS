@@ -10,15 +10,18 @@ import UIKit
 let keyboardManager = KeyboardManager()
 
 class KeyboardManager {
+
     
     var onKeyboardWillShow: ((_ keyboardHeight: CGFloat) -> Void)?
-    var onKeyboardWillHide: ((_ bottomSafeAreaInsetsHeight: CGFloat) -> Void)?
+    var onKeyboardWillHide: (() -> Void)?
     
     init() {
+        print("KeyboardManager init")
         setupKeyboardObservers()
     }
     
     deinit {
+        print("Deinit KeyboardManager.")
         NotificationCenter.default.removeObserver(self)
     }
     
@@ -36,13 +39,15 @@ class KeyboardManager {
     @objc private func keyboardWillShow(notification: NSNotification) {
         if let userInfo = notification.userInfo,
            let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let keyboardHeight = keyboardFrame.cgRectValue.height //+ 10  // Adding extra padding
-            self.onKeyboardWillShow?(-keyboardHeight);  print("Keyboard height: \(keyboardHeight)")
+            let keyboardHeight = keyboardFrame.cgRectValue.height
+            self.onKeyboardWillShow?(-keyboardHeight)
+            print("Keyboard height: \(keyboardHeight)")
         }
     }
     
     @objc private func keyboardWillHide(notification: NSNotification) {
-        self.onKeyboardWillHide?(bottomSafeAreaInsetsHeight); print("Keyboard will hide")
+        self.onKeyboardWillHide?()
+        print("Keyboard will hide")
     }
 }
 

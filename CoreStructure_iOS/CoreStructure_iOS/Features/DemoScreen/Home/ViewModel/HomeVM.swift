@@ -11,24 +11,24 @@ class HomeVM{
     
     static func getWalet(success: @escaping (_ response: Response) -> Void){
         
-        ApiManager.shared.apiConnection(url: .wallet)
-        { ( res : Response) in
-            
-            AlertMessage.shared.isSuccessfulResponse(res) {
-                success(res)
-            }
-        }
+//        ApiManager.shared.apiConnection(url: .wallet)
+//        { ( res : Response) in
+//            
+//            AlertMessage.shared.isSuccessfulResponse(res) {
+//                success(res)
+//            }
+//        }
     }
     
     static func getUserInfor(success: @escaping (_ response: Response) -> Void){
         
-        ApiManager.shared.apiConnection(url: .userInfor)
-        { ( res : Response) in
-            
-            AlertMessage.shared.isSuccessfulResponse(res) {
-                success(res)
-            }
-        }
+//        ApiManager.shared.apiConnection(url: .userInfor)
+//        { ( res : Response) in
+//            
+//            AlertMessage.shared.isSuccessfulResponse(res) {
+//                success(res)
+//            }
+//        }
     }
 }
 
@@ -40,15 +40,16 @@ class ManagerViewModel{
     var data: [String] = []
     
     func managerViewModel(){
-        ApiManager.shared.apiConnection(url: .guests) { [self] (res: Response) in
-            
-            if page == 0{
-                data = res.list
-            }else{
-                data += res.list
-            }
-            
-        }
+//        ApiManager.shared.apiConnection(url: .guests)
+//        { [self] (res: Response) in
+//            
+//            if page == 0{
+//                data = res.list
+//            }else{
+//                data += res.list
+//            }
+//            
+//        }
     }
     
 }

@@ -18,6 +18,7 @@ import UIKit
 //    self.doSomething()  // 'self' is the view controller strongly captured here
 //}
 
+//@MainActor
 class BaseUIButton: UIButton {
     
     private var activityIndicator: UIActivityIndicatorView!
@@ -46,15 +47,18 @@ class BaseUIButton: UIButton {
         }
     }
     
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupButton()
         setupActivityIndicator()
+        NotificationCenter.default.addObserver(self, selector: #selector(stopLoading), name: .stopButtonLoading, object: nil)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
 
     
     private func setupButton() {
@@ -115,15 +119,18 @@ class BaseUIButton: UIButton {
         ])
     }
     
-    // Start loading
     func startLoading() {
+        guard activityIndicator != nil else { return }
+
         self.isUserInteractionEnabled = false
         self.activityIndicator.startAnimating()
         self.setTitleColor(.clear, for: .normal)
     }
     
-    // Stop loading
-    func stopLoading(){
+
+    @objc func stopLoading(){
+        guard activityIndicator != nil else { return }
+        
         self.isUserInteractionEnabled = true
         self.activityIndicator.stopAnimating()
         self.setTitleColor(.white, for: .normal)
@@ -131,8 +138,13 @@ class BaseUIButton: UIButton {
     
     deinit {
         print("✅ BaseUIButton is deinitialized")
-        self.stopLoading()
+//        stopLoading()
+        NotificationCenter.default.removeObserver(self)
     }
 }
 
 
+
+extension Notification.Name {
+    static let stopButtonLoading = Notification.Name("stopButtonLoading")
+}

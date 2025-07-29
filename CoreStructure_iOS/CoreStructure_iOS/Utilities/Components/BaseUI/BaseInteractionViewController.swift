@@ -13,13 +13,16 @@ class BaseInteractionViewController: UIViewController, UIGestureRecognizerDelega
     private var duration: Int = 0
     private let maximumDuration: Int = 100 // seconds
     private let interval: TimeInterval = 1.0 // seconds
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        startTimer()
+    }
 
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .mainColor
-        setupTapGesture()
         startTimer()
     }
     
@@ -45,7 +48,7 @@ class BaseInteractionViewController: UIViewController, UIGestureRecognizerDelega
                                      selector: #selector(timerFired),
                                      userInfo: nil,
                                      repeats: true)
-        RunLoop.main.add(timer!, forMode: .common) // prevents freeze during scroll/UI interactions
+        RunLoop.main.add(timer!, forMode: .common)
     }
 
     private func stopTimer() {
@@ -55,24 +58,86 @@ class BaseInteractionViewController: UIViewController, UIGestureRecognizerDelega
     }
 
     @objc private func timerFired() {
-        duration += Int(interval)
+        duration += 1
         print("Timer ==> \(duration)")
         if duration >= maximumDuration {
             stopTimer()
         }
     }
-
-    private func setupTapGesture() {
-        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
-        tapRecognizer.delegate = self
-        tapRecognizer.cancelsTouchesInView = false
-        view.addGestureRecognizer(tapRecognizer)
-    }
-
-    @objc private func handleTap(_ recognizer: UITapGestureRecognizer) {
-        startTimer()
-    }
 }
+
+
+//class BaseInteractionViewController: UIViewController, UIGestureRecognizerDelegate {
+//    
+//    private var timer: Timer?
+//    private var duration: Int = 0
+//    private let maximumDuration: Int = 100 // seconds
+//    private let interval: TimeInterval = 1.0 // seconds
+//    
+//    
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        startTimer()
+//    }
+//
+//    // MARK: - Lifecycle
+//    
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        view.backgroundColor = .mainColor
+////        setupTapGesture()
+//        startTimer()
+//    }
+//    
+//    override func viewDidDisappear(_ animated: Bool) {
+//        super.viewDidDisappear(animated)
+//        stopTimer()
+//        duration = 0
+//    }
+//
+//    deinit {
+//        stopTimer()
+//        print("BaseInteractionController deinitialized and timer stopped.")
+//    }
+//
+//    // MARK: - Timer
+//
+//    private func startTimer() {
+//        stopTimer()
+//        duration = 0
+//        print("duration is \(duration)")
+//        timer = Timer.scheduledTimer(timeInterval: interval,
+//                                     target: self,
+//                                     selector: #selector(timerFired),
+//                                     userInfo: nil,
+//                                     repeats: true)
+//        RunLoop.main.add(timer!, forMode: .common) // prevents freeze during scroll/UI interactions
+//    }
+//
+//    private func stopTimer() {
+//        timer?.invalidate()
+//        timer = nil
+//        print("Timer reached maximum duration and was stopped.")
+//    }
+//
+//    @objc private func timerFired() {
+//        duration += Int(interval)
+//        print("Timer ==> \(duration)")
+//        if duration >= maximumDuration {
+//            stopTimer()
+//        }
+//    }
+//
+////    private func setupTapGesture() {
+////        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+////        tapRecognizer.delegate = self
+////        tapRecognizer.cancelsTouchesInView = false
+////        view.addGestureRecognizer(tapRecognizer)
+////    }
+////
+////    @objc private func handleTap(_ recognizer: UITapGestureRecognizer) {
+////        startTimer()
+////    }
+//}
 
 
 class DisplayBaseInteractionVC: BaseInteractionViewController {

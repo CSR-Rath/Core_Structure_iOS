@@ -44,8 +44,8 @@ class PasscodeVC: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-        navigationController?.interactivePopGestureRecognizer?.delegate = self // enable swap
+//        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+//        navigationController?.interactivePopGestureRecognizer?.delegate = self // enable swap
     }
     
 }
@@ -75,8 +75,8 @@ extension  PasscodeVC {
     
     private func susseccfullyPasscode(){
         
-        let tabbar = CustomTabBarVC()
-        SceneDelegate.changeRootViewController(to: tabbar, animated: true)
+        _ = CustomTabBarVC()
+//        SceneDelegate.changeRootViewController(to: tabbar, animated: true)
         
     }
 

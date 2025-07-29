@@ -22,9 +22,9 @@ class SuccessfullyViewController: UIViewController, UIGestureRecognizerDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        leftBarButtonItem(iconButton: .isEmpty)
-        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        navigationController?.interactivePopGestureRecognizer?.delegate = self
+//        leftBarButtonItem(iconButton: .isEmpty)
+//        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+//        navigationController?.interactivePopGestureRecognizer?.delegate = self
         
         view.backgroundColor = .white
         title = "Susseccfully"

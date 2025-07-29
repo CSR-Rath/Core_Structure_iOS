@@ -16,15 +16,16 @@ struct ItemDragDropModel: Codable{
     var description: String
 }
 
-class HomeABAVC: BaseInteractionViewController{
+class HomeABAVC: BaseInteractionViewController, UIScrollViewDelegate{
     
     let text = UILabel()
+    var didScrollView: ((_ : UIScrollView)->())?
     
-   
+    
     private var isDragging: Bool = false
     private let spacing: CGFloat = 10
     private let radius: CGFloat = 15
-
+    
     private var data1: [ItemDragDropModel] = []{
         didSet{
             StoreLocalDataManager.shared.saveItemOneDropModel(data: data1)
@@ -42,7 +43,7 @@ class HomeABAVC: BaseInteractionViewController{
     }
     
     private var dataListTable = [
-        [ "Item 2-1", 
+        [ "Item 2-1",
           "Item 2-2",
           "Item 2-3",
           "Item 2-4",
@@ -55,11 +56,13 @@ class HomeABAVC: BaseInteractionViewController{
         ]
     ]
     
-    
-   private let scrollView: UIScrollView = {
+    lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView()
+        scroll.delegate = self
+        scroll.backgroundColor = .clear
         scroll.translatesAutoresizingMaskIntoConstraints = false
-        scroll.backgroundColor = .white
+        scroll.alwaysBounceVertical = true // Required for refresh to show
+        scroll.addRefreshControl(target: self, action: #selector(pullRefresh))
         return scroll
     }()
     
@@ -172,13 +175,21 @@ class HomeABAVC: BaseInteractionViewController{
         setupLongPressGestureRecognizers()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-        navigationController?.interactivePopGestureRecognizer?.delegate = self
- 
+    
+    @objc private func pullRefresh(){
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            self.scrollView.stopRefreshing()
+            
+            
+        }
     }
-
+    
+    
+    
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        didScrollView?(scrollView)
+    }
 }
 
 extension HomeABAVC{
@@ -188,12 +199,11 @@ extension HomeABAVC{
         view.addSubview(scrollView)
         scrollView.addSubview(stackContainer)
         
-        // MARK: - Main container
         NSLayoutConstraint.activate([
             
-            scrollView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            scrollView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1),
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             scrollView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1),
             
             stackContainer.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
@@ -209,7 +219,7 @@ extension HomeABAVC{
         text.translatesAutoresizingMaskIntoConstraints = false
         text.text = "UI ABA"
         text.fontBold(25, color: .black)
-
+        
         
         scrollView.addSubview(viewLine)
         viewCard.addSubview(text)
@@ -289,7 +299,7 @@ extension HomeABAVC { // Prevents unmoved drag
          if you isn't call again it have small issue in case longPressGesture func it working,
          but itemsForBeginning isn't working,
          we using longPressGesture because prevent when dragging have another action
-        */
+         */
         
         let longPressGesture1 = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture(_:)))
         collectionView1.addGestureRecognizer(longPressGesture1)
@@ -300,10 +310,10 @@ extension HomeABAVC { // Prevents unmoved drag
         let longPressGesture3 = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture(_:)))
         tableView.addGestureRecognizer(longPressGesture3)
     }
-
+    
     // MARK: - Handle Long Press Gesture
     @objc private func handleLongPressGesture(_ gesture: UILongPressGestureRecognizer) {
-
+        
         switch gesture.state {
         case .began:
             // Handle the beginning of the long press, e.g., start a drag
@@ -324,11 +334,11 @@ extension HomeABAVC { // Prevents unmoved drag
 
 //MARK: - UICollectionView
 extension HomeABAVC:  UICollectionViewDataSource,
-                                  UICollectionViewDelegate,
-                                  UICollectionViewDelegateFlowLayout,
-                                  UICollectionViewDragDelegate,
-                                  UICollectionViewDropDelegate{
-
+                      UICollectionViewDelegate,
+                      UICollectionViewDelegateFlowLayout,
+                      UICollectionViewDragDelegate,
+                      UICollectionViewDropDelegate{
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return collectionView == collectionView1 ? data1.count : data2.count
     }
@@ -361,7 +371,7 @@ extension HomeABAVC:  UICollectionViewDataSource,
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
+        
         print("didSelectItemAt")
         
     }
@@ -386,7 +396,7 @@ extension HomeABAVC:  UICollectionViewDataSource,
         }
         
     }
-
+    
     // UICollectionViewDragDelegate
     func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
         
@@ -410,7 +420,7 @@ extension HomeABAVC:  UICollectionViewDataSource,
         print("performDropWith collectionView")
         isDragging = false
         dragDropTableView(status: true)
-       
+        
         
         guard let item = coordinator.items.first else { return }
         guard let (sourceCollectionView, sourceIndexPath) = item.dragItem.localObject as? (UICollectionView, IndexPath) else { return }
@@ -451,7 +461,7 @@ extension HomeABAVC:  UICollectionViewDataSource,
     }
     
     func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
-
+        
         return UICollectionViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
     }
     
@@ -465,14 +475,14 @@ extension HomeABAVC:  UICollectionViewDataSource,
 
 //MARK: - UITableView
 extension HomeABAVC:  UITableViewDataSource,
-                                  UITableViewDelegate,
-                                  UITableViewDragDelegate,
-                                  UITableViewDropDelegate{
+                      UITableViewDelegate,
+                      UITableViewDragDelegate,
+                      UITableViewDropDelegate{
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return dataListTable.count
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataListTable[section].count
     }
@@ -485,11 +495,11 @@ extension HomeABAVC:  UITableViewDataSource,
         cell.textLabel?.text = dataListTable[indexPath.section][indexPath.row]
         return cell
     }
- 
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
-
+    
     func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
         
         isDragging = true
@@ -500,26 +510,26 @@ extension HomeABAVC:  UITableViewDataSource,
         let itemProvider = NSItemProvider(object: item as NSString)
         let dragItem = UIDragItem(itemProvider: itemProvider)
         dragItem.localObject = item
-
+        
         return [dragItem]
     }
-
+    
     func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
         
         isDragging = false
         dragDropCollection(status: true)
         print(" performDropWith tableView")
-      
+        
         guard let destinationIndexPath = coordinator.destinationIndexPath else {
             print("No destination index path.")
             return
         }
-
+        
         if let sourceIndexPath = coordinator.items.first?.sourceIndexPath {
-
+            
             coordinator.session.loadObjects(ofClass: NSString.self) { items in
                 guard items is [String] else { return }
-
+                
                 tableView.performBatchUpdates({
                     let movedItem = self.dataListTable[sourceIndexPath.section].remove(at: sourceIndexPath.row)
                     self.dataListTable[destinationIndexPath.section].insert(movedItem, at: destinationIndexPath.row)
@@ -532,7 +542,7 @@ extension HomeABAVC:  UITableViewDataSource,
             print("No source index path.")
         }
     }
-
+    
     func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
         return UITableViewDropProposal(operation: .move,
                                        intent: .insertAtDestinationIndexPath)
@@ -543,7 +553,6 @@ extension HomeABAVC:  UITableViewDataSource,
         UIDevice.generateButtonFeedback(style: .medium)
         setupLongPressGestureRecognizers()
     }
-
 }
 
 
@@ -576,13 +585,13 @@ class TableCell: UITableViewCell{
         addSubviews(of: viewBg)
         
         NSLayoutConstraint.activate([
-        
+            
             viewBg.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1),
             viewBg.centerXAnchor.constraint(equalTo: centerXAnchor),
             viewBg.topAnchor.constraint(equalTo: topAnchor),
             viewBg.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
             viewBg.heightAnchor.constraint(equalToConstant: 120),
-        
+            
         ])
     }
 }

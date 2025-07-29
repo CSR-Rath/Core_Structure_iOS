@@ -30,8 +30,7 @@ enum NotificationTypeEnum: String {
     // CounterType
     case receivedPayment = "RECEIVED_PAYMENT"
     case clearance = "CLEARANCE"
-    
-    
+
 }
 
 class NotificationManager {
@@ -61,7 +60,6 @@ class NotificationManager {
         
         switch notificationType{
             
-            // MARK: - General Account
         case .topUp:
             rootPresent.present(vc, animated: true)
         case .transfer:
@@ -103,6 +101,5 @@ class NotificationManager {
             print("===> Empty case")
         }
     }
-    
 }
 

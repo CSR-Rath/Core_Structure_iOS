@@ -1,117 +1,203 @@
 import UIKit
 
-let tabBarHeight: CGFloat = UIDevice.isDeviceHasSafeArea() ? 90 : 60
+//let tabBarHeight: CGFloat = UIDevice.isDeviceHasSafeArea() ? 90 : 60
 
 class CustomTabBarVC: UITabBarController, UIGestureRecognizerDelegate {
     
+    // properties for tabBar view controller
+    private let secondVC = HomeABAVC()
     private let firstVC = DemoFeatureVC()
-    private let secondVC = UIViewController()
     private let googleMapsVC = GoogleMapsViewController()
-    private let fourtVC = UIViewController()
-    private let fiveVC = UIViewController()
-   
+    private let fourtVC = GoogleMapsViewController()
+    private let fiveVC = GoogleMapsViewController()
+    
+    // properties for animation tabBar custom
     private var previousOffsetY: CGFloat = 0
     private var isScrollingDown : Bool = false
     private var lastContentOffset: CGFloat = 0
     
-    
-    var titleNavigationBar: [TitleIconModel] = [
-        
+    private var titleNavigationBar: [TitleIconModel] = [
         TitleIconModel(name: "Home", iconName: ""),
         TitleIconModel(name: "News", iconName: ""),
         TitleIconModel(name: "BVM VIP", iconName: ""),
         TitleIconModel(name: "Station", iconName: ""),
         TitleIconModel(name: "More", iconName: "")
-    
     ]
+    
     
     private lazy var tabBarView: TabBarView = {
         let tabBarView = TabBarView()
         tabBarView.backgroundColor = .orange
+        tabBarView.dataList = titleNavigationBar
+        
         tabBarView.indexDidChange = { [weak self] index in
             self?.selectedIndex = index
             self?.setupNavigationBar(index: index)
         }
-        tabBarView.dataList = titleNavigationBar
+        
         return tabBarView
     }()
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        leftBarButtonItem(iconButton: .isEmpty)
         setupViewControllers()
-        setupConstraintAndSetupController()
+        setupConstraint()
         setupNavigationBar()
+        handleScrollingTabBar()
     }
-    
 }
 
 extension CustomTabBarVC{
-    
     
     private func setupNavigationBar(index: Int = 0){
         title = titleNavigationBar[index].name
     }
     
     private func setupViewControllers(){
-        
         tabBar.isHidden = true
-        view.backgroundColor = .white
-        viewControllers = [firstVC, secondVC, googleMapsVC, fourtVC, fiveVC]
-        
-        // Animation when scrolling
-        firstVC.didScrollView = { [self] scrollView  in
-            
-            let currentOffsetY = scrollView.contentOffset.y
-            isScrollingDown = currentOffsetY > previousOffsetY
-            previousOffsetY = currentOffsetY
-            
-            self.updateCollectionViewPosition(offsetY: currentOffsetY)
-        }
-        
+        view.backgroundColor = .mainBackgroundColor
+//        navigationItem.hidesBackButton = true // disable back button and swipe
+        viewControllers = [secondVC, firstVC, googleMapsVC, fourtVC, fiveVC]
     }
     
-    private func updateCollectionViewPosition(offsetY: CGFloat) {
-        //MARK: - animation TabBar like ACLEDA TabBar
-        let hideThreshold: CGFloat = 50  // Adjust when the collection view should start hiding
-        let maxOffset: CGFloat = 90      // Height of the collection view
-        let contentHeight = firstVC.tableView.contentSize.height
-        let scrollViewHeight = firstVC.tableView.frame.height
-        let contentOffsetY = firstVC.tableView.contentOffset.y
+    private func setupConstraint(){
         
-        // Check if the scroll view is at the bottom (end) to prevent scrolling behavior
+        view.addSubview(tabBarView)
+        tabBarView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            
+            tabBarView.heightAnchor.constraint(equalToConstant: UIDevice.isDeviceHasSafeArea() ? 90 : 60),
+            tabBarView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            tabBarView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            tabBarView.leftAnchor.constraint(equalTo: view.leftAnchor),
+        ])
+    }
+}
+
+// MARK: - Animation TabBar Scrolling
+extension CustomTabBarVC {
+    
+    private func handleScrollingTabBar() {
+        firstVC.didScrollView = { [weak self] scrollView in
+            self?.handleScroll(for: scrollView)
+        }
+        
+        secondVC.didScrollView = { [weak self] scrollView in
+            self?.handleScroll(for: scrollView)
+        }
+    }
+
+    private func handleScroll(for scrollView: UIScrollView) {
+        let currentOffsetY = scrollView.contentOffset.y
+        let isScrollingDown = currentOffsetY > previousOffsetY
+        previousOffsetY = currentOffsetY
+
+        let contentHeight = scrollView.contentSize.height
+        let scrollViewHeight = scrollView.frame.height
+        let contentOffsetY = scrollView.contentOffset.y
+
+        updateTabBarPosition(
+            offsetY: currentOffsetY,
+            contentHeight: contentHeight,
+            scrollViewHeight: scrollViewHeight,
+            contentOffsetY: contentOffsetY,
+            isScrollingDown: isScrollingDown
+        )
+    }
+
+    private func updateTabBarPosition(offsetY: CGFloat,
+                                      contentHeight: CGFloat,
+                                      scrollViewHeight: CGFloat,
+                                      contentOffsetY: CGFloat,
+                                      isScrollingDown: Bool) {
+        
+        let hideThreshold: CGFloat = 50
+        let maxOffset: CGFloat = 90
         let atBottom = contentHeight - scrollViewHeight - contentOffsetY <= 0
         
-        if offsetY > lastContentOffset, offsetY > hideThreshold, !atBottom {
-            // Scroll down -> Hide collection view (if not at bottom)
-            UIView.animate(withDuration: 0.2) {
+        if isScrollingDown && offsetY > hideThreshold && !atBottom {
+            // Hide tab bar
+            UIView.animate(withDuration: 0.25, delay: 0, options: [.curveEaseOut]) {
                 self.tabBarView.transform = CGAffineTransform(translationX: 0, y: maxOffset)
             }
-        } else if offsetY < lastContentOffset, !atBottom {
-            // Scroll up -> Show collection view (if not at bottom)
-            UIView.animate(withDuration: 0.2) {
+        } else if !isScrollingDown && !atBottom {
+            // Show tab bar
+            UIView.animate(withDuration: 0.25, delay: 0, options: [.curveEaseOut]) {
                 self.tabBarView.transform = .identity
             }
         }
         
         lastContentOffset = offsetY
     }
-    
-    private func setupConstraintAndSetupController(){
-        
-        view.addSubview(tabBarView)
-        tabBarView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            
-            tabBarView.heightAnchor.constraint(equalToConstant: tabBarHeight),
-            tabBarView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            tabBarView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            tabBarView.leftAnchor.constraint(equalTo: view.leftAnchor),
-        ])
-        
-    }
 }
+
+//extension CustomTabBarVC{
+//   
+//    private func handleScrollingTabBar(){
+//        firstVC.didScrollView = { [weak self] scrollView  in
+//            guard let self else{ return }
+// 
+//            let currentOffsetY = scrollView.contentOffset.y
+//            isScrollingDown = currentOffsetY > previousOffsetY
+//            previousOffsetY = currentOffsetY
+//            
+//            let contentHeight = secondVC.scrollView.contentSize.height
+//            let scrollViewHeight = secondVC.scrollView.frame.height
+//            let contentOffsetY = secondVC.scrollView.contentOffset.y
+//            
+//            self.updateCollectionViewPosition(offsetY: currentOffsetY,
+//                                              contentHeight: contentHeight,
+//                                              scrollViewHeight: scrollViewHeight,
+//                                              contentOffsetY: contentOffsetY)
+//        }
+//        
+//        
+//        secondVC.didScrollView = { [weak self] scrollView  in
+//            guard let self else{ return }
+// 
+//            let currentOffsetY = scrollView.contentOffset.y
+//            isScrollingDown = currentOffsetY > previousOffsetY
+//            previousOffsetY = currentOffsetY
+//            
+//            let contentHeight = secondVC.scrollView.contentSize.height
+//            let scrollViewHeight = secondVC.scrollView.frame.height
+//            let contentOffsetY = secondVC.scrollView.contentOffset.y
+//            
+//            self.updateCollectionViewPosition(offsetY: currentOffsetY,
+//                                              contentHeight: contentHeight,
+//                                              scrollViewHeight: scrollViewHeight,
+//                                              contentOffsetY: contentOffsetY)
+//        }
+//    }
+//    
+//    private func updateCollectionViewPosition(offsetY: CGFloat,
+//                                              contentHeight: CGFloat,
+//                                              scrollViewHeight: CGFloat,
+//                                              contentOffsetY: CGFloat) {
+//        //MARK: - animation TabBar like ACLEDA TabBar
+//        let hideThreshold: CGFloat = 50  // Adjust when the collection view should start hiding
+//        let maxOffset: CGFloat = 90      // Height of the collection view
+//
+//        
+//        // Check if the scroll view is at the bottom (end) to prevent scrolling behavior
+//        let atBottom = contentHeight - scrollViewHeight - contentOffsetY <= 0
+//        
+//        if offsetY > lastContentOffset, offsetY > hideThreshold, !atBottom {
+//            // Scroll down -> Hide collection view (if not at bottom)
+//            UIView.animate(withDuration: 0.2) {
+//                self.tabBarView.transform = CGAffineTransform(translationX: 0, y: maxOffset)
+//            }
+//        } else if offsetY < lastContentOffset, !atBottom {
+//            // Scroll up -> Show collection view (if not at bottom)
+//            UIView.animate(withDuration: 0.2) {
+//                self.tabBarView.transform = .identity
+//            }
+//        }
+//        
+//        lastContentOffset = offsetY
+//    }
+//    
+//}
 
 
 // MARK: - addShape Collection
@@ -119,16 +205,16 @@ extension CustomTabBarVC{
     
     
     // MARK: If you to add shap you need add it on viewDidAppear
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//        addShape(tabBarColor: .orange)
-//    }
+    //    override func viewDidAppear(_ animated: Bool) {
+    //        super.viewDidAppear(animated)
+    //        addShape(tabBarColor: .orange)
+    //    }
     
     private func addShape(tabBarColor: UIColor) {
         
         tabBarView.backgroundColor = .clear
         tabBarView.collactionView.backgroundColor = .clear
-
+        
         let shapeLayerTab = CAShapeLayer()
         shapeLayerTab.path = createPath()
         shapeLayerTab.fillColor = tabBarColor.cgColor
@@ -189,4 +275,3 @@ extension CustomTabBarVC{
         return path.cgPath
     }
 }
-

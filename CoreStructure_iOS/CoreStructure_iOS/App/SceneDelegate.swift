@@ -6,81 +6,37 @@
 //
 
 import UIKit
-import RealmSwift
-
-class TouchPuchVC: UIViewController{
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let vc = MemoryleaksVC()
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .white
-    }
-    
-    deinit{
-        print("Deinit TouchPuchVC")
-    }
-    
-}
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
-    var window: UIWindow?
+    internal var window: UIWindow?
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+    
+        networkMonitoring()
+        rootViewController(scene: scene)
+    }
+    
+    private func rootViewController(scene: UIScene){
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-//        networkMonitoring()
-        rootViewController()
-//        formateDouble()
-//        
-//        let config = Realm.Configuration(schemaVersion: 1)
-//        Realm.Configuration.defaultConfiguration = config
         
-    }
-    
-    private func formateDouble(){
+        let loginSuuccess = UserDefaults.standard.bool(forKey: AppConstants.loginSuuccess)
         
-        let amount : Double = 889910.47890
-        let pont = amount.toFormate(as: .POINTS_TYPE)
-        let currencyKHR = amount.toFormate(as: .KHR_TYPE)
-        let currencyUSD = amount.toFormate(as: .USD_TYPE)
-        let fuel = amount.toFormate(as: .LISTERS_TYPE)
-        
-        print("\npont \(pont)\n")
-        print("currencyKHR \(currencyKHR)\n")
-        print("currencyUSD \(currencyUSD)\n")
-        print("fuel \(fuel)\n")
-    }
-    
-    private func rootViewController(){
-        
-        printFontsName()
-        var controller: UIViewController = TouchPuchVC()
-        
-//        if UserDefaults.standard.bool(forKey: AppConstants.loginSuuccess) == true{
-//            controller = TouchPuchVC()
-//        }else{
-//            controller = LoginViewController()
-//        }
-    
+        let controller: UIViewController =  LoginScreenVC()//loginSuuccess ? CustomTabBarVC() : LoginScreenVC()
         let navigation = UINavigationController(rootViewController: controller)
         window!.rootViewController = navigation
         window!.makeKeyAndVisible()
         
+        setupnavigationBarAppearance(controller: controller)
+    }
+    
+    private func setupnavigationBarAppearance(controller: UIViewController){
         controller.navigationBarAppearance(titleColor: .black,
                                            barAppearanceColor: .clear,
+                                           barAppearanceScrollingColor: .orange,
                                            shadowColorLine: .clear)
-        
-        // MARK: - configuretion height
-//        windowSceneDelegate = window!
-//        bottomSafeAreaInsetsHeight = window?.safeAreaInsets.bottom
-//        barAppearanHeight = navigation.navigationBar.frame.height + (window?.safeAreaInsets.top ?? 0)
-        
     }
     
     private func networkMonitoring(){
@@ -88,37 +44,38 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             
             if isConnected {
                 print("✅ Internet connected")
-                AlertMessage.shared.updateToConnectedMessageAndDismiss()
                 
             } else {
                 print("❌ Internet disconnected")
-                AlertMessage.shared.alertError(message: "❌ Internet disconnected")
                 
             }
         }
     }
     
-    static func changeRootViewController(to viewController: UIViewController,
-                                         animated: Bool = true) {
-        guard let window = UIApplication.shared.connectedScenes
-            .compactMap({ $0 as? UIWindowScene })
-            .flatMap({ $0.windows })
-            .first(where: { $0.isKeyWindow }) else {
+    static func changeRootViewController(to viewController: UIViewController) {
+        
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let sceneDelegate = windowScene.delegate as? UIWindowSceneDelegate,
+              let window = sceneDelegate.window else {
             return
         }
-        
-        if animated {
-            UIView.transition(with: window,
-                              duration: 0.5,
-                              options: .transitionFlipFromRight,
-                              animations: {
-                
-                window.rootViewController = viewController
-            }, completion: nil)
-        } else {
-            window.rootViewController = viewController
-            window.makeKeyAndVisible()
-        }
+
+        // Create your new root controller (e.g., tab bar controller)
+//        let tabBar = CustomTabBarVC()
+
+        // Optional: wrap in navigation controller if needed
+        let nav = UINavigationController(rootViewController: viewController)
+
+        // Replace rootViewController with animation
+        window?.rootViewController = nav
+
+        // Animate the transition (optional)
+        UIView.transition(with: window!,
+                          duration: 0.3,
+                          options: .transitionCrossDissolve,
+                          animations: nil,
+                          completion: nil)
+
     }
 }
 
@@ -169,12 +126,6 @@ func printFontsName(){
     }
 }
 
-
-
-
-import UIKit
-
-import UIKit
 
 class CropImageViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     

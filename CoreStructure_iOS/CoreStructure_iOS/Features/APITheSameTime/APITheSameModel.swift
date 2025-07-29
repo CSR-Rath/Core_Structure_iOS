@@ -7,8 +7,29 @@
 
 import Foundation
 
+struct ResponseCode:Codable {
+    var status: Int
+    var message: String
+
+}
+
 // Top-level response for paginated products
 struct ProductListResponse: Codable {
+    let count: Int
+    let next: String?
+    let previous: String?
+    let results: [Product]?
+    let response: ResponseCode?
+}
+
+struct ProductListResponse1: Codable {
+    let count: Int
+    let next: String?
+    let previous: String?
+    let results: [Product]?
+}
+
+struct ProductListResponse2: Codable {
     let count: Int
     let next: String?
     let previous: String?
