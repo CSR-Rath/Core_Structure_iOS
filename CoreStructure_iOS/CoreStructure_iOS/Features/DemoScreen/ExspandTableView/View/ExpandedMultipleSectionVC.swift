@@ -23,7 +23,6 @@ class ExpandedMultipleSectionVC: BaseInteractionViewController {
         super.viewDidLoad()
         
         title = "Multiple Expand"
-        view.backgroundColor = .orange
         tableView.delegate = self
         tableView.dataSource = self
         

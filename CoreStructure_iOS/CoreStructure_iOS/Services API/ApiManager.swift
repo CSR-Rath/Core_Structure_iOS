@@ -20,10 +20,6 @@ struct ResponseModel:Codable {
     var message: String?
 }
 
-struct LoginModel: Codable{
-    let refresh: String // refresh_token
-    let access: String // token
-}
 
 // MARK: - Header
 func getHeader() -> HTTPHeaders {
@@ -65,7 +61,7 @@ private func isConnectedToNetwork() -> Bool {
 class ApiManager {
     
     static let shared = ApiManager()
-   
+    
     private var currentTask: URLSessionDataTask?
     private var isRefreshingToken = false
     private var pendingRequests: [() -> Void] = []
@@ -83,7 +79,7 @@ class ApiManager {
         let startTime = Date()
         
         if !isConnectedToNetwork() {
-            AlertMessage.shared.alertError(title: "No Internet", 
+            AlertMessage.shared.alertError(title: "No Internet",
                                            message: "No Internet Connection. Please check your network and try again.")
             return
         }
@@ -101,25 +97,25 @@ class ApiManager {
         request.timeoutInterval = 60
         request.httpMethod = method.rawValue
         
-        // Always get fresh headers
+        // MARK: - Handle header
         if let finalHeaders = headers{
             for (headerField, headerValue) in finalHeaders {
                 request.setValue(headerValue, forHTTPHeaderField: headerField)
             }
+        }else{
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         }
         
+        // MARK: - Handle body
         do {
-            if let modelCodable {
-                
-                print("modelCodable: \(modelCodable)")
-                request.httpBody = try JSONEncoder().encode(modelCodable)
-            } else if let param {
-                
-                print("param: \(param)")
-                request.httpBody = try JSONSerialization.data(withJSONObject: param, options: [])
+            if let model = modelCodable {
+                print("📦 Request Body Model: \(model)")
+                request.httpBody = try JSONEncoder().encode(model)
+            } else if let parameters = param {
+                print("📦 Request Parameters: \(parameters)")
+                request.httpBody = try JSONSerialization.data(withJSONObject: parameters)
             }
-        }
-        catch {
+        }catch {
             print("⚠️ Error setting HTTP body: \(error.localizedDescription)")
             return
         }
@@ -140,7 +136,7 @@ class ApiManager {
                 
                 return
             }
-
+            
             guard let httpResponse = response as? HTTPURLResponse, let data else {
                 AlertMessage.shared.alertError(title: "Network Error",
                                                message: "Failed to receive valid response from the server. Please try again.")
@@ -150,16 +146,14 @@ class ApiManager {
             DebuggerRespose.shared.debuggerResult(urlRequest: request,
                                                   data: data,
                                                   error: false)
-
+            
             
             switch httpResponse.statusCode {
             case 200..<300:
                 print("✅ Request succeeded in \(duration) seconds: \(url)")
-
+                
                 DebuggerRespose.shared.validateModel(model: T.self, data: data) { objectData in
-                    Task { @MainActor in
-                           res(objectData)
-                       }
+                    res(objectData)
                 }
                 
             case 401:
@@ -190,7 +184,7 @@ class ApiManager {
                             } else {
                                 print("❌ Token refresh failed. Clearing pending requests.")
                                 DispatchQueue.main.async {
-                                    let newViewController = LoginScreenVC()
+                                    let newViewController = LoginVC()
                                     let navigationController = UINavigationController(rootViewController: newViewController)
                                     UIApplication.shared.windows.first?.rootViewController = navigationController
                                     UIApplication.shared.windows.first?.makeKeyAndVisible()
@@ -217,8 +211,7 @@ class ApiManager {
         request.httpMethod = HTTPMethodEnum.POST.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        
-        let body: [String: Any] = [
+        let body: Parameters = [
             "refresh": UserDefaults.standard.string(forKey: AppConstants.refreshToken) ?? ""
         ]
         request.httpBody = try? JSONSerialization.data(withJSONObject: body)
@@ -254,6 +247,10 @@ class ApiManager {
             }
             
         }.resume()
+    }
+    
+    deinit{
+        print("==> ✅ Deinit ApiManager.")
     }
 }
 

@@ -43,7 +43,6 @@ class DragDropCollectionVC: BaseInteractionViewController,
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Drag Drop CollectionView"
-        view.backgroundColor = .lightGray
         setupCollectionView()
         loadDataList()
         setupLongPressGestureRecognizer()

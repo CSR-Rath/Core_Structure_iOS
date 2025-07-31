@@ -16,21 +16,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Testing Function" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EJv-l3-vVJ">
-                                <rect key="frame" x="120" y="396" width="153" height="60"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wellpaperAngkorWat" translatesAutoresizingMaskIntoConstraints="NO" id="tse-4S-uFc">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="tse-4S-uFc" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="6rZ-Mt-QIe"/>
+                            <constraint firstAttribute="bottom" secondItem="tse-4S-uFc" secondAttribute="bottom" id="eVT-DF-ItW"/>
+                            <constraint firstItem="tse-4S-uFc" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="fWA-jh-oA4"/>
+                            <constraint firstItem="tse-4S-uFc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="zUq-xv-05W"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52.671755725190835" y="374.64788732394368"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="wellpaperAngkorWat" width="480" height="853.33331298828125"/>
+    </resources>
 </document>

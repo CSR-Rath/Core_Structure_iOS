@@ -19,6 +19,7 @@ API_KEY = AIzaSyBqVewVBMEhIqsP8uNDkkSD1wZYJCCXFgw // get from firebase key API_K
 
 BUNDLE_ID = com.rath.CoreStructure-iOS.dev
 
+
 Bundle_Display_Name = DEV Testing
 
 // Key AES

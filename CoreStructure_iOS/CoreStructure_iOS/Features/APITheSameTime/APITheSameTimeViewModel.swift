@@ -50,6 +50,7 @@ class APITheSameTimeViewModel_iOS13 {
 }
 
 
+@MainActor
 class APITheSameTimeViewModel {
     
     var productList1: ProductListResponse1?
@@ -99,7 +100,6 @@ class APITheSameTimeViewModel {
         }
         
         self.onDataUpdated?()
-        print("✅ All APIs completed (async/await)")
     }
     
     

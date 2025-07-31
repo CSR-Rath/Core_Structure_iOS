@@ -44,9 +44,7 @@ class ScannerCV: BaseInteractionViewController  {
         title = "Scanner"
 
         view.backgroundColor =  .black
-        //Enable back swipe gesture
-        navigationController?.interactivePopGestureRecognizer?.delegate = self
-        
+
         positionScan = CGRect(x: (screen.width-widthScan)/2,
                               y: ((screen.height-heightScan)/2)-150,
                               width: widthScan,
@@ -55,7 +53,7 @@ class ScannerCV: BaseInteractionViewController  {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationBarAppearance(titleColor: .white)
+       
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -72,7 +70,7 @@ class ScannerCV: BaseInteractionViewController  {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationBarAppearance()
+       
     }
     
     override func viewDidDisappear(_ animated: Bool) {

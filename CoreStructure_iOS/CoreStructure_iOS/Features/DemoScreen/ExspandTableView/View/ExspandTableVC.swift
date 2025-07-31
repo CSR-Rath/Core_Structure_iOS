@@ -40,7 +40,6 @@ class ExspandTableVC: BaseInteractionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Exspand Table"
-        view.backgroundColor = .white
         setupConstrain()
     }
 

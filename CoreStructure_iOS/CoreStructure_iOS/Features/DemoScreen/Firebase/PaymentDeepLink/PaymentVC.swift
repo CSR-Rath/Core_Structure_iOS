@@ -11,7 +11,6 @@ class PaymentVC: BaseInteractionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
         title = "Process Payment"
         
         let buttonPay = BaseUIButton(frame: CGRect(x: (Int(screen.width)-300)/2,

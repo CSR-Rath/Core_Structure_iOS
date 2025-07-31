@@ -25,7 +25,7 @@ class SegmentPageViewController: BaseInteractionViewController {
         view.backgroundColor = .white
         title = "PagviewController"
         //Enable back swipe gesture
-//        navigationController?.interactivePopGestureRecognizer?.delegate = self
+
         setupConstraint()
         
         

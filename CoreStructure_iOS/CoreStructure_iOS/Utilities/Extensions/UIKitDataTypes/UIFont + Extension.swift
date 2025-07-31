@@ -52,7 +52,7 @@ extension UILabel {
 
 extension UITextField {
     
-    func fontLight(_ size: CGFloat,  color: UIColor = .black){
+    func fontLight(_ size: CGFloat, color: UIColor = .black){
         self.font = UIFont.appFont(style: .light, size: size)
         self.textColor = color
     }

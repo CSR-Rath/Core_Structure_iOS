@@ -23,7 +23,7 @@ class BaseUIViewConroller: UIViewController, UIGestureRecognizerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupLeftBarButtonItem()
+//        setupLeftBarButtonItem()
         setupInteractivePopGestureRecognizer()
     }
     
@@ -34,15 +34,15 @@ class BaseUIViewConroller: UIViewController, UIGestureRecognizerDelegate {
     
     private func setupInteractivePopGestureRecognizer(){
         
-        if isInteractivePopGestureRecognizer{
+//        if isInteractivePopGestureRecognizer{
             
 //            navigationController?.interactivePopGestureRecognizer?.delegate = self
 //            navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-        }else{
+//        }else{
             
 //            navigationController?.interactivePopGestureRecognizer?.delegate = nil
 //            navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        }
+//        }
         
     }
     

@@ -42,8 +42,9 @@ class BaseUIButton: UIButton {
     var buttonHeight: CGFloat = 50{
         didSet{
             layer.cornerRadius = buttonHeight/2
+            nsContraint.isActive = false
             nsContraint.constant = buttonHeight
-            layoutIfNeeded()
+            nsContraint.isActive = true
         }
     }
     

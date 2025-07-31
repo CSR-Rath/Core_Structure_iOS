@@ -12,7 +12,7 @@ class TabBarView: UIView{
     
     var indexDidChange:((_ index: Int)->())?
     
-    private var indexSelected: Int = 0 {
+    var indexSelected: Int = 0 {
         didSet{
             collactionView.reloadData()
         }

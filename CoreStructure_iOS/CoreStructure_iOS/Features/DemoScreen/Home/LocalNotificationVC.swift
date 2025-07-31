@@ -22,9 +22,7 @@ class LocalNotificationVC: BaseInteractionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Push Notification"
-        view.backgroundColor = .white
-        //Enable back swipe gesture
-        navigationController?.interactivePopGestureRecognizer?.delegate = self
+
         
         setupUIView()
         setupContainer()
@@ -56,7 +54,7 @@ class LocalNotificationVC: BaseInteractionViewController {
         Loading.shared.showLoading()
     }
     
-//    @objc func sendNotification() {
+//    @objc func sendNotification(){
 //        let message = "Hello, Mr. Rath!"
 //        NotificationCenter.default.post(
 //            name: .newMessageNotification,

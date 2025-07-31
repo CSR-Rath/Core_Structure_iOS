@@ -156,8 +156,6 @@ class PhoneTextFieldVC: BaseInteractionViewController {
     
     private func keyboradHandleer(){
         
-       
-        
         keyboardManager.onKeyboardWillShow = { [weak self] keyboardHeight in
             guard let self = self else { return }
             self.nsButton.constant = keyboardHeight - 20

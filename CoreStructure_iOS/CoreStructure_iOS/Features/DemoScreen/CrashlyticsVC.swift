@@ -14,7 +14,7 @@ class CrashlyticsVC: BaseInteractionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        leftBarButtonItem(iconButton: .back)
+
         title = "Crashlytic"
         view.backgroundColor = .white
         

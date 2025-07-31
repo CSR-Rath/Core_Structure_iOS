@@ -24,7 +24,8 @@ enum IconEmptyList {
 
 
 extension UIScrollView {
-    func addRefreshControl(tintColor: UIColor = .systemBlue,
+    
+    func addRefreshControl(tintColor: UIColor = .lightText,
                            target: Any,
                            action: Selector) {
         
@@ -33,14 +34,12 @@ extension UIScrollView {
         refresh.tintColor = tintColor
         refresh.addTarget(target, action: action, for: .valueChanged)
         self.refreshControl = refresh
-        
     }
     
     func stopRefreshing() {
         self.refreshControl?.endRefreshing()
     }
 }
-
 
 // MARK: - Handle Empty list for UITableView & UICollectionView
 extension UIScrollView {
@@ -100,7 +99,7 @@ extension UIScrollView {
         }
     }
     
-    private func animateImageView(_ imageView: UIImageView) {
+    private func animateImageView(_ imageView: UIView) {
         UIView.animate(withDuration: 1.0, animations: {
             imageView.transform = CGAffineTransform(rotationAngle: .pi / 10)
         }, completion: { _ in

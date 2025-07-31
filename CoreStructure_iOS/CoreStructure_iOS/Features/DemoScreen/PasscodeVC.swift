@@ -18,7 +18,7 @@ enum PasscodeActionEnum{
     case none
 }
 
-class PasscodeVC: UIViewController, UIGestureRecognizerDelegate {
+class PasscodeVC: BaseInteractionViewController {
     
     private var digit: Int = 6
     private var textHandle: String = ""
@@ -37,15 +37,7 @@ class PasscodeVC: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Passcode"
-        view.backgroundColor = .white
         setupUIView()
-   
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-//        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-//        navigationController?.interactivePopGestureRecognizer?.delegate = self // enable swap
     }
     
 }
@@ -74,9 +66,7 @@ extension  PasscodeVC {
     
     
     private func susseccfullyPasscode(){
-        
-        _ = CustomTabBarVC()
-//        SceneDelegate.changeRootViewController(to: tabbar, animated: true)
+        self.pushVC(to: SuccessfullyVC())
         
     }
 
@@ -100,7 +90,6 @@ extension PasscodeVC{
             case .unavailable(let errorCode):
                 
                 print("Biometric authentication not available. Error code: \(errorCode)")
-//                showAlert(message: "")
             }
         }
     }
@@ -123,6 +112,7 @@ extension PasscodeVC{
         
         self.present(alert, animated: true, completion: nil)
     }
+    
 }
 
 // MARK: Handle action on button keyborad
@@ -133,7 +123,7 @@ extension PasscodeVC{
         UIDevice.generateButtonFeedback()
         
         let text = items[sender.tag]
-        print("text  ==> \(text)")
+//        print("text  ==> \(text)")
         
         //MARK: Handle delete
         if  sender.tag == 11{
@@ -214,7 +204,6 @@ extension PasscodeVC{
     private func setupCircleView(){
         
         for i in 0...digit-1 {
-            print(i)
             let circle = UIView()
             circle.layer.cornerRadius = 10
             circle.backgroundColor = digitColor
@@ -263,7 +252,7 @@ extension PasscodeVC{
                 button.setImage(.icDeletePasscode, for: .normal)
             }
             
-            button.heightAnchor.constraint(equalToConstant: 80).isActive = true
+            button.buttonHeight = 80
             button.widthAnchor.constraint(equalToConstant: 80).isActive = true
             arrayButton.append(button)
         }
@@ -307,4 +296,3 @@ extension PasscodeVC{
         })
     }
 }
-

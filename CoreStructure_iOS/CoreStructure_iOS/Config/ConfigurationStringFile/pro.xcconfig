@@ -15,7 +15,7 @@ BASE_URL = https:/$()/api-prime.therealreward.com/
 
 API_KEY = AIzaSyBqVewVBMEhIqsP8uNDkkSD1wZYJCCXFgw // get from firebase key API_KEY
 
-BUNDLE_ID = com.rath.CoreStructure-iOS.pro
+BUNDLE_ID = com.rath.CoreStructure-iOS.dev
 
 Bundle_Display_Name = PRO Testing
 

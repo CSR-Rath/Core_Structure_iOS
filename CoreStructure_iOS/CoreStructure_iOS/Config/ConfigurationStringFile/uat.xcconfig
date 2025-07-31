@@ -11,11 +11,12 @@
 
 //uat-api-prime.therealreward.com/
 // terminal: ipconfig getifaddr en0 = 192.168.0.175 // Django 0.0.0.0:8000 nad ALLOWED_HOSTS = ['*']
-BASE_URL = http:/$()/192.168.1.101:8000/api/
+BASE_URL = http:/$()/172.20.10.2:8000/api/
 
 API_KEY = AIzaSyBqVewVBMEhIqsP8uNDkkSD1wZYJCCXFgw // get from firebase key API_KEY
 
-BUNDLE_ID = com.rath.CoreStructure-iOS.dev//com.rath.CoreStructure-iOS.uat
+BUNDLE_ID = com.rath.CoreStructure-iOS.dev
+//com.rath.CoreStructure-iOS.uat
 
 Bundle_Display_Name = UAT Testing
 

@@ -26,7 +26,6 @@ class CenteringCellVC: BaseInteractionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
 
         self.addCollectionView()
         self.setupLayout()

@@ -40,8 +40,7 @@ class HandleNavigationBarVC: UIViewController, UIGestureRecognizerDelegate {
       
 //        rightBarButtonItem()
 
-        //Enable back swipe gesture
-        navigationController?.interactivePopGestureRecognizer?.delegate = self
+
   
     }
     

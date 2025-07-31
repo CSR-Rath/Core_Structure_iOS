@@ -25,8 +25,7 @@ class HtmlVC: UIViewController, UIGestureRecognizerDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        //Enable back swipe gesture
-        navigationController?.interactivePopGestureRecognizer?.delegate = self
+        
     }
     
 }

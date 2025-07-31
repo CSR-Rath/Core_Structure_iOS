@@ -36,7 +36,6 @@ class BoardCollectionVC: BaseInteractionViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
         
         setupAddButtonItem()
         setupCollectionView()

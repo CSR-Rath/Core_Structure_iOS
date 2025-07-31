@@ -67,10 +67,8 @@ class GroupDateVC: BaseInteractionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
         title = "Group Date"
-        //Enable back swipe gesture
-        navigationController?.interactivePopGestureRecognizer?.delegate = self
+
         setupUI()
         groupEvents(models)
         totleAll = models.count

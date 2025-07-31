@@ -14,9 +14,7 @@ class OTPVC: BaseInteractionViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //Enable back swipe gesture
-//        navigationController?.interactivePopGestureRecognizer?.delegate = self
-//        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+ 
         
     }
     
@@ -30,7 +28,6 @@ class OTPVC: BaseInteractionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
         title = "OTP"
         codeTxt = OneTimeCodeTextField()
        

@@ -27,7 +27,6 @@ class ExspandSingleSectionVC: BaseInteractionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Single Exspand "
-        view.backgroundColor = .orange
         tableView.delegate = self
         tableView.dataSource = self
         setupUI()

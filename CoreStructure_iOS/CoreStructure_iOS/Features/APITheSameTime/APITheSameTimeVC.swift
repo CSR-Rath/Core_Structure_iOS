@@ -7,15 +7,18 @@
 
 import UIKit
 
-class APITheSameTimeVC: UIViewController {
+class APITheSameTimeVC: BaseInteractionViewController {
     
-    private let tableView = UITableView()
+    
     private let viewModel = APITheSameTimeViewModel()
     
-
+    private let tableView = UITableView()
     
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        title =  "Call Api The SameTime"
+        leftBarButtonItem(icon: nil)
         view.backgroundColor = .white
         setupTableView()
         
@@ -32,7 +35,7 @@ class APITheSameTimeVC: UIViewController {
             Loading.shared.hideLoading()
         }
 
-        viewModel.fetchApiTheSameTime() // ✅ Call it here
+        viewModel.fetchApiTheSameTime()
     }
 
     
@@ -44,25 +47,22 @@ class APITheSameTimeVC: UIViewController {
         
         // Register a simple UITableViewCell
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-//        tableView.addRefreshControl(target: <#T##Any#>, action: <#T##Selector#>)
         tableView.addRefreshControl(target: self, action: #selector(pullRefreshData))
     }
     
     @objc private func pullRefreshData() {
       viewModel.fetchApiTheSameTime()
-          
     }
 }
 
 extension APITheSameTimeVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
-//        if tableView.isPagination(indexPath: indexPath,
-//                                  arrayCount: viewModel.productList1?.results?.count ?? 0,
-//                                  totalItems: viewModel.productList1?.count ?? 0){
-//            
-//        }
+        if tableView.isPagination(indexPath: indexPath,
+                                  arrayCount: viewModel.productList1?.results?.count ?? 0,
+                                  totalItems: viewModel.productList1?.count ?? 0){
+            
+        }
     }
 }
 

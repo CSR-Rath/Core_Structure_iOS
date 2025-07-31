@@ -9,7 +9,7 @@ import UIKit
 
 
 
-class LocalizableVC: UIViewController {
+class LocalizableVC: BaseInteractionViewController {
     
     let keyLocalizable : [String] = [
         "customer",
@@ -102,7 +102,6 @@ class LocalizableVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
         title = "Localizable"
         textFields = [textField1,textField2,textField3]
         setupConstraint()

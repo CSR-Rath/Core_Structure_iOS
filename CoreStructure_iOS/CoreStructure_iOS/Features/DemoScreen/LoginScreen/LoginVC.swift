@@ -8,7 +8,7 @@
 import UIKit
 
 //MARK: - ViewController
-class LoginScreenVC: UIViewController {
+class LoginVC: UIViewController {
     
     let viewModel = LoginViewModel()
     
@@ -44,11 +44,11 @@ class LoginScreenVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-
+        
         setupUI()
     }
     
-    private func setupUI() {
+    private func setupUI(){
         view.addSubview(emailTextField)
         view.addSubview(passwordTextField)
         view.addSubview(loginButton)
@@ -82,39 +82,10 @@ class LoginScreenVC: UIViewController {
         viewModel.login(username: username, password: password)
         
         viewModel.onSuccessLogin = { [weak self] in
-            self?.loginButton.stopLoading()
-            SceneDelegate.changeRootViewController(to: CustomTabBarVC())
+            DispatchQueue.main.async {
+                self?.loginButton.stopLoading()
+                SceneDelegate.shared.changeRootViewController(to: CustomTabBarVC())
+            }
         }
     }
 }
-
-//@MainActor
-class LoginViewModel{
-    
-    var onSuccessLogin: (()->Void)?
-    
-    func login(username: String, password: String){
-        
-        let modelCodable = ParamLogin(username: username,
-                                      password: password)
-        
-        ApiManager.shared.apiConnection(url: .login,
-                                        method: .POST,
-                                        modelCodable: modelCodable) { (res: LoginModel) in
-//            DispatchQueue.main.async {
-                UserDefaults.standard.setValue(res.access, forKey: AppConstants.token)
-                UserDefaults.standard.setValue(res.refresh, forKey: AppConstants.refreshToken)
-                UserDefaults.standard.setValue(true, forKey: AppConstants.loginSuuccess)
-                self.onSuccessLogin?()
-//            }
-        }
-    }
-}
-
-//MARK: - Model
-struct ParamLogin: Codable{
-    let username: String
-    let password: String
-}
-
-

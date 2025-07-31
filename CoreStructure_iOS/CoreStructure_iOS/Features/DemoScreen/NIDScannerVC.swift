@@ -44,7 +44,7 @@ class NIDScannerVC: UIViewController, UIGestureRecognizerDelegate  {
         
         view.backgroundColor =  .black
         //Enable back swipe gesture
-        navigationController?.interactivePopGestureRecognizer?.delegate = self
+
         
         positionScan = CGRect(x: (screen.width-widthScan)/2,
                               y: ((screen.height-heightScan)/2)-150,

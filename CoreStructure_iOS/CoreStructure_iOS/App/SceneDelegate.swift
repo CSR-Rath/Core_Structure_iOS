@@ -9,34 +9,36 @@ import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
+    static let shared = SceneDelegate()
+    
     internal var window: UIWindow?
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-    
         networkMonitoring()
+        setupNavigationBarAppearance()
         rootViewController(scene: scene)
     }
     
     private func rootViewController(scene: UIScene){
         
-        guard let windowScene = (scene as? UIWindowScene) else { return }
-        window = UIWindow(windowScene: windowScene)
-        
-        let loginSuuccess = UserDefaults.standard.bool(forKey: AppConstants.loginSuuccess)
-        
-        let controller: UIViewController =  LoginScreenVC()//loginSuuccess ? CustomTabBarVC() : LoginScreenVC()
+        let loginSuccessfully = UserDefaults.standard.bool(forKey: AppConstants.loginSuuccess)
+        let controller: UIViewController = loginSuccessfully ? CustomTabBarVC() : LoginVC()
         let navigation = UINavigationController(rootViewController: controller)
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        
+        window = UIWindow(windowScene: windowScene)
         window!.rootViewController = navigation
         window!.makeKeyAndVisible()
-        
-        setupnavigationBarAppearance(controller: controller)
+        window!.overrideUserInterfaceStyle = .light
+       
     }
     
-    private func setupnavigationBarAppearance(controller: UIViewController){
-        controller.navigationBarAppearance(titleColor: .black,
-                                           barAppearanceColor: .clear,
-                                           barAppearanceScrollingColor: .orange,
-                                           shadowColorLine: .clear)
+    private func setupNavigationBarAppearance(){
+        AppManager.shared.setCustomNavigationBarAppearance(titleColor: .white,
+                                                           titleColorScrolling: .white,
+                                                           barAppearanceColor: .clear,
+                                                           barAppearanceScrollingColor: .clear,
+                                                           shadowColorLine: .clear)
     }
     
     private func networkMonitoring(){
@@ -52,31 +54,26 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
     }
     
-    static func changeRootViewController(to viewController: UIViewController) {
-        
-        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-              let sceneDelegate = windowScene.delegate as? UIWindowSceneDelegate,
-              let window = sceneDelegate.window else {
-            return
-        }
-
-        // Create your new root controller (e.g., tab bar controller)
-//        let tabBar = CustomTabBarVC()
-
-        // Optional: wrap in navigation controller if needed
-        let nav = UINavigationController(rootViewController: viewController)
-
-        // Replace rootViewController with animation
-        window?.rootViewController = nav
-
-        // Animate the transition (optional)
-        UIView.transition(with: window!,
-                          duration: 0.3,
-                          options: .transitionCrossDissolve,
-                          animations: nil,
-                          completion: nil)
-
+    func changeRootViewController(to controller: UIViewController) {
+    
+    guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+            let sceneDelegate = windowScene.delegate as? UIWindowSceneDelegate,
+            let window = sceneDelegate.window else {
+        return
     }
+
+    // Optional: wrap in navigation controller if needed
+    let nav = UINavigationController(rootViewController: controller)
+    window?.rootViewController = nav
+
+    // Animate the transition (optional)
+    UIView.transition(with: window!,
+                        duration: 0.3,
+                        options: .transitionCrossDissolve,
+                        animations: nil,
+                        completion: nil)
+
+}
 }
 
 
@@ -140,7 +137,7 @@ class CropImageViewController: UIViewController, UIImagePickerControllerDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+//        view.backgroundColor = .white
         
         setupScrollView()
         setupImageView()

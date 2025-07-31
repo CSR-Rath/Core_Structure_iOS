@@ -7,38 +7,24 @@
 
 import UIKit
 
-enum IconButtonBar {
-    case back
-    case close
-    case isEmpty
-    
-    var image: UIImage? {
-        switch self {
-        case .back:
-            return  UIImage(named: "icBack")
-        case .close:
-            return .icAdd
-        case .isEmpty:
-            return UIImage()
-        }
-    }
-}
-
-//MARK: Handle Navigationbar
 extension UIViewController{
     
-    func leftBarButtonItem(iconButton: IconButtonBar = .back) {
-        guard let icon = iconButton.image?.withRenderingMode(.alwaysOriginal) else {
-            print("Icon bar invalid")
-            return
-        }
+    func leftBarButtonItem(icon: UIImage? = UIImage(named: "icBack")?.withRenderingMode(.alwaysOriginal),
+                           isSwiping: Bool? = true
+    
+    ) {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: icon,
+            style: .plain,
+            target: self,
+            action: icon == nil ?  #selector(helperAction) :  #selector(leftBarButtonItemAction)
+        )
         
-            navigationItem.leftBarButtonItem = UIBarButtonItem(
-                image: icon,
-                style: .plain,
-                target: self,
-                action: iconButton != .isEmpty ? #selector(leftBarButtonItemAction) :  #selector(helperAction)
-            )
+        if isSwiping == false && icon == nil{
+            isSwipingBack = false
+        }else{
+            isSwipingBack = true
+        }
         
     }
     
@@ -53,44 +39,7 @@ extension UIViewController{
         } else {
             self.navigationController?.popViewController(animated: true)
         }
-        
-        print("Action ==> back button")
     }
-    
-    
-
-    
-    func navigationBarAppearance(titleColor: UIColor = .black,
-                                 barAppearanceColor: UIColor = .clear,
-                                 barAppearanceScrollingColor: UIColor = .clear,
-                                 shadowColorLine: UIColor = .clear) {
-        
-        let setupFont: UIFont = UIFont.appFont(style: .bold, size: 16)
-        let largeFont: UIFont = UIFont.appFont(style: .bold, size: 34)
-        
-        let appearance = UINavigationBarAppearance()
-        appearance.titleTextAttributes = [
-            .foregroundColor: titleColor,
-            .font: setupFont
-        ]
-        appearance.largeTitleTextAttributes = [
-            .foregroundColor: titleColor,
-            .font: largeFont
-        ]
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = barAppearanceColor
-        appearance.shadowColor = shadowColorLine
-        
-        let appearanceScrolling = UINavigationBarAppearance()
-        appearanceScrolling.configureWithOpaqueBackground()
-        appearanceScrolling.backgroundColor = barAppearanceScrollingColor
-        appearanceScrolling.shadowColor = shadowColorLine
-        
-        navigationController?.navigationBar.standardAppearance = appearanceScrolling
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
-    }
-
-    
 }
 
 // MARK: Action change screen view contoller
@@ -106,7 +55,18 @@ extension UIViewController{
     
     // pop to first step
     @objc func popToRootVC(animated: Bool = true){
-        self.navigationController?.popToRootViewController(animated: animated)
+        
+        guard let window = UIApplication.shared.windows.first,
+              let navController = self.navigationController else { return }
+        
+        UIView.transition(with: window,
+                          duration: 0.3,
+                          options: .transitionCrossDissolve,
+                          animations: {
+            navController.popToRootViewController(animated: true)
+        })
+        
+        //        self.navigationController?.popToRootViewController(animated: animated)
     }
     
     @objc func pushVC(to viewController: UIViewController, animated: Bool = true){
@@ -164,3 +124,4 @@ extension UIViewController{
     }
     
 }
+

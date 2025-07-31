@@ -18,9 +18,7 @@ class FileDownloaderManager {
     static let shared = FileDownloaderManager()
 
     func shareFile(data: Data, doc_name: String) {
-
-        DispatchQueue.main.async {
-            
+        DispatchQueue.main.async{
             let barButtonItemAppearance = UIBarButtonItem.appearance()
             let attributes:[NSAttributedString.Key : Any] = [ NSAttributedString.Key.foregroundColor: UIColor.orange]
             barButtonItemAppearance.setTitleTextAttributes(attributes, for: .normal)
