@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GenerteQRAndBarCodeVC: BaseInteractionViewController {
+class GenerteQRAndBarCodeVC: BaseUIViewConroller {
     
     lazy var viewQRCode: QRCodeView = {
         let view = QRCodeView()

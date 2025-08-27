@@ -30,76 +30,72 @@ enum NotificationTypeEnum: String {
     // CounterType
     case receivedPayment = "RECEIVED_PAYMENT"
     case clearance = "CLEARANCE"
-
 }
 
-class NotificationManager {
+final class NotificationManager {
     
     static let shared = NotificationManager()
     private init() {}
     
     func rootNotificationViewController(userInfo: [AnyHashable : Any]) {
-        
-        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-              let sceneDelegate = windowScene.delegate as? SceneDelegate,
-              let rootPresent = sceneDelegate.window?.rootViewController,
-              let rootPush = sceneDelegate.window?.rootViewController as? UINavigationController
-        else { print("===> WindowScene is Nil"); return }
+        let typeString = userInfo["type"] as? String ?? ""
+        let notificationType = NotificationTypeEnum(rawValue: typeString)
         
         
-        // Example: parse notification type from userInfo
-        let type = userInfo["type"] as? String ?? ""
+        let typeRaw = userInfo["type"] as? String ?? ""
         let body = userInfo["body"] as? String ?? ""
         let refId = userInfo["refId"] as? String ?? ""
         
         
-        let vc = UIViewController()
+        let vc = FromeAlertVC()
         vc.view.backgroundColor = .orange
         
-        let notificationType =  NotificationTypeEnum(rawValue: type)
+        // MARK: BVM
         
-        switch notificationType{
-            
-        case .topUp:
-            rootPresent.present(vc, animated: true)
-        case .transfer:
-            rootPresent.present(vc, animated: true)
-        case .payment:
-            rootPresent.present(vc, animated: true)
-        case .received:
-            rootPresent.present(vc, animated: true)
-        case .revers:
-            rootPresent.present(vc, animated: true)
-        case .recordSale:
-            rootPresent.present(vc, animated: true)
-        case .correctBalance:
-            rootPresent.present(vc, animated: true)
-        case .correctProduct:
-            rootPresent.present(vc, animated: true)
-        case .claim:
-            rootPresent.present(vc, animated: true)
-        case .purchaseRequest:
-            rootPresent.present(vc, animated: true)
-        case .priceUpdate:
-            rootPresent.present(vc, animated: true)
-        case .transferQR:
-            rootPresent.present(vc, animated: true)
-        case .receivedQR:
-            rootPresent.present(vc, animated: true)
-        case .returnQR:
-            rootPresent.present(vc, animated: true)
-        case .createAccount:
-            rootPresent.present(vc, animated: true)
-            
-            // MARK: - Counter Account
-        case .receivedPayment:
-            rootPresent.present(vc, animated: true)
-        case .clearance:
-            rootPresent.present(vc, animated: true)
-        case .none:
-            rootPush.pushViewController(vc, animated: true)
-            print("===> Empty case")
+        
+        //MARK: For present
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .overFullScreen
+        getCurrentViewController()?.present(nav, animated: true)
+        
+    }
+    
+}
+
+func getCurrentViewController()->UIViewController?{
+    var currentViewController: UIViewController
+    guard let rootViewController = UIApplication.shared.windows.first?.rootViewController else {
+        return nil
+    }
+    currentViewController = rootViewController
+    
+    while let presentedViewController = currentViewController.presentedViewController {
+        currentViewController = presentedViewController
+    }
+    
+    return currentViewController
+}
+
+
+
+class FromeAlertVC: UIViewController{
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        view.backgroundColor = .white
+        title = "Alert Notification"
+        leftBarButtonItem(isSwiping: false)
+    }
+    
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        self.dismissVC(){
+            NotificationCenter.default.post(name: .popToRootVC, object: nil)
         }
+        
     }
 }
+
 

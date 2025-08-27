@@ -62,7 +62,10 @@
 		</dict>
 	</dict>
 	<key>UIBackgroundModes</key>
-	<array/>
+	<array>
+		<string>processing</string>
+		<string>remote-notification</string>
+	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
 </dict>

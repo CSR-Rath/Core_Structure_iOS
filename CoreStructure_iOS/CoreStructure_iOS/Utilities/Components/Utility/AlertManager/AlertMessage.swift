@@ -40,9 +40,6 @@ class AlertMessage{
             rootPresent.present(bottomSheetVC, animated: true) {
                 completion?()
                 Loading.shared.hideLoading()
-                /// prevent loding animate button
-                NotificationCenter.default.post(name: .stopButtonLoading, object: nil)
-                 
             }
         }
     }

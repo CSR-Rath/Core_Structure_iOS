@@ -16,8 +16,6 @@ enum EndpointEnum: String {
     case roomType = "room_types"
     case reservations = "reservations"
     
-    case getUsers = "users"
-    case getPosts = "posts"
     case infoUserApp = "master/transaction?page=1&size=10"
     case infoUserApp2 = "master/transaction?page=2&size=20"
     case infoUserApp3 = "master/transaction?page=3&size=30"
@@ -27,6 +25,18 @@ enum EndpointEnum: String {
     case products3 = "products/?page=3"
     case login = "login/"
     case refreshToken = "token/refresh/"
+    
+    
+    case apiFreeUsers = "users"
+    case apiFreePosts = "posts"
+    case apiFreeComments = "comments"
+    case apiFreeAlbums = "albums"
+    case apiFreePhotos = "photos"
+    case apiFreeTodos = "todos"
+
+    
+
+    
      
 }
 

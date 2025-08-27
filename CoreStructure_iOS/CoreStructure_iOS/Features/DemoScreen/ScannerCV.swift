@@ -9,7 +9,7 @@ import UIKit
 import AVFoundation
 
 
-class ScannerCV: BaseInteractionViewController  {
+class ScannerCV: BaseUIViewConroller  {
     
     // Manages the entire camera session (starting/stopping capture)
     private var captureSession: AVCaptureSession!

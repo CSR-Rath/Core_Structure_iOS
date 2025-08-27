@@ -60,23 +60,33 @@ class BaseUIPageViewController: UIPageViewController, UIPageViewControllerDataSo
     func pageViewController(_ pageViewController: UIPageViewController,
                             viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard let index = pages.firstIndex(of: viewController), index > 0 else { return nil }
+        currentIndex = index
         return pages[index - 1]
     }
     
     func pageViewController(_ pageViewController: UIPageViewController,
                             viewControllerAfter viewController: UIViewController) -> UIViewController? {
         guard let index = pages.firstIndex(of: viewController), index < pages.count - 1 else { return nil }
+        currentIndex = index
         return pages[index + 1]
     }
+
     
-    // MARK: - Go to Page
-    func goToPageViewControoler(index: Int) {
-        
-        let direction:  UIPageViewController.NavigationDirection = index > currentIndex ? .forward : .reverse
-        
+    private var isAnimatingPageTransition = false
+
+    func goToPageViewController(index: Int) {
+        guard !isAnimatingPageTransition else { return }
         guard index >= 0 && index < pages.count else { return }
-        setViewControllers([pages[index]], direction: direction, animated: true, completion: nil)
-        currentIndex = index
+        
+        let direction: UIPageViewController.NavigationDirection = index > currentIndex ? .forward : .reverse
+        
+        isAnimatingPageTransition = true
+        setViewControllers([pages[index]], direction: direction, animated: true) { [weak self] completed in
+            self?.isAnimatingPageTransition = false
+            if completed {
+                self?.currentIndex = index
+            }
+        }
     }
 }
 
@@ -141,7 +151,7 @@ class PageVC: BaseInteractionViewController {
         let index = sender.tag
         
         if pageVC.currentIndex != index{
-            pageVC.goToPageViewControoler(index: index)
+            pageVC.goToPageViewController(index: index)
         }
     }
 }

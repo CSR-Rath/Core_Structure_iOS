@@ -25,7 +25,7 @@ enum IconEmptyList {
 
 extension UIScrollView {
     
-    func addRefreshControl(tintColor: UIColor = .lightText,
+    func addRefreshControl(tintColor: UIColor = .blue,
                            target: Any,
                            action: Selector) {
         

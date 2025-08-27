@@ -16,7 +16,7 @@ class BaseInteractionViewController: UIViewController {
     
     lazy var bgImg: UIImageView = {
         let img = UIImageView()
-        img.image = .wellpaperAngkorWat
+//        img.image = .wellpaperAngkorWat
         img.contentMode = .scaleAspectFill
         return img
     }()
@@ -30,7 +30,7 @@ class BaseInteractionViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        leftBarButtonItem()
+//        leftBarButtonItem()
         
         view.backgroundColor = .mainBGColor
         
@@ -76,21 +76,4 @@ class BaseInteractionViewController: UIViewController {
     }
 }
 
-var isSwipingBack = true
 
-// MARK: - Control swiping back when custom button back (isSwipingBack == true can swiping and isSwipingBack = false can't swiping)
-extension UINavigationController: UIGestureRecognizerDelegate {
-    
-    override open func viewDidLoad() {
-        super.viewDidLoad()
-        interactivePopGestureRecognizer?.delegate = self
-    }
-    
-    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        return (viewControllers.count > 1 && isSwipingBack)
-    }
-    
-    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return false
-    }
-}

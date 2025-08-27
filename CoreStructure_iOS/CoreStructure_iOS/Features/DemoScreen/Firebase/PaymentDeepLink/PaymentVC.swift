@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PaymentVC: BaseInteractionViewController {
+class PaymentVC: BaseUIViewConroller {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,7 +18,7 @@ class PaymentVC: BaseInteractionViewController {
                                                    width: 300,
                                                    height: 50))
         buttonPay.setTitle("Pay Now", for: .normal)
-        buttonPay.actionUIButton = {
+        buttonPay.onTouchUpInside = {
             self.openYouTubeVideo(videoID: "")
         }
         
@@ -49,9 +49,12 @@ class PaymentVC: BaseInteractionViewController {
         Loading.shared.showLoading()
         Loading.shared.hideLoading(seconds: 0.60) {
             /// remove notification UIApplication.didBecomeActiveNotification
+            
             NotificationCenter.default.removeObserver(self,
                                                       name: UIApplication.didBecomeActiveNotification,
                                                       object: nil)
+            
+            AlertMessage.shared.alertError(title: "Message!", message: "Successfully")
         }
     }
 

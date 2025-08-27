@@ -11,9 +11,10 @@
 
 //uat-api-prime.therealreward.com/
 //jsonplaceholder.typicode.com/
+
 BASE_URL = https:/$()/api-prime.therealreward.com/
 
-API_KEY = AIzaSyBqVewVBMEhIqsP8uNDkkSD1wZYJCCXFgw // get from firebase key API_KEY
+API_KEY = AIzaSyBqVewVBMEhIqsP8uNDkkSD1wZYJCCXFgw
 
 BUNDLE_ID = com.rath.CoreStructure-iOS.dev
 

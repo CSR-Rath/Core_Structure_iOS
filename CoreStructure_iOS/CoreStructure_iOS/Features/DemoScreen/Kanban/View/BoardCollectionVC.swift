@@ -8,7 +8,7 @@
 import UIKit
 import MobileCoreServices
 
-class BoardCollectionVC: BaseInteractionViewController{
+class BoardCollectionVC: BaseUIViewConroller{
 
     private var collectionView: UICollectionView!
     private var flowLayout: UICollectionViewFlowLayout!

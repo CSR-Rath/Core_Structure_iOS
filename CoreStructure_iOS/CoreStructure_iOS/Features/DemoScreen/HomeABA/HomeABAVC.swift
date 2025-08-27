@@ -15,39 +15,37 @@ struct ItemDragDropModel: Codable{
     var description: String
 }
 
-class HomeABAVC: BaseInteractionViewController, UIScrollViewDelegate{
+class HomeABAVC: BaseUIViewConroller, UIScrollViewDelegate{
     
     let text = UILabel()
     var didScrollView: ((_ : UIScrollView)->())?
     
+    private let spacing: CGFloat = 10
+    private let radius: CGFloat = 15
+    
+    private var isRepeating = false
     private var isDraggingTableView: Bool = false
     private var isDraggingCollectView: Bool = false
-    
     private var isHasAnimateDraging: Bool = false
-    private var isRepeating = false
-    
+    private let colorCollectionView: UIColor = .clear
     private var indexDraging: Int? = nil{
         didSet{
             tableView.reloadData()
         }
     }
     
-    private let spacing: CGFloat = 10
-    private let radius: CGFloat = 15
-    private let colorCollectionView: UIColor = .clear
-    
     private var data1: [ItemDragDropModel] = []{
         didSet{
+//            print("Change data1")
             StoreLocalDataManager.shared.saveItemOneDropModel(data: data1)
-            print("Change data1")
             collectionView1.reloadData()
         }
     }
     
     private var data2: [ItemDragDropModel] = []{
         didSet{
+//            print("Change data2")
             StoreLocalDataManager.shared.saveItemTwoDropModel(data: data2)
-            print("Change data2")
             collectionView2.reloadData()
         }
     }
@@ -158,16 +156,7 @@ class HomeABAVC: BaseInteractionViewController, UIScrollViewDelegate{
         stack.alignment = .fill
         stack.distribution = .fill
         stack.backgroundColor = .clear
-//        stack.alpha = 0.5
-        
-        
-//        let blurEffect = UIBlurEffect(style: .light) // or .dark, .extraLight, .regular, etc.
-//        let blurView = UIVisualEffectView(effect: blurEffect)
-//        blurView.frame = stack.bounds
-//        blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-////        blurView.alpha = 0
-//        // 2. Add blurView as a subview behind other views
-//        stack.insertSubview(blurView, at: 0)
+
         
         return stack
     }()
@@ -180,6 +169,29 @@ class HomeABAVC: BaseInteractionViewController, UIScrollViewDelegate{
         setupLongPressGestureRecognizers()
     }
     
+}
+
+
+// MARK: - Handle action go to new view controller
+extension HomeABAVC {
+    
+    private func didTappedOnNotification(){
+        
+    }
+    
+    private func didSelectionCellTableViewRow(id: Int){
+        
+    }
+    
+    private func didSelectionCellCollectionViewItems(id: Int){
+         
+    }
+    
+}
+
+
+extension HomeABAVC {
+    
     @objc private func pullRefresh(){
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             self.scrollView.stopRefreshing()
@@ -190,6 +202,7 @@ class HomeABAVC: BaseInteractionViewController, UIScrollViewDelegate{
         didScrollView?(scrollView)
     }
 }
+
 
 //MARK: - Prevents unmoved drag
 extension HomeABAVC {
@@ -239,8 +252,8 @@ extension HomeABAVC {
         default:
             break
         }
+        
     }
-    
 }
 
 
@@ -270,7 +283,9 @@ extension HomeABAVC:  UITableViewDataSource,
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+       let data =  dataListTable[indexPath.section][indexPath.row]
         
+        didSelectionCellTableViewRow(id: 1)
         print("UITableView didSelectRowAt")
     }
     
@@ -378,12 +393,7 @@ extension HomeABAVC:  UICollectionViewDataSource,
         
         return cell
     }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        print("didSelectItemAt")
-        
-    }
+
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
@@ -402,6 +412,20 @@ extension HomeABAVC:  UICollectionViewDataSource,
             
             return CGSize(width: with, height: 39)
         }
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let data: ItemDragDropModel
+        if collectionView == collectionView1 {
+            data = data1[indexPath.row]
+        } else {
+            data = data2[indexPath.row]
+        }
+        
+        didSelectionCellCollectionViewItems(id: data.id)
+        print("didSelectItemAt")
         
     }
 }

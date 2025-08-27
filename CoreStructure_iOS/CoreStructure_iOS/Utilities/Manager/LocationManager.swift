@@ -8,11 +8,6 @@
 import UIKit
 import CoreLocation
 
-//enum DistanceEnum{
-//    case mm
-//    case km
-//}
-
 enum DistanceUnit {
     case meters
     case kilometers
@@ -56,6 +51,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         @unknown default:
             completion(nil)
         }
+        
     }
 
     /// Set a custom distance filter (e.g. 5 meters, 50 meters)

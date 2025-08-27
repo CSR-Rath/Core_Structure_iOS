@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class TestingButtonVC: BaseInteractionViewController{
+class TestingButtonVC: BaseUIViewConroller{
     var  btn =  BaseUIButton()
      
     override func viewDidLoad() {
@@ -27,7 +27,7 @@ class TestingButtonVC: BaseInteractionViewController{
        
         btn = BaseUIButton(frame: CGRect(x: 100, y: 500, width: 200, height: 50))
         btn.setTitle("Tap Me", for: .normal)
-        btn.actionUIButton = {
+        btn.onTouchUpInside = {
             self.btn.startLoading()
         }
         view.addSubview(btn)

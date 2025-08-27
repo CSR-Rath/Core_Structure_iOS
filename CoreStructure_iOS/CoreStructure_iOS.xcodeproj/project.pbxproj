@@ -125,11 +125,11 @@
 		FAA0F0042D800BA200FE4A23 /* SignatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA0F0032D800BA200FE4A23 /* SignatureViewController.swift */; };
 		FAA0F0062D800C9300FE4A23 /* SharedLinkVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA0F0052D800C9300FE4A23 /* SharedLinkVC.swift */; };
 		FAA0F0082D8019A900FE4A23 /* FileDownloaderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA0F0072D8019A900FE4A23 /* FileDownloaderManager.swift */; };
+		FAA122832E4592A40089F255 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FAA122822E4592A40089F255 /* GoogleService-Info.plist */; };
 		FAA401402D798CD40090BCE4 /* TestingButtonVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA4013F2D798CD40090BCE4 /* TestingButtonVC.swift */; };
 		FAA401422D798D0E0090BCE4 /* DisplayGifFileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA401412D798D0E0090BCE4 /* DisplayGifFileVC.swift */; };
 		FAA401442D79A7B30090BCE4 /* BaseUITextFieldPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA401432D79A7B30090BCE4 /* BaseUITextFieldPhone.swift */; };
 		FAA4FBA12E2DDDB60012705E /* APITheSameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA4FBA02E2DDDB60012705E /* APITheSameModel.swift */; };
-		FAA56E742E39090E0064009C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FAA56E732E39090E0064009C /* GoogleService-Info.plist */; };
 		FAA5F4E22E1265EC0073DE30 /* GoogleMapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA5F4E12E1265EC0073DE30 /* GoogleMapsViewController.swift */; };
 		FAA5F4E42E1273D70073DE30 /* TableViewManagerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA5F4E32E1273D70073DE30 /* TableViewManagerHelper.swift */; };
 		FAA5F4E72E1276F00073DE30 /* CollectionViewManagerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA5F4E62E1276F00073DE30 /* CollectionViewManagerHelper.swift */; };
@@ -319,13 +319,13 @@
 		FAA0F0032D800BA200FE4A23 /* SignatureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignatureViewController.swift; sourceTree = "<group>"; };
 		FAA0F0052D800C9300FE4A23 /* SharedLinkVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedLinkVC.swift; sourceTree = "<group>"; };
 		FAA0F0072D8019A900FE4A23 /* FileDownloaderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDownloaderManager.swift; sourceTree = "<group>"; };
+		FAA122822E4592A40089F255 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FAA16D3C2CDDA0B7004D1B97 /* MainTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTextField.swift; sourceTree = "<group>"; };
 		FAA16D3E2CDDAF82004D1B97 /* BaseUILabelPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUILabelPadding.swift; sourceTree = "<group>"; };
 		FAA4013F2D798CD40090BCE4 /* TestingButtonVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingButtonVC.swift; sourceTree = "<group>"; };
 		FAA401412D798D0E0090BCE4 /* DisplayGifFileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayGifFileVC.swift; sourceTree = "<group>"; };
 		FAA401432D79A7B30090BCE4 /* BaseUITextFieldPhone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUITextFieldPhone.swift; sourceTree = "<group>"; };
 		FAA4FBA02E2DDDB60012705E /* APITheSameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APITheSameModel.swift; sourceTree = "<group>"; };
-		FAA56E732E39090E0064009C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FAA5F4E12E1265EC0073DE30 /* GoogleMapsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapsViewController.swift; sourceTree = "<group>"; };
 		FAA5F4E32E1273D70073DE30 /* TableViewManagerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewManagerHelper.swift; sourceTree = "<group>"; };
 		FAA5F4E62E1276F00073DE30 /* CollectionViewManagerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewManagerHelper.swift; sourceTree = "<group>"; };
@@ -487,7 +487,6 @@
 			children = (
 				FAB94BC12E3B57370073E421 /* HomeABA */,
 				FAA02EA22E3AFC3200178D85 /* LoginScreen */,
-				FAB0C41D2E1672CA009405C3 /* GoogleMaps */,
 				FAAD14552D68661E00C13166 /* Firebase */,
 				FAC761852D87F7FD00636660 /* BaseUIViewController */,
 				FA9C000B2CCBEEE900F277E3 /* SplashScreen */,
@@ -730,7 +729,7 @@
 				FA494BA62C69EBD70086D346 /* Assets.xcassets */,
 				FA494BA82C69EBD70086D346 /* LaunchScreen.storyboard */,
 				FA494BAB2C69EBD70086D346 /* Info.plist */,
-				FAA56E732E39090E0064009C /* GoogleService-Info.plist */,
+				FAA122822E4592A40089F255 /* GoogleService-Info.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -757,9 +756,6 @@
 			isa = PBXGroup;
 			children = (
 				FA96D9002D9E98DA006F28DB /* TabBar */,
-				FA96D8FD2D9E9803006F28DB /* Login */,
-				FA96D8FC2D9E97D9006F28DB /* Register */,
-				FAABFE1D2D817A02009B3721 /* Success */,
 				FA0664272CD1EAAF00694A9B /* DemoScreen */,
 				FA91B2EB2E2AC35E002676C1 /* APITheSameTime */,
 			);
@@ -789,13 +785,6 @@
 				FA883E6E2D1D56D800F39E4B /* BaseInteractionViewController.swift */,
 			);
 			path = BaseUI;
-			sourceTree = "<group>";
-		};
-		FA8151BD2DFC1AA1003E2DA5 /* Chinese */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Chinese;
 			sourceTree = "<group>";
 		};
 		FA837E062C9BD83900213AE4 /* Home */ = {
@@ -842,27 +831,10 @@
 			path = APITheSameTime;
 			sourceTree = "<group>";
 		};
-		FA96D8FC2D9E97D9006F28DB /* Register */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Register;
-			sourceTree = "<group>";
-		};
-		FA96D8FD2D9E9803006F28DB /* Login */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Login;
-			sourceTree = "<group>";
-		};
 		FA96D9002D9E98DA006F28DB /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
-				FA96D9022D9E9902006F28DB /* News */,
-				FA96D9042D9E991F006F28DB /* More */,
 				FA96D9012D9E98F6006F28DB /* Home */,
-				FA96D9032D9E990D006F28DB /* Station */,
 			);
 			path = TabBar;
 			sourceTree = "<group>";
@@ -872,39 +844,8 @@
 			children = (
 				FA96D9062D9E9AC6006F28DB /* Models */,
 				FA96D9082D9E9AD8006F28DB /* Views */,
-				FA96D9072D9E9AD0006F28DB /* ViewModels */,
 			);
 			path = Home;
-			sourceTree = "<group>";
-		};
-		FA96D9022D9E9902006F28DB /* News */ = {
-			isa = PBXGroup;
-			children = (
-				FA96D90E2D9E9BAC006F28DB /* Models */,
-				FA96D90C2D9E9BAB006F28DB /* ViewModels */,
-				FA96D90D2D9E9BAB006F28DB /* Views */,
-			);
-			path = News;
-			sourceTree = "<group>";
-		};
-		FA96D9032D9E990D006F28DB /* Station */ = {
-			isa = PBXGroup;
-			children = (
-				FA96D90F2D9E9BBA006F28DB /* Models */,
-				FA96D9102D9E9BBA006F28DB /* ViewModels */,
-				FA96D9112D9E9BBA006F28DB /* Views */,
-			);
-			path = Station;
-			sourceTree = "<group>";
-		};
-		FA96D9042D9E991F006F28DB /* More */ = {
-			isa = PBXGroup;
-			children = (
-				FA96D9092D9E9B97006F28DB /* Models */,
-				FA96D90A2D9E9B98006F28DB /* ViewModels */,
-				FA96D90B2D9E9B98006F28DB /* Views */,
-			);
-			path = More;
 			sourceTree = "<group>";
 		};
 		FA96D9062D9E9AC6006F28DB /* Models */ = {
@@ -915,82 +856,11 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		FA96D9072D9E9AD0006F28DB /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
 		FA96D9082D9E9AD8006F28DB /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				FAA99BDC2D9FBCF60058272B /* Cells */,
-				FAA99BE02D9FBD4A0058272B /* Views */,
 				FAA99BDF2D9FBD410058272B /* ViewControllers */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		FA96D9092D9E9B97006F28DB /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		FA96D90A2D9E9B98006F28DB /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		FA96D90B2D9E9B98006F28DB /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		FA96D90C2D9E9BAB006F28DB /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		FA96D90D2D9E9BAB006F28DB /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		FA96D90E2D9E9BAC006F28DB /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		FA96D90F2D9E9BBA006F28DB /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		FA96D9102D9E9BBA006F28DB /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		FA96D9112D9E9BBA006F28DB /* Views */ = {
-			isa = PBXGroup;
-			children = (
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1072,26 +942,12 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		FAA99BE02D9FBD4A0058272B /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		FAA99BE42D9FE7A50058272B /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
 				FAA99BE52D9FE7C80058272B /* FirebaseManager.swift */,
 			);
 			path = Utilities;
-			sourceTree = "<group>";
-		};
-		FAABFE1D2D817A02009B3721 /* Success */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Success;
 			sourceTree = "<group>";
 		};
 		FAAC1C412DFA7570002E140E /* DayRangeSelectionDate */ = {
@@ -1146,13 +1002,6 @@
 				FA837DFE2C9AF35800213AE4 /* CustomTabBarCell.swift */,
 			);
 			path = Cell;
-			sourceTree = "<group>";
-		};
-		FAB0C41D2E1672CA009405C3 /* GoogleMaps */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = GoogleMaps;
 			sourceTree = "<group>";
 		};
 		FAB5D63C2C6C3D1900A31A6F /* Cells */ = {
@@ -1252,7 +1101,6 @@
 		FAF489612D9CE5FA00B20CE6 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				FA8151BD2DFC1AA1003E2DA5 /* Chinese */,
 				FAF489622D9CE5FA00B20CE6 /* English */,
 				FAF489662D9CE5FA00B20CE6 /* Khmer */,
 			);
@@ -1384,16 +1232,16 @@
 				FAF4896C2D9CE5FA00B20CE6 /* Roboto-Regular.ttf in Resources */,
 				FAF489702D9CE5FA00B20CE6 /* NotoSansKhmer-Regular.ttf in Resources */,
 				FAF4896D2D9CE5FA00B20CE6 /* Roboto-Bold.ttf in Resources */,
-				FA7FF8E82CDC722B00C824BD /* Localizable.strings in Resources */,
-				FA8653FC2D1AAE0300D87D6F /* createDeepLinkApp.png in Resources */,
-				FA494BAA2C69EBD70086D346 /* LaunchScreen.storyboard in Resources */,
-				FA5968F42D79565400440485 /* loadingGif.gif in Resources */,
-				FA494BA72C69EBD70086D346 /* Assets.xcassets in Resources */,
 				FAF489712D9CE5FA00B20CE6 /* NotoSansKhmer-Bold.ttf in Resources */,
-				FA494BA52C69EB9C0086D346 /* Main.storyboard in Resources */,
-				FA5968F62D795C7200440485 /* 0cMVlLSnnW.gif in Resources */,
 				FAF4896E2D9CE5FA00B20CE6 /* NotoSansKhmer-Medium.ttf in Resources */,
-				FAA56E742E39090E0064009C /* GoogleService-Info.plist in Resources */,
+				FA8653FC2D1AAE0300D87D6F /* createDeepLinkApp.png in Resources */,
+				FA7FF8E82CDC722B00C824BD /* Localizable.strings in Resources */,
+				FA494BAA2C69EBD70086D346 /* LaunchScreen.storyboard in Resources */,
+				FA494BA72C69EBD70086D346 /* Assets.xcassets in Resources */,
+				FA494BA52C69EB9C0086D346 /* Main.storyboard in Resources */,
+				FA5968F42D79565400440485 /* loadingGif.gif in Resources */,
+				FA5968F62D795C7200440485 /* 0cMVlLSnnW.gif in Resources */,
+				FAA122832E4592A40089F255 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1731,6 +1579,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -1761,15 +1611,17 @@
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CoreStructure_iOS/Resources/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "$(Bundle_Display_Name)";
+				INFOPLIST_KEY_CFBundleDisplayName = "UAT Testing";
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires access to the camera to allow you to take photos and record videos.";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "This app uses Face ID for secure authentication.";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This app needs location access to monitor geofences.";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "This app uses your location to monitor regions even in the background.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to show it on the map.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app requires access to your photo library to save captured images.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = "";
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -1848,6 +1700,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -1871,22 +1725,24 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = HCSG6K6N58;
+				DEVELOPMENT_TEAM = 4PU8RQ5WW2;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/CoreStructure_iOS",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CoreStructure_iOS/Resources/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "$(Bundle_Display_Name)";
+				INFOPLIST_KEY_CFBundleDisplayName = "UAT Testing";
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires access to the camera to allow you to take photos and record videos.";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "This app uses Face ID for secure authentication.";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This app needs location access to monitor geofences.";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "This app uses your location to monitor regions even in the background.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to show it on the map.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app requires access to your photo library to save captured images.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = "";
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -1964,6 +1820,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -1994,15 +1852,17 @@
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CoreStructure_iOS/Resources/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "$(Bundle_Display_Name)";
+				INFOPLIST_KEY_CFBundleDisplayName = "UAT Testing";
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires access to the camera to allow you to take photos and record videos.";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "This app uses Face ID for secure authentication.";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This app needs location access to monitor geofences.";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "This app uses your location to monitor regions even in the background.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to show it on the map.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app requires access to your photo library to save captured images.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = "";
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;

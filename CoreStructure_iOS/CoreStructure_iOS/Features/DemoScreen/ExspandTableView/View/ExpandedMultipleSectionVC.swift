@@ -2,7 +2,7 @@ import UIKit
 
 
 //MARK: Multiple dropdown session
-class ExpandedMultipleSectionVC: BaseInteractionViewController {
+class ExpandedMultipleSectionVC: BaseUIViewConroller {
     
     //MARK: Mutiple section expended
     var expandedSectionIndices: [Int] = [] // Array to store expanded section indices

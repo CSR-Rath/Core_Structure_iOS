@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SegmentPageViewController: BaseInteractionViewController {
+class SegmentPageViewController: BaseUIViewConroller {
     
     let pageview = BaseUIPageViewController()
     let segmentedView = SegmentedView()

@@ -13,7 +13,7 @@ target 'CoreStructure_iOS' do
   pod 'Firebase/Firestore', '~> 10.15'
   pod 'Firebase/Messaging', '~> 10.15'
   pod 'Firebase/Crashlytics', '~> 10.15'
-
+  pod 'SnapKit', '~> 10.15'
 # Google Sign-In
 # pod 'GoogleSignIn'
 

@@ -18,7 +18,7 @@ enum PasscodeActionEnum{
     case none
 }
 
-class PasscodeVC: BaseInteractionViewController {
+class PasscodeVC: BaseUIViewConroller {
     
     private var digit: Int = 6
     private var textHandle: String = ""
@@ -55,12 +55,15 @@ extension  PasscodeVC {
             UIDevice.vibrateOnWrongPassword()
             UIDevice.shakeStackView(to: stackCircle)
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: { [self] in
-                textHandle.removeAll()
-                digitCircleView.forEach({ item in
-                    item.backgroundColor = digitColor
-                })
-            })
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+                guard let self = self else { return }
+                self.textHandle.removeAll()
+                self.digitCircleView.forEach { item in
+                    item.backgroundColor = self.digitColor
+                }
+            }
+
         }
     }
     
@@ -77,7 +80,10 @@ extension PasscodeVC{
     
     private func biometricAuthentication(){
     
-        BiometricAuthenticationManager.shared.fingerPrintFaceID { result in
+        BiometricAuthenticationManager.shared.fingerPrintFaceID { [weak self] result in
+            
+            guard let self = self else { return }
+            
             switch result {
             case .success(let status):
                 print("Authentication successful: \(status)") // Navigate or perform action based on success
@@ -120,10 +126,7 @@ extension PasscodeVC{
     
     @objc private func buttonTappedKeyborad(_ sender: UIButton) {
         
-        UIDevice.generateButtonFeedback()
-        
         let text = items[sender.tag]
-//        print("text  ==> \(text)")
         
         //MARK: Handle delete
         if  sender.tag == 11{
@@ -157,6 +160,8 @@ extension PasscodeVC{
                 }
             }
         }
+        
+        UIDevice.generateButtonFeedback()
     }
 }
 

@@ -7,6 +7,8 @@
 
 import UIKit
 
+var isFromAlertNotification: Bool = false
+
 class SplashScreenVC: UIViewController {
     
     lazy var btnCustomTabBar: BaseUIButton = {
@@ -46,12 +48,11 @@ class SplashScreenVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        setupConstraint()
-        title = "Please choose"
+        title = "Splash Screen"
         
-        let tabBar = CustomTabBarVC()
-        self.pushVC(to: tabBar)
+        gotoTabBar(to: self)
     }
+    
     
     private func setupConstraint() {
         view.addSubview(stackButton)
@@ -67,13 +68,61 @@ class SplashScreenVC: UIViewController {
         let tabBar = CustomTabBarVC()
         self.pushVC(to: tabBar)
     }
+}
+
+
+
+@MainActor func gotoTabBar(to contoller: UIViewController, isChangRoot: Bool = false){
     
-    func presentCustomBottomSheet() {
-        let multiplVC = PresentCustomBottomSheet()
-        multiplVC.modalPresentationStyle = .custom
-        self.present(multiplVC, animated: false, completion: nil)
+    print("contoller: \(contoller.title ?? "nil")")
+    
+    Loading.shared.showLoading()
+    let viewModel = ViewModel()
+    viewModel.asyncCall()
+    viewModel.onDataUpdated = {
+        Loading.shared.hideLoading()
+        
+        let tabBar = CustomTabBarVC()
+        tabBar.posts = viewModel.posts ?? []
+        tabBar.title =  contoller.title ?? "nil"
+
+        if isChangRoot{
+            SceneDelegate.shared.changeRootViewController(to: tabBar)
+        }else{
+            // Use like this it is working from click alert from push notification from app DidDisconnect
+            contoller.navigationController?.pushViewController(tabBar, animated: false)
+        }
     }
 }
+
+
+
+class RooViewController{
+    
+    @MainActor func gotoTabBar(to contoller: UIViewController, isChangRoot: Bool = false){
+        
+        print("contoller: \(contoller.title ?? "nil")")
+        
+        Loading.shared.showLoading()
+        let viewModel = ViewModel()
+        viewModel.asyncCall()
+        viewModel.onDataUpdated = {
+            Loading.shared.hideLoading()
+            
+            let tabBar = CustomTabBarVC()
+            tabBar.posts = viewModel.posts ?? []
+            tabBar.title =  contoller.title ?? "nil"
+            SceneDelegate.shared.changeRootViewController(to: tabBar)
+
+        }
+    }
+
+    
+    
+    
+}
+
+
 
 
 class PresentCustomBottomSheet: UIViewController {
@@ -110,7 +159,6 @@ class PresentCustomBottomSheet: UIViewController {
     lazy var btnCancel: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
-//        btn.setImage(.icClose, for: .normal)
         btn.addTarget(self, action: #selector(animateDismissView), for: .touchUpInside)
         return btn
     }()

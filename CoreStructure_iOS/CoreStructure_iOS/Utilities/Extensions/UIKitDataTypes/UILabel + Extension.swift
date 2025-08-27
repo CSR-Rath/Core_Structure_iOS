@@ -55,3 +55,39 @@ extension UILabel {
 }
 
 
+extension NSMutableAttributedString {
+    
+    /// Appends normal label-style text with the specified color.
+    func appendLabelText(text: String,
+                         color: UIColor) -> NSMutableAttributedString {
+        
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: 14),
+            .foregroundColor: color
+        ]
+        self.append(NSAttributedString(string: text, attributes: attributes))
+        return self
+    }
+    
+    /// Appends link-style text (default link color).
+    func appendLinkText(text: String) -> NSMutableAttributedString {
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: 14),
+            .foregroundColor: UIColor.red
+        ]
+        self.append(NSAttributedString(string: text, attributes: attributes))
+        return self
+    }
+    
+    /// Appends underlined link-style text.
+    func appendUnderlinedLinkText(text: String) -> NSMutableAttributedString {
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: 14),
+            .foregroundColor: UIColor.red,
+            .underlineColor: UIColor.red,
+            .underlineStyle: NSUnderlineStyle.single.rawValue
+        ]
+        self.append(NSAttributedString(string: text, attributes: attributes))
+        return self
+    }
+}

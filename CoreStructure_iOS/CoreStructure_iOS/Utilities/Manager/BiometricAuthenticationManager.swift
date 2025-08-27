@@ -83,10 +83,13 @@ func helper() {
     BiometricAuthenticationManager.shared.fingerPrintFaceID { result in
         switch result {
         case .success(let status):
+            
             print("Authentication successful: \(status)")
         case .failure(let message):
+            
             print("Authentication failed: \(message)")
         case .unavailable(let errorCode):
+            
             print("Biometric authentication not available, error code: \(errorCode)")
         }
     }

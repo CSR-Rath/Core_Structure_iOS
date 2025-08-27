@@ -1,6 +1,6 @@
 import UIKit
 
-class PreventionScreenVC: BaseInteractionViewController {
+class PreventionScreenVC: BaseUIViewConroller {
 
     lazy var viewContainer: BlurredBackgroundView = {
         let view = BlurredBackgroundView()

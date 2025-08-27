@@ -15,7 +15,7 @@ struct TansationDate: Codable {
 
 
 
-class GroupDateVC: BaseInteractionViewController {
+class GroupDateVC: BaseUIViewConroller {
     
     private var models: [TansationDate] = [
         TansationDate(type: "Deposit", created: 1724424400, desc: "Salary deposit"),
@@ -165,3 +165,61 @@ extension GroupDateVC: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
+
+import UIKit
+import Combine
+
+class UserMVVMCombineViewController: UIViewController {
+
+    private let nameLabel = UILabel()
+    private let showButton = UIButton(type: .system)
+
+    private let viewModel = UserViewModel()
+    private var cancellables = Set<AnyCancellable>()  // 🛑 រក្សា subscription
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .white
+
+        nameLabel.frame = CGRect(x: 40, y: 100, width: 300, height: 30)
+        showButton.frame = CGRect(x: 40, y: 150, width: 120, height: 44)
+        showButton.setTitle("បង្ហាញអ្នកប្រើ", for: .normal)
+        showButton.addTarget(self, action: #selector(showUser), for: .touchUpInside)
+
+        view.addSubview(nameLabel)
+        view.addSubview(showButton)
+
+        bindViewModel()
+    }
+
+    private func bindViewModel() {
+        // ✅ Binding displayText ទៅ UI ដោយប្រើ Combine
+        viewModel.$displayText
+            .receive(on: DispatchQueue.main) // UI ត្រូវ update នៅលើ main thread
+            .sink { [weak self] text in
+                self?.nameLabel.text = text
+            }
+            .store(in: &cancellables)
+    }
+
+    @objc private func showUser() {
+        viewModel.loadUser()
+    }
+}
+
+import Combine
+
+class UserViewModel {
+    // ✅ @Published ប្រាប់ Combine ថា បើមានការផ្លាស់ប្តូរ -> បង្ហាញ UI ទៅវិញ
+    @Published var displayText: String = ""
+
+    func loadUser() {
+        let user = Customer(name: "A", age: "50")
+        displayText = "Name: \(user.name), Age: \(user.age)"
+    }
+}
+
+struct Customer{
+    var name: String
+    var age: String
+}

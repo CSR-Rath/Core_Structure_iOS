@@ -33,7 +33,7 @@ class NotificationVC: UIViewController{
                                                 width: 300,
                                                 height: 50))
         button.setTitle("POST", for: .normal)
-        button.actionUIButton = {
+        button.onTouchUpInside = {
             self.sendNotification()
         }
         

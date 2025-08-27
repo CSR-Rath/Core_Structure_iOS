@@ -1,7 +1,16 @@
 
 import UIKit
 
+extension NSNotification.Name{
+    static let refreshTabBar = NSNotification.Name("refreshTabBar")
+    static let popToRootVC = NSNotification.Name("popToRootVC")
+}
+
 class CustomTabBarVC: UITabBarController, UIGestureRecognizerDelegate {
+    
+    
+    var posts = [PostModel]()
+    
     
     // properties for tabBar view controller
     private let secondVC = HomeABAVC()
@@ -29,7 +38,7 @@ class CustomTabBarVC: UITabBarController, UIGestureRecognizerDelegate {
         let tabBarView = TabBarView()
         tabBarView.backgroundColor = .mainTabBarColor
         tabBarView.dataList = titleNavigationBar
-        tabBarView.indexSelected = 1
+        tabBarView.indexSelected = 0
         
         tabBarView.indexDidChange = { [weak self] index in
             self?.selectedIndex = index
@@ -45,10 +54,78 @@ class CustomTabBarVC: UITabBarController, UIGestureRecognizerDelegate {
         setupConstraint()
         setupNavigationBar()
         handleScrollingTabBar()
+
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        isSwipingBack = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        isSwipingBack = false
+        navigationItem.hidesBackButton = true
+    }
+    
+    init(){
+        super.init(nibName: nil, bundle: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(returnFirstIndexTabBar),
+                                               name: .refreshTabBar,
+                                               object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(pop),
+                                               name: .popToRootVC,
+                                               object: nil)
+    }
+
+    deinit{
+        print("Deinit TabBar")
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 
 extension CustomTabBarVC{
+    
+    
+    @objc private func returnFirstIndexTabBar(){
+        tabBarView.indexSelected = 0
+        self.selectedIndex = 0
+    }
+    
+    @objc private func pop(){
+        
+        switch selectedIndex{
+        case 0:
+            
+            secondVC.popTopTabBar()
+
+            
+            break
+        case 1:
+            
+            firstVC.popTopTabBar()
+            break
+        case 2:
+            secondVC.popTopTabBar()
+            break
+        case 3:
+            
+            break
+        default:
+            break
+        }
+        
+    }
     
     private func setupNavigationBar(index: Int = 0){
         title = titleNavigationBar[index].name
@@ -213,70 +290,15 @@ extension CustomTabBarVC{
 }
 
 
-//extension CustomTabBarVC{
-//
-//    private func handleScrollingTabBar(){
-//        firstVC.didScrollView = { [weak self] scrollView  in
-//            guard let self else{ return }
-//
-//            let currentOffsetY = scrollView.contentOffset.y
-//            isScrollingDown = currentOffsetY > previousOffsetY
-//            previousOffsetY = currentOffsetY
-//
-//            let contentHeight = secondVC.scrollView.contentSize.height
-//            let scrollViewHeight = secondVC.scrollView.frame.height
-//            let contentOffsetY = secondVC.scrollView.contentOffset.y
-//
-//            self.updateCollectionViewPosition(offsetY: currentOffsetY,
-//                                              contentHeight: contentHeight,
-//                                              scrollViewHeight: scrollViewHeight,
-//                                              contentOffsetY: contentOffsetY)
-//        }
-//
-//
-//        secondVC.didScrollView = { [weak self] scrollView  in
-//            guard let self else{ return }
-//
-//            let currentOffsetY = scrollView.contentOffset.y
-//            isScrollingDown = currentOffsetY > previousOffsetY
-//            previousOffsetY = currentOffsetY
-//
-//            let contentHeight = secondVC.scrollView.contentSize.height
-//            let scrollViewHeight = secondVC.scrollView.frame.height
-//            let contentOffsetY = secondVC.scrollView.contentOffset.y
-//
-//            self.updateCollectionViewPosition(offsetY: currentOffsetY,
-//                                              contentHeight: contentHeight,
-//                                              scrollViewHeight: scrollViewHeight,
-//                                              contentOffsetY: contentOffsetY)
-//        }
-//    }
-//
-//    private func updateCollectionViewPosition(offsetY: CGFloat,
-//                                              contentHeight: CGFloat,
-//                                              scrollViewHeight: CGFloat,
-//                                              contentOffsetY: CGFloat) {
-//        //MARK: - animation TabBar like ACLEDA TabBar
-//        let hideThreshold: CGFloat = 50  // Adjust when the collection view should start hiding
-//        let maxOffset: CGFloat = 90      // Height of the collection view
-//
-//
-//        // Check if the scroll view is at the bottom (end) to prevent scrolling behavior
-//        let atBottom = contentHeight - scrollViewHeight - contentOffsetY <= 0
-//
-//        if offsetY > lastContentOffset, offsetY > hideThreshold, !atBottom {
-//            // Scroll down -> Hide collection view (if not at bottom)
-//            UIView.animate(withDuration: 0.2) {
-//                self.tabBarView.transform = CGAffineTransform(translationX: 0, y: maxOffset)
-//            }
-//        } else if offsetY < lastContentOffset, !atBottom {
-//            // Scroll up -> Show collection view (if not at bottom)
-//            UIView.animate(withDuration: 0.2) {
-//                self.tabBarView.transform = .identity
-//            }
-//        }
-//
-//        lastContentOffset = offsetY
-//    }
-//
-//}
+// MARK: Handle notification push
+extension CustomTabBarVC{
+    
+    func newController(){
+        let vc = UIViewController()
+        vc.view.backgroundColor = .red
+        self.navigationController?.pushViewController(vc, animated: false)
+    }
+    
+    
+    
+}

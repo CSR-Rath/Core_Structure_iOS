@@ -6,14 +6,17 @@
 //
 
 import UIKit
+import Combine
 
-class APITheSameTimeVC: BaseInteractionViewController {
+class APITheSameTimeVC: BaseUIViewConroller {
     
     
     private let viewModel = APITheSameTimeViewModel()
     
-    private let tableView = UITableView()
+    private let viewModelApi = ViewModel()
     
+    private let tableView = UITableView()
+    private var cancellables = Set<AnyCancellable>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,23 +25,14 @@ class APITheSameTimeVC: BaseInteractionViewController {
         view.backgroundColor = .white
         setupTableView()
         
-        Loading.shared.showLoading() // Show loading before fetch
-
-        viewModel.onDataUpdated = { [weak self] in
-            guard let self else { return }
-
-            print("✅ Data updated callback fired — all APIs done")
-
-            self.tableView.reloadData()
-            self.tableView.stopRefreshing()
-            self.tableView.isHideLoadingSpinner()
+        Loading.shared.showLoading()
+        viewModelApi.asyncCall()
+        viewModelApi.onDataUpdated = { [weak self] in
+            self?.tableView.reloadData()
             Loading.shared.hideLoading()
         }
-
-        viewModel.fetchApiTheSameTime()
     }
 
-    
     private func setupTableView() {
         view.addSubview(tableView)
         tableView.frame = view.bounds
@@ -51,40 +45,25 @@ class APITheSameTimeVC: BaseInteractionViewController {
     }
     
     @objc private func pullRefreshData() {
-      viewModel.fetchApiTheSameTime()
+        viewModelApi.asyncCall()
     }
+    
 }
 
 extension APITheSameTimeVC: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if tableView.isPagination(indexPath: indexPath,
-                                  arrayCount: viewModel.productList1?.results?.count ?? 0,
-                                  totalItems: viewModel.productList1?.count ?? 0){
-            
-        }
-    }
 }
 
 extension APITheSameTimeVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        if viewModel.productList1?.results?.count ?? 0 > 0{
-            tableView.isRestoreEmptyState()
-        }else{
-            tableView.isShowEmptyState()
-        }
-        
-        return viewModel.productList1?.results?.count ?? 0
+        return viewModelApi.posts?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = viewModel.productList1?.results?[indexPath.row].name
+        cell.textLabel?.text = viewModelApi.posts?[indexPath.row].title
         return cell
     }
+    
 }
-
-
-

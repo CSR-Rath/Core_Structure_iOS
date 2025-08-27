@@ -27,7 +27,7 @@ extension AddVoucherView: UITableViewDelegate, UITableViewDataSource
 }
 
 
-class AddVoucherVC: BaseInteractionViewController {
+class AddVoucherVC: BaseUIViewConroller {
     private let addVoucherView = AddVoucherView()
     
     override func loadView() {

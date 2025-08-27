@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CrashlyticsVC: BaseInteractionViewController {
+class CrashlyticsVC: BaseUIViewConroller {
     
     var a: Int! = nil
     var stack: UIStackView!

@@ -8,7 +8,7 @@
 import UIKit
 import UIKit
 
-class UploadImageVC: BaseInteractionViewController {
+class UploadImageVC: BaseUIViewConroller {
     
     private let imagePicker = BaseUIImagePickerController()
     private var imageHeightConstraint = NSLayoutConstraint()

@@ -8,7 +8,7 @@
 import UIKit
 
 
-class CenteringCellVC: BaseInteractionViewController {
+class CenteringCellVC: BaseUIViewConroller {
 
     // Declared CollectionView variable:
     var collectionView : UICollectionView?

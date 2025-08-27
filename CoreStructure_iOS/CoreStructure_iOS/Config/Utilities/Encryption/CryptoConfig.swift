@@ -8,6 +8,7 @@
 import Foundation
 
 struct CryptoConfig {
+    
     struct Payment {
         static let key = AppConfiguration.shared.paymentKey       // 32 chars
         static let iv  = AppConfiguration.shared.paymentVector    // 16 chars
@@ -27,4 +28,5 @@ struct CryptoConfig {
         static let key = AppConfiguration.shared.paymentKey
         static let iv  = AppConfiguration.shared.paymentVector
     }
+    
 }

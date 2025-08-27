@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LocalNotificationVC: BaseInteractionViewController {
+class LocalNotificationVC: BaseUIViewConroller {
     let buttonPush = BaseUIButton()
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -22,10 +22,13 @@ class LocalNotificationVC: BaseInteractionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Push Notification"
-
-        
         setupUIView()
         setupContainer()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
     }
     
     
@@ -33,7 +36,9 @@ class LocalNotificationVC: BaseInteractionViewController {
         buttonPush.layer.cornerRadius = 10
         buttonPush.backgroundColor = .orange
         buttonPush.setTitle("Testing Push", for: .normal)
-        buttonPush.addTarget(self, action: #selector(didTappedButtonPush), for: .touchUpInside)
+        buttonPush.onTouchUpInside = { [weak self] in
+            self?.scheduleLocalNotification(body: "Testing")
+        }
     }
     
     private func setupContainer(){
@@ -44,25 +49,9 @@ class LocalNotificationVC: BaseInteractionViewController {
             buttonPush.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
             buttonPush.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
             buttonPush.heightAnchor.constraint(equalToConstant: 50),
-            //            buttonPush.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100)
         ])
     }
-    
-    @objc private func didTappedButtonPush(){
-        print("didTappedButtonPush")
-        self.scheduleLocalNotification(body: "Testing")
-        Loading.shared.showLoading()
-    }
-    
-//    @objc func sendNotification(){
-//        let message = "Hello, Mr. Rath!"
-//        NotificationCenter.default.post(
-//            name: .newMessageNotification,
-//            object: nil,
-//            userInfo: ["message": message]
-//        )
-//        print("✅ Notification Sent!")
-//    }
+
     
     
     func scheduleLocalNotification(body: String = "") {

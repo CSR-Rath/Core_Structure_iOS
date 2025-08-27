@@ -16,7 +16,7 @@ enum AccountTypeEnum: String {
 
 class AccountManager{
     
-    static let shared = AccountManager() // Singleton
+    static let shared = AccountManager()
     private init() {}
     
     private let accountType = "accountType"

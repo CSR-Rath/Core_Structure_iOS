@@ -204,7 +204,7 @@ class HowToUseCryptoHelper {
 
         // 3. Convert to JSON
         guard let jsonString = CodableConverter.shared.codableToJSONString(updatedRequest) else {
-            return  ""//EncrypoitAES(data: "")
+            return  ""
         }
 
         // 4. Encrypt JSON with Transfer key/iv

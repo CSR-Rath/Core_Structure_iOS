@@ -17,17 +17,77 @@ import LocalAuthentication
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private var orientationLock = UIInterfaceOrientationMask.portrait
+    private let gcmMessageIDKey = "gcm.message_id"
+    
+    func fetchDataSync() -> String {
+        let url = URL(string: "https://jsonplaceholder.typicode.com/posts/1")!
+        // This will block until the data is loaded
+        if let data = try? Data(contentsOf: url),
+           let text = String(data: data, encoding: .utf8) {
+            return text
+        }
+        return "Error fetching data"
+    }
+    
+    
+    func fetchDataAsync() async -> String {
+        let url = URL(string: "https://jsonplaceholder.typicode.com/posts/1")!
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+            return String(data: data, encoding: .utf8) ?? "Decoding error"
+        } catch {
+            return "Error: \(error)"
+        }
+    }
+    
+
 
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
+        print("✅ didFinishLaunchingWithOptions.")
+        
+        
+        // If this runs on the main thread, UI freezes until the request finishes
+//        print("Starting synchronous fetch...")
+//        let result = fetchDataSync()
+//        print("Finished synchronous fetch: \(result)")
+        
+        
+        // This runs inside a Task, so the main thread stays responsive
+//        print("Starting asynchronous fetch...")
+//        Task {
+//            let result = await fetchDataAsync()
+//            print("Finished asynchronous fetch: \(result)")
+//        }
+//        print("This prints immediately, even before the data finishes loading!")
+
+        
+//        print("starting call")
+//        let viewModel = APITheSameTimeViewModel_iOS13()
+//        viewModel.fetchApiTheSameTime()
+//        viewModel.onDataUpdated = {
+//            print("starting call finishes")
+//        }
+//        print("End call")
+        
+//        let viewModel = ViewModel()
+//        
+//        viewModel.fetchWithTaskGroup()
+//        viewModel.onDataUpdated = {
+//            print("viewModel Posts:\(viewModel.posts ?? [])")
+//            
+//            print("---------------------")
+//            
+//            print("viewModel comments:\(viewModel.comments ?? [])")
+//            
+//        }
+        
         
         configureFirebaseMessaging(application)
         configureGoogleMaps()
-        
-       
-        
+  
         return true
     }
 
@@ -58,8 +118,15 @@ extension AppDelegate: UNUserNotificationCenterDelegate, MessagingDelegate {
         // Request notification authorization
         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
         UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { granted, error in
+            if let error = error {
+                print("❌ Authorization error: \(error.localizedDescription)")
+                return
+            }
+            
             if granted {
-                // Authorization granted; handle if needed
+                print("✅ Notification permission granted.")
+            } else {
+                print("⚠️ Notification permission denied.")
             }
         }
         
@@ -68,28 +135,54 @@ extension AppDelegate: UNUserNotificationCenterDelegate, MessagingDelegate {
         // Set messaging delegate
         Messaging.messaging().delegate = self
     }
+    
 
+      func application(_ application: UIApplication,
+                       didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+          Messaging.messaging().apnsToken = deviceToken
+          
+          print("✅ DeviceToken: \(deviceToken)")
+      }
+
+    
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-        print("✅ FCM token: \(fcmToken ?? "")")
-        // Send token to your server if needed
+        guard let token = fcmToken else { return }
+        
+        print("✅ FCM token: \(token)")
     }
+    
+    
 
     func userNotificationCenter(
         _ center: UNUserNotificationCenter,
         willPresent notification: UNNotification,
         withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
     ) {
+        
+        let userInfo = notification.request.content.userInfo
+
+        for (key, value) in userInfo {
+            print("Key: \(key), Value: \(value)")
+        }
+        
+        
         if #available(iOS 14.0, *) {
-            completionHandler([.banner, .sound, .badge])
+            completionHandler([.banner, .sound, .badge, .list])
         } else {
             completionHandler([.alert, .sound, .badge])
         }
+        
     }
 
     func userNotificationCenter(
         _ center: UNUserNotificationCenter,
         didReceive response: UNNotificationResponse
     ) async {
+        let userInfo = response.notification.request.content.userInfo
+        print("Did select on alert")
+//        isFromAlertNotification = true
+        NotificationManager.shared.rootNotificationViewController(userInfo: userInfo)
+        
         // Handle notification response if needed
     }
 }
@@ -145,7 +238,6 @@ extension AppDelegate{
         }
     }
 }
-
 
 
 // MARK: - App Orientation

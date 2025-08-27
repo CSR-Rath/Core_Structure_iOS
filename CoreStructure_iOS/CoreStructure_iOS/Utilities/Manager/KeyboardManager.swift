@@ -11,7 +11,6 @@ let keyboardManager = KeyboardManager()
 
 class KeyboardManager {
 
-    
     var onKeyboardWillShow: ((_ keyboardHeight: CGFloat) -> Void)?
     var onKeyboardWillHide: (() -> Void)?
     

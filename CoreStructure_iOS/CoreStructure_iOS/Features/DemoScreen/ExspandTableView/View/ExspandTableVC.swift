@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ExspandTableVC: BaseInteractionViewController {
+class ExspandTableVC: BaseUIViewConroller {
     
     lazy var btnSingleExspand: BaseUIButton = {
         let btn = BaseUIButton()

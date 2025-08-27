@@ -32,7 +32,6 @@ class KeychainManager {
         return status == errSecSuccess
     }
     
-
     static func update(key: String, value: String) -> Bool {
         guard let data = value.data(using: .utf8) else { return false }
 
@@ -80,4 +79,5 @@ class KeychainManager {
         print("status ==> \(status == errSecSuccess)")
         return status == errSecSuccess
     }
+    
 }

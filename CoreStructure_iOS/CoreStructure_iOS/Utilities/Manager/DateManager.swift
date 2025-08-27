@@ -21,7 +21,6 @@ class DateManager {
         return dateFormatter.string(from: date)
     }
 
-    // MARK: - Time Interval
 
     func timeIntervalInDays(from startDate: Date, to endDate: Date) -> Int {
         let calendar = Calendar.current

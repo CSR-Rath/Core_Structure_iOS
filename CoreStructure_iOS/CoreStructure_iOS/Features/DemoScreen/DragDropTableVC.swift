@@ -173,7 +173,7 @@ import UIKit
 
 import UIKit
 
-class DragDropTableVC: BaseInteractionViewController {
+class DragDropTableVC: BaseUIViewConroller {
     
     var tableView: UITableView!
     var data = [

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SuccessfullyVC: UIViewController {
+class SuccessfullyVC: BaseUIViewConroller {
     
     lazy var imageSucces: UIImageView = {
         let img = UIImageView()
@@ -21,15 +21,15 @@ class SuccessfullyVC: UIViewController {
         let btn = BaseUIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.titleButton = "Done"
-        btn.actionUIButton = { [weak self] in
-            self?.popToRootVC(animated: false)
+        btn.onTouchUpInside = { [weak self] in
+            self?.popTopTabBar()
         }
         return btn
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        leftBarButtonItem(icon: nil)
+        leftBarButtonItem(icon: nil, isSwiping: false)
         view.backgroundColor = .red
         title = "Susseccfully"
         setupConstraint()

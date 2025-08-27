@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SliderVC: BaseInteractionViewController {
+class SliderVC: BaseUIViewConroller {
 
     private let backgroundView: UIView = {
         let view = UIView()

@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import 
 
 struct ListModel {
     let id: Int
@@ -14,7 +14,7 @@ struct ListModel {
     let createViewController: () -> UIViewController
 }
 
-class DemoFeatureVC: BaseInteractionViewController {
+class DemoFeatureVC: BaseUIViewConroller {
 
     var tableView = UITableView()
     private var previousOffsetY: CGFloat = 0

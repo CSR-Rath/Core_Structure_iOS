@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LifecycleVC: BaseInteractionViewController {
+class LifecycleVC: BaseUIViewConroller {
 
     override func loadView() {
         super.loadView()

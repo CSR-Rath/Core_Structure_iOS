@@ -78,6 +78,8 @@ class OriginalTabBarVC: UITabBarController,UITabBarControllerDelegate {
         tabBar.backgroundColor = .mainBlueColor // Background color of the tab bar
         tabBar.standardAppearance = appearance
         
+        
+        
     }
     
     // UITabBarControllerDelegate method

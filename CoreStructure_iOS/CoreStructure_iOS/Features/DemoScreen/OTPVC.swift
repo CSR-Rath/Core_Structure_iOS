@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OTPVC: BaseInteractionViewController {
+class OTPVC: BaseUIViewConroller {
     var codeTxt: OneTimeCodeTextField!
     
     var btnClear = BaseUIButton()

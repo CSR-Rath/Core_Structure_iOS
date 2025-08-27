@@ -9,7 +9,7 @@ import UIKit
 
 
 
-class LocalizableVC: BaseInteractionViewController {
+class LocalizableVC: BaseUIViewConroller {
     
     let keyLocalizable : [String] = [
         "customer",

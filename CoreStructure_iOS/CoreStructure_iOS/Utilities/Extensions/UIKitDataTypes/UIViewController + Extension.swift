@@ -10,17 +10,19 @@ import UIKit
 extension UIViewController{
     
     func leftBarButtonItem(icon: UIImage? = UIImage(named: "icBack")?.withRenderingMode(.alwaysOriginal),
-                           isSwiping: Bool? = true
-    
+                           isSwiping: Bool? = true,
+                           action: Selector? = nil
+                           
     ) {
+        navigationItem.hidesBackButton = false
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: icon,
             style: .plain,
             target: self,
-            action: icon == nil ?  #selector(helperAction) :  #selector(leftBarButtonItemAction)
+            action: icon == nil ?  #selector(helperAction) : action == nil ?  #selector(leftBarButtonItemAction) :  action
         )
         
-        if isSwiping == false && icon == nil{
+        if isSwiping == false  {
             isSwipingBack = false
         }else{
             isSwipingBack = true
@@ -44,10 +46,37 @@ extension UIViewController{
 
 // MARK: Action change screen view contoller
 extension UIViewController{
-    
-    @objc func dismissVC(animated: Bool = true){
-        self.dismiss(animated: animated)
+
+    @objc func popTopTabBarAndReload(){
+        if let nav = navigationController {
+            for vc in nav.viewControllers {
+                if vc is CustomTabBarVC {
+                    nav.popToViewController(vc, animated: true)
+                    NotificationCenter.default.post(name: .refreshTabBar, object: nil)
+                    break
+                }
+            }
+        }
     }
+    
+    @objc func popTopTabBar(){
+        if let nav = navigationController {
+            for vc in nav.viewControllers {
+                if vc is CustomTabBarVC {
+                    nav.popToViewController(vc, animated: true)
+                    break
+                }
+            }
+        }
+    }
+    
+    
+
+    
+    @objc func dismissVC(animated: Bool = true, completion: (() -> Void)? = nil) {
+        self.dismiss(animated: animated, completion: completion)
+    }
+
     
     @objc func popVC(animated: Bool = true){
         self.navigationController?.popViewController(animated: animated)
@@ -59,15 +88,31 @@ extension UIViewController{
         guard let window = UIApplication.shared.windows.first,
               let navController = self.navigationController else { return }
         
+        // import animation when
         UIView.transition(with: window,
                           duration: 0.3,
                           options: .transitionCrossDissolve,
                           animations: {
-            navController.popToRootViewController(animated: true)
+            navController.popToRootViewController(animated: animated)
+        })
+    }
+    
+    
+    @objc func popToRootWhenPresentVC(animated: Bool = true){
+        
+        guard let window = UIApplication.shared.windows.first,
+              let navController = self.navigationController else { return }
+        
+        UIView.transition(with: window,
+                          duration: 0.3,
+                          options: .transitionCrossDissolve,
+                          animations: {
+            navController.popToRootViewController(animated: animated)
         })
         
-        //        self.navigationController?.popToRootViewController(animated: animated)
+        self.navigationController?.popToRootViewController(animated: animated)
     }
+    
     
     @objc func pushVC(to viewController: UIViewController, animated: Bool = true){
         self.navigationController?.pushViewController(viewController, animated: animated)

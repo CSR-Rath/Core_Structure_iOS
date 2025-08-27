@@ -105,7 +105,7 @@ class BaseUITextFieldPhone: UITextField, UITextFieldDelegate {
 
 
 
-class PhoneTextFieldVC: BaseInteractionViewController {
+class PhoneTextFieldVC: BaseUIViewConroller {
     
     private  var nsButton = NSLayoutConstraint()
     

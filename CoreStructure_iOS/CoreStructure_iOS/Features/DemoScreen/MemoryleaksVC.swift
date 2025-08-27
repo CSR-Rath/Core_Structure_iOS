@@ -33,7 +33,7 @@ class MemoryleaksVC: UIViewController {
 //            self?.navigationController?.pushViewController(vc, animated: true)
 //        }
         
-        btn.actionUIButton = {
+        btn.onTouchUpInside = {
             
             // have store reference - deinit isn't wkoring
             

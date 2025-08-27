@@ -22,7 +22,7 @@ struct MenuListModel: Codable {
     let id: Int
 }
 
-class DragDropCollectionVC: BaseInteractionViewController,
+class DragDropCollectionVC: BaseUIViewConroller,
                             UICollectionViewDataSource,
                             UICollectionViewDelegateFlowLayout,
                             UICollectionViewDragDelegate,

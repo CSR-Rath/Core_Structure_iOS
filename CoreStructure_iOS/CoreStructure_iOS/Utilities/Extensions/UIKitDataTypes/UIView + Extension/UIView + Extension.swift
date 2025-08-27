@@ -30,6 +30,11 @@ extension UIView{
         ]
     }
     
+    func fitSize(){
+        self.setContentHuggingPriority(.required, for: .horizontal)
+        self.setContentCompressionResistancePriority(.required, for: .horizontal)
+    }
+    
 //    func makeSecure() { // prevent view
 //        let field = UITextField()
 //        let view = UIView(frame: CGRect(x: 0, y: 0, width: field.frame.self.width, height: field.frame.self.height))

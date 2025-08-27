@@ -11,7 +11,7 @@ struct Location {
 }
 
 // MARK: - View Controller
-class GoogleMapsViewController: BaseInteractionViewController {
+class GoogleMapsViewController: BaseUIViewConroller {
     
     private var mapView = GMSMapView()
     private var markers: [GMSMarker] = []

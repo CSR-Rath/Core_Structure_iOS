@@ -18,15 +18,15 @@ class LanguageManager {
     static let shared = LanguageManager()
     private init() {}
     
-    private let langualeKey = "langualeKey"
+    private let languageKey = "languageKey"
 
     func setCurrentLanguage(_ lang: LanguageTypeEnum) {
-        print("===> lang: \(lang.rawValue)")
-        UserDefaults.standard.setValue(lang.rawValue, forKey: langualeKey)
+//        print("🌐 Setting language to: \(lang.rawValue)")
+        UserDefaults.standard.setValue(lang.rawValue, forKey: languageKey)
     }
     
     func getCurrentLanguage() -> LanguageTypeEnum {
-        let rawValue = UserDefaults.standard.string(forKey: langualeKey) ?? LanguageTypeEnum.english.rawValue
+        let rawValue = UserDefaults.standard.string(forKey: languageKey) ?? LanguageTypeEnum.english.rawValue
         return LanguageTypeEnum(rawValue: rawValue) ?? .english
     }
 }

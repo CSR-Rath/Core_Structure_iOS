@@ -7,6 +7,12 @@
 
 import UIKit
 
+let statusBarFrame = 0
+let navigationBarFrame = 0
+
+//✅ Yes. You can use SwiftUI inside UIKit (UIHostingController) or UIKit inside SwiftUI (UIViewRepresentable). Many real-world projects mix both.
+
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     static let shared = SceneDelegate()
@@ -22,19 +28,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private func rootViewController(scene: UIScene){
         
         let loginSuccessfully = UserDefaults.standard.bool(forKey: AppConstants.loginSuuccess)
-        let controller: UIViewController = loginSuccessfully ? CustomTabBarVC() : LoginVC()
+        let controller: UIViewController = SplashScreenVC()
+        
         let navigation = UINavigationController(rootViewController: controller)
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        
         window = UIWindow(windowScene: windowScene)
         window!.rootViewController = navigation
         window!.makeKeyAndVisible()
         window!.overrideUserInterfaceStyle = .light
-       
+        
     }
     
+    
     private func setupNavigationBarAppearance(){
-        AppManager.shared.setCustomNavigationBarAppearance(titleColor: .white,
+        AppManager.shared.setCustomNavigationBarAppearance(titleColor: .red,
                                                            titleColorScrolling: .white,
                                                            barAppearanceColor: .clear,
                                                            barAppearanceScrollingColor: .clear,
@@ -54,26 +61,41 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
     }
     
-    func changeRootViewController(to controller: UIViewController) {
-    
-    guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-            let sceneDelegate = windowScene.delegate as? UIWindowSceneDelegate,
-            let window = sceneDelegate.window else {
-        return
+    func changeRootViewController(to controller: UIViewController, 
+                                  animated: Bool = true) {
+        
+        guard let window = self.window else { return }
+        
+        // Optional: wrap in navigation controller if needed
+        let nav = UINavigationController(rootViewController: controller)
+        if animated {
+            UIView.transition(with: window,
+                              duration: 0.3,
+                              options: .transitionCrossDissolve,
+                              animations: {
+                window.rootViewController = nav
+            })
+        } else {
+            window.rootViewController = nav
+        }
+        
     }
+    
+    func statusBarColor(color: UIColor){
+        
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let rootVC = windowScene.windows.first?.rootViewController as? UINavigationController
+        else { return }
 
-    // Optional: wrap in navigation controller if needed
-    let nav = UINavigationController(rootViewController: controller)
-    window?.rootViewController = nav
+        let navigationBarFrame = rootVC.navigationBar.frame
 
-    // Animate the transition (optional)
-    UIView.transition(with: window!,
-                        duration: 0.3,
-                        options: .transitionCrossDissolve,
-                        animations: nil,
-                        completion: nil)
-
-}
+        if let statusBarFrame = UIApplication.shared.windows.first?.windowScene?.statusBarManager?.statusBarFrame {
+            let statusBarView = UIView(frame: statusBarFrame)
+            statusBarView.backgroundColor = color
+            UIApplication.shared.windows.first?.addSubview(statusBarView)
+        }
+        
+    }
 }
 
 
@@ -99,8 +121,8 @@ extension SceneDelegate {
     func sceneDidDisconnect(_ scene: UIScene) {
         print("sceneDidDisconnect") // Scene is removed (e.g., app is fully closed or scene is discarded).
     }
-    
 }
+
 
 
 
@@ -137,7 +159,6 @@ class CropImageViewController: UIViewController, UIImagePickerControllerDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        view.backgroundColor = .white
         
         setupScrollView()
         setupImageView()

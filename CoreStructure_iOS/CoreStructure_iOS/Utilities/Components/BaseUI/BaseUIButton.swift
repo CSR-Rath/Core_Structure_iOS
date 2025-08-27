@@ -25,7 +25,7 @@ class BaseUIButton: UIButton {
     private let animationDuration: TimeInterval = 0.05
     private var nsContraint = NSLayoutConstraint()
 
-    var actionUIButton: (()->())?
+    var onTouchUpInside: (()->())?
     
     var titleButton: String = ""{
         didSet{
@@ -45,6 +45,7 @@ class BaseUIButton: UIButton {
             nsContraint.isActive = false
             nsContraint.constant = buttonHeight
             nsContraint.isActive = true
+//            self.if
         }
     }
     
@@ -60,8 +61,6 @@ class BaseUIButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
 
-
-    
     private func setupButton() {
         self.titleLabel?.fontMedium(17, color: .white)
         self.layer.cornerRadius = buttonHeight/2
@@ -97,7 +96,7 @@ class BaseUIButton: UIButton {
     }
     
     @objc private func didTappedButton() {
-        actionUIButton?()
+        onTouchUpInside?()
     }
     
     private func animateButton(scale: CGFloat, alpha: CGFloat) {
@@ -122,24 +121,26 @@ class BaseUIButton: UIButton {
     
     func startLoading() {
         guard activityIndicator != nil else { return }
-
-        self.isUserInteractionEnabled = false
-        self.activityIndicator.startAnimating()
-        self.setTitleColor(.clear, for: .normal)
+        DispatchQueue.main.async {
+            self.isUserInteractionEnabled = false
+            self.activityIndicator.startAnimating()
+            self.setTitleColor(.clear, for: .normal)
+        }
     }
     
 
     @objc func stopLoading(){
         guard activityIndicator != nil else { return }
-        
-        self.isUserInteractionEnabled = true
-        self.activityIndicator.stopAnimating()
-        self.setTitleColor(.white, for: .normal)
+        DispatchQueue.main.async {
+            self.isUserInteractionEnabled = true
+            self.activityIndicator.stopAnimating()
+            self.setTitleColor(.white, for: .normal)
+        }
     }
     
     deinit {
-        print("✅ BaseUIButton is deinitialized")
-//        stopLoading()
+        let title = self.currentTitle ?? "No Title"
+        print("✅ BaseUIButton is deinitialized \(title)")
         NotificationCenter.default.removeObserver(self)
     }
 }

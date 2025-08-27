@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ExspandSingleSectionVC: BaseInteractionViewController {
+class ExspandSingleSectionVC: BaseUIViewConroller {
     
     //MARK: Mutiple section expended
     var expandedSectionIndices: [Int] = [] // Array to store expanded section indices

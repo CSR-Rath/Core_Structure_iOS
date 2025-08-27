@@ -7,54 +7,55 @@
 
 import UIKit
 
+var isSwipingBack = true
+
 class BaseUIViewConroller: UIViewController, UIGestureRecognizerDelegate {
-    
-    var isLeftBarButtonItem = true{
-        didSet{
-            setupLeftBarButtonItem()
-        }
-    }
-    
-    var isInteractivePopGestureRecognizer = true{
-        didSet{
-            setupInteractivePopGestureRecognizer()
-        }
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        setupLeftBarButtonItem()
-        setupInteractivePopGestureRecognizer()
+        view.backgroundColor = .white
+        self.leftBarButtonItem()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         
     }
     
     private func setupInteractivePopGestureRecognizer(){
-        
-//        if isInteractivePopGestureRecognizer{
-            
-//            navigationController?.interactivePopGestureRecognizer?.delegate = self
-//            navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-//        }else{
-            
-//            navigationController?.interactivePopGestureRecognizer?.delegate = nil
-//            navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-//        }
-        
+
     }
     
+}
+
+
+// MARK: Make swiping enble when custom back button
+extension UINavigationController: UIGestureRecognizerDelegate {
+
+    override open func viewDidLoad() {
+        super.viewDidLoad()
+        interactivePopGestureRecognizer?.delegate = self
+    }
     
-   private func setupLeftBarButtonItem(){
-        
-        if isLeftBarButtonItem {
-            
-//            leftBarButtonItem()
-        }else{
-            
-            self.navigationItem.leftBarButtonItem = nil
-        }
+    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return (viewControllers.count > 1 && isSwipingBack)
+    }
+    
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return false
     }
 }
